@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 496 336" style="enable-background:new 0 0 496 336;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#3757A6;}
+	.st2{fill:#EF4F4E;}
+	.st3{fill:#DD4545;}
+	.st4{fill:#E2F2F1;}
+	.st5{fill:#2A4D93;}
+	.st6{fill:#CC3E3E;}
+	.st7{fill:#D6EAE8;}
+	.st8{fill:#133970;}
+</style>
+<rect x="160" class="st0" width="176" height="336"/>
+<path class="st1" d="M160,0H48C21.6,0,0,19.2,0,46.4v243.2C0,316.8,21.6,336,48,336h112V0z"/>
+<path class="st2" d="M448,0H336v336h112c26.4,0,48-19.2,48-46.4V46.4C496,19.2,474.4,0,448,0z"/>
+<path class="st3" d="M448,0H336v240.8L446.4,336c26.4,0,49.6-19.2,49.6-46.4V46.4C496,19.2,474.4,0,448,0z"/>
+<polygon class="st4" points="336,240.8 336,0 160,0 160,95.2 "/>
+<polygon class="st5" points="160,0 48,0 160,95.2 "/>
+<path class="st6" d="M336,336h112c26.4,0,48-16,48-48H336V336z"/>
+<rect x="160" y="288" class="st7" width="176" height="48"/>
+<path class="st8" d="M0,288c0,32,21.6,48,48,48h112v-48H0z"/>
+<path class="st6" d="M448,0H336v84.8l160,49.6v-88C496,19.2,474.4,0,448,0z"/>
+<polygon class="st7" points="336,84.8 336,0 160,0 160,32.8 "/>
+<polygon class="st8" points="160,0 48,0 160,32.8 "/>
+</svg>
