@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Form,
@@ -6,9 +6,13 @@ import {
   Nav,
   Row,
   Tab,
-  TabContainer
+  TabContainer,
+  Image,
 } from "react-bootstrap";
-
+import adddoc from '../../../images/add-documents.svg';
+import delitype from '../../../images/deliverytype.svg';
+import acceptsign from '../../../images/acceptsign.svg';
+import tranlatelang from '../../../images/translatellang.svg';
 const Tabschoice = () => {
   const [language] = useState([
     {
@@ -56,7 +60,6 @@ const Tabschoice = () => {
     },
     {
       id: 3,
-
       name: "تاییدیه دادگستری",
       price: "۲۶۰۰۰",
       checkin: false
@@ -118,18 +121,18 @@ const Tabschoice = () => {
   return (
     <TabContainer id="left-tabs-example" defaultActiveKey="first">
       <Col className="tabsorder" xl={3} lg={3} md={3} sm={3}>
-        <Nav variant="pills" className="flex-column tabsdet">
+        <Nav variant="pills" className="flex-column tabsdet hvr-sweep-to-bottom">
           <Nav.Item>
-            <Nav.Link eventKey="first">زبان ترجمه</Nav.Link>
+            <Nav.Link  eventKey="first"><Image src={tranlatelang}/>زبان ترجمه</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="second">مهرو تاییدات</Nav.Link>
+            <Nav.Link  eventKey="second"><Image src={acceptsign}/>مهرو تاییدات</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="third">نسخه اضافه</Nav.Link>
+            <Nav.Link  eventKey="third"><Image src={adddoc}/>نسخه اضافه</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="fourth">نوع تحویل</Nav.Link>
+            <Nav.Link  eventKey="fourth"><Image src={delitype}/> نوع تحویل</Nav.Link>
           </Nav.Item>
         </Nav>
       </Col>

@@ -49,6 +49,42 @@
     src: url('../fonts/eot/robotoregular.eot?#iefix') format('embedded-opentype'), /* IE6-8 */ url('../fonts/woff2/robotoregular.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/ url('../fonts/woff/robotoregular.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../fonts/ttf/robotoregular.ttf') format('truetype');
 }
 
+
+@font-face {
+	font-family: fanum;
+	font-style: normal;
+	font-weight: bold;
+	src: url('../fonts/eot/iranyekanwebbold(fanum).eot');
+	src: url('../fonts/eot/iranyekanwebbold(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../fonts/woff2/iranyekanwebbold(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../fonts/woff/iranyekanwebbold(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../fonts/ttf/iranyekanwebbold(fanum).ttf') format('truetype');
+}
+
+@font-face {
+	font-family: fanum;
+	font-style: normal;
+	font-weight: 300;
+	src: url('../fonts/eot/iranyekanweblight(fanum).eot');
+	src: url('../fonts/eot/iranyekanweblight(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../fonts/woff2/iranyekanweblight(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../fonts/woff/iranyekanweblight(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../fonts/ttf/iranyekanweblight(fanum).ttf') format('truetype');
+}
+
+@font-face {
+	font-family: fanum;
+	font-style: normal;
+	font-weight: normal;
+	src: url('../fonts/eot/iranyekanwebregular(fanum).eot');
+	src: url('../fonts/eot/iranyekanwebregular(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../fonts/woff2/iranyekanwebregular(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../fonts/woff/iranyekanwebregular(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../fonts/ttf/iranyekanwebregular(fanum).ttf') format('truetype');
+}
+
+
+
 html {
     overflow-x: hidden;
 
@@ -64,6 +100,9 @@ body {
 a:hover {
     cursor: pointer;
     text-decoration: none !important;
+}
+.fanum{
+    font-family: fanum
 }
 
 /* login */
@@ -1348,8 +1387,13 @@ box-shadow: 0px -2px 14px -4px rgba(0,0,0,0.75);
 .orderbuttons button:focus{
     background-color: #aad0f4 !important;
     border-color: #aad0f4 !important;
+    color:#495267 !important;
 }
-
+.orderbuttons button:active{
+    background-color: #aad0f4 !important;
+    border-color: #aad0f4 !important;
+    color:#495267 !important
+}
 .selectcer{
   
     margin: 0px !important;
@@ -1405,7 +1449,7 @@ box-shadow: 0px -2px 14px -4px rgba(0,0,0,0.75);
 }
 .tabschoice {
     border: 1px solid #e1e1e1;
-    border-radius: 10px;
+    border-radius: 1rem;
     background: #fff;
     padding-right: 0px !important;
     margin: 0 0 0 0 !important;
@@ -1427,33 +1471,62 @@ box-shadow: 0px -2px 14px -4px rgba(0,0,0,0.75);
 .tabsdet {
     width: 100% !important;
     display: block !important;
-    border-radius: 0 !important;
+    border-bottom-right-radius: 1rem; 
+    border-top-right-radius: 1rem; 
     color: #454f63 !important;
     background-color: #fafafa;
 
 }
-.tabsorder .nav-pills .nav-link:active{
-    background-color: #fff  !important ;
-    color:#454f63  !important;
+
+
+
+/* Sweep To Bottom */
+.hvr-sweep-to-bottom .nav-item {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration:1s;
+    transition-duration: 1s;
+  }
+  .hvr-sweep-to-bottom .nav-item:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
     -webkit-transform: scaleY(0);
     transform: scaleY(0);
-    -webkit-transform-origin: 50% 100%;
-    transform-origin: 50% 100%;
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
     -webkit-transition-property: transform;
     transition-property: transform;
-    -webkit-transition-duration: 0.7s;
-    transition-duration: 0.7s;
+    -webkit-transition-duration: 1s;
+    transition-duration: 1s;
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
+  }
+   .hvr-sweep-to-bottom .nav-item:active {
+    color: white;
+  }
+  .hvr-sweep-to-bottom .nav-item:active:before {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
 
 
-}
-
-/* .tabsorder .nav-pills .nav-link.active{
+.tabsorder .nav-link.active{
     background-color: #fff  !important ;
     color:#454f63  !important;
 
-} */
+}
 
 
 /*.tabsdet{*/
@@ -1527,6 +1600,19 @@ div#left-tabs-example-tabpane-third {
     text-align: center;
     font-size: 1.5rem;
 }
+.tabsorder .nav-item a {
+    color: #454f63 !important;
+    font-size: .8rem !important;
+    height:100%;
+}
+.tabsorder .nav-item img {
+    padding-left: 0.3rem;
+}
+.servicesgroup .form-control {
+    border-radius: 2rem;
+    font-size: .8rem;
+    color: #9c9c9c;
+}
 /* orderpage */
 /* checkbox */
 input[type="checkbox"]{
@@ -1571,3 +1657,64 @@ input[type="checkbox"]:checked:after {
      */
 }
 /* checkbox */
+
+/* countinue-order */
+.Continue-order {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: column;
+    flex-direction: column;
+    text-align: center
+}
+.Continue-order button {
+    border-color: #e1e1e1;
+    background-color: #fafafa;
+    color: #e1e1e1;
+}
+
+/* upload-photo */
+.uploadphoto {
+    padding: 2rem;
+    height: 100%;
+}
+.upload-text {
+    text-align: center;
+    font-size: .8rem;
+}
+.uploadphoto form {
+    border: 2px dotted #909090;
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.uploadphoto input[type=file] {
+    color: transparent;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.uploadphoto form::before {
+    content: "آپلود عکس" !important;
+    opacity: 1 !important;
+    color: #1976d2 !important;
+    font-size: .9rem !important;
+    position: absolute;
+    top: 35%;
+    left: 14%;
+}
+    
+
+/* upload-photo */
+/* confirmorder */
+.confirmorder {
+    text-align: center;
+    font-size: .8rem;
+}
+.confirmorder img {
+    width: 80px;
+}
+/* confirmorder */
+/* countinue-order */
+

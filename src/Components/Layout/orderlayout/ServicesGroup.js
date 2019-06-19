@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Form, Card } from "react-bootstrap";
 const ServicesGrop = () => {
   return (
-    <Card>
+    <Card style={{borderRadius:'1rem',height:"100%"}}>
       <Form className=" servicesgroup rtl row">
         <Col xl={12} lg={12} md={12} xs={12}>
           <Form.Group controlId="exampleForm.ControlSelect1">
