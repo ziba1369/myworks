@@ -10,7 +10,7 @@ const Documenttype = () => {
 
  })
     return ( 
-        <Card className="documenttype">
+        <Card className="documenttype ">
   <Card.Header>نوع مدرک ترجمه</Card.Header>
   <Card.Body>
     <Card.Title>{typedoc.type}</Card.Title>
