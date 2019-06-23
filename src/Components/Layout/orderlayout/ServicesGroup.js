@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Row, Button, Col, Form, Card } from "react-bootstrap";
 
-const ServicesGroup = ({onClicks,step}) => {
+const ServicesGroup = ({onClicks,step,onChangess}) => {
   const [service, setService] = useState();
   const [types,setTypes]=useState();
   const handleServiceChange = e => {
@@ -17,11 +17,11 @@ const ServicesGroup = ({onClicks,step}) => {
     if (service === undefined ||types === undefined ) {
       document.getElementById("groups").style.borderColor = "red";
       document.getElementById("types").style.borderColor = "red";
+
     }else {
-    document.getElementById("groups").style.borderColor = '#ced4da';
-    document.getElementById("types").style.borderColor = '#ced4da';
-    document.getElementById('add1').onclick=onClicks;
   
+      onClicks()
+    
     }
   }
 
@@ -31,7 +31,7 @@ const ServicesGroup = ({onClicks,step}) => {
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
         <Card className="documenttype ">
           <Card.Header>نوع مدرک ترجمه</Card.Header>
-         <Card.Body style={{height: "257px"}}>
+         <Card.Body style={{padding:"8rem 0"}}>
             {/* // <Card.Title>{typedoc.type}</Card.Title>
             // <Card.Text>
             //   زبان ترجمه<span>{typedoc.countchoose} مورد</span>
@@ -110,7 +110,7 @@ const ServicesGroup = ({onClicks,step}) => {
         </Card>
       </Col>
       <Col xl={3} lg={3} md={3} sm={12} xs={12} className="Continue-order">
-        <Button onClick= {handleSubmit} id="add1" type="submit">
+        <Button  onClick={handleSubmit} id="add1" type="submit">
           ادامه سفارش
         </Button>
       </Col>

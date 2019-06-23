@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {Button ,Col,Row,Card } from "react-bootstrap";
-const Photoupload = () => {
+const Photoupload = ({ onClicks, step, onChanges }) => {
 const[typedoc,changetypedoc]=useState({
         type:'شناسنامه',
         countchoose:'۱',
@@ -9,9 +9,13 @@ const[typedoc,changetypedoc]=useState({
         deliverytype:'عادی'
    
     })
-
+    const handleSubmit = () => {
+    
+        onClicks();
+      
+    };
   return (
-    <Row>
+     <React.Fragment>
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
         <Card className="documenttype ">
           <Card.Header>نوع مدرک ترجمه</Card.Header>
@@ -54,18 +58,17 @@ const[typedoc,changetypedoc]=useState({
     </Card>
     </Col>
 
-    <Col
-          xl={3}
-          lg={3}
-          md={3}
-          sm={12}
-          xs={12}
-          className="Continue-order"
-        
-        >
-          <Button   onClick={null} type="submit">ادامه سفارش</Button> 
+    <Col xl={3} lg={3} md={3} sm={12} xs={12} className="Continue-order">
+          <p className="addteaxt" />
+          <Button style={{margin: "1rem 0",fontSize:'.8rem',fontFamily: 'fanum'}} variant="primary" size="lg">
+            <p>مجموع هزینه ها</p>
+            <p>2500000 تومان</p>
+          </Button >
+          <Button id="add1" onClick={handleSubmit} type="submit">
+            ادامه سفارش
+          </Button>
         </Col>
-        </Row>
+        </React.Fragment>
   );
 };
 

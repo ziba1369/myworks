@@ -8,13 +8,137 @@ import Photoupload from "./Layout/orderlayout/Photoupload";
 import Confirmorder from "./Layout/orderlayout/Confirmorder";
 
 const Order = () => {
- 
   const [step, setCount] = useState(1);
-  const increment = () => {setCount(step + 1)};
-  const stepcolor=document.getElementsByClassName('selectcer');
-  
-  return (
+  const [styleone, setStyleone] = useState();
+  const [styletwo, setStyletwo] = useState();
+  const [stylethree, setStylethree] = useState();
+  const [stylefour, setStylefour] = useState();
+  const [stylefive, setStylefive] = useState();
 
+  const [lineone, setLineone] = useState();
+  const [linetwo, setLinetwo] = useState();
+  const [linethree, setLinethree] = useState();
+  const [linefour, setLinefour] = useState();
+ 
+  const increment = () => {
+    setCount(step + 1);
+  };
+  const handlermadrak=(e)=>{
+  alert('aaa')
+  };
+  useEffect(() => {
+  
+    switch (step) {
+      case 1:
+      
+
+        break;
+
+      case 2:
+          setStyleone({
+            backgroundColor: "#aad0f4",
+            borderColor: "#aad0f4",
+            color: "#495267"
+          });
+    
+        setLineone({
+          content: "",
+          position: "absolute",
+          bottom: "0",
+          left: "0",
+          right: "50%",
+          top: "50%",
+          height: "0.5em",
+          borderTopWidth: 2,
+          borderTopStyle: "solid",
+          borderTopColor: "#1976d2",
+          zIndex: "-1"
+        });
+
+        break;
+
+      case 3:
+          setStyletwo({
+            backgroundColor: "#aad0f4",
+            borderColor: "#aad0f4",
+            color: "#495267"
+          });
+      
+        setLinetwo({
+          content: "",
+          position: "absolute",
+          bottom: "0",
+          left: "0",
+          right: "50%",
+          top: "50%",
+          height: "0.5em",
+          borderTopWidth: 2,
+          borderTopStyle: "solid",
+          borderTopColor: "#1976d2",
+          zIndex: "-1"
+        });
+
+        break;
+
+      case 4:
+          setStylethree({
+            backgroundColor: "#aad0f4",
+            borderColor: "#aad0f4",
+            color: "#495267"
+          });
+       
+        setLinethree({
+          content: "",
+          position: "absolute",
+          bottom: "0",
+          left: "0",
+          right: "50%",
+          top: "50%",
+          height: "0.5em",
+          borderTopWidth: 2,
+          borderTopStyle: "solid",
+          borderTopColor: "#1976d2",
+          zIndex: "-1"
+        });
+
+        break;
+
+      case 5:
+          setStylefour({
+            backgroundColor: "#aad0f4",
+            borderColor: "#aad0f4",
+            color: "#495267"
+          });
+       
+        setLinefour({
+          content: "",
+          position: "absolute",
+          bottom: "0",
+          left: "0",
+          right: "50%",
+          top: "50%",
+          height: "0.5em",
+          borderTopWidth: 2,
+          borderTopStyle: "solid",
+          borderTopColor: "#1976d2",
+          zIndex: "-1"
+        });
+        break;
+        case 6:
+            setStylefive({
+              backgroundColor: "#aad0f4",
+              borderColor: "#aad0f4",
+              color: "#495267"
+            });
+
+        break;
+
+      default:
+        break;
+    }
+  }, [step]);
+ 
+  return (
     <Container>
       <Row>
         <Col
@@ -52,47 +176,65 @@ const Order = () => {
         </Col>
       </Row>
       <Row className="orderbuttons rtl">
-        <Col id='choosecer' className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer">
-                    <Button size="lg">
-                        انتخاب مدرک
-                </Button>
-                </Col>
+        <Col
+          id="choosecer"
+          onclick={handlermadrak}
+          className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
+        >
+          <Button style={styleone} size="lg">
+            انتخاب مدرک
+          </Button>
+          <span style={lineone} />
+        </Col>
 
-                <Col id='kindtrans' className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer">
-                    <Button size="lg">
-                        نوع ترجمه
-                </Button>
-                </Col>
+        <Col
+          id="kindtrans"
+          className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
+        >
+          <Button style={styletwo} size="lg">
+            نوع ترجمه
+          </Button>
+          <span style={linetwo} />
+        </Col>
 
-                <Col id='upload' className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer">
-                    <Button size="lg">
-                        آپلود مدارک
-                </Button>
-                </Col>
+        <Col
+          id="upload"
+          className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
+        >
+          <Button style={stylethree} size="lg">
+            آپلود مدارک
+          </Button>
+          <span style={linethree} />
+        </Col>
 
-                <Col id='confirm' className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer">
-                    <Button size="lg">
-                        تایید سفارش
-                </Button>
-                </Col>
-                <Col id='pay' className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer last">
-                    <Button size="lg">
-                        پرداخت
-                   </Button>
-
-                </Col>
+        <Col
+          id="confirm"
+          className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
+        >
+          <Button size="lg" style={stylefour}>
+            تایید سفارش
+          </Button>
+          <span style={linefour} />
+        </Col>
+        <Col
+          id="pay"
+          className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer last"
+        >
+          <Button size="lg">پرداخت</Button>
+          <span style={stylefive} />
+        </Col>
       </Row>
 
-      <Row className="rtl" style={{ paddingTop: "3rem" ,paddingBottom: "3rem" }}>
-    
-          {step === 1 && <ServicesGroup  onClicks={increment} count={step} />}
-          {step === 2 && <Tabschoice   onClicks={increment} count={step} />}
-          {step === 3 && <Photoupload  count={step} />}
-          {step === 4 && <Confirmorder  count={step} />}
-      
+      <Row
+        className="rtl"
+        style={{ paddingTop: "3rem", paddingBottom: "3rem" }}
+      >
+        {step === 1 && <ServicesGroup onClicks={increment} count={step} />}
+        {step === 2 && <Tabschoice onClicks={increment} count={step} />}
+        {step === 3 && <Photoupload onClicks={increment} count={step} />}
+        {step === 4 && <Confirmorder onClicks={increment} count={step} />}
       </Row>
     </Container>
-
   );
 };
 

@@ -15,7 +15,7 @@ import delitype from "../../../images/deliverytype.svg";
 import acceptsign from "../../../images/acceptsign.svg";
 import tranlatelang from "../../../images/translatellang.svg";
 
-const Tabschoice = ({ onClicks, step }) => {
+const Tabschoice = ({ onClicks, step, onChanges }) => {
   const [typedoc, changetypedoc] = useState({
     type: "شناسنامه",
     countchoose: "۱",
@@ -53,7 +53,7 @@ const Tabschoice = ({ onClicks, step }) => {
       checkin: false
     }
   ]);
- 
+
   const [validation] = useState([
     {
       id: 1,
@@ -79,14 +79,14 @@ const Tabschoice = ({ onClicks, step }) => {
     { type: "automatic", name: "عادی", id: 1 },
     { type: "express", name: "فوری", id: 2 }
   ]);
- 
+
   const lnaguage = languages.map((item, index) => {
-   const  langhandle=()=>{
-     var lng = languages;
-     lng[index].checkin = !lng[index].checkin
-     setLang(lng)
-    }
-   
+    const langhandle = () => {
+      var lng = languages;
+      lng[index].checkin = !lng[index].checkin;
+      setLang(lng);
+    };
+
     return (
       <Row>
         <Col sm={8}>{item.name}</Col>
@@ -141,18 +141,22 @@ const Tabschoice = ({ onClicks, step }) => {
       </Row>
     );
   });
-console.log(languages);
+
   const handleSubmit = () => {
-   
-    if(languages.checkin === false)
-    {
-      document.getElementById("add1").onclick = onClicks;
-    
-    }else{
-    alert("ffdddd")
+    var blang = false;
+    for (let x in languages) {
+      if (languages[x].checkin) {
+        blang = true;
+        break;
+      }
+    }
+    if (blang) {
+      onClicks();
+    } else {
+      alert("aaa");
     }
   };
-// console.log(languages.);
+
   return (
     <React.Fragment>
       <Row>
@@ -284,7 +288,15 @@ console.log(languages);
           </TabContainer>
         </Col>
         <Col xl={3} lg={3} md={3} sm={12} xs={12} className="Continue-order">
-          <p className="addteaxt"></p>
+          <p className="addteaxt" />
+          <Button
+            style={{ margin: "1rem 0", fontSize: ".8rem", fontFamily: "fanum" }}
+            variant="primary"
+            size="lg"
+          >
+            <p>مجموع هزینه ها</p>
+            <p>2500000 تومان</p>
+          </Button>
           <Button id="add1" onClick={handleSubmit} type="submit">
             ادامه سفارش
           </Button>

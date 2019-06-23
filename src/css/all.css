@@ -1363,7 +1363,7 @@ svg.svg-inline--fa.fa-search.fa-w-16 {
     background-color: #fafafa;
     position: relative;
     box-sizing: border-box;
-    border: 2px solid #e1e1e1 !important;
+    border: 2px solid #e1e1e1 ;
     color: #495267;
     font-size: 1rem;
 }
@@ -1411,7 +1411,7 @@ box-shadow: 0px -2px 14px -4px rgba(0,0,0,0.75);
   .selectcer.last::after {
     border: 0px;
 }
-.selectcer::after{
+/* .selectcer::after{
     content: "";
     position: absolute;
     bottom: 0;
@@ -1423,7 +1423,7 @@ box-shadow: 0px -2px 14px -4px rgba(0,0,0,0.75);
     z-index: -1;
  
   
-}
+} */
 .documenttype .card-body {
     background-color: #fafafa;
     font-size: .9rem;
@@ -1475,6 +1475,7 @@ box-shadow: 0px -2px 14px -4px rgba(0,0,0,0.75);
     border-top-right-radius: 1rem; 
     color: #454f63 !important;
     background-color: #fafafa;
+    padding-right: .1rem !important;
 
 }
 
@@ -1526,16 +1527,21 @@ box-shadow: 0px -2px 14px -4px rgba(0,0,0,0.75);
     border-radius: 1rem;
 }
 .tabsorder{
-    padding-right: 0px !important;
+   
+    padding-right: .04rem !important;
     padding-left: 0px !important;
 }
+
 .tabsorder .nav-link.active{
     background-color: #fff  !important ;
     color:#454f63  !important;
+    
+
 
 }
 .hvr-sweep-to-bottom a{
         padding-top: 2.2rem !important; 
+        padding-left: 0.3rem !important;
 }
 
 .tabsdet {
@@ -1670,7 +1676,7 @@ input[type="checkbox"]:checked:after {
     flex-direction: column;
     text-align: center
 }
-.Continue-order button {
+.Continue-order #add1 {
     border-color: #e1e1e1;
     background-color: #fafafa;
     color: #e1e1e1;
@@ -1678,8 +1684,7 @@ input[type="checkbox"]:checked:after {
 
 /* upload-photo */
 .uploadphoto {
-    padding: 2rem;
-    height: 100%;
+    padding: 2rem 2rem 7.5rem 2rem;
 }
 .upload-text {
     text-align: center;
