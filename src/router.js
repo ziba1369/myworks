@@ -1,7 +1,7 @@
 import Home from './Components/Home';
 import PriceServices from './Components/PriceServices';
 import Order from './Components/Order';
-
+import Loginpage from './Components/Loginpage';
 const routers = [
 
     {
@@ -19,6 +19,12 @@ const routers = [
     {
         path: '/order',
         component: Order,
+        exact: true,
+
+    },
+    {
+        path: '/login',
+        component: Loginpage,
         exact: true,
 
     },

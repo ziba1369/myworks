@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Row, Button, Col, Form, Card } from "react-bootstrap";
-
+import {ToastsContainer, ToastsStore,ToastsContainerPosition} from 'react-toasts';
+ 
 const ServicesGroup = ({onClicks,step,onChangess}) => {
   const [service, setService] = useState();
   const [types,setTypes]=useState();
@@ -14,17 +15,23 @@ const ServicesGroup = ({onClicks,step,onChangess}) => {
     
   };
   const handleSubmit=()=>{
-    if (service === undefined ||types === undefined ) {
+    if (service === undefined )
+    {
       document.getElementById("groups").style.borderColor = "red";
+      ToastsStore.warning('لطفا گروه بندی خدمات  انتخاب کنید')
+    }
+    
+    else if(types === undefined ) {
+  
       document.getElementById("types").style.borderColor = "red";
-
+      ToastsStore.warning('لطفا نوع مدرک  ترجمه را انتخاب کنید')
     }else {
   
       onClicks()
     
     }
   }
-
+ 
   return (
     <React.Fragment>
      
@@ -110,6 +117,7 @@ const ServicesGroup = ({onClicks,step,onChangess}) => {
         </Card>
       </Col>
       <Col xl={3} lg={3} md={3} sm={12} xs={12} className="Continue-order">
+      <ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore} />
         <Button  onClick={handleSubmit} id="add1" type="submit">
           ادامه سفارش
         </Button>

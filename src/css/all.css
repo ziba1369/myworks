@@ -1727,3 +1727,42 @@ input[type="checkbox"]:checked:after {
 /* confirmorder */
 /* countinue-order */
 
+/* toast */
+.toasts-container div {
+    font-family: iranyekan !important;
+}
+/* toast */
+
+/* loginpage */
+
+p.textlogin {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #454f63;
+}
+label.form-label {
+    color: #454f62;
+    font-size: .9rem;
+}
+.form-check {
+    text-align: center;
+}
+label.form-check-label {
+    font-size: .9rem;
+    text-align: center;
+}
+.loginpage button {
+    width: 100%;
+    font-size: 1rem;
+    box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
+}
+p.forgetpass ,p.activesys{
+    text-align: center;
+    padding: 2.8rem 0 1rem 0;
+    font-size: .9rem;
+}
+.activesys span {
+    color: #1976d2;
+    padding: 0 .3rem;
+}
+/* loginpage */

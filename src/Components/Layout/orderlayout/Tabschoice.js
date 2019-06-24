@@ -14,7 +14,8 @@ import adddoc from "../../../images/add-documents.svg";
 import delitype from "../../../images/deliverytype.svg";
 import acceptsign from "../../../images/acceptsign.svg";
 import tranlatelang from "../../../images/translatellang.svg";
-
+import {ToastsContainer, ToastsStore,ToastsContainerPosition} from 'react-toasts';
+ 
 const Tabschoice = ({ onClicks, step, onChanges }) => {
   const [typedoc, changetypedoc] = useState({
     type: "شناسنامه",
@@ -54,7 +55,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     }
   ]);
 
-  const [validation] = useState([
+  const [validation,setVal] = useState([
     {
       id: 1,
       name: "مهروتاییدیه دفترترجمی",
@@ -75,9 +76,9 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     }
   ]);
   const [count, setcount] = useState(0);
-  const [delivery, setdelivery] = useState([
-    { type: "automatic", name: "عادی", id: 1 },
-    { type: "express", name: "فوری", id: 2 }
+  const [delivery, setDelivery] = useState([
+    { type: "automatic", name: "عادی", id: 1, checkin:false },
+    { type: "express", name: "فوری", id: 2 ,checkin:false}
   ]);
 
   const lnaguage = languages.map((item, index) => {
@@ -108,6 +109,11 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
   });
 
   const valid = validation.map((item, index) => {
+    const validhandle = () => {
+      var val = validation;
+      val[index].checkin = !val[index].checkin;
+      setVal(val);
+    };
     return (
       <Row key={item.id}>
         <Col sm={8}>{item.name}</Col>
@@ -118,6 +124,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
               <Form.Check
                 className="checkbox-container checkmark"
                 type="checkbox"
+                onChange={validhandle}
                 id={item.id}
               />
             </span>
@@ -128,13 +135,18 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
   });
 
   const typedelivery = delivery.map((item, index) => {
+    const deliveryhandle = () => {
+      var del = delivery;
+     del[index].checkin = !del[index].checkin;
+     setDelivery(del);
+    };
     return (
       <Row>
         <Col sm={6}>{item.name}</Col>
         <Col sm={6}>
           <p>
             <span>
-              <Form.Check type="checkbox" id={item.id} />
+              <Form.Check type="checkbox" onChange={deliveryhandle}   id={item.id} />
             </span>
           </p>
         </Col>
@@ -143,23 +155,51 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
   });
 
   const handleSubmit = () => {
-    var blang = false;
+    let blang = false;
+    let bval=false;
+    let bdel=false;
     for (let x in languages) {
       if (languages[x].checkin) {
         blang = true;
         break;
       }
     }
-    if (blang) {
-      onClicks();
-    } else {
-      alert("aaa");
+ 
+    for (let x in validation) {
+      if (validation[x].checkin) {
+        bval = true;
+        break;
+      }
     }
+    for (let x in delivery) {
+      if (delivery[x].checkin) {
+        bdel = true;
+        break;
+      }
+    }
+    if (blang && bval && bdel) {
+      onClicks();
+    } else if(blang===false){
+      ToastsStore.warning('لطفا یک زبان برای ترجمه انتخاب کنید')
+   
+    }else if(bval===false)
+    {
+      ToastsStore.warning('لطفا  نوع تاییدیه را انتخاب کنید')
+    }else if(bdel===false)
+     {
+      ToastsStore.warning('لطفا نحوه ارسال  را  برای ترجمه انتخاب کنید')
+     }
+     
   };
 
   return (
     <React.Fragment>
       <Row>
+   
+ 
+
+       
+ 
         <Col xl={3} lg={3} md={3} sm={12} xs={12}>
           <Card className="documenttype ">
             <Card.Header>نوع مدرک ترجمه</Card.Header>
@@ -180,7 +220,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
             </Card.Body>
           </Card>
         </Col>
-
+        
         <Col
           xl={6}
           lg={6}
@@ -225,6 +265,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
                 <Tab.Content>
                   <Tab.Pane className="tabcheckbox" eventKey="first">
                     {lnaguage}
+                    
                   </Tab.Pane>
                   <Tab.Pane className="tabcheckbox" eventKey="second">
                     {valid}
@@ -268,7 +309,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
                       </div>
                     </div>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="fourth">
+                  <Tab.Pane className="tabcheckbox" style={{textAlign:"center"}} eventKey="fourth">
                     <p
                       style={{
                         color: "#454f63",
@@ -288,7 +329,8 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
           </TabContainer>
         </Col>
         <Col xl={3} lg={3} md={3} sm={12} xs={12} className="Continue-order">
-          <p className="addteaxt" />
+        <ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore} />
+         
           <Button
             style={{ margin: "1rem 0", fontSize: ".8rem", fontFamily: "fanum" }}
             variant="primary"

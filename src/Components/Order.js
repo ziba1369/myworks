@@ -21,11 +21,49 @@ const Order = () => {
   const [linefour, setLinefour] = useState();
  
   const increment = () => {
+   
     setCount(step + 1);
   };
-  const handlermadrak=(e)=>{
-  alert('aaa')
+  const handlerMadrak=( )=>{
+    if(step<1)
+    {
+      return (step && lineone)
+    }
+    setCount(1);
   };
+  const handlerType=()=>{
+    if(step<2)
+    {
+      
+      return (step && lineone)
+    }
+    setCount(2);
+
+  }
+  const handlerUpload=()=>{
+    if(step<3)
+    {
+      
+      return (step && lineone)
+    }
+    setCount(3)
+  }
+  const handlerConfirm=()=>{
+    if(step<4)
+    {
+      
+      return (step && lineone)
+    }
+    setCount(4)
+  }
+  const handlerPay=()=>{
+    if(step<5)
+    {
+      
+      return (step && lineone)
+    }
+    setCount(5)
+  }
   useEffect(() => {
   
     switch (step) {
@@ -178,10 +216,10 @@ const Order = () => {
       <Row className="orderbuttons rtl">
         <Col
           id="choosecer"
-          onclick={handlermadrak}
+         
           className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
         >
-          <Button style={styleone} size="lg">
+          <Button style={styleone} onClick={handlerMadrak} size="lg">
             انتخاب مدرک
           </Button>
           <span style={lineone} />
@@ -191,7 +229,7 @@ const Order = () => {
           id="kindtrans"
           className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
         >
-          <Button style={styletwo} size="lg">
+          <Button style={styletwo} onClick={handlerType} size="lg">
             نوع ترجمه
           </Button>
           <span style={linetwo} />
@@ -201,7 +239,7 @@ const Order = () => {
           id="upload"
           className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
         >
-          <Button style={stylethree} size="lg">
+          <Button style={stylethree} onClick={handlerUpload} size="lg">
             آپلود مدارک
           </Button>
           <span style={linethree} />
@@ -211,7 +249,7 @@ const Order = () => {
           id="confirm"
           className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
         >
-          <Button size="lg" style={stylefour}>
+          <Button size="lg" style={stylefour} onClick={handlerConfirm}>
             تایید سفارش
           </Button>
           <span style={linefour} />
@@ -220,7 +258,7 @@ const Order = () => {
           id="pay"
           className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer last"
         >
-          <Button size="lg">پرداخت</Button>
+          <Button size="lg" onClick={handlerPay}>پرداخت</Button>
           <span style={stylefive} />
         </Col>
       </Row>

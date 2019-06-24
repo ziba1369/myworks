@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {Card} from 'react-bootstrap';
+
 const Documenttype = () => {
  const[typedoc,changetypedoc]=useState({
      type:'شناسنامه',

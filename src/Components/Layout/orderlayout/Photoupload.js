@@ -1,5 +1,6 @@
 import React,{useState} from "react";
-import {Button ,Col,Row,Card } from "react-bootstrap";
+import {Button ,Col,Row,Card} from "react-bootstrap";
+
 const Photoupload = ({ onClicks, step, onChanges }) => {
 const[typedoc,changetypedoc]=useState({
         type:'شناسنامه',
@@ -9,11 +10,24 @@ const[typedoc,changetypedoc]=useState({
         deliverytype:'عادی'
    
     })
+  const[picture,setPicture]=useState()
+ const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+      setPicture({image: e.target.result});
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
     const handleSubmit = () => {
     
         onClicks();
       
     };
+
+
   return (
      <React.Fragment>
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
@@ -50,8 +64,8 @@ const[typedoc,changetypedoc]=useState({
        </Row>
        <Row>
        <form>
-  <input type="file" name="pic" accept="image/*" />
-
+       <input type="file" onChange={onImageChange} className="filetype" id="group_image"/>
+       <img id="target" alt={picture} src={picture} />
   </form>
        </Row>
        </div>
