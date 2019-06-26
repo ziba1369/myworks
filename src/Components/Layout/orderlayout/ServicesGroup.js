@@ -1,44 +1,43 @@
 import React, { useState, useEffect } from "react";
-import {Row, Button, Col, Form, Card } from "react-bootstrap";
-import {ToastsContainer, ToastsStore,ToastsContainerPosition} from 'react-toasts';
- 
-const ServicesGroup = ({onClicks,step,onChangess}) => {
+import { Row, Button, Col, Form, Card } from "react-bootstrap";
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
+} from "react-toasts";
+
+const ServicesGroup = ({ onClicks, step, onChangess }) => {
   const [service, setService] = useState();
-  const [types,setTypes]=useState();
+  const [types, setTypes] = useState();
   const handleServiceChange = e => {
     setService(e.target.value);
-  
   };
 
   const handleTypeTransChange = e => {
     setTypes(e.target.value);
-    
   };
-  const handleSubmit=()=>{
-    if (service === undefined )
-    {
+  const handleSubmit = () => {
+    if (service === undefined) {
       document.getElementById("groups").style.borderColor = "red";
-      ToastsStore.warning('لطفا گروه بندی خدمات  انتخاب کنید')
-    }
-    
-    else if(types === undefined ) {
-  
+      ToastsStore.warning("لطفا گروه بندی خدمات  انتخاب کنید");
+    } else if (types === undefined) {
       document.getElementById("types").style.borderColor = "red";
-      ToastsStore.warning('لطفا نوع مدرک  ترجمه را انتخاب کنید')
-    }else {
-  
-      onClicks()
-    
+      ToastsStore.warning("لطفا نوع مدرک  ترجمه را انتخاب کنید");
+    } else {
+      let changebutton=document.getElementById("add1");
+     changebutton.classList.add('changebutton');
+      onClicks();
+     
     }
-  }
- 
+
+  };
+
   return (
     <React.Fragment>
-     
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
         <Card className="documenttype ">
           <Card.Header>نوع مدرک ترجمه</Card.Header>
-         <Card.Body style={{padding:"8rem 0"}}>
+          <Card.Body style={{ padding: "8rem 0" }}>
             {/* // <Card.Title>{typedoc.type}</Card.Title>
             // <Card.Text>
             //   زبان ترجمه<span>{typedoc.countchoose} مورد</span>
@@ -52,11 +51,10 @@ const ServicesGroup = ({onClicks,step,onChangess}) => {
             // <Card.Text>
             //   نوع تحویل<span>{typedoc.deliverytype} مورد</span>
             // </Card.Text> */}
-          </Card.Body> 
+          </Card.Body>
         </Card>
       </Col>
-     
-      
+
       <Col
         xl={6}
         lg={6}
@@ -91,7 +89,7 @@ const ServicesGroup = ({onClicks,step,onChangess}) => {
               </Form.Group>
             </Col>
             <Col xl={12} lg={12} md={12} xs={12}>
-              <Form.Group >
+              <Form.Group>
                 <Form.Label>نوع مدرک ترجمه</Form.Label>
                 <Form.Control
                   as="select"
@@ -117,12 +115,14 @@ const ServicesGroup = ({onClicks,step,onChangess}) => {
         </Card>
       </Col>
       <Col xl={3} lg={3} md={3} sm={12} xs={12} className="Continue-order">
-      <ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore} />
-        <Button  onClick={handleSubmit} id="add1" type="submit">
+        <ToastsContainer
+          position={ToastsContainerPosition.TOP_CENTER}
+          store={ToastsStore}
+        />
+        <Button onClick={handleSubmit} id="add1" type="submit">
           ادامه سفارش
         </Button>
       </Col>
-    
     </React.Fragment>
   );
 };

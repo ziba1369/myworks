@@ -127,7 +127,14 @@ a:hover {
     color: #fff;
     padding: .5rem 0rem;
 }
-
+.changebutton{
+background-color: #1976d2;
+border-radius: 5px;
+-webkit-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
+-moz-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
+box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
+color: #fff;
+}
 .sign a {
     color: #fff;
 }
@@ -847,7 +854,10 @@ p.call {
 .servicestext div {
     padding: auto 0px !important
 }
-
+.dropdown-item {
+    display: block;
+    width: 85%;
+}
 @media only screen and (min-width: 768px) {
     .dropdown-item {
         display: block;
@@ -1734,7 +1744,9 @@ input[type="checkbox"]:checked:after {
 /* toast */
 
 /* loginpage */
-
+.loginpage,.registerpage {
+    padding: 4rem 0;
+}
 p.textlogin {
     text-align: center;
     font-size: 1.3rem;
@@ -1751,7 +1763,7 @@ label.form-check-label {
     font-size: .9rem;
     text-align: center;
 }
-.loginpage button {
+.loginpage button ,.registerpage button{
     width: 100%;
     font-size: 1rem;
     box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
@@ -1765,4 +1777,45 @@ p.forgetpass ,p.activesys{
     color: #1976d2;
     padding: 0 .3rem;
 }
+.btn-primary.disabled, .btn-primary:disabled {
+    border: 0px !important;
+    box-shadow: none !important;
+}
+.loginpage #formBasicChecbox {
+    left: 0;
+    position: absolute;
+    margin-left: 1rem;
+}
+.form-check {
+    text-align: right !important;
+}
 /* loginpage */
+
+/* forgetpass */
+
+.forgetpass a {
+    color: #454f63;
+}
+.btn-primary.disabled, .btn-primary:disabled{
+    background-color: rgb(225, 225, 225) !important;
+}
+/* forgetpass */
+.textthird{
+ text-align: center
+}
+
+button:not(:disabled) {
+        border: 0px;
+}
+.leftreg {
+    font-size: .7rem;
+    text-align: left;
+    position: absolute;
+    left: 1rem;
+}
+.rightreg {
+    font-size: .7rem;
+    text-align: right;
+    right: 0;
+    position: relative;
+}

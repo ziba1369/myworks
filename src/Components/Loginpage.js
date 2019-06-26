@@ -5,42 +5,42 @@ import {
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
+import $ from 'jquery';
+import {Link} from "react-router-dom";
 const Login = () => {
   const [name, setName] = useState("");
-  const [pass, setPasss] = useState({});
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [pass, setPass] = useState("");
+  const [loginButton, setLoginButtonStyle] = useState({backgroundColor: "#e1e1e1"})
 
-  const handleSubmit = event => {
-     if (event) event.preventDefault();
-    if (name.length<1) {
-      ToastsStore.error("لطفا نام کاربری را وارد کنید");
+  const checkLoginButton = () => {
+    if (name.length>1 && pass.length>1) {
+        setLoginButtonStyle({backgroundColor: "#1976d2"})
+        $(".loginbutton").removeAttr("disabled");
+    } else {
+        setLoginButtonStyle({backgroundColor: "#e1e1e1"})
+        $(".loginbutton").attr("disabled","disabled");
     }
-    else if(pass.length<5){
-      ToastsStore.error("لطفا رمز عبور را واد کنید");
-    }
-      else {
-      alert("ok");
-    }
-  };
+}
+
+
 
   const handleName = e => {
-    e.persist();
-    setName(e.target.name);
+    setName(e.target.value);
   };
-
-  useEffect(() => {
-    handleSubmit()
-  }, [name]);
 
 
   const handlepassword = e => {
-    e.persist();
-   setPasss(e.target.pass)
+   setPass(e.target.value)
   };
+     // checkLoginButton function after mobile value changed
+     useEffect(() => {
+      checkLoginButton()
+  }, [name]);
+
+  // checkLoginButton function after password value changed
   useEffect(() => {
-    handleSubmit()
-}, [pass]);
+      checkLoginButton()
+  }, [pass]);
 
 
   return (
@@ -75,6 +75,7 @@ const Login = () => {
                 type="password"
                 placeholder=""
                 onChange={handlepassword}
+                value={pass}
                 required
               />
             </Form.Group>
@@ -85,14 +86,17 @@ const Login = () => {
               variant="primary"
               size="lg"
               type="submit"
-              onClick={handleSubmit}
+              style={loginButton}
+            
+              className="loginbutton"
             >
               ورود
+              
             </Button>
-            <p className="forgetpass">رمز عبور را فراموش کرده اید</p>
+            <p className="forgetpass"><Link to='/forgetpass'>رمز عبور را فراموش کرده اید</Link></p>
             <hr />
             <p className="activesys">
-              هنوز در سیستم فعال نشدید<span>عضویت</span>
+              هنوز در سیستم فعال نشدید<Link to="/register"><span>عضویت</span></Link>
             </p>
           </Form>
         </Col>

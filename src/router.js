@@ -2,6 +2,8 @@ import Home from './Components/Home';
 import PriceServices from './Components/PriceServices';
 import Order from './Components/Order';
 import Loginpage from './Components/Loginpage';
+import Forgetpass from './Components/Layout/Login/Forgetpass';
+import Register from './Components/Layout/Login/Resgistery';
 const routers = [
 
     {
@@ -25,6 +27,18 @@ const routers = [
     {
         path: '/login',
         component: Loginpage,
+        exact: true,
+
+    },
+    {
+        path: '/forgetpass',
+        component: Forgetpass,
+        exact: true,
+
+    },
+    {
+        path: '/register',
+        component: Register,
         exact: true,
 
     },
