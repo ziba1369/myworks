@@ -6,7 +6,7 @@ import workDoc from '../../../images/shoghli.svg';
 import financeDoc from '../../../images/mali-g.svg';
 import educarionDoc from '../../../images/tahsili-g.svg';
 import cardDoc from '../../../images/passport.46186dcf.svg';
-
+import { Link } from "react-router-dom";
 
 const Services = () => {
     const [info,
@@ -19,6 +19,7 @@ const Services = () => {
         color: '#ffe7bd',
         boxshadow: '0px 4px 20px 1px #ffe7bd',
         name: "officedoc",
+        history:"/services/4"
     },
         {
             id: 2,
@@ -27,7 +28,8 @@ const Services = () => {
             alt: 'مدارک شغلی',
             color: '#dac2d4',
             boxshadow: '0px 4px 20px 1px #dac2d4',
-            name: "workdoc"
+            name: "workdoc",
+            history:"/services/1"
         },
         {
             id: 3,
@@ -36,7 +38,8 @@ const Services = () => {
             alt: 'مدارک مالی',
             color: '#c5edd7',
             boxshadow: '0px 4px 20px 1px #c5edd7',
-            name: "financedoc"
+            name: "financedoc",
+            history:"/services/3"
         },
         {
             id: 4,
@@ -45,7 +48,8 @@ const Services = () => {
             alt: 'مدارک تحصیلی',
             color: '#ffdfe6',
             boxshadow: '0px 4px 20px 1px #ffdfe6',
-            name: "educarionDoc"
+            name: "educarionDoc",
+            history:"/services/2"
         },
         {
             id: 5,
@@ -54,23 +58,27 @@ const Services = () => {
             alt: 'مدارک شناسایی',
             color: '#ebeeff',
             boxshadow: '0px 4px 20px 1px #ebeeff',
-            name: "carddoc"
+            name: "carddoc",
+            history:"/services/4"
         },
     
     ]);
 
     const cards = info.map((item, index) => {
         return (
-
-            <div key={item.id} className="child col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4">
+         
+            <div key={item.id}  className="child col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4">
                 <Card className="pulse noborder" style={{backgroundColor: item.color, boxShadow: item.boxshadow}}>
+                  <Link to={item.history}>
                     <Card.Img variant="top" alt={item.alt} className={item.name} src={item.img}/>
                     <Card.Body>
-                        <Card.Title><a href={null}>{item.title}</a></Card.Title>
+                        <Card.Title>{item.title}</Card.Title>
                     </Card.Body>
+                    </Link>
                 </Card>
             </div>
-
+           
+           
 
         )
     })

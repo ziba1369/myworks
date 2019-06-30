@@ -7,7 +7,9 @@ import {
 } from "react-toasts";
 import $ from 'jquery';
 import {Link} from "react-router-dom";
-const Login = () => {
+import axios from "axios";
+import * as Cookies from "js-cookie";
+const Login = (props) => {
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
   const [loginButton, setLoginButtonStyle] = useState({backgroundColor: "#e1e1e1"})
@@ -41,6 +43,30 @@ const Login = () => {
   useEffect(() => {
       checkLoginButton()
   }, [pass]);
+
+const loginbutton=()=>{
+  var login = {
+    mobile: name,
+    password: pass
+};
+    axios.post("http://hezare3vom.ratechcompany.com/api/login_app", login, {headers: { 'Content-Type': 'application/json' }})
+    .then(function (response) {
+      console.log(response.data.success)
+        if (response.data.success) {
+            Cookies.set('token', response.data.token, {path: '/', expires: 7});
+            props.history.push("/");
+            
+        } else {
+            ToastsStore.error(response.data.errmessage);
+        }
+    })
+    .catch(function (error) {
+        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    })
+}
+
+
+
 
 
   return (
@@ -87,7 +113,7 @@ const Login = () => {
               size="lg"
               type="submit"
               style={loginButton}
-            
+              onClick={loginbutton}
               className="loginbutton"
             >
               ورود

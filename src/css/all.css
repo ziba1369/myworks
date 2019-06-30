@@ -467,6 +467,7 @@ button:focus {
 .card-title {
     margin-bottom: .75rem;
     text-align: center;
+    color:#454f63
 }
 
 .card-title a {
@@ -856,7 +857,7 @@ p.call {
 }
 .dropdown-item {
     display: block;
-    width: 85%;
+    width: 85% !important;
 }
 @media only screen and (min-width: 768px) {
     .dropdown-item {
@@ -1326,6 +1327,8 @@ p.service-price {
 }
 .pagination {
     justify-content: center;
+        font-family: fanum;
+    
 }
 .pagination li {
     padding: .3rem 0.6rem;
@@ -1812,10 +1815,16 @@ button:not(:disabled) {
     text-align: left;
     position: absolute;
     left: 1rem;
+    color:#1976d2 !important
+}
+#timer{
+    text-align: center;
+    color:#1976d2 !important
 }
 .rightreg {
     font-size: .7rem;
     text-align: right;
     right: 0;
     position: relative;
+   
 }

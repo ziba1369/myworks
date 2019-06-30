@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Button, Col, Row, Form } from "react-bootstrap";
 import {
   ToastsStore,
@@ -6,7 +6,8 @@ import {
   ToastsContainerPosition
 } from "react-toasts";
 import $ from "jquery";
-
+import axios from "axios";
+import * as Cookies from "js-cookie";
 const Forgetpass = () => {
   const [step, setStep] = useState(1);
   const [firstStep, setFirstStep] = useState({ display: "block" });
@@ -40,12 +41,16 @@ const Forgetpass = () => {
         setThirdStep({ display: "block" });
 
         break;
-
+      default:
+        break;
     }
   }, [step]);
   //////////////////// FIRST STEP //////////////////////
   const [mobile, setMobile] = useState("");
-
+  const [vertification, setVertification] = useState("");
+  const [RegisterFirst, setRegisterFirstStyle] = useState({
+    backgroundColor: "#e1e1e1"
+  });
   const checkRegisterFirstButton = () => {
     if (mobile.length === 11) {
       setRegisterFirstStyle({ backgroundColor: "#1976d2" });
@@ -66,49 +71,100 @@ const Forgetpass = () => {
   }, [mobile]);
 
   // checkRegisterFirstButton function after rules value changed
-  const loginfirstStep = () => {
+  const loginfirstStep = props => {
     setStep(2);
-    
-    
+
+    var login = {
+      mobile_number: mobile
+    };
+    axios
+      .post(
+        "http://hezare3vom.ratechcompany.com/api/get_verification_code",
+        login,
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then(function(response) {
+        console.log(response.data.success);
+        if (response.data.success) {
+          Cookies.set("token", response.data.code, { path: "/", expires: 7 });
+          ToastsStore.success(response.data.code);
+          setVertification(response.data.code);
+          props.history.push("/");
+        } else {
+          ToastsStore.error(response.data.errmessage);
+        }
+      })
+      .catch(function(error) {
+        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+      });
   };
   //////////////////// SECOND STEP //////////////////////
   // states
 
   const [active, setActive] = useState("");
-  const[min,setMin]=useState(0)
-  const[second,setSecond]=useState(60)
+  // const[vertiification_code,setVertification]=useState([]);
+  const [min, setMin] = useState(0);
+  const [second, setSecond] = useState(60);
   const [RegisterSecond, setRegisterSecondStyle] = useState({
     backgroundColor: "#e1e1e1"
   });
   const [activSecond, setactiveSecondStyle] = useState({
     color: "#e1e1e1"
   });
-  const changeStep=()=>{
-    setStep(1)
-  }
+  const changeStep = () => {
+    setStep(1);
+  };
+  const mobileStep = props => {
+    if (second === 0) {
+      setSecond(60);
+
+      var login = {
+        mobile_number: mobile
+      };
+      axios
+        .post(
+          "http://hezare3vom.ratechcompany.com/api/get_verification_code",
+          login,
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then(function(response) {
+          console.log(response.data.success);
+          if (response.data.success) {
+            Cookies.set("token", response.data.code, { path: "/", expires: 7 });
+            ToastsStore.success(response.data.code);
+            setVertification(response.data.code);
+            props.history.push("/");
+          } else {
+            ToastsStore.error(response.data.errmessage);
+          }
+        })
+        .catch(function(error) {
+          ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+        });
+    }
+  };
+
   useEffect(() => {
     let interval = null;
-    if(second<61 && second>0 && step===2)
-    {
+    if (second < 61 && second > 0 && step === 2) {
       interval = setInterval(() => {
         setSecond(second => second - 1);
-        if(second==0)
-        {
-          setSecond("00")
-        }
+        document.querySelector('.rightreg').style.color="rgb(225, 225, 225)" 
       }, 1000);
-    }
-     else  {
+    } else {
+     
       clearInterval(interval);
-     }
+      
+    }
+    if(second===0){
+      document.querySelector('.rightreg').style.color="#1976d2";
+    }
     return () => clearInterval(interval);
-   
-  }, [second,step]);
-
+  }, [second, step]);
 
   // check conditions and enable/disable register button
   const checkRegisterSecondButton = () => {
-    if (active) {
+    if (parseInt(active) === parseInt(vertification)) {
       setRegisterSecondStyle({ backgroundColor: "#1976d2" });
       $("#rfbutton").removeAttr("disabled");
     } else {
@@ -127,10 +183,34 @@ const Forgetpass = () => {
   }, [active]);
 
   // checkRegisterFirstButton function after rules value changed
-  const loginSecondStep = () => {
-    setStep(3);
+  const loginSecondStep = props => {
+    if (parseInt(active) === parseInt(vertification)) {
+      setStep(3);
+    }
+    console.log(active, vertification);
+    var verti = {
+      mobile_number: mobile,
+      vertification_vode: vertification
+    };
+    axios
+      .post(
+        "http://hezare3vom.ratechcompany.com/api/check_verification_code",
+        verti,
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then(function(response) {
+        console.log(response.data.success);
+        if (response.data.success) {
+          Cookies.set("token", { path: "/", expires: 7 });
+          ToastsStore.success(response.data.code);
+          props.history.push("/");
+        }
+      })
+      .catch(function(error) {
+        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+      });
   };
-  
+
   //////////////////// THIRD STEP //////////////////////
 
   const [name, setName] = useState("");
@@ -189,30 +269,22 @@ const Forgetpass = () => {
   const [birthyearvalue, setBirthyearvalue] = useState("سال");
   const [pass, setPass] = useState("");
   const [passr, setPassr] = useState("");
-  const [RegisterFirst, setRegisterFirstStyle] = useState({
+  const [RegisterThird, setRegisterThirdStyle] = useState({
     backgroundColor: "#e1e1e1"
   });
 
   // check conditions and enable/disable register button
-  const checkRegisterThirdButton = () => {
-    if (
-      name.length > 1 &&
-      lastname.length > 1 &&
-      certi.length === 11 &&
-      pass.lenght > 1 &&
-      passr.length > 1 &&
-      pass === passr
-    ) {
-      setRegisterFirstStyle({ backgroundColor: "#1976d2" });
-      $("#rfbutton").removeAttr("disabled");
-    } else {
-      setRegisterFirstStyle({ backgroundColor: "#e1e1e1" });
-      $("#rfbutton").attr("disabled", "disabled");
-    }
-  };
+
   useEffect(() => {
     checkRegisterThirdButton();
   }, [certi]);
+
+  useEffect(() => {
+    checkRegisterThirdButton();
+  }, [pass]);
+  useEffect(() => {
+    checkRegisterThirdButton();
+  }, [passr]);
 
   const handleName = e => {
     setName(e.target.value);
@@ -239,9 +311,59 @@ const Forgetpass = () => {
   const handlePassr = e => {
     setPassr(e.target.value);
   };
-  const loginFirstStep = () => {
-   alert("its true")
+  const checkRegisterThirdButton = () => {
+  console.log(pass.length)
+    if (
+      name.length > 1 &&
+      lastname.length > 1 &&
+      certi.length === 11 &&
+      pass.length >1 &&
+      passr.length>1 &&
+      pass===passr &&
+      birthday &&
+      birthmonth &&
+      birthyear
+      
+    ) {
+      setRegisterThirdStyle({ backgroundColor: "#1976d2" });
+      $("#rfbutton").removeAttr("disabled");
+    } else {
+      setRegisterThirdStyle({ backgroundColor: "#e1e1e1" });
+      $("#rfbutton").attr("disabled", "disabled");
+    }
   };
+
+  const loginThirdStep = props => {
+    var vertiification = {
+      name: name,
+      lastname: lastname,
+      national_code: certi,
+      mobile: mobile,
+      birth_day: birthday,
+      birth_month: birthmonth,
+      birth_year: birthyear,
+      password: pass
+    };
+    axios
+      .post(
+        "http://hezare3vom.ratechcompany.com/api/sign_up_app",
+        vertiification,
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then(function(response) {
+        if (response.data.success) {
+          Cookies.set("token", { path: "/", expires: 7 });
+
+          props.history.push("/");
+        } else {
+          ToastsStore.error(response.data.errmessage);
+        }
+      })
+      .catch(function(error) {
+        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+      });
+  };
+
   ///////////////////////////////////////////
   return (
     <React.Fragment>
@@ -255,13 +377,13 @@ const Forgetpass = () => {
             xs={12}
           >
             <div dir="rtl">
-            <div style={firstStep}>
+              <div style={firstStep}>
                 <ToastsContainer
                   position={ToastsContainerPosition.TOP_CENTER}
                   store={ToastsStore}
                 />
                 <p className="textlogin">فراموشی کلمه عبور</p>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group>
                   <Form.Label>
                     شماره تلفن همراهی که با آن ثبت نام کرده اید وارد نمایید
                   </Form.Label>
@@ -293,7 +415,7 @@ const Forgetpass = () => {
                   store={ToastsStore}
                 />
                 <p className="textlogin">فعالسازی</p>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group>
                   <Form.Label>
                     کد فعالسازی ارسال شده به شماره همراه را وارد کنید
                   </Form.Label>
@@ -305,8 +427,21 @@ const Forgetpass = () => {
                     vlaue={active}
                     required
                   />
-                  <p id="timer">0{min}:{second}</p>
-                  <p className="retuen"><a className="rightreg" style={activSecond}>ارسال مجدد کد فعالسازی</a><a  onClick={changeStep} className="leftreg">اصلاح شماره تماس</a></p>
+                  <p id="timer">
+                    0{min}:{second}
+                  </p>
+                  <p className="retuen">
+                    <a
+                      className="rightreg"
+                      onClick={mobileStep}
+                      style={activSecond}
+                    >
+                      ارسال مجدد کد فعالسازی
+                    </a>
+                    <a onClick={changeStep} className="leftreg">
+                      اصلاح شماره تماس
+                    </a>
+                  </p>
                 </Form.Group>
 
                 <Button
@@ -318,7 +453,7 @@ const Forgetpass = () => {
                   onClick={loginSecondStep}
                   className="loginbutton"
                 >
-                 ثبت
+                  ثبت
                 </Button>
               </div>
               <div style={thirdStep}>
@@ -327,7 +462,7 @@ const Forgetpass = () => {
                   store={ToastsStore}
                 />
                 <p className="textlogin">اطلاعات شخصی</p>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group>
                   <Form.Label>نام </Form.Label>
                   <Form.Control
                     type="text"
@@ -428,19 +563,17 @@ const Forgetpass = () => {
                   />
                 </Form.Group>
                 <Button
-                variant="primary"
-                size="lg"
-                type="submit"
-                id="rfbutton"
-                style={RegisterFirst}
-                onClick={loginFirstStep}
-                className="loginbutton"
-              >
-                ثبت
-              </Button>
+                  variant="primary"
+                  size="lg"
+                  type="submit"
+                  id="rfbutton"
+                  style={RegisterThird}
+                  onClick={loginThirdStep}
+                  className="loginbutton"
+                >
+                  ثبت
+                </Button>
               </div>
-
-         
             </div>
           </Col>
         </Container>
