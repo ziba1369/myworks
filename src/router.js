@@ -13,7 +13,8 @@ const routers = [
 
     },
     {
-        path: '/services/:id',
+       path: '/services/:id',
+      // path: '/services',
         component: PriceServices,
         exact: true,
 

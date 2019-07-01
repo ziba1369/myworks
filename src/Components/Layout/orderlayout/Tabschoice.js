@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Button,
   Form,
@@ -53,7 +53,8 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
       price: "۲۶۰۰۰",
       checkin: false
     }
-  ]);
+  ]
+  );
 
   const [validation,setVal] = useState([
     {
@@ -83,9 +84,11 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
 
   const lnaguage = languages.map((item, index) => {
     const langhandle = () => {
+      
       var lng = languages;
       lng[index].checkin = !lng[index].checkin;
       setLang(lng);
+    
     };
 
     return (
@@ -155,7 +158,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
   });
 
   const handleSubmit = () => {
-    let blang = false;
+    let blang =false;
     let bval=false;
     let bdel=false;
     for (let x in languages) {
@@ -178,6 +181,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
       }
     }
     if (blang && bval && bdel) {
+     
       onClicks();
     } else if(blang===false){
       ToastsStore.warning('لطفا یک زبان برای ترجمه انتخاب کنید')
@@ -191,7 +195,35 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
      }
      
   };
+const changeButton=()=>{
+  let blang =false;
+ 
+  for (let x in languages) {
+    if (languages[x].checkin) {
+      blang = true;
+      break;
+    }
+  }
 
+  if (blang) {
+   
+  alert('true use')
+  }
+  
+}
+
+useEffect (()=>{
+  changeButton()
+  console.log('languages')
+},
+[languages.reduce((obj, item) => (obj[item.key] = item.value, obj) ,{})]
+)
+// useEffect(()=>{
+//   changeButton()
+// },[validation])
+// useEffect(()=>{
+//   changeButton()
+// },[delivery])
   return (
     <React.Fragment>
       <Row>
@@ -229,7 +261,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
           xs={12}
           style={{ borderRadius: "1rem", height: "100%" }}
         >
-          <TabContainer id="left-tabs-example" defaultActiveKey="first">
+          <TabContainer  id="left-tabs-example" defaultActiveKey="first">
             <div className="row bordertab">
               <Col className="tabsorder" xl={3} lg={3} md={3} sm={3}>
                 <Nav
@@ -339,7 +371,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
             <p>مجموع هزینه ها</p>
             <p>2500000 تومان</p>
           </Button>
-          <Button id="add1" onClick={handleSubmit} type="submit">
+          <Button id="add1"  onClick={handleSubmit} type="submit">
             ادامه سفارش
           </Button>
         </Col>

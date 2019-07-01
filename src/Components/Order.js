@@ -19,66 +19,78 @@ const Order = () => {
   const [linetwo, setLinetwo] = useState();
   const [linethree, setLinethree] = useState();
   const [linefour, setLinefour] = useState();
- 
+
   const increment = () => {
-   
     setCount(step + 1);
   };
-  const handlerMadrak=( )=>{
-    if(step<1)
-    {
-      return (step && lineone)
-    }
-    setCount(1);
-  };
-  const handlerType=()=>{
-    if(step<2)
-    {
-      
-      return (step && lineone)
-    }
-    setCount(2);
 
-  }
-  const handlerUpload=()=>{
-    if(step<3)
-    {
-      
-      return (step && lineone)
-    }
-    setCount(3)
-  }
-  const handlerConfirm=()=>{
-    if(step<4)
-    {
-      
-      return (step && lineone)
-    }
-    setCount(4)
-  }
-  const handlerPay=()=>{
-    if(step<5)
-    {
-      
-      return (step && lineone)
-    }
-    setCount(5)
-  }
   useEffect(() => {
-  
     switch (step) {
       case 1:
-      
-
+        setStyleone({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStyletwo({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylethree({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylefour({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylefive({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+        });
+        setLineone({
+          display:'none'
+        });
+        setLinetwo({
+          display:'none'
+        });
+        setLinethree({
+          display:'none'
+        });
+        setLinefour({
+         display:'none'
+        });
         break;
 
       case 2:
-          setStyleone({
-            backgroundColor: "#aad0f4",
-            borderColor: "#aad0f4",
-            color: "#495267"
-          });
-    
+        setStyleone({
+          backgroundColor: "#aad0f4",
+          borderColor: "#aad0f4",
+          color: "#495267"
+        });
+        setStyletwo({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylethree({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylefour({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylefive({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
         setLineone({
           content: "",
           position: "absolute",
@@ -92,16 +104,46 @@ const Order = () => {
           borderTopColor: "#1976d2",
           zIndex: "-1"
         });
+        setLinetwo({
+          display:'none'
+        });
+        setLinethree({
+          display:'none'
+        });
+        setLinefour({
+         display:'none'
+        });
+       
+        
 
         break;
 
       case 3:
-          setStyletwo({
+          setStyleone({
             backgroundColor: "#aad0f4",
             borderColor: "#aad0f4",
             color: "#495267"
           });
-      
+        setStyletwo({
+          backgroundColor: "#aad0f4",
+          borderColor: "#aad0f4",
+          color: "#495267"
+        });
+        setStylethree({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylefour({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylefive({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
         setLinetwo({
           content: "",
           position: "absolute",
@@ -115,16 +157,40 @@ const Order = () => {
           borderTopColor: "#1976d2",
           zIndex: "-1"
         });
-
+        setLinethree({
+          display:'none'
+        });
+        setLinefour({
+         display:'none'
+        });
         break;
 
       case 4:
-          setStylethree({
+          setStyleone({
             backgroundColor: "#aad0f4",
             borderColor: "#aad0f4",
             color: "#495267"
           });
-       
+        setStyletwo({
+          backgroundColor: "#aad0f4",
+          borderColor: "#aad0f4",
+          color: "#495267"
+        });
+        setStylethree({
+          backgroundColor: "#aad0f4",
+          borderColor: "#aad0f4",
+          color: "#495267"
+        });
+        setStylefour({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylefive({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
         setLinethree({
           content: "",
           position: "absolute",
@@ -138,16 +204,38 @@ const Order = () => {
           borderTopColor: "#1976d2",
           zIndex: "-1"
         });
-
+       
+        setLinefour({
+         display:'none'
+        });
         break;
 
       case 5:
-          setStylefour({
+          setStyleone({
             backgroundColor: "#aad0f4",
             borderColor: "#aad0f4",
             color: "#495267"
           });
-       
+        setStyletwo({
+          backgroundColor: "#aad0f4",
+          borderColor: "#aad0f4",
+          color: "#495267"
+        });
+        setStylethree({
+          backgroundColor: "#aad0f4",
+          borderColor: "#aad0f4",
+          color: "#495267"
+        });
+        setStylefour({
+          backgroundColor: "#aad0f4",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylefive({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
         setLinefour({
           content: "",
           position: "absolute",
@@ -162,12 +250,32 @@ const Order = () => {
           zIndex: "-1"
         });
         break;
-        case 6:
-            setStylefive({
-              backgroundColor: "#aad0f4",
-              borderColor: "#aad0f4",
-              color: "#495267"
-            });
+      case 6:
+          setStyleone({
+            backgroundColor: "#aad0f4",
+            borderColor: "#aad0f4",
+            color: "#495267"
+          });
+        setStyletwo({
+          backgroundColor: "#aad0f4",
+          borderColor: "#aad0f4",
+          color: "#495267"
+        });
+        setStylethree({
+          backgroundColor: "#aad0f4",
+          borderColor: "#aad0f4",
+          color: "#495267"
+        });
+        setStylefour({
+          backgroundColor: "#aad0f4",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
+        setStylefive({
+          backgroundColor: "#fafafa",
+          border: "2px solid #e1e1e1",
+          color: "#495267"
+        });
 
         break;
 
@@ -175,7 +283,36 @@ const Order = () => {
         break;
     }
   }, [step]);
- 
+  const handlerMadrak = () => {
+    if (step < 1) {
+      return step === 1;
+    }
+    setCount(1);
+  };
+  const handlerType = () => {
+    if (step < 2) {
+      return step;
+    }
+    setCount(2);
+  };
+  const handlerUpload = () => {
+    if (step < 3) {
+      return step;
+    }
+    setCount(3);
+  };
+  const handlerConfirm = () => {
+    if (step < 4) {
+      return step;
+    }
+    setCount(4);
+  };
+  const handlerPay = () => {
+    if (step < 5) {
+      return step;
+    }
+    setCount(5);
+  };
   return (
     <Container>
       <Row>
@@ -216,7 +353,6 @@ const Order = () => {
       <Row className="orderbuttons rtl">
         <Col
           id="choosecer"
-         
           className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
         >
           <Button style={styleone} onClick={handlerMadrak} size="lg">
@@ -258,8 +394,10 @@ const Order = () => {
           id="pay"
           className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer last"
         >
-          <Button size="lg" onClick={handlerPay}>پرداخت</Button>
-          <span style={stylefive} />
+          <Button size="lg" onClick={handlerPay}>
+            پرداخت
+          </Button>
+         
         </Col>
       </Row>
 

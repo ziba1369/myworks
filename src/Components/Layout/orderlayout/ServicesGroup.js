@@ -24,14 +24,17 @@ const ServicesGroup = ({ onClicks, step, onChangess }) => {
       document.getElementById("types").style.borderColor = "red";
       ToastsStore.warning("لطفا نوع مدرک  ترجمه را انتخاب کنید");
     } else {
-      let changebutton=document.getElementById("add1");
-     changebutton.classList.add('changebutton');
+    
       onClicks();
      
     }
 
   };
-
+  if(service && types)
+  {
+    let changebutton=document.getElementById("add1");
+    changebutton.classList.add('changebutton');
+  }
   return (
     <React.Fragment>
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>

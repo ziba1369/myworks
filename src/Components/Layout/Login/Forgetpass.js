@@ -83,6 +83,7 @@ const Forgetpass = () => {
   // checkRegisterFirstButton function after rules value changed
   const loginfirstStep = () => {
     setStep(2);
+
   };
 
   //////////////////// SECOND STEP //////////////////////
@@ -135,12 +136,12 @@ while(second>60)
   const handlerActiveChange = e => {
     setActive(e.target.value);
   };
-  // checkRegisterFirstButton function after mobile value changed
+  // checkRegisterSecondButton function after mobile value changed
   useEffect(() => {
     checkRegisterSecondButton();
   }, [active]);
 
-  // checkRegisterFirstButton function after rules value changed
+  // checkRegisterSecondButton function after rules value changed
   const loginSecondStep = () => {
     setStep(3);
   };
@@ -174,7 +175,7 @@ while(second>60)
     checkRegisteThirdButton();
   }, [newpassr]);
 
-  // checkRegisterFirstButton function after rules value changed
+  // checkRegisterThirdButton function after rules value changed
   const loginThirdStep = () => {
     setStep(4);
   };
@@ -195,7 +196,7 @@ while(second>60)
     /////from server
   };
 
-  // checkRegisterFirstButton function after rules value changed
+  // checkRegisterFourthButton function after rules value changed
   const loginFourthStep = () => {
     setStep(5);
   };
