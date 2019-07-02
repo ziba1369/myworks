@@ -1,7 +1,9 @@
 import React,{useState} from "react";
+import Tabchoice from './Tabschoice';
 import {Button ,Col,Row,Card} from "react-bootstrap";
+import ImagesUploader from 'react-images-uploader';
 
-const Photoupload = ({ onClicks, step, onChanges }) => {
+const Photoupload = ({onClicks, step, onChanges }) => {
 const[typedoc,changetypedoc]=useState({
         type:'شناسنامه',
         countchoose:'۱',
@@ -27,7 +29,7 @@ const[typedoc,changetypedoc]=useState({
       
     };
 
-
+   
   return (
      <React.Fragment>
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
@@ -63,10 +65,25 @@ const[typedoc,changetypedoc]=useState({
          </div>
        </Row>
        <Row>
-       <form>
+         
+       <ImagesUploader
+                url=""
+                optimisticPreviews
+                multiple
+                onLoadEnd={(err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                }}
+                label="آپلود عکس"
+                />
+
+
+       {/* <form>
+     
        <input type="file" onChange={onImageChange} className="filetype" id="group_image"/>
        <img id="target" alt={picture} src={picture} />
-  </form>
+  </form> */}
        </Row>
        </div>
     </Card>

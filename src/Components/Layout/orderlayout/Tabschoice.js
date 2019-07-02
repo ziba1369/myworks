@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Form,
@@ -14,8 +14,12 @@ import adddoc from "../../../images/add-documents.svg";
 import delitype from "../../../images/deliverytype.svg";
 import acceptsign from "../../../images/acceptsign.svg";
 import tranlatelang from "../../../images/translatellang.svg";
-import {ToastsContainer, ToastsStore,ToastsContainerPosition} from 'react-toasts';
- 
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
+} from "react-toasts";
+
 const Tabschoice = ({ onClicks, step, onChanges }) => {
   const [typedoc, changetypedoc] = useState({
     type: "شناسنامه",
@@ -53,10 +57,9 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
       price: "۲۶۰۰۰",
       checkin: false
     }
-  ]
-  );
+  ]);
 
-  const [validation,setVal] = useState([
+  const [validation, setVal] = useState([
     {
       id: 1,
       name: "مهروتاییدیه دفترترجمی",
@@ -78,17 +81,21 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
   ]);
   const [count, setcount] = useState(0);
   const [delivery, setDelivery] = useState([
-    { type: "automatic", name: "عادی", id: 1, checkin:false },
-    { type: "express", name: "فوری", id: 2 ,checkin:false}
+    { type: "automatic", name: "عادی", id: 1, checkin: false },
+    { type: "express", name: "فوری", id: 2, checkin: false }
   ]);
-
+  const [styleone, setStyleone] = useState({
+    borderColor: "#e1e1e1",
+    backgroundColor: "#fafafa",
+    color: "#e1e1e1",
+    border: "0px"
+  });
   const lnaguage = languages.map((item, index) => {
     const langhandle = () => {
-      
-      var lng = languages;
+      var lng = [...languages];
       lng[index].checkin = !lng[index].checkin;
+      console.log(lng === languages);
       setLang(lng);
-    
     };
 
     return (
@@ -113,7 +120,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
 
   const valid = validation.map((item, index) => {
     const validhandle = () => {
-      var val = validation;
+      var val = [...validation];
       val[index].checkin = !val[index].checkin;
       setVal(val);
     };
@@ -139,9 +146,9 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
 
   const typedelivery = delivery.map((item, index) => {
     const deliveryhandle = () => {
-      var del = delivery;
-     del[index].checkin = !del[index].checkin;
-     setDelivery(del);
+      var del = [...delivery];
+      del[index].checkin = !del[index].checkin;
+      setDelivery(del);
     };
     return (
       <Row>
@@ -149,7 +156,12 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
         <Col sm={6}>
           <p>
             <span>
-              <Form.Check type="checkbox" onChange={deliveryhandle}   id={item.id} />
+              <Form.Check
+                type="radio"
+                name="deliver"
+                onChange={deliveryhandle}
+                id={item.id}
+              />
             </span>
           </p>
         </Col>
@@ -158,101 +170,166 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
   });
 
   const handleSubmit = () => {
-    let blang =false;
-    let bval=false;
-    let bdel=false;
+    let blang = false;
+    let bval = false;
+    let bdel = false;
     for (let x in languages) {
       if (languages[x].checkin) {
         blang = true;
+        console.log("a");
         break;
       }
     }
- 
+
     for (let x in validation) {
       if (validation[x].checkin) {
         bval = true;
+        console.log("b");
         break;
       }
     }
     for (let x in delivery) {
       if (delivery[x].checkin) {
         bdel = true;
+        console.log("c");
         break;
       }
     }
     if (blang && bval && bdel) {
-     
+      console.log("resault");
       onClicks();
-    } else if(blang===false){
-      ToastsStore.warning('لطفا یک زبان برای ترجمه انتخاب کنید')
-   
-    }else if(bval===false)
-    {
-      ToastsStore.warning('لطفا  نوع تاییدیه را انتخاب کنید')
-    }else if(bdel===false)
-     {
-      ToastsStore.warning('لطفا نحوه ارسال  را  برای ترجمه انتخاب کنید')
-     }
-     
-  };
-const changeButton=()=>{
-  let blang =false;
- 
-  for (let x in languages) {
-    if (languages[x].checkin) {
-      blang = true;
-      break;
+    } else if (blang === false) {
+      ToastsStore.warning("لطفا یک زبان برای ترجمه انتخاب کنید");
+    } else if (bval === false) {
+      ToastsStore.warning("لطفا  نوع تاییدیه را انتخاب کنید");
+    } else if (bdel === false) {
+      ToastsStore.warning("لطفا نحوه ارسال  را  برای ترجمه انتخاب کنید");
     }
-  }
+  };
+  const changeButton = () => {
+    let blang = false;
+    let bval = false;
+    let bdel = false;
+    for (let x in languages) {
+      if (languages[x].checkin) {
+        blang = true;
+        console.log("1");
+        break;
+      }
+    }
+    for (let x in validation) {
+      if (validation[x].checkin) {
+        bval = true;
+        console.log("2");
+        break;
+      }
+    }
+    for (let x in delivery) {
+      if (delivery[x].checkin) {
+        bdel = true;
+        console.log("3");
+        break;
+      }
+    }
+    if (blang && bval && bdel) {
+      setStyleone({
+        backgroundColor: "#1976d2",
+        borderRadius: "5px",
+        boxShadow: "0px 6px 10px -2px rgba(0, 0, 0, 0.32)",
+        color: "#fff"
+      });
+    } else if (blang === false) {
+      setStyleone({
+        borderColor: "#e1e1e1",
+        backgroundColor: "#fafafa",
+        color: "#e1e1e1",
+        border: "0px"
+      });
+    } else if (bval === false) {
+      setStyleone({
+        borderColor: "#e1e1e1",
+        backgroundColor: "#fafafa",
+        color: "#e1e1e1",
+        border: "0px"
+      });
+    } else if (bdel === false) {
+      setStyleone({
+        borderColor: "#e1e1e1",
+        backgroundColor: "#fafafa",
+        color: "#e1e1e1",
+        border: "0px"
+      });
+    }
+  };
+  const languagenum = () => {
+    let w = 0;
+    for (let x in languages) {
+      if (languages[x].checkin) {
+        w++;
+      }
+    }
+    return w;
+  };
+  const acceptnum = () => {
+    let w = 0;
+    for (let x in validation) {
+      if (validation[x].checkin) {
+        w++;
+      }
+    }
+    return w;
+  };
 
-  if (blang) {
-   
-  alert('true use')
-  }
-  
-}
-
-useEffect (()=>{
-  changeButton()
-  console.log('languages')
-},
-[languages.reduce((obj, item) => (obj[item.key] = item.value, obj) ,{})]
-)
-// useEffect(()=>{
-//   changeButton()
-// },[validation])
-// useEffect(()=>{
-//   changeButton()
-// },[delivery])
+  const deliverynum = () => {
+    let z;
+    for (let x in delivery) {
+      if (delivery[x].checkin) {
+        z = delivery[x].name;
+      }
+     
+    }
+    return z;
+  };
+  // useEffect(()=>{
+  //   deliverynum()
+  // },[delivery])
+  useEffect(() => {
+    changeButton();
+  }, [languages]);
+  useEffect(() => {
+    changeButton();
+  }, [validation]);
+  useEffect(() => {
+    changeButton();
+  }, [delivery]);
   return (
     <React.Fragment>
       <Row>
-   
- 
-
-       
- 
         <Col xl={3} lg={3} md={3} sm={12} xs={12}>
-          <Card className="documenttype ">
+          <Card className="documenttype">
             <Card.Header>نوع مدرک ترجمه</Card.Header>
             <Card.Body>
               <Card.Title>{typedoc.type}</Card.Title>
               <Card.Text>
-                زبان ترجمه<span>{typedoc.countchoose} مورد</span>
+                زبان ترجمه
+                <span>
+                  {languagenum()}
+                  مورد
+                </span>
               </Card.Text>
               <Card.Text>
-                مهرو تاییدات<span>{typedoc.accept} مورد</span>
+                مهرو تاییدات<span>{acceptnum()} مورد</span>
               </Card.Text>
               <Card.Text>
-                نسخه اضافه<span>{typedoc.extradoc} مورد</span>
+                نسخه اضافه<span>{count} مورد</span>
               </Card.Text>
               <Card.Text>
-                نوع تحویل<span>{typedoc.deliverytype} مورد</span>
+                نوع تحویل<span>{deliverynum()}</span>
               </Card.Text>
             </Card.Body>
           </Card>
         </Col>
-        
+
         <Col
           xl={6}
           lg={6}
@@ -261,7 +338,11 @@ useEffect (()=>{
           xs={12}
           style={{ borderRadius: "1rem", height: "100%" }}
         >
-          <TabContainer  id="left-tabs-example" defaultActiveKey="first">
+          <TabContainer
+            id="left-tabs-example"
+            //  onChange={changeButton}
+            defaultActiveKey="first"
+          >
             <div className="row bordertab">
               <Col className="tabsorder" xl={3} lg={3} md={3} sm={3}>
                 <Nav
@@ -297,7 +378,6 @@ useEffect (()=>{
                 <Tab.Content>
                   <Tab.Pane className="tabcheckbox" eventKey="first">
                     {lnaguage}
-                    
                   </Tab.Pane>
                   <Tab.Pane className="tabcheckbox" eventKey="second">
                     {valid}
@@ -341,7 +421,11 @@ useEffect (()=>{
                       </div>
                     </div>
                   </Tab.Pane>
-                  <Tab.Pane className="tabcheckbox" style={{textAlign:"center"}} eventKey="fourth">
+                  <Tab.Pane
+                    className="tabcheckbox"
+                    style={{ textAlign: "center" }}
+                    eventKey="fourth"
+                  >
                     <p
                       style={{
                         color: "#454f63",
@@ -361,8 +445,11 @@ useEffect (()=>{
           </TabContainer>
         </Col>
         <Col xl={3} lg={3} md={3} sm={12} xs={12} className="Continue-order">
-        <ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore} />
-         
+          <ToastsContainer
+            position={ToastsContainerPosition.TOP_CENTER}
+            store={ToastsStore}
+          />
+
           <Button
             style={{ margin: "1rem 0", fontSize: ".8rem", fontFamily: "fanum" }}
             variant="primary"
@@ -371,7 +458,12 @@ useEffect (()=>{
             <p>مجموع هزینه ها</p>
             <p>2500000 تومان</p>
           </Button>
-          <Button id="add1"  onClick={handleSubmit} type="submit">
+          <Button
+            style={styleone}
+            id="add1"
+            onClick={handleSubmit}
+            type="submit"
+          >
             ادامه سفارش
           </Button>
         </Col>
