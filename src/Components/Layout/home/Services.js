@@ -19,7 +19,7 @@ const Services = () => {
         color: '#ffe7bd',
         boxshadow: '0px 4px 20px 1px #ffe7bd',
         name: "officedoc",
-        history:"/services/4"
+        history:"/services/0"
     },
         {
             id: 2,
@@ -29,7 +29,7 @@ const Services = () => {
             color: '#dac2d4',
             boxshadow: '0px 4px 20px 1px #dac2d4',
             name: "workdoc",
-            history:"/services/1"
+            history:"/services/2"
         },
         {
             id: 3,
@@ -39,7 +39,7 @@ const Services = () => {
             color: '#c5edd7',
             boxshadow: '0px 4px 20px 1px #c5edd7',
             name: "financedoc",
-            history:"/services/3"
+            history:"/services/4"
         },
         {
             id: 4,
@@ -49,7 +49,7 @@ const Services = () => {
             color: '#ffdfe6',
             boxshadow: '0px 4px 20px 1px #ffdfe6',
             name: "educarionDoc",
-            history:"/services/2"
+            history:"/services/3"
         },
         {
             id: 5,
@@ -59,7 +59,7 @@ const Services = () => {
             color: '#ebeeff',
             boxshadow: '0px 4px 20px 1px #ebeeff',
             name: "carddoc",
-            history:"/services/4"
+            history:"/services/1"
         },
     
     ]);

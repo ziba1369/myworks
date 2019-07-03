@@ -286,7 +286,6 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
       if (delivery[x].checkin) {
         z = delivery[x].name;
       }
-     
     }
     return z;
   };
@@ -302,6 +301,35 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
   useEffect(() => {
     changeButton();
   }, [delivery]);
+
+
+  // const sumValue = () => {
+  //   let sumd;
+  //   let sumv;
+  //   let sum;
+  //   for (let x in languages){ 
+  //     if (languages[x].checkin) {
+  //       sum = sum + languages[x].price;
+  //     }
+  //     return sum
+  //   } 
+  //   for (let x in validation) {
+      
+  //     if (languages[x].checkin) {
+  //       sumv = sum + languages[x].price;
+  //     }
+  //     return sum
+  //   }
+  //   for (let x in delivery) {
+     
+  //     if (languages[x].checkin) {
+  //       sumd = sum + languages[x].price;
+  //     }
+  //     return sum
+  //   }
+  //   const all=sum+sumv+sumd
+  //   return all
+  // };
   return (
     <React.Fragment>
       <Row>
@@ -456,7 +484,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
             size="lg"
           >
             <p>مجموع هزینه ها</p>
-            <p>2500000 تومان</p>
+            <p>25000 تومان</p>
           </Button>
           <Button
             style={styleone}

@@ -149,15 +149,13 @@ const Forgetpass = () => {
     if (second < 61 && second > 0 && step === 2) {
       interval = setInterval(() => {
         setSecond(second => second - 1);
-        document.querySelector('.rightreg').style.color="rgb(225, 225, 225)" 
+        document.querySelector(".rightreg").style.color = "rgb(225, 225, 225)";
       }, 1000);
     } else {
-     
       clearInterval(interval);
-      
     }
-    if(second===0){
-      document.querySelector('.rightreg').style.color="#1976d2";
+    if (second === 0) {
+      document.querySelector(".rightreg").style.color = "#1976d2";
     }
     return () => clearInterval(interval);
   }, [second, step]);
@@ -312,18 +310,17 @@ const Forgetpass = () => {
     setPassr(e.target.value);
   };
   const checkRegisterThirdButton = () => {
-  console.log(pass.length)
+    console.log(pass.length);
     if (
       name.length > 1 &&
       lastname.length > 1 &&
       certi.length === 11 &&
-      pass.length >1 &&
-      passr.length>1 &&
-      pass===passr &&
+      pass.length > 1 &&
+      passr.length > 1 &&
+      pass === passr &&
       birthday &&
       birthmonth &&
       birthyear
-      
     ) {
       setRegisterThirdStyle({ backgroundColor: "#1976d2" });
       $("#rfbutton").removeAttr("disabled");

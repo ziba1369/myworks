@@ -59,7 +59,7 @@ const PriceServices = props => {
     switch (props.match.params.id)
      {
       case '5':
-        setStyleone({backgroundColor: '#3798f5',boxShadow:' 0 0 0 0 rgba(38,143,255,.5)', border:'0px'});
+        setStyleone({backgroundColor: '#3798f5',boxShadow:' 0px 0px 15px -6px rgba(0,0,0,0.75)',border:'0px'});
         setStyletwo({color: '#454f63' ,backgroundColor: '#5766b5' ,borderColor: '#5766b5'});
         setStylethree({color:'#454f63' ,backgroundColor: '#ffdfe6' ,borderColor: '#ffdfe6'});
         setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
@@ -69,7 +69,7 @@ const PriceServices = props => {
         break;
       case '1':
         setStyleone({ color:'#454f63 ',backgroundColor: '#aad0f4',borderColor: '#aad0f4'});
-        setStyletwo({ backgroundColor: '#57665b',boxShadow:' 0 0 0 0 rgba(38,143,255,.5)', border:'0px'});
+        setStyletwo({ backgroundColor: '#57665b',boxShadow:'  0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
         setStylethree({color:'#454f63' ,backgroundColor: '#ffdfe6' ,borderColor: '#ffdfe6'});
         setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
         setStylefive({color: '#454f63' ,backgroundColor: '#dac2d4' ,borderColor: '#dac2d4'});
@@ -78,7 +78,7 @@ const PriceServices = props => {
       case '3':
           setStyleone({ color:'#454f63 ',backgroundColor: '#aad0f4',borderColor: '#aad0f4'});
           setStyletwo({color: '#454f63' ,backgroundColor: '#5766b5' ,borderColor: '#5766b5'});
-        setStylethree({backgroundColor: '#ef9a9a',boxShadow:' 0 0 0 0 rgba(38,143,255,.5)', border:'0px'});
+        setStylethree({backgroundColor: '#ef9a9a',boxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',webkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',MozwebkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
         setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
         setStylefive({color: '#454f63' ,backgroundColor: '#dac2d4' ,borderColor: '#dac2d4'});
         setStylesix({color:'#454f63',backgroundColor: '#ffe7bd',borderColor: '#ffe7bd'});
@@ -88,7 +88,7 @@ const PriceServices = props => {
           setStyleone({ color:'#454f63 ',backgroundColor: '#aad0f4',borderColor: '#aad0f4'});
           setStyletwo({color: '#454f63' ,backgroundColor: '#5766b5' ,borderColor: '#5766b5'});
           setStylethree({color:'#454f63' ,backgroundColor: '#ffdfe6' ,borderColor: '#ffdfe6'});
-        setStylefour({backgroundColor: "#deb69f",boxShadow:' 0 0 0 0 rgba(38,143,255,.5)', border:'0px'});
+        setStylefour({backgroundColor: "#deb69f",boxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',webkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',MozwebkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
         setStylefive({color: '#454f63' ,backgroundColor: '#dac2d4' ,borderColor: '#dac2d4'});
         setStylesix({color:'#454f63',backgroundColor: '#ffe7bd',borderColor: '#ffe7bd'});
         break;
@@ -97,7 +97,7 @@ const PriceServices = props => {
           setStyletwo({color: '#454f63' ,backgroundColor: '#5766b5' ,borderColor: '#5766b5'});
           setStylethree({color:'#454f63' ,backgroundColor: '#ffdfe6' ,borderColor: '#ffdfe6'});
           setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
-        setStylefive({backgroundColor: "#c463ac",boxShadow:' 0 0 0 0 rgba(38,143,255,.5)', border:'0px'});
+        setStylefive({backgroundColor: "#c463ac",boxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',webkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',MozwebkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
         setStylesix({color:'#454f63',backgroundColor: '#ffe7bd',borderColor: '#ffe7bd'});
         break;
       case '0':
@@ -107,7 +107,7 @@ const PriceServices = props => {
           setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
           setStylefive({color: '#454f63' ,backgroundColor: '#dac2d4' ,borderColor: '#dac2d4'});
           setStylesix({color:'#454f63',backgroundColor: '#ffe7bd',borderColor: '#ffe7bd'});
-        setStylesix({ backgroundColor: "#f4c36d",boxShadow:' 0 0 0 0 rgba(38,143,255,.5)', border:'0px'});
+        setStylesix({ backgroundColor: "#f4c36d",boxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',webkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',MozwebkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
         break;
         default:
           break;
