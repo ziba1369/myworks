@@ -19,7 +19,8 @@ import {
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
-
+import axios from "axios";
+import * as Cookies from "js-cookie";
 const Tabschoice = ({ onClicks, step, onChanges }) => {
   const [typedoc, changetypedoc] = useState({
     type: "شناسنامه",
@@ -33,28 +34,28 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
       id: 1,
       value: "fatoen",
       name: "فارسی به انگلیسی",
-      price: "۲۶۰۰۰",
+      price: "26000",
       checkin: false
     },
     {
       id: 2,
       value: "entofa",
       name: "انگلیسی به فارسی",
-      price: "۲۶۰۰۰",
+      price: "26000",
       checkin: false
     },
     {
       id: 3,
       value: "arotfa",
       name: "عربی به فارسی",
-      price: "۲۶۰۰۰",
+      price: "26000",
       checkin: false
     },
     {
       id: 4,
       value: "fatoen",
       name: "فارسی به عربی",
-      price: "۲۶۰۰۰",
+      price: "26000",
       checkin: false
     }
   ]);
@@ -63,19 +64,19 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     {
       id: 1,
       name: "مهروتاییدیه دفترترجمی",
-      price: "۲۶۰۰۰",
+      price: "26000",
       checkin: false
     },
     {
       id: 2,
       name: "تاییدیه وزارت امورخارجه",
-      price: "۲۶۰۰۰",
+      price: "26000",
       checkin: false
     },
     {
       id: 3,
       name: "تاییدیه دادگستری",
-      price: "۲۶۰۰۰",
+      price: "26000",
       checkin: false
     }
   ]);
@@ -94,7 +95,6 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     const langhandle = () => {
       var lng = [...languages];
       lng[index].checkin = !lng[index].checkin;
-      console.log(lng === languages);
       setLang(lng);
     };
 
@@ -176,7 +176,6 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     for (let x in languages) {
       if (languages[x].checkin) {
         blang = true;
-        console.log("a");
         break;
       }
     }
@@ -184,19 +183,18 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     for (let x in validation) {
       if (validation[x].checkin) {
         bval = true;
-        console.log("b");
+
         break;
       }
     }
     for (let x in delivery) {
       if (delivery[x].checkin) {
         bdel = true;
-        console.log("c");
+
         break;
       }
     }
     if (blang && bval && bdel) {
-      console.log("resault");
       onClicks();
     } else if (blang === false) {
       ToastsStore.warning("لطفا یک زبان برای ترجمه انتخاب کنید");
@@ -205,6 +203,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     } else if (bdel === false) {
       ToastsStore.warning("لطفا نحوه ارسال  را  برای ترجمه انتخاب کنید");
     }
+  
   };
   const changeButton = () => {
     let blang = false;
@@ -213,21 +212,21 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     for (let x in languages) {
       if (languages[x].checkin) {
         blang = true;
-        console.log("1");
+
         break;
       }
     }
     for (let x in validation) {
       if (validation[x].checkin) {
         bval = true;
-        console.log("2");
+
         break;
       }
     }
     for (let x in delivery) {
       if (delivery[x].checkin) {
         bdel = true;
-        console.log("3");
+
         break;
       }
     }
@@ -260,6 +259,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
         border: "0px"
       });
     }
+
   };
   const languagenum = () => {
     let w = 0;
@@ -289,9 +289,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     }
     return z;
   };
-  // useEffect(()=>{
-  //   deliverynum()
-  // },[delivery])
+
   useEffect(() => {
     changeButton();
   }, [languages]);
@@ -302,34 +300,28 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     changeButton();
   }, [delivery]);
 
-
-  // const sumValue = () => {
-  //   let sumd;
-  //   let sumv;
-  //   let sum;
-  //   for (let x in languages){ 
-  //     if (languages[x].checkin) {
-  //       sum = sum + languages[x].price;
-  //     }
-  //     return sum
-  //   } 
-  //   for (let x in validation) {
-      
-  //     if (languages[x].checkin) {
-  //       sumv = sum + languages[x].price;
-  //     }
-  //     return sum
-  //   }
-  //   for (let x in delivery) {
-     
-  //     if (languages[x].checkin) {
-  //       sumd = sum + languages[x].price;
-  //     }
-  //     return sum
-  //   }
-  //   const all=sum+sumv+sumd
-  //   return all
-  // };
+  const sumValue = () => {
+    let sumd = 0;
+    let sumv = 0;
+    let sum = 0;
+    for (let x in languages) {
+      if (languages[x].checkin) {
+        sum = sum + parseInt(languages[x].price);
+      }
+    }
+    for (let x in validation) {
+      if (validation[x].checkin) {
+        sumv = sumv + parseInt(validation[x].price);
+      }
+    }
+    
+    if(count>0){
+    return (count+1)*(sum + sumv);
+    }
+    else{
+      return (sum + sumv);
+    }
+  };
   return (
     <React.Fragment>
       <Row>
@@ -484,7 +476,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
             size="lg"
           >
             <p>مجموع هزینه ها</p>
-            <p>25000 تومان</p>
+            <p>{sumValue()} تومان</p>
           </Button>
           <Button
             style={styleone}

@@ -5,7 +5,8 @@ import {
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
-
+import axios from "axios";
+import * as Cookies from "js-cookie";
 const ServicesGroup = ({ onClicks, step, onChangess }) => {
   const [service, setService] = useState();
   const [types, setTypes] = useState();
@@ -35,6 +36,22 @@ const ServicesGroup = ({ onClicks, step, onChangess }) => {
     let changebutton=document.getElementById("add1");
     changebutton.classList.add('changebutton');
   }
+  useEffect(()=>{
+    
+    const all={
+      servicecook:service,
+      typescook:types,
+    }
+      
+    const servivcegroup={
+      service:service,
+      types:types
+    }
+    Cookies.set('service',handleTypeTransChange , {path: '/', expires: 7})
+    Cookies.set('types',types, {path: '/', expires: 7})  
+    
+  
+  },[])
   return (
     <React.Fragment>
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
