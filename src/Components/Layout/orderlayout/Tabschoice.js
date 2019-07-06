@@ -394,7 +394,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
                   </Nav.Item>
                 </Nav>
               </Col>
-              <Col className="tabsordercontent" xl={9} lg={9} md={9} sm={9}>
+              <Col className="tabsordercontent" style={{width:'300px'}} xl={9} lg={9} md={9} sm={9}>
                 <Tab.Content>
                   <Tab.Pane className="tabcheckbox" eventKey="first">
                     {lnaguage}

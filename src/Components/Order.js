@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Row, Col, Breadcrumb } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import * as Cookies from "js-cookie";
 import Tabschoice from "./Layout/orderlayout/Tabschoice";
 import ServicesGroup from "./Layout/orderlayout/ServicesGroup";
 import Photoupload from "./Layout/orderlayout/Photoupload";
@@ -293,6 +293,7 @@ const Order = () => {
     if (step < 2) {
       return step;
     }
+
     setCount(2);
   };
   const handlerUpload = () => {

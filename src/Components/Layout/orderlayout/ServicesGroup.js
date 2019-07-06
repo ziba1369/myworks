@@ -5,15 +5,23 @@ import {
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
+import $ from 'jquery';
 import axios from "axios";
 import * as Cookies from "js-cookie";
 const ServicesGroup = ({ onClicks, step, onChangess }) => {
   const [service, setService] = useState();
+  const [optionservice,setOptionservice]=useState([1,2,3,4,5]);
   const [types, setTypes] = useState();
-  const handleServiceChange = e => {
-    setService(e.target.value);
-  };
 
+  const handleServiceChange = e => {
+    if(service===undefined)
+    { 
+    setService(1);
+    }
+    setService(e.target.value);
+   
+  };
+console.log(service)
   const handleTypeTransChange = e => {
     setTypes(e.target.value);
   };
@@ -25,33 +33,31 @@ const ServicesGroup = ({ onClicks, step, onChangess }) => {
       document.getElementById("types").style.borderColor = "red";
       ToastsStore.warning("لطفا نوع مدرک  ترجمه را انتخاب کنید");
     } else {
-    
       onClicks();
-     
     }
-
   };
-  if(service && types)
-  {
-    let changebutton=document.getElementById("add1");
-    changebutton.classList.add('changebutton');
-  }
-  useEffect(()=>{
+ 
+
+  useEffect(() => {
+    if (service && types) {
+      let changebutton = document.getElementById("add1");
+      changebutton.classList.add("changebutton");
     
-    const all={
-      servicecook:service,
-      typescook:types,
+     Cookies.set('service',service, { expires: 7, path: '/' })
+     Cookies.set('types',types, { expires: 7, path: '/' })
     }
-      
-    const servivcegroup={
-      service:service,
-      types:types
-    }
-    Cookies.set('service',handleTypeTransChange , {path: '/', expires: 7})
-    Cookies.set('types',types, {path: '/', expires: 7})  
-    
+  }, [service,types]);
+  // useEffect(()=>{
+  //   if(service===undefined && types === undefined)
+  //   {
+  //     setService(Cookies.get('service'));
+  //     setTypes(Cookies.get('types'));
+  //   }
   
-  },[])
+    
+  //   },[types,service])
+  //   console.log(service)
+    
   return (
     <React.Fragment>
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
@@ -93,18 +99,19 @@ const ServicesGroup = ({ onClicks, step, onChangess }) => {
                   as="select"
                   type="select"
                   onChange={handleServiceChange}
-                  vlaue="service"
+                  vlaue={service}
                   name="slelect"
                   required
                 >
-                  <option value="" disabled selected>
+                   <option value="" disabled selected>
                     یک گزینه را انتخاب کنید
                   </option>
-                  <option value="1">1</option>
+                  {optionservice.map(item=>(<option value={item}>{item}</option>))}
+                  {/* <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
-                  <option value="5">5</option>
+                  <option value="5">5</option> */}
                 </Form.Control>
               </Form.Group>
             </Col>
@@ -116,7 +123,7 @@ const ServicesGroup = ({ onClicks, step, onChangess }) => {
                   id="types"
                   type="select"
                   onChange={handleTypeTransChange}
-                  vlaue="types"
+                  vlaue={types}
                   name="typedocservice"
                   required
                 >

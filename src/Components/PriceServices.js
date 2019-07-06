@@ -60,7 +60,7 @@ const PriceServices = props => {
      {
       case '5':
         setStyleone({backgroundColor: '#3798f5',boxShadow:' 0px 0px 15px -6px rgba(0,0,0,0.75)',border:'0px'});
-        setStyletwo({color: '#454f63' ,backgroundColor: '#5766b5' ,borderColor: '#5766b5'});
+        setStyletwo({color: '#454f63' ,backgroundColor: '#ebeeff' ,borderColor: '#5766b5'});
         setStylethree({color:'#454f63' ,backgroundColor: '#ffdfe6' ,borderColor: '#ffdfe6'});
         setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
         setStylefive({color: '#454f63' ,backgroundColor: '#dac2d4' ,borderColor: '#dac2d4'});
@@ -69,7 +69,7 @@ const PriceServices = props => {
         break;
       case '1':
         setStyleone({ color:'#454f63 ',backgroundColor: '#aad0f4',borderColor: '#aad0f4'});
-        setStyletwo({ backgroundColor: '#57665b',boxShadow:'  0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
+        setStyletwo({ backgroundColor: '#5766b5',boxShadow:'  0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
         setStylethree({color:'#454f63' ,backgroundColor: '#ffdfe6' ,borderColor: '#ffdfe6'});
         setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
         setStylefive({color: '#454f63' ,backgroundColor: '#dac2d4' ,borderColor: '#dac2d4'});
@@ -77,7 +77,7 @@ const PriceServices = props => {
         break;
       case '3':
           setStyleone({ color:'#454f63 ',backgroundColor: '#aad0f4',borderColor: '#aad0f4'});
-          setStyletwo({color: '#454f63' ,backgroundColor: '#5766b5' ,borderColor: '#5766b5'});
+          setStyletwo({color: '#454f63' ,backgroundColor: '#ebeeff' ,borderColor: '#5766b5'});
         setStylethree({backgroundColor: '#ef9a9a',boxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',webkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',MozwebkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
         setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
         setStylefive({color: '#454f63' ,backgroundColor: '#dac2d4' ,borderColor: '#dac2d4'});
@@ -86,7 +86,7 @@ const PriceServices = props => {
   
       case '4':
           setStyleone({ color:'#454f63 ',backgroundColor: '#aad0f4',borderColor: '#aad0f4'});
-          setStyletwo({color: '#454f63' ,backgroundColor: '#5766b5' ,borderColor: '#5766b5'});
+          setStyletwo({color: '#454f63' ,backgroundColor: '#ebeeff' ,borderColor: '#5766b5'});
           setStylethree({color:'#454f63' ,backgroundColor: '#ffdfe6' ,borderColor: '#ffdfe6'});
         setStylefour({backgroundColor: "#deb69f",boxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',webkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',MozwebkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
         setStylefive({color: '#454f63' ,backgroundColor: '#dac2d4' ,borderColor: '#dac2d4'});
@@ -94,7 +94,7 @@ const PriceServices = props => {
         break;
       case '2':
           setStyleone({ color:'#454f63 ',backgroundColor: '#aad0f4',borderColor: '#aad0f4'});
-          setStyletwo({color: '#454f63' ,backgroundColor: '#5766b5' ,borderColor: '#5766b5'});
+          setStyletwo({color: '#454f63' ,backgroundColor: '#ebeeff' ,borderColor: '#5766b5'});
           setStylethree({color:'#454f63' ,backgroundColor: '#ffdfe6' ,borderColor: '#ffdfe6'});
           setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
         setStylefive({backgroundColor: "#c463ac",boxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',webkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)',MozwebkitboxShadow:'0px 0px 15px -6px rgba(0,0,0,0.75)', border:'0px'});
@@ -102,7 +102,7 @@ const PriceServices = props => {
         break;
       case '0':
           setStyleone({ color:'#454f63 ',backgroundColor: '#aad0f4',borderColor: '#aad0f4'});
-          setStyletwo({color: '#454f63' ,backgroundColor: '#5766b5' ,borderColor: '#5766b5'});
+          setStyletwo({color: '#454f63' ,backgroundColor: '#ebeeff' ,borderColor: '#5766b5'});
           setStylethree({color:'#454f63' ,backgroundColor: '#ffdfe6' ,borderColor: '#ffdfe6'});
           setStylefour({color: '#454f63',backgroundColor: '#c5edd7' ,borderColor: '#c5edd7'});
           setStylefive({color: '#454f63' ,backgroundColor: '#dac2d4' ,borderColor: '#dac2d4'});
@@ -177,13 +177,13 @@ const PriceServices = props => {
                         <Card.Text>
                           <p className="textprice text-gray ">هزینه ترجمه:</p>
                           <p className="numberprice ">
-                            {" "}
-                            تومان{item.pricetrans}
+                      
+                            {item.pricetrans}تومان
                           </p>
                           <p className="textprice text-gray ">
                             هزینه نسخه اضافه:
                           </p>
-                          <p className="numberprice"> تومان{item.extraprice}</p>
+                          <p className="numberprice">{item.extraprice}تومان</p>
                         </Card.Text>
                       </Card.Body>
                       <Card.Footer>
