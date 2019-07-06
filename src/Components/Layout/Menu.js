@@ -20,31 +20,31 @@ const Menu = () => {
                         <React.Fragment>
                             <Row>
                                 <div className="smenu"><p><Link to="/services/1">مدارک شناسایی</Link></p>
-                                <NavDropdown.Item href="#">یک</NavDropdown.Item>
-                                 <NavDropdown.Item href="#">دو</NavDropdown.Item>
-                                
+                                    <NavDropdown.Item href="#">یک</NavDropdown.Item>
+                                    <NavDropdown.Item href="#">دو</NavDropdown.Item>
+
                                 </div>
                                 <div className="smenu"><p><Link to="/services/3">مدارک تحصیلی</Link></p>
-                                <NavDropdown.Item href="#">یک</NavDropdown.Item>
-                                <NavDropdown.Item href="#">دو</NavDropdown.Item>
-                                    
+                                    <NavDropdown.Item href="#">یک</NavDropdown.Item>
+                                    <NavDropdown.Item href="#">دو</NavDropdown.Item>
+
                                 </div>
                             </Row>
                             <Row>
                                 <div className="smenu"><p><Link to="/services/4">مدارک مالی</Link></p>
-                                <NavDropdown.Item href="#">یک</NavDropdown.Item>
-                                 <NavDropdown.Item href="#">دو</NavDropdown.Item>
-                                   
+                                    <NavDropdown.Item href="#">یک</NavDropdown.Item>
+                                    <NavDropdown.Item href="#">دو</NavDropdown.Item>
+
                                 </div>
                                 <div className="smenu"><p><Link to="/services/2">مدارک شغلی</Link></p>
-                                <NavDropdown.Item href="#">یک</NavDropdown.Item>
-                                 <NavDropdown.Item href="#">دو</NavDropdown.Item>
-                                   
+                                    <NavDropdown.Item href="#">یک</NavDropdown.Item>
+                                    <NavDropdown.Item href="#">دو</NavDropdown.Item>
+
                                 </div>
                                 <div className="smenu"><p><Link to="/services/0">مدارک شرکتی</Link></p>
-                                <NavDropdown.Item href="#">یک</NavDropdown.Item>
-                                   <NavDropdown.Item href="#">دو</NavDropdown.Item>
-                                   
+                                    <NavDropdown.Item href="#">یک</NavDropdown.Item>
+                                    <NavDropdown.Item href="#">دو</NavDropdown.Item>
+
                                 </div>
                             </Row>
                         </React.Fragment>}/>
@@ -83,8 +83,8 @@ const Menu = () => {
 
             </NavDropdown>
 
-            <Nav.Link href="#pricing">تماس باما</Nav.Link>
-            <Nav.Link href="#pricing">درباره ما</Nav.Link>
+            <Nav.Link href="#">تماس باما</Nav.Link>
+            <Nav.Link href="#">درباره ما</Nav.Link>
         </Nav>
     );
 }

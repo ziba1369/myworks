@@ -51,10 +51,10 @@ const Contatus = () => {
 
                     </Col>
                     <Col xl={12} md={12} sm={12} xs={12} className="fontawe ">
-                        <a  className="instagram"><FontAwesomeIcon icon={faInstagram}/></a>
-                        <a  className="linkdin"><FontAwesomeIcon icon={faLinkedin}/></a>
-                        <a  className="twitter"><FontAwesomeIcon icon={faTwitter}/></a>
-                        <a  className="facebook"><FontAwesomeIcon icon={faFacebook}/></a>
+                        <a className="instagram"><FontAwesomeIcon icon={faInstagram}/></a>
+                        <a className="linkdin"><FontAwesomeIcon icon={faLinkedin}/></a>
+                        <a className="twitter"><FontAwesomeIcon icon={faTwitter}/></a>
+                        <a className="facebook"><FontAwesomeIcon icon={faFacebook}/></a>
 
                     </Col>
                 </Col>

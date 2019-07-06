@@ -9,7 +9,7 @@ const Introduce = () => {
         <React.Fragment>
             <Row className="topdist"></Row>
             <Row className="rtl introduce">
-                <Col xl={9} md={9} sm={12} xs={12} >
+                <Col xl={9} md={9} sm={12} xs={12}>
 
                     <div>
                         <h3 className="titlesections">چرا دفتر ترجمه رسمی ۴۴۹ تهران</h3>
@@ -36,22 +36,22 @@ const Introduce = () => {
                     </ul>
 
                 </Col>
-                <Col className="Phone" xl={3} md={3} sm={12}  xs={12} style={{textAlign: 'center'}}>
+                <Col className="Phone" xl={3} md={3} sm={12} xs={12} style={{textAlign: 'center'}}>
                     <img src={Phone} alt={Phone}/>
                 </Col>
-              </Row>
-              <Row className="downloadicons">
+            </Row>
+            <Row className="downloadicons">
                 <Col xl={9} md={9} sm={12} xs={12}>
                     <p className="intrbuton rtl">
                         <Button variant="light"><span><img src={playstore} alt={"playstore"}/></span>دانلود از پلی استور</Button>
                         <Button variant="light"><span><img src={googleplay} alt={"googleplay"}/></span>دانلود از گوگل
                             پلی</Button>
                     </p>
-                  
-                </Col>
-                </Row>
 
-      
+                </Col>
+            </Row>
+
+
         </React.Fragment>
     );
 }
