@@ -6,7 +6,7 @@ import Forgetpass from './Components/Forgetpass';
 import Register from './Components/Register';
 import React from 'react';
 import {Route, BrowserRouter} from 'react-router-dom';
-
+import Steptranslate from './Components/Steptranslate';
 import NavBar from './Components/Layout/NavBar';
 
 function Routes() {
@@ -47,6 +47,12 @@ function Routes() {
         {
             path: '/register',
             component: Register,
+            exact: true,
+
+        },
+        {
+            path: '/steptranslate',
+            component: Steptranslate,
             exact: true,
 
         },

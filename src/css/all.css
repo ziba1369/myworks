@@ -726,6 +726,16 @@ button:focus {
     margin: 2rem 0;
     padding: 1rem 0rem;
 }
+.contnewsletterlast {
+    border-radius: 10px;
+    margin: 2rem 0;
+    padding: 1rem 0rem;
+}
+.contnewsletterlast img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
 
 .contnewsletter img {
     width: 100%;
@@ -1961,3 +1971,19 @@ p.forgetpass, p.activesys {
     position: relative;
 
 }
+
+
+/* page-steptranslate */
+.centerapge{
+    margin:0 auto;
+    display:table
+}
+.pagination .active a.page-link {
+    border: 0px !important;
+    background-color: #1976d2
+}
+.pagination a.page-link,.pagination .page-link:hover {
+    border: 0px !important;
+    background-color: none
+}
+/* page-steptranslate */

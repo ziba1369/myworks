@@ -9,7 +9,7 @@ import {
     Breadcrumb
 } from "react-bootstrap";
 import {Link} from "react-router-dom";
-import Pagination from "react-js-pagination";
+import Paginatior from "react-hooks-paginator";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -21,6 +21,10 @@ import {
 import * as Cookies from "js-cookie";
 
 const PriceServices = props => {
+    const  pageLimit=1;
+    const [offset, setOffset] = useState(0);
+    const [total, setTotal] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [step, setCount] = useState(props.match.params.id);
     const [activepage, setActivePage] = useState(1);
     const [data, setData] = useState([]);
@@ -34,32 +38,13 @@ const PriceServices = props => {
     const [stylefour, setStylefour] = useState({color: '#454f63', backgroundColor: '#c5edd7', borderColor: '#c5edd7'});
     const [stylefive, setStylefive] = useState({color: '#454f63', backgroundColor: '#dac2d4', borderColor: '#dac2d4'});
     const [stylesix, setStylesix] = useState({color: '#454f63', backgroundColor: '#ffe7bd', borderColor: '#ffe7bd'});
-    const onPageChanged = pageNumber => {
-        setActivePage({activePage: pageNumber});
-    };
+    // const onPageChanged = pageNumber => {
+    //     setActivePage({activePage: pageNumber});
+    // };
 
 
     useEffect(() => {
-
-        axios
-            .get(
-                "http://hezare3vom.ratechcompany.com/api/front/get_products_list?limit=15&offset=0&category_id=" +
-                props.match.params.id,
-                {
-                    headers: {"Content-Type": "application/json"}
-                }
-            )
-            .then(function (response) {
-                if (response.data.success) {
-                    setData(response.data.products);
-
-                } else {
-                    ToastsStore.error(response.data.error);
-                }
-            })
-            .catch(function (error) {
-                ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-            });
+        setOffset(0)
     }, [props.match.params.id]);
     useEffect(() => {
         switch (props.match.params.id) {
@@ -151,6 +136,32 @@ const PriceServices = props => {
 
         }
     }, [props.match.params.id])
+    useEffect(() => {
+        axios
+            .get(
+                "http://hezare3vom.ratechcompany.com/api/front/get_products_list?limit=" + pageLimit + "&offset=" + offset + "&category_id=" +
+                props.match.params.id,
+                {
+                    headers: {"Content-Type": "application/json"}
+                }
+            )
+            .then(function (response) {
+                if (response.data.success) {
+                    setData(response.data.products);
+                    setTotal(response.data.total)
+
+                } else {
+                    ToastsStore.error(response.data.error);
+                }
+            })
+            .catch(function (error) {
+                ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+            });
+      }, [offset]);
+
+      useEffect(()=>{
+          console.log(offset)
+      },[offset])
     return (
         <Container fluid className="contentpadding">
             <Row>
@@ -235,13 +246,21 @@ const PriceServices = props => {
                             );
                         })}
                     </Row>
-                    <Pagination
+                    {/* <Pagination
                         activePage={activepage} // active page number
                         itemsCountPerPage={2} // your limit value send to server with axios
                         totalItemsCount={450} //TODO get it from server
                         pageRangeDisplayed={5} // Number of pages visitor see in browser
                         onChange={onPageChanged}
-                    />
+                    /> */}
+                     <Paginatior
+         totalRecords={total}
+         pageLimit={pageLimit}
+         pageNeighbours={4}
+         setOffset={setOffset}
+         currentPage={currentPage}
+         setCurrentPage={setCurrentPage}
+      />
                 </Col>
 
                 <Col className="service-box" xl={3} lg={3} md={12} sm={12} xs={12}>

@@ -13,15 +13,13 @@ const ServicesGroup = ({onClicks, step, onChangess}) => {
     const [service, setService] = useState();
     const [optionservice, setOptionservice] = useState([1, 2, 3, 4, 5]);
     const [types, setTypes] = useState();
-
+    const[optiontypes,setoptiontypes]=useState([6,7,8,9,10])
     const handleServiceChange = e => {
-        if (service === undefined) {
-            setService(1);
-        }
+      
         setService(e.target.value);
 
     };
-    console.log(service)
+    
     const handleTypeTransChange = e => {
         setTypes(e.target.value);
     };
@@ -45,19 +43,18 @@ const ServicesGroup = ({onClicks, step, onChangess}) => {
 
             Cookies.set('service', service, {expires: 7, path: '/'})
             Cookies.set('types', types, {expires: 7, path: '/'})
+           
         }
     }, [service, types]);
-    // useEffect(()=>{
-    //   if(service===undefined && types === undefined)
-    //   {
-    //     setService(Cookies.get('service'));
-    //     setTypes(Cookies.get('types'));
-    //   }
-
-
-    //   },[types,service])
-    //   console.log(service)
-
+useEffect(()=>{
+  console.log(Cookies.get('service') === null)
+  if (Cookies.get('service') !== null) {
+    document.getElementById('groups').selectedIndex=Cookies.get('service')
+   }
+   if (Cookies.get('types') !== null) {
+    document.getElementById('types').selectedIndex=Cookies.get('service')
+   }
+},[])
     return (
         <React.Fragment>
             <Col xl={3} lg={3} md={3} sm={12} xs={12}>
@@ -130,11 +127,7 @@ const ServicesGroup = ({onClicks, step, onChangess}) => {
                                     <option value="" disabled selected>
                                         یک گزینه را انتخاب کنید
                                     </option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                    {optiontypes.map(item => (<option value={item}>{item}</option>))}
                                 </Form.Control>
                             </Form.Group>
                         </Col>
