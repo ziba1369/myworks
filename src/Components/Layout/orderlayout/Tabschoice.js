@@ -94,9 +94,10 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
   });
   const lnaguage = languages.map((item, index) => {
     const langhandle = () => {
-      var lng = [...languages];
+         var lng = [...languages];
       lng[index].checkin = !lng[index].checkin;
       setLang(lng);
+      
     };
 
     return (
@@ -110,8 +111,9 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
                 onChange={langhandle}
                 value={item.value}
                 type="checkbox"
-                id={item.id}
-                classname="langu"
+                id="langu"
+                className="langu"
+                checked={item.checkin? "checked ": ""}
               />
             </span>
           </p>
@@ -138,6 +140,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
                 type="checkbox"
                 onChange={validhandle}
                 id={item.id}
+                checked={item.checkin? "checked ": ""}
               />
             </span>
           </p>
@@ -163,6 +166,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
                 name="deliver"
                 onChange={deliveryhandle}
                 id={item.id}
+                checked={item.checkin? "checked ": ""}
               />
             </span>
           </p>
@@ -289,27 +293,47 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     }
     return z;
   };
-
+  useEffect(() => {
+  
+    if (Cookies.get("languages") !== null) {
+     
+     setLang(JSON.parse(Cookies.get("languages")))
+     console.log(languages)
+    }
+  },[]);
+  useEffect(()=>{
+     if(Cookies.get("validation") !== null) {
+     
+      setVal(JSON.parse(Cookies.get("validation")))
+     
+     }
+   
+     
+  },[]);
+  useEffect(()=>{
+    if(Cookies.get("delivery") !== null) {
+     
+      setDelivery(JSON.parse(Cookies.get("delivery")))
+     
+    }
+  },[])
   useEffect(() => {
     changeButton();
-    Cookies.set("languages", languages, {expires: 7,path: "/"});
+   Cookies.set("languages",languages, {expires: 7,path: "/"});
+    // console.log(languages);
+    
+
   }, [languages]);
   useEffect(() => {
     Cookies.set("validation", validation, {expires: 7,path: "/"});
     changeButton();
   }, [validation]);
   useEffect(() => {
-    Cookies.set("delivery", delivery, {expires: 7,path: "/"});
+   Cookies.set("delivery", delivery, {expires: 7,path: "/"});
     changeButton();
   }, [delivery]);
 
-  useEffect(() => {
- 
-    if (Cookies.get("languages") !== null) {
-     setLang(JSON.parse(Cookies.get("languages")))
-    }
-   
-  }, []);
+
   const sumValue = () => {
     let sumd = 0;
     let sumv = 0;
@@ -322,6 +346,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     for (let x in validation) {
       if (validation[x].checkin) {
         sumv = sumv + parseInt(validation[x].price);
+
       }
     }
     for (let x in delivery) {

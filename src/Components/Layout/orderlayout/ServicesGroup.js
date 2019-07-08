@@ -11,9 +11,23 @@ import * as Cookies from "js-cookie";
 
 const ServicesGroup = ({onClicks, step, onChangess}) => {
     const [service, setService] = useState();
-    const [optionservice, setOptionservice] = useState([1, 2, 3, 4, 5]);
+    const [optionservice, setOptionservice] = useState([{
+        id:1,
+        value:'مدارک شناسایی'
+    },
+{
+    id:2,
+    value:'مدارک نحصیلی'
+}] );
     const [types, setTypes] = useState();
-    const[optiontypes,setoptiontypes]=useState([6,7,8,9,10])
+    const[optiontypes,setoptiontypes]= useState([{
+        id:1,
+        value:'مدارک شناسایی'
+    },
+{
+    id:2,
+    value:'مدارک نحصیلی'
+}] )
     const handleServiceChange = e => {
       
         setService(e.target.value);
@@ -34,7 +48,19 @@ const ServicesGroup = ({onClicks, step, onChangess}) => {
             onClicks();
         }
     };
-
+    useEffect(()=>{
+        if (Cookies.get('service') !== null) {
+            document.getElementById('groups').selectedIndex=Cookies.get('service')
+            setService(document.getElementById('groups').selectedIndex);
+        
+           }
+           if (Cookies.get('types') !== null) {
+            document.getElementById('types').selectedIndex=Cookies.get('service')
+            setTypes(document.getElementById('types').selectedIndex);
+           }
+      
+      
+    },[])
 
     useEffect(() => {
         if (service && types) {
@@ -43,18 +69,10 @@ const ServicesGroup = ({onClicks, step, onChangess}) => {
 
             Cookies.set('service', service, {expires: 7, path: '/'})
             Cookies.set('types', types, {expires: 7, path: '/'})
-           
+          
         }
     }, [service, types]);
-useEffect(()=>{
-  console.log(Cookies.get('service') === null)
-  if (Cookies.get('service') !== null) {
-    document.getElementById('groups').selectedIndex=Cookies.get('service')
-   }
-   if (Cookies.get('types') !== null) {
-    document.getElementById('types').selectedIndex=Cookies.get('service')
-   }
-},[])
+
     return (
         <React.Fragment>
             <Col xl={3} lg={3} md={3} sm={12} xs={12}>
@@ -103,7 +121,7 @@ useEffect(()=>{
                                     <option value="" disabled selected>
                                         یک گزینه را انتخاب کنید
                                     </option>
-                                    {optionservice.map(item => (<option value={item}>{item}</option>))}
+                                    {optionservice.map(item => (<option value={item.id}>{item.value}</option>))}
                                     {/* <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -127,7 +145,7 @@ useEffect(()=>{
                                     <option value="" disabled selected>
                                         یک گزینه را انتخاب کنید
                                     </option>
-                                    {optiontypes.map(item => (<option value={item}>{item}</option>))}
+                                    {optiontypes.map(item => (<option value={item.id}>{item.value}</option>))}
                                 </Form.Control>
                             </Form.Group>
                         </Col>
