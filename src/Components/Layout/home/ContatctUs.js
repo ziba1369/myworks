@@ -4,7 +4,7 @@ import phoneIcon from '../../../images/phone-symbol-of-an-auricular-inside-a-cir
 import emailIcon from '../../../images/email.svg';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTwitter, faLinkedin, faInstagram, faFacebook} from "@fortawesome/free-brands-svg-icons";
-
+import {Link} from "react-router-dom";
 const Contatus = () => {
     return (
         <React.Fragment>
@@ -51,10 +51,10 @@ const Contatus = () => {
 
                     </Col>
                     <Col xl={12} md={12} sm={12} xs={12} className="fontawe ">
-                        <a className="instagram"><FontAwesomeIcon icon={faInstagram}/></a>
-                        <a className="linkdin"><FontAwesomeIcon icon={faLinkedin}/></a>
-                        <a className="twitter"><FontAwesomeIcon icon={faTwitter}/></a>
-                        <a className="facebook"><FontAwesomeIcon icon={faFacebook}/></a>
+                        <Link className="instagram"><FontAwesomeIcon icon={faInstagram}/></Link>
+                        <Link className="linkdin"><FontAwesomeIcon icon={faLinkedin}/></Link>
+                        <Link className="twitter"><FontAwesomeIcon icon={faTwitter}/></Link>
+                        <Link className="facebook"><FontAwesomeIcon icon={faFacebook}/></Link>
 
                     </Col>
                 </Col>

@@ -8,7 +8,7 @@ import React from 'react';
 import {Route, BrowserRouter} from 'react-router-dom';
 import Steptranslate from './Components/Steptranslate';
 import NavBar from './Components/Layout/NavBar';
-
+import BlogOriginal from './Components/BlogOriginal';
 function Routes() {
 
     const routers = [
@@ -51,8 +51,14 @@ function Routes() {
 
         },
         {
-            path: '/steptranslate',
+            path: '/news',
             component: Steptranslate,
+            exact: true,
+
+        },
+        {
+            path: '/blog',
+            component: BlogOriginal,
             exact: true,
 
         },

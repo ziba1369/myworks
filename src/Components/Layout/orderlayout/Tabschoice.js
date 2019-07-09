@@ -361,6 +361,23 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
       return sum + sumv + sumd;
     }
   };
+  useEffect(()=>{
+    Cookies.set('languagenum',languagenum(),{ expires: 7, path: '' })
+
+  },[languagenum])
+  useEffect(()=>{
+    Cookies.set('acceptnum',acceptnum(),{ expires: 7, path: '' })
+
+  },[acceptnum])
+
+  useEffect(()=>{
+    Cookies.set('count',count,{ expires: 7, path: '' })
+
+  },[count])
+  useEffect(()=>{
+    Cookies.set('deliverynum',deliverynum(),{ expires: 7, path: '' })
+
+  },[deliverynum])
   return (
     <React.Fragment>
       <Row>
@@ -373,6 +390,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
                 زبان ترجمه
                 <span>
                   {languagenum()}
+                 
                   مورد
                 </span>
               </Card.Text>
