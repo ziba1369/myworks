@@ -21,7 +21,7 @@ import {
 import * as Cookies from "js-cookie";
 
 const PriceServices = props => {
-    const  pageLimit=1;
+    const  pageLimit=15;
     const [offset, setOffset] = useState(0);
     const [total, setTotal] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -44,11 +44,8 @@ const PriceServices = props => {
 
 
     useEffect(() => {
-        setOffset(0)
-    }, [props.match.params.id]);
-    useEffect(() => {
         switch (props.match.params.id) {
-            case '5':
+            case 'all':
                 setStyleone({
                     backgroundColor: '#3798f5',
                     boxShadow: ' 0px 0px 15px -6px rgba(0,0,0,0.75)',
@@ -116,7 +113,7 @@ const PriceServices = props => {
                 });
                 setStylesix({color: '#454f63', backgroundColor: '#ffe7bd', borderColor: '#ffe7bd'});
                 break;
-            case '0':
+            case '5':
                 setStyleone({color: '#454f63 ', backgroundColor: '#aad0f4', borderColor: '#aad0f4'});
                 setStyletwo({color: '#454f63', backgroundColor: '#ebeeff', borderColor: '#5766b5'});
                 setStylethree({color: '#454f63', backgroundColor: '#ffdfe6', borderColor: '#ffdfe6'});
@@ -148,6 +145,7 @@ const PriceServices = props => {
             .then(function (response) {
                 if (response.data.success) {
                     setData(response.data.products);
+                    console.log(response.data.products)
                     setTotal(response.data.total)
 
                 } else {
@@ -157,11 +155,13 @@ const PriceServices = props => {
             .catch(function (error) {
                 ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
             });
-      }, [offset]);
-
-      useEffect(()=>{
-          console.log(offset)
-      },[offset])
+            console.log('ok')
+      },[props.match.params.id,offset]);
+     
+    
+      useEffect(() => {
+        setOffset(0)
+    }, [props.match.params.id]);
     return (
         <Container fluid className="contentpadding">
             <Row>
@@ -256,7 +256,7 @@ const PriceServices = props => {
                      <Paginatior
          totalRecords={total}
          pageLimit={pageLimit}
-         pageNeighbours={4}
+        //  pageNeighbours={4}
          setOffset={setOffset}
          currentPage={currentPage}
          setCurrentPage={setCurrentPage}
@@ -272,7 +272,7 @@ const PriceServices = props => {
                                 // className="paleblue"
                                 block
                                 style={styleone}
-                                onClick={e => props.history.push("/services/5")}
+                                onClick={e => props.history.push("all")}
                             >
                                 همه موارد
                             </Button>
@@ -311,7 +311,7 @@ const PriceServices = props => {
                             <Button
                                 style={stylesix}
                                 //className="cream"
-                                onClick={e => props.history.push("/services/0")}
+                                onClick={e => props.history.push("/services/5")}
                                 block
                             >
                                 مدارک شرکتی

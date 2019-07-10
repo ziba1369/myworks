@@ -67,7 +67,7 @@ const Newsletter = () => {
             <Col xl={12} lg={12} md={12} sm={12} xs={12} className="newsletter">
                 {show}
                 <Row className="allnews ">
-                    <p className="titlesections "><FontAwesomeIcon icon={faAngleDoubleRight}/><span className="seeall">مشاهده همه اخبار</span><FontAwesomeIcon
+                    <p className="titlesections "><FontAwesomeIcon icon={faAngleDoubleRight}/><Link to="/news"><span className="seeall">مشاهده همه اخبار</span></Link><FontAwesomeIcon
                         icon={faAngleDoubleLeft}/></p>
                 </Row>
             </Col>

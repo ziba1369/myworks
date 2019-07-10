@@ -126,15 +126,17 @@ const BlogOriginal = () => {
                <p><Link to="/">درباره ما</Link></p>
              </Col>
              <Col  xl={4} lg={4}  md={4}   sm={12}  xs={12}>
+              <h5>آخرین خبر</h5>
                {newsdet.map(item=>{
+                
                    return(
                        <p>{item.title}</p>
                    )
                }
                    )}
              </Col>
-             <Col  xl={3} lg={3}  md={3}   sm={12}  xs={12}> 
-             <Col xl={12} md={12} sm={12} xs={12}>
+             <Col  xl={3} lg={3}  md={3}   sm={12}  xs={12} style={{textAlign:"center"}}> 
+             <Col xl={12} lg={3} md={12} sm={12} xs={12}>
                         <p><img src={phoneIcon} alt={"phoneIcon"}/></p>
                         <p><span>021-44442131</span></p>
                         <p><span>021-44442131</span></p>
@@ -147,7 +149,7 @@ const BlogOriginal = () => {
                     </Col>
 
              </Col> 
-             <Col  xl={3} lg={3}  md={3}   sm={12}  xs={12}> 
+             <Col  xl={3} lg={3}  md={3}   sm={12}  xs={12}  style={{textAlign:"center"}}> 
              <Col xl={12} md={12} sm={12} xs={12}>
                         <p><img src={phoneIcon} alt={"phoneIcon"}/></p>
                         <p><span>میدان پونک ،ساختمان 130،طبقه 5ام، واحد320</span></p>

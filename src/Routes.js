@@ -57,7 +57,7 @@ function Routes() {
 
         },
         {
-            path: '/blog',
+            path: '/news/blog',
             component: BlogOriginal,
             exact: true,
 

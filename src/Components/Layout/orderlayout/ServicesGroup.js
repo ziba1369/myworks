@@ -9,27 +9,14 @@ import $ from 'jquery';
 import axios from "axios";
 import * as Cookies from "js-cookie";
 
-const ServicesGroup = ({onClicks, step, onChangess}) => {
+const ServicesGroup = ({onClicks, step, onChanges}) => {
+    
     const [service, setService] = useState();
-    const [optionservice, setOptionservice] = useState([{
-        id:1,
-        value:'مدارک شناسایی'
-    },
-{
-    id:2,
-    value:'مدارک نحصیلی'
-}] );
+    const [optionservice, setOptionservice] = useState(["یک گزینه را انتخاب کنید"]);
     const [types, setTypes] = useState();
-    const[optiontypes,setoptiontypes]= useState([{
-        id:1,
-        value:'مدارک شناسایی'
-    },
-{
-    id:2,
-    value:'مدارک نحصیلی'
-}] )
+    const[optiontypes,setoptiontypes]= useState(["یک گزینه را انتخاب کنید"])
     const handleServiceChange = e => {
-      
+        
         setService(e.target.value);
 
     };
@@ -46,7 +33,10 @@ const ServicesGroup = ({onClicks, step, onChangess}) => {
             ToastsStore.warning("لطفا نوع مدرک  ترجمه را انتخاب کنید");
         } else {
             onClicks();
+            console.log(onClicks())
         }
+        Cookies.set('service', service, {expires: 7, path: '/'})
+        Cookies.set('types', types, {expires: 7, path: '/'})
     };
     useEffect(()=>{
         if (Cookies.get('service') !== null) {
@@ -55,23 +45,78 @@ const ServicesGroup = ({onClicks, step, onChangess}) => {
         
            }
            if (Cookies.get('types') !== null) {
-            document.getElementById('types').selectedIndex=Cookies.get('service')
+            document.getElementById('types').selectedIndex=Cookies.get('types')
             setTypes(document.getElementById('types').selectedIndex);
            }
       
       
     },[])
+useEffect(()=>{
+    axios
+    .get(
+        "http://hezare3vom.ratechcompany.com/api/front/get_products_groups",
+        
+        {
+            headers: {"Content-Type": "application/json"}
+        }
+    )
+    .then(function (response) {
+        if (response.data.success) {
+            setOptionservice(response.data.product_groups);
+            
+           
 
+        } else {
+            ToastsStore.error(response.data.error);
+            
+        }
+    })
+    .catch(function (error) {
+        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    });
+}, [])
     useEffect(() => {
         if (service && types) {
             let changebutton = document.getElementById("add1");
             changebutton.classList.add("changebutton");
 
-            Cookies.set('service', service, {expires: 7, path: '/'})
-            Cookies.set('types', types, {expires: 7, path: '/'})
+            
           
         }
-    }, [service, types]);
+    }, [types]);
+   
+    useEffect(() => {
+      
+        if (service && types) {
+            let changebutton = document.getElementById("add1");
+            changebutton.classList.add("changebutton");  
+        };
+      
+        axios
+        .get(
+            "http://hezare3vom.ratechcompany.com/api/front/get_products?category_id="+service,
+           
+            {
+                headers: {"Content-Type": "application/json"}
+            }
+        )
+        .then(function (response) {
+            if (response.data.success) {
+                
+                setoptiontypes(response.data.products);
+                
+               
+
+            } else {
+                ToastsStore.error(response.data.error);
+                
+            }
+        })
+        .catch(function (error) {
+            ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+        });
+
+    }, [service]);
 
     return (
         <React.Fragment>
@@ -121,7 +166,7 @@ const ServicesGroup = ({onClicks, step, onChangess}) => {
                                     <option value="" disabled selected>
                                         یک گزینه را انتخاب کنید
                                     </option>
-                                    {optionservice.map(item => (<option value={item.id}>{item.value}</option>))}
+                                    {optionservice.map(item => (<option value={item.id}>{item.name}</option>))}
                                     {/* <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -145,7 +190,7 @@ const ServicesGroup = ({onClicks, step, onChangess}) => {
                                     <option value="" disabled selected>
                                         یک گزینه را انتخاب کنید
                                     </option>
-                                    {optiontypes.map(item => (<option value={item.id}>{item.value}</option>))}
+                                    {optiontypes.map(item => (<option value={item.id}>{item.name}</option>))}
                                 </Form.Control>
                             </Form.Group>
                         </Col>

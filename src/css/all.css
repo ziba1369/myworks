@@ -773,6 +773,7 @@ button:focus {
 
 .seeall {
     padding: 0rem 1rem;
+    color: #0e4d8b;
 }
 
 .allnews p {
@@ -1316,12 +1317,8 @@ li.breadcrumb-item a {
 .detail-card .card-title.h5 {
     color: #454f63;
     font-size: 1.1rem;
-}
-
-.detail-card .card-title.h5 {
-    color: #454f63;
-    font-size: 1.1rem;
     padding: 0 0 1.5rem 0;
+    height:3rem;
 }
 
 .detail-card .card-body {
@@ -2073,4 +2070,10 @@ p.forgetpass, p.activesys {
 }
 .foter-blog a {
     color: #454f63;
+}
+.fontawe {
+    padding-top: 4.3rem;
+}
+.foter-blog * {
+    color: #1d2b48;
 }

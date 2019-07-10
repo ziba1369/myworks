@@ -125,7 +125,7 @@
 
 // export default Popularservices;
 
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {Col, Button, Row, Carousel} from 'react-bootstrap';
 import bithSertificate from '../../../images/passport (1).svg';
 import idCard from '../../../images/id-card.svg';
@@ -140,68 +140,49 @@ import {faCheckCircle} from '@fortawesome/free-regular-svg-icons';
 import Media from 'react-media';
 import * as Cookies from "js-cookie";
 import {withRouter} from 'react-router-dom';
-
-
+import axios from "axios";
+import {
+    ToastsContainer,
+    ToastsStore,
+    ToastsContainerPosition
+} from "react-toasts";
 const Popularservices = (props) => {
+
     const [Information, setinfo] = useState([
-            {
-                id: 1,
-                img: bithSertificate,
-                title: "ترجمه شناسنامه",
-                description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
-                price: '۲۵۰۰'
-            },
-            {
-                id: 2,
-                img: idCard,
-                title: "ترجمه کارت ملی",
-                description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
-                price: '۲۵۰۰'
-            },
-            {
-                id: 3,
-                img: score,
-                title: "ترجمه ریزنمرات",
-                description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
-                price: '۲۵۰۰'
-            },
-            {
-                id: 4,
-                img: customtrans,
-                title: "ترجمه سفارشی",
-                description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
-                price: '۲۵۰۰'
-            },
-            {
-                id: 5,
-                img: builddoc,
-                title: "سندملک",
-                description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
-                price: '۲۵۰۰'
-            },
-            {
-                id: 6,
-                img: workcer,
-                title: "گواهی کار",
-                description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
-                price: '۲۵۰۰'
-            },
-            {
-                id: 7,
-                img: diploma,
-                title: "دانشنامه",
-                description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
-                price: '۲۵۰۰'
-            },
-            {
-                id: 8,
-                img: marriage,
-                title: "سندازدواج",
-                description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
-                price: '۲۵۰۰'
-            }
-        ]
-    )
+        {
+            id: 4,
+            img: customtrans,
+            title: "ترجمه سفارشی",
+            description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
+            price: '۲۵۰۰'
+        }
+    ]);
+    useEffect(()=>{
+      
+            axios
+                .get(
+                    "http://hezare3vom.ratechcompany.com/api/front/get_popular_products",
+                    props.match.params.id,
+                    {
+                        headers: {"Content-Type": "application/json"}
+                    }
+                )
+                .then(function (response) {
+                    if (response.data.success) {
+                        setinfo([...response.data.products,...Information]);
+                       console.log([...response.data.products,...Information])
+                       
+    
+                    } else {
+                        ToastsStore.error(response.data.error);
+                        
+                    }
+                })
+                .catch(function (error) {
+                    ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+                });
+          }, []);
+   
     const cardServices = Information.map((item, inex) => {
         return (
 
@@ -226,7 +207,7 @@ const Popularservices = (props) => {
                 </div>
                 <div className="custom">
                     <Button type="submit" className="green" style={{cursor: "pointer"}} onClick={() => {
-                        Cookies.set('service', item.title, {expires: 7, path: '/'});
+                        Cookies.set('service', item.group_id, {expires: 7, path: '/'});
                         Cookies.set('types', item.id, {expires: 7, path: '/'});
                         props.history.push("/order/2");
                     }}>ثبت سفارش</Button>
