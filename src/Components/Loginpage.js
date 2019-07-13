@@ -16,20 +16,7 @@ const Login = props => {
   const [loginButton, setLoginButtonStyle] = useState({
     backgroundColor: "#e1e1e1"
   });
-  const handlesave = () => {
-    const checkbox=document.getElementById('checkbox');
-    const loginuser = {
-      name: name,
-      pass: pass
-    };
-    if (checkbox.checked) {
-      Cookies.set("loginusername", loginuser.name, { path: "/", expires: 7 });
-      Cookies.set("loginpass", loginuser.pass, { path: "/", expires: 7 });
-    } else {
-      Cookies.set("loginusername", loginuser.name, { path: "/", expires: 1 });
-      Cookies.set("loginpass", loginuser.pass, { path: "/", expires: 1 });
-    }
-  };
+  
   const checkLoginButton = () => {
     if (name.length > 1 && pass.length > 1) {
       setLoginButtonStyle({ backgroundColor: "#1976d2" });
@@ -58,6 +45,7 @@ const Login = props => {
   }, [pass]);
 
   const loginbutton = () => {
+    const checkbox=document.getElementById('checkbox');
     const login = {
       name: name,
       pass: pass
@@ -69,7 +57,11 @@ const Login = props => {
       .then(function(response) {
         console.log(response.data.success);
         if (response.data.success) {
+          if (checkbox.checked) {
           Cookies.set("token", response.data.token, { path: "/", expires: 7 });
+          }else{
+            Cookies.set("token", response.data.token, { path: "/", expires: 1 });
+          }
           props.history.push("/");
         } else {
           ToastsStore.error(response.data.error);
@@ -119,7 +111,7 @@ const Login = props => {
             </Form.Group>
             <Form.Group controlId="formBasicChecbox">
               <Form.Check
-                onClick={handlesave}
+               
                 type="checkbox"
                 id='checkbox'
                 label="مرابه خاطر بسپارید"

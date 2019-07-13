@@ -98,7 +98,6 @@ const Forgetpass = (props) => {
             console.log(response.data.code);
             ToastsStore.success(response.data.code);
             setVertification(response.data.code);
-            Cookies.set('token', response.data.token, {path: '/', expires: 7});
             props.history.push("/");
 
         } else {
@@ -146,7 +145,7 @@ const Forgetpass = (props) => {
         if (second < 61 && second > 0 && step === 2) {
             interval = setInterval(() => {
                 setSecond(second => second - 1);
-            }, 1000);
+            },1000);
         } else {
             clearInterval(interval);
         }
