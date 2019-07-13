@@ -866,7 +866,7 @@ p.call {
     display: flex;
     justify-items: center;
     justify-content: center;
-    margin: 1rem 0rem;
+    margin: 2rem 0rem;
     -webkit-box-shadow: 0px 9px 22px -2px rgba(0, 0, 0, 0.32);
     -moz-box-shadow: 0px 9px 22px -2px rgba(0, 0, 0, 0.32);
     box-shadow: 0px 9px 22px -2px rgba(0, 0, 0, 0.32);
@@ -1652,7 +1652,9 @@ a#left-tabs-example-tab-fourth.active {
     position: absolute !important;
     margin-right: 2.5rem !important;
 }
-
+.form-check-input{
+    float:left;
+}
 .tabcheckbox input[type=checkbox], .tabcheckbox input[type=radio] {
     transform: scale(1.5);
 }

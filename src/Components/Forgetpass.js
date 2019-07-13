@@ -5,9 +5,10 @@ import {
     ToastsContainer,
     ToastsContainerPosition
 } from "react-toasts";
+import axios from "axios";
 import $ from "jquery";
-
-const Forgetpass = () => {
+import * as Cookies from "js-cookie";
+const Forgetpass = (props) => {
     const [step, setStep] = useState(1);
     const [firstStep, setFirstStep] = useState({display: "block"});
     const [secondStep, setSecondStep] = useState({
@@ -55,14 +56,15 @@ const Forgetpass = () => {
     // states
 
     const [mobile, setMobile] = useState("");
-
+    const [vertification, setVertification] = useState("");
     const [RegisterFirst, setRegisterFirstStyle] = useState({
         backgroundColor: "#e1e1e1"
     });
 
     // check conditions and enable/disable register button
     const checkRegisterFirstButton = () => {
-        if (mobile.length === 11) {
+       const phoneno=/^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
+        if (mobile.match(phoneno)) {
             setRegisterFirstStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
@@ -85,6 +87,29 @@ const Forgetpass = () => {
         setStep(2);
 
     };
+    useEffect(() => {
+        var forgetpass = {
+            mobile_number: mobile
+        };
+        axios.post("http://hezare3vom.ratechcompany.com/api/get_vertification_code", forgetpass, {headers: {'Content-Type': 'application/json'}})
+    .then(function (response) {
+        console.log(response.data.success)
+        if (response.data.success) {
+            console.log(response.data.code);
+            ToastsStore.success(response.data.code);
+            setVertification(response.data.code);
+            Cookies.set('token', response.data.token, {path: '/', expires: 7});
+            props.history.push("/");
+
+        } else {
+            ToastsStore.error(response.data.error);
+        }
+    })
+
+    .catch(function (error) {
+        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    })
+},[mobile])
 
     //////////////////// SECOND STEP //////////////////////
     // states

@@ -92,7 +92,7 @@ const Forgetpass = () => {
                     setVertification(response.data.code);
                     props.history.push("/");
                 } else {
-                    ToastsStore.error(response.data.errmessage);
+                    ToastsStore.error(response.data.error);
                 }
             })
             .catch(function (error) {
@@ -136,7 +136,7 @@ const Forgetpass = () => {
                         setVertification(response.data.code);
                         props.history.push("/");
                     } else {
-                        ToastsStore.error(response.data.errmessage);
+                        ToastsStore.error(response.data.error);
                     }
                 })
                 .catch(function (error) {
@@ -189,7 +189,7 @@ const Forgetpass = () => {
         console.log(active, vertification);
         var verti = {
             mobile_number: mobile,
-            vertification_vode: vertification
+            vertification_code: vertification
         };
         axios
             .post(
@@ -354,7 +354,7 @@ const Forgetpass = () => {
 
                     props.history.push("/");
                 } else {
-                    ToastsStore.error(response.data.errmessage);
+                    ToastsStore.error(response.data.error);
                 }
             })
             .catch(function (error) {
