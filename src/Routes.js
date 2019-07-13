@@ -6,7 +6,7 @@ import Forgetpass from './Components/Forgetpass';
 import Register from './Components/Register';
 import React from 'react';
 import {Route, BrowserRouter} from 'react-router-dom';
-import Steptranslate from './Components/Steptranslate';
+import News from './Components/News';
 import NavBar from './Components/Layout/NavBar';
 import BlogOriginal from './Components/BlogOriginal';
 function Routes() {
@@ -52,12 +52,12 @@ function Routes() {
         },
         {
             path: '/news',
-            component: Steptranslate,
+            component: News,
             exact: true,
 
         },
         {
-            path: '/news/blog',
+            path: '/blog/:slug',
             component: BlogOriginal,
             exact: true,
 

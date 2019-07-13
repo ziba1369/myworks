@@ -22,7 +22,8 @@ import {
 import axios from "axios";
 import * as Cookies from "js-cookie";
 
-const Tabschoice = ({ onClicks, step, onChanges }) => {
+const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
+  const types= Cookies.get('types');
   const [typedoc, changetypedoc] = useState({
     type: "شناسنامه",
     countchoose: "۱",
@@ -30,57 +31,8 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     extradoc: "۰",
     deliverytype: "عادی"
   });
-  const [languages, setLang] = useState([
-    {
-      id: 1,
-      value: "fatoen",
-      name: "فارسی به انگلیسی",
-      price: "26000",
-      checkin: false
-    },
-    {
-      id: 2,
-      value: "entofa",
-      name: "انگلیسی به فارسی",
-      price: "26000",
-      checkin: false
-    },
-    {
-      id: 3,
-      value: "arotfa",
-      name: "عربی به فارسی",
-      price: "26000",
-      checkin: false
-    },
-    {
-      id: 4,
-      value: "fatoen",
-      name: "فارسی به عربی",
-      price: "26000",
-      checkin: false
-    }
-  ]);
-
-  const [validation, setVal] = useState([
-    {
-      id: 1,
-      name: "مهروتاییدیه دفترترجمی",
-      price: "26000",
-      checkin: false
-    },
-    {
-      id: 2,
-      name: "تاییدیه وزارت امورخارجه",
-      price: "26000",
-      checkin: false
-    },
-    {
-      id: 3,
-      name: "تاییدیه دادگستری",
-      price: "26000",
-      checkin: false
-    }
-  ]);
+  const [languages, setLang] = useState([]);
+  const [validation, setVal] = useState([]);
   const [count, setcount] = useState(0);
   const [delivery, setDelivery] = useState([
     { type: "automatic", name: "عادی", id: 1, checkin: false, price: 20000 },
@@ -294,6 +246,22 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     return z;
   };
   useEffect(() => {
+    changeButton();
+   Cookies.set("languages",languages, {expires: 7,path: "/"});
+    // console.log(languages);
+    
+
+  }, [languages]);
+  useEffect(() => {
+    Cookies.set("validation", validation, {expires: 7,path: "/"});
+    changeButton();
+  }, [validation]);
+  useEffect(() => {
+   Cookies.set("delivery", delivery, {expires: 7,path: "/"});
+    changeButton();
+  }, [delivery]);
+
+  useEffect(() => {
   
     if (Cookies.get("languages") !== null) {
      
@@ -317,22 +285,7 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
      
     }
   },[])
-  useEffect(() => {
-    changeButton();
-   Cookies.set("languages",languages, {expires: 7,path: "/"});
-    // console.log(languages);
-    
-
-  }, [languages]);
-  useEffect(() => {
-    Cookies.set("validation", validation, {expires: 7,path: "/"});
-    changeButton();
-  }, [validation]);
-  useEffect(() => {
-   Cookies.set("delivery", delivery, {expires: 7,path: "/"});
-    changeButton();
-  }, [delivery]);
-
+ 
 
   const sumValue = () => {
     let sumd = 0;
@@ -378,6 +331,62 @@ const Tabschoice = ({ onClicks, step, onChanges }) => {
     Cookies.set('deliverynum',deliverynum(),{ expires: 7, path: '' })
 
   },[deliverynum])
+  useEffect(() => {
+
+  
+    axios
+    .get(
+        "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id="+types,
+       
+        {
+            headers: {"Content-Type": "application/json"}
+        }
+    )
+    .then(function (response) {
+        if (response.data.success) {
+            
+            setLang(response.data.product_languages);
+            
+           
+
+        } else {
+            ToastsStore.error(response.data.error);
+            
+        }
+    })
+    .catch(function (error) {
+        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    });
+
+}, [types]);
+useEffect(() => {
+
+  
+  axios
+  .get(
+      "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id="+types,
+     
+      {
+          headers: {"Content-Type": "application/json"}
+      }
+  )
+  .then(function (response) {
+      if (response.data.success) {
+          
+          setVal(response.data.product_certificates);
+          
+         
+
+      } else {
+          ToastsStore.error(response.data.error);
+          
+      }
+  })
+  .catch(function (error) {
+      ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+  });
+
+}, [types]);
   return (
     <React.Fragment>
       <Row>

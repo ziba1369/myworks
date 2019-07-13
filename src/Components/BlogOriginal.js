@@ -1,4 +1,4 @@
-import React, { useState, useeffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Row, Breadcrumb, Container, Image,Button,} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import khabanameh from "../images/khabarnameh.jpg";
@@ -6,40 +6,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTwitter, faLinkedin, faInstagram, faFacebook} from "@fortawesome/free-brands-svg-icons";
 import phoneIcon from '../images/phone-symbol-of-an-auricular-inside-a-circle.svg';
 import emailIcon from '../images/email.svg';
+import * as Cookies from "js-cookie";
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
+} from "react-toasts";
+import axios from "axios";
 const BlogOriginal = () => {
-  const [newsdet, setnews] = useState([
-    {
-      id: 1,
-      img: khabanameh,
-      title: "مراحل ترجمه رسمی  در ایران",
-      date: "۲۲ آذر ۹۸",
-      content:"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
-    },
-    {
-      id: 2,
-      img: khabanameh,
-      title: "مراحل ترجمه رسمی  در ایران",
-      date: "۲۲ آذر ۹۸",
-      content:
-        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد "
-    },
-    {
-      id: 3,
-      img: khabanameh,
-      title: "مراحل ترجمه رسمی  در ایران",
-      date: "۲۲ آذر ۹۸",
-      content:
-        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد "
-    },
-    {
-      id: 4,
-      img: khabanameh,
-      title: "مراحل ترجمه رسمی  در ایران",
-      date: "۲۲ آذر ۹۸",
-      content:
-        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد "
-    }
-  ]);
+  const [newsdet, setNews] = useState([]);
+  const news_id=Cookies.get("newsdet").id;
   const [tag,setTag]=useState([
       {
           id:'1',
@@ -50,6 +26,29 @@ const BlogOriginal = () => {
         name:'ترجمه' 
       }
   ])
+  useEffect(() => {
+   
+    axios
+        .get(
+            "http://hezare3vom.ratechcompany.com/api/front/get_news",news_id,
+            {
+                headers: {"Content-Type": "application/json"}
+            }
+        )
+        .then(function (response) {
+            if (response.data.success) {
+                setNews((JSON.parse(Cookies.get("newsdet"))));
+                console.log(response.data.news)
+               
+            } else {
+                ToastsStore.error(response.data.error);
+            }
+        })
+        .catch(function (error) {
+            ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+        });
+        
+  },[]);
   return (
     <Container>
       <Row>
@@ -70,7 +69,7 @@ const BlogOriginal = () => {
             </Breadcrumb.Item>
 
             <Breadcrumb.Item active href={null}>
-              {newsdet[0].title}
+              {newsdet.title}
             </Breadcrumb.Item>
           </Breadcrumb>
         </Col>
@@ -94,7 +93,7 @@ const BlogOriginal = () => {
           </div>
           <div className="tag">
               {tag.map(i=>{return (
-                  <Button>{i.name}</Button>
+                  <Button>{i.tag}</Button>
               )})}
           </div>
 
@@ -107,10 +106,10 @@ const BlogOriginal = () => {
           sm={12}
           xs={12}
         >
-          <Image src={newsdet[0].img} alt={newsdet[0].title} />
+          <Image src={newsdet.img} alt={newsdet.title} />
           <Col lg={12} xl={12} md={12} sm={12} xs={12}>
-            <p className="detail-title">{newsdet[0].title}</p>
-            <p>{newsdet[0].content}</p>
+            <p className="detail-title">{newsdet.short}</p>
+            <p>{newsdet.content}</p>
           </Col>
         </Col>
       </Row>

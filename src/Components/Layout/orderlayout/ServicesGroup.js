@@ -9,12 +9,12 @@ import $ from 'jquery';
 import axios from "axios";
 import * as Cookies from "js-cookie";
 
-const ServicesGroup = ({onClicks, step, onChanges}) => {
+const ServicesGroup = ({onClicks ,step, onChanges}) => {
     
     const [service, setService] = useState();
-    const [optionservice, setOptionservice] = useState(["یک گزینه را انتخاب کنید"]);
+    const [optionservice, setOptionservice] = useState([]);
     const [types, setTypes] = useState();
-    const[optiontypes,setoptiontypes]= useState(["یک گزینه را انتخاب کنید"])
+    const[optiontypes,setoptiontypes]= useState([])
     const handleServiceChange = e => {
         
         setService(e.target.value);
@@ -32,8 +32,8 @@ const ServicesGroup = ({onClicks, step, onChanges}) => {
             document.getElementById("types").style.borderColor = "red";
             ToastsStore.warning("لطفا نوع مدرک  ترجمه را انتخاب کنید");
         } else {
-            onClicks();
-            console.log(onClicks())
+            onClicks()
+          
         }
         Cookies.set('service', service, {expires: 7, path: '/'})
         Cookies.set('types', types, {expires: 7, path: '/'})
