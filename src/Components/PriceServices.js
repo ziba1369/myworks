@@ -19,7 +19,7 @@ import {
     ToastsContainerPosition
 } from "react-toasts";
 import * as Cookies from "js-cookie";
-
+import Footer from './Layout/Footer';
 const PriceServices = props => {
     const  pageLimit=15;
     const [offset, setOffset] = useState(0);
@@ -320,7 +320,9 @@ const PriceServices = props => {
                     </Card>
                 </Col>
                 <div/>
+                
             </Row>
+            <Footer/>
         </Container>
     );
 };

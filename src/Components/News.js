@@ -9,6 +9,7 @@ import {
     ToastsStore,
     ToastsContainerPosition
 } from "react-toasts";
+import Footer from './Layout/Footer';
 const Steptranslate = () => {
     const  pageLimit=7;
     const [currentData, setCurrentData] = useState([]);
@@ -155,6 +156,7 @@ const Steptranslate = () => {
         />
     
       </div>
+      <Footer/>
         </React.Fragment>
      );
 }

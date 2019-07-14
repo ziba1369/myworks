@@ -6,7 +6,7 @@ import Tabschoice from "./Layout/orderlayout/Tabschoice";
 import ServicesGroup from "./Layout/orderlayout/ServicesGroup";
 import Photoupload from "./Layout/orderlayout/Photoupload";
 import Confirmorder from "./Layout/orderlayout/Confirmorder";
-
+import Footer from './Layout/Footer';
 const Order = (props) => {
     const [step, setCount] = useState(1);
     const [styleone, setStyleone] = useState();
@@ -395,6 +395,7 @@ const Order = (props) => {
         setCount(5);
     };
     return (
+        <React.Fragment>
         <Container>
             <Row>
                 <Col
@@ -491,7 +492,10 @@ const Order = (props) => {
                 {step === 3 && <Photoupload onClicks={increment} count={step}/>}
                 {step === 4 && <Confirmorder onClicks={increment} count={step}/>}
             </Row>
+        
         </Container>
+            <Footer/>
+            </React.Fragment>
     );
 };
 

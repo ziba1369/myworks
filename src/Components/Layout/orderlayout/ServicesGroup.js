@@ -119,6 +119,7 @@ useEffect(()=>{
     }, [service]);
 
     return (
+        
         <React.Fragment>
             <Col xl={3} lg={3} md={3} sm={12} xs={12}>
                 <Card className="documenttype ">

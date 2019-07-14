@@ -59,6 +59,7 @@ const Forgetpass = (props) => {
     const [vertification, setVertification] = useState("");
     const [RegisterFirst, setRegisterFirstStyle] = useState({
         backgroundColor: "#e1e1e1"
+        ,border:"0px"
     });
 
     // check conditions and enable/disable register button
@@ -91,11 +92,12 @@ const Forgetpass = (props) => {
         var forgetpass = {
             mobile_number: mobile
         };
-        axios.post("http://hezare3vom.ratechcompany.com/api/get_vertification_code", forgetpass, {headers: {'Content-Type': 'application/json'}})
+        axios.post("http://hezare3vom.ratechcompany.com/api/get_forget_pass_code", forgetpass, {headers: {'Content-Type': 'application/json'}})
     .then(function (response) {
         console.log(response.data.success)
         if (response.data.success) {
-            console.log(response.data.code);
+            
+            alert(response.data.code);
             ToastsStore.success(response.data.code);
             setVertification(response.data.code);
             props.history.push("/");
@@ -115,11 +117,13 @@ const Forgetpass = (props) => {
     const [activSecond, setactiveSecondStyle] = useState({
         color: "#e1e1e1"
     });
+
     const [active, setActive] = useState("");
     const [min, setMin] = useState(1)
     const [second, setSecond] = useState(60)
     const [RegisterSecond, setRegisterSecondStyle] = useState({
-        backgroundColor: "#e1e1e1"
+        backgroundColor: "#e1e1e1",
+        border:"0px"
     });
     useEffect(() => {
         setMin(0)
@@ -169,13 +173,37 @@ const Forgetpass = (props) => {
     const changeStep = () => {
         setStep(1)
     }
+    const forgetpass = {
+        mobile_number: mobile
+    };
+  useEffect(()=>{
+    axios.post("http://hezare3vom.ratechcompany.com/api/get_forget_pass_code", forgetpass, {headers: {'Content-Type': 'application/json'}})
+    .then(function (response) {
+        console.log(response.data.success)
+        if (response.data.success) {
+            alert(response.data.code);
+            ToastsStore.success(response.data.code);
+            setVertification(response.data.code);
+            props.history.push("/");
+
+        } else {
+            ToastsStore.error(response.data.error);
+        }
+    })
+
+    .catch(function (error) {
+        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    })
+},[mobile])
+
 
     //////////////////// THIRD STEP //////////////////////
 
     const [newpass, setnewpass] = useState("");
     const [newpassr, setnewpassr] = useState("");
     const [RegisterThird, setRegisterThirdStyle] = useState({
-        backgroundColor: "#e1e1e1"
+        backgroundColor: "#e1e1e1",
+        border:"0px"
     });
     // check conditions and enable/disable register button
     const checkRegisteThirdButton = () => {

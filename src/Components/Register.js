@@ -50,14 +50,15 @@ const Forgetpass = () => {
     const [mobile, setMobile] = useState("");
     const [vertification, setVertification] = useState("");
     const [RegisterFirst, setRegisterFirstStyle] = useState({
-        backgroundColor: "#e1e1e1"
+        backgroundColor: "#e1e1e1",
+        border:"0px"
     });
     const checkRegisterFirstButton = () => {
         if (mobile.length === 11) {
             setRegisterFirstStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
-            setRegisterFirstStyle({backgroundColor: "#e1e1e1"});
+            setRegisterFirstStyle({backgroundColor: "#e1e1e1",border:"0px"});
             $("#rfbutton").attr("disabled", "disabled");
         }
     };
@@ -85,7 +86,7 @@ const Forgetpass = () => {
                 {headers: {"Content-Type": "application/json"}}
             )
             .then(function (response) {
-                console.log(response.data.success);
+               // console.log(response.data.success);
                 if (response.data.success) {
                     Cookies.set("token", response.data.code, {path: "/", expires: 7});
                     ToastsStore.success(response.data.code);
@@ -107,7 +108,8 @@ const Forgetpass = () => {
     const [min, setMin] = useState(0);
     const [second, setSecond] = useState(60);
     const [RegisterSecond, setRegisterSecondStyle] = useState({
-        backgroundColor: "#e1e1e1"
+        backgroundColor: "#e1e1e1",
+        border:"0"
     });
     const [activSecond, setactiveSecondStyle] = useState({
         color: "#e1e1e1"
@@ -129,7 +131,7 @@ const Forgetpass = () => {
                     {headers: {"Content-Type": "application/json"}}
                 )
                 .then(function (response) {
-                    console.log(response.data.success);
+                    //console.log(response.data.success);
                     if (response.data.success) {
                         Cookies.set("token", response.data.code, {path: "/", expires: 7});
                         ToastsStore.success(response.data.code);
@@ -167,7 +169,7 @@ const Forgetpass = () => {
             setRegisterSecondStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
-            setRegisterSecondStyle({backgroundColor: "#e1e1e1"});
+            setRegisterSecondStyle({backgroundColor: "#e1e1e1",border:"0"});
             $("#rfbutton").attr("disabled", "disabled");
         }
     };
@@ -186,7 +188,7 @@ const Forgetpass = () => {
         if (parseInt(active) === parseInt(vertification)) {
             setStep(3);
         }
-        console.log(active, vertification);
+        //console.log(active, vertification);
         var verti = {
             mobile_number: mobile,
             vertification_code: vertification
@@ -198,7 +200,7 @@ const Forgetpass = () => {
                 {headers: {"Content-Type": "application/json"}}
             )
             .then(function (response) {
-                console.log(response.data.success);
+                //console.log(response.data.success);
                 if (response.data.success) {
                     Cookies.set("token", {path: "/", expires: 7});
                     ToastsStore.success(response.data.code);
@@ -215,8 +217,10 @@ const Forgetpass = () => {
     const [name, setName] = useState("");
     const [lastname, setLastName] = useState("");
     const [certi, setCertifi] = useState("");
+    const[selectday,setselectday]=useState("");
     const [birthday, setBirthday] = useState([
-        1,
+        "روز"
+        ,1,
         2,
         3,
         4,
@@ -264,12 +268,13 @@ const Forgetpass = () => {
         12
     ]);
     const [birthmonthvalue, setBirthmonthvalue] = useState("ماه");
-    const [birthyear, setBirthyear] = useState([1398]);
+    const [birthyear, setBirthyear] = useState([]);
     const [birthyearvalue, setBirthyearvalue] = useState("سال");
     const [pass, setPass] = useState("");
     const [passr, setPassr] = useState("");
     const [RegisterThird, setRegisterThirdStyle] = useState({
-        backgroundColor: "#e1e1e1"
+        backgroundColor: "#e1e1e1",
+        border:"0"
     });
 
     // check conditions and enable/disable register button
@@ -311,7 +316,7 @@ const Forgetpass = () => {
         setPassr(e.target.value);
     };
     const checkRegisterThirdButton = () => {
-        console.log(pass.length);
+        // console.log(pass.length);
         if (
             name.length > 1 &&
             lastname.length > 1 &&
@@ -326,7 +331,7 @@ const Forgetpass = () => {
             setRegisterThirdStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
-            setRegisterThirdStyle({backgroundColor: "#e1e1e1"});
+            setRegisterThirdStyle({backgroundColor: "#e1e1e1",border:"0px"});
             $("#rfbutton").attr("disabled", "disabled");
         }
     };
@@ -337,11 +342,12 @@ const Forgetpass = () => {
             lastname: lastname,
             national_code: certi,
             mobile: mobile,
-            birth_day: birthday,
+            birth_day: selectday,
             birth_month: birthmonth,
             birth_year: birthyear,
             password: pass
         };
+         console.log(vertiification)
         axios
             .post(
                 "http://hezare3vom.ratechcompany.com/api/sign_up_app",
@@ -349,6 +355,7 @@ const Forgetpass = () => {
                 {headers: {"Content-Type": "application/json"}}
             )
             .then(function (response) {
+                console.log(response)
                 if (response.data.success) {
                     Cookies.set("token", {path: "/", expires: 7});
 
@@ -357,11 +364,40 @@ const Forgetpass = () => {
                     ToastsStore.error(response.data.error);
                 }
             })
-            .catch(function (error) {
-                ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-            });
     };
+    useEffect(()=>{
+        axios
+        .get(
+            "http://hezare3vom.ratechcompany.com/api/get_year",
+           
+            {
+                headers: {"Content-Type": "application/json"}
+            }
+        )
+        .then(function (response) {
+            if (response.data.success) {
+                
+                setBirthyear(response.data.year);
+                console.log(response.data.year)
+               
 
+            } else {
+                ToastsStore.error(response.data.error);
+                
+            }
+        })
+        .catch(function (error) {
+            ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+        });
+
+    }, []);
+ useEffect(()=>{
+    var e = document.getElementById("day");
+    var value = e.options[e.selectedIndex].value;
+    setselectday(value);
+   console.log(value)
+ },[birthday])
+   
     ///////////////////////////////////////////
     return (
         <React.Fragment>
@@ -380,11 +416,9 @@ const Forgetpass = () => {
                                     position={ToastsContainerPosition.TOP_CENTER}
                                     store={ToastsStore}
                                 />
-                                <p className="textlogin">فراموشی کلمه عبور</p>
+                                <p className="textlogin">عضویت</p>
                                 <Form.Group>
-                                    <Form.Label>
-                                        شماره تلفن همراهی که با آن ثبت نام کرده اید وارد نمایید
-                                    </Form.Label>
+                                  
                                     <Form.Label>شماره همراه</Form.Label>
                                     <Form.Control
                                         type="tel"
@@ -489,17 +523,16 @@ const Forgetpass = () => {
                                     <Row>
                                         <Col xl={4} lg={4} md={4} sm={12} xs={12}>
                                             <Form.Control
-                                                id="groups"
+                                                id="day"
                                                 as="select"
                                                 type="select"
                                                 onChange={handleBirthday}
                                                 value={birthvalue}
                                                 name="slelect"
                                                 required
+                                                className="day"
                                             >
-                                                <option selected disabled>
-                                                    روز
-                                                </option>
+                                               
                                                 {birthday.map(num => (
                                                     <option value={num}>{num}</option>
                                                 ))}
@@ -515,6 +548,7 @@ const Forgetpass = () => {
                                                 value={birthmonthvalue}
                                                 name="slelect"
                                                 required
+                                                className="month"
                                             >
                                                 <option selected disabled>
                                                     ماه

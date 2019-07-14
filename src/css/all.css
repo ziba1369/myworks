@@ -188,7 +188,8 @@ a.dropdown-item {
 
 .dropdown-menu.show {
     display: inline-flex !important;
-    padding: 2rem;
+    padding: 1rem;
+
 }
 
 .navbar-custom .navbar-toggler-icon {
@@ -2059,6 +2060,7 @@ p.forgetpass, p.activesys {
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.32);
     border-radius:.3rem;
     padding: 1rem;
+    direction:rtl
 }
 .tag .btn {
     background-color: #fff;
@@ -2069,6 +2071,7 @@ p.forgetpass, p.activesys {
 .foter-blog {
     background-color: #eff5ff;
     padding: 2rem;
+    margin-top: 2rem;
 }
 .foter-blog a {
     color: #454f63;
@@ -2078,4 +2081,17 @@ p.forgetpass, p.activesys {
 }
 .foter-blog * {
     color: #1d2b48;
+}
+@media only screen and (min-width: 768px) {
+p a.dropdown-item {
+    border: 0;
+    margin-left: 1rem;
+    position: relative;
+    left: 1rem;
+    top: 1rem;
+}
+.dropdown-menu.show {
+
+    min-width: 26rem !important;
+}
 }

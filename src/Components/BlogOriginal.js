@@ -13,9 +13,9 @@ import {
   ToastsContainerPosition
 } from "react-toasts";
 import axios from "axios";
-const BlogOriginal = () => {
+import Footer from './Layout/Footer';
+const BlogOriginal = (props) => {
   const [newsdet, setNews] = useState([]);
-  const news_id=Cookies.get("newsdet").id;
   const [tag,setTag]=useState([
       {
           id:'1',
@@ -27,18 +27,21 @@ const BlogOriginal = () => {
       }
   ])
   useEffect(() => {
-   
+  
     axios
         .get(
-            "http://hezare3vom.ratechcompany.com/api/front/get_news",news_id,
+            "http://hezare3vom.ratechcompany.com/api/front/get_news/?news_slug="+props.match.params.slug,
+            
             {
                 headers: {"Content-Type": "application/json"}
             }
         )
         .then(function (response) {
+          console.log(response)
             if (response.data.success) {
-                setNews((JSON.parse(Cookies.get("newsdet"))));
-                console.log(response.data.news)
+                setNews([response.data]);
+                console.log(setNews)
+              
                
             } else {
                 ToastsStore.error(response.data.error);
@@ -48,7 +51,7 @@ const BlogOriginal = () => {
             ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
         });
         
-  },[]);
+  },[props.match.params.slug]);
   return (
     <Container>
       <Row>
@@ -69,7 +72,14 @@ const BlogOriginal = () => {
             </Breadcrumb.Item>
 
             <Breadcrumb.Item active href={null}>
-              {newsdet.title}
+            {newsdet.map(i => {
+            return (
+              <React.Fragment>
+              {i.title}
+              </React.Fragment>
+            )
+            })
+          }
             </Breadcrumb.Item>
           </Breadcrumb>
         </Col>
@@ -92,12 +102,23 @@ const BlogOriginal = () => {
           })}
           </div>
           <div className="tag">
-              {tag.map(i=>{return (
-                  <Button>{i.tag}</Button>
-              )})}
+              {newsdet.map(item=>{
+              return(
+                <React.Fragment>
+                {item.tags.map(tag=>{
+                  return (
+                    <button type="button" class="btn btn-primary">{tag}</button>
+                  )
+                })}
+                </React.Fragment>
+              )
+              }
+              )} 
           </div>
 
         </Col>
+        {newsdet.map(i=>{
+          return(
         <Col
           className="detailnews"
           lg={{ span: 7, offset: 1 }}
@@ -106,68 +127,18 @@ const BlogOriginal = () => {
           sm={12}
           xs={12}
         >
-          <Image src={newsdet.img} alt={newsdet.title} />
+
+          <Image src={i.img} alt={i.title} />
           <Col lg={12} xl={12} md={12} sm={12} xs={12}>
-            <p className="detail-title">{newsdet.short}</p>
-            <p>{newsdet.content}</p>
+            <p className="detail-title">{i.short}</p>
+            <p>{i.content}</p>
           </Col>
         </Col>
+          )
+          })
+        }
       </Row>
-      <Row className="foter-blog rtl">
-          <Col  xl={12} lg={12}  md={12}   sm={12}  xs={12}>
-            
-            <Row>
-             
-             <Col  xl={2} lg={2}  md={2}   sm={12}  xs={12}>
-               <p><Link to="/">صفحه اصلی</Link></p>
-               <p><Link to="/">خدمات ترجمه</Link></p>
-               <p><Link to="/">قیمت ترجمه</Link></p>
-               <p><Link to="/">درباره ما</Link></p>
-             </Col>
-             <Col  xl={4} lg={4}  md={4}   sm={12}  xs={12}>
-              <h5>آخرین خبر</h5>
-               {newsdet.map(item=>{
-                
-                   return(
-                       <p>{item.title}</p>
-                   )
-               }
-                   )}
-             </Col>
-             <Col  xl={3} lg={3}  md={3}   sm={12}  xs={12} style={{textAlign:"center"}}> 
-             <Col xl={12} lg={3} md={12} sm={12} xs={12}>
-                        <p><img src={phoneIcon} alt={"phoneIcon"}/></p>
-                        <p><span>021-44442131</span></p>
-                        <p><span>021-44442131</span></p>
-                    </Col>
-
-                    <Col xl={12} md={12} sm={12} xs={12}>
-                        <p><img src={emailIcon} alt={"emailIcon"}/></p>
-                        <p className="mail"><span>info@Hezare3.com</span></p>
-
-                    </Col>
-
-             </Col> 
-             <Col  xl={3} lg={3}  md={3}   sm={12}  xs={12}  style={{textAlign:"center"}}> 
-             <Col xl={12} md={12} sm={12} xs={12}>
-                        <p><img src={phoneIcon} alt={"phoneIcon"}/></p>
-                        <p><span>میدان پونک ،ساختمان 130،طبقه 5ام، واحد320</span></p>
-                       
-                    </Col>
-
-                    <Col xl={12} md={12} sm={12} xs={12} className="fontawe ">
-                        <Link className="instagram"><FontAwesomeIcon icon={faInstagram}/></Link>
-                        <Link className="linkdin"><FontAwesomeIcon icon={faLinkedin}/></Link>
-                        <Link className="twitter"><FontAwesomeIcon icon={faTwitter}/></Link>
-                        <Link className="facebook"><FontAwesomeIcon icon={faFacebook}/></Link>
-
-                    </Col>
-                    
-             </Col> 
-            </Row>
-          
-          </Col>   
-      </Row>
+    <Footer/>
     </Container>
   );
 };
