@@ -209,7 +209,7 @@ const Popularservices = (props) => {
                     <Button type="submit" className="green" style={{cursor: "pointer"}} onClick={() => {
                         Cookies.set('service', item.group_id, {expires: 7, path: '/'});
                         Cookies.set('types', item.id, {expires: 7, path: '/'});
-                        props.history.push("/order/2");
+                        props.history.push("/order/1");
                     }}>ثبت سفارش</Button>
                 </div>
 

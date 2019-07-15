@@ -2,7 +2,12 @@ import React,{useState,useEffect} from 'react';
 import {Nav, NavDropdown, Row,Dropdown,Col} from 'react-bootstrap';
 import Media from 'react-media';
 import {Link} from "react-router-dom";
-
+import {
+    ToastsContainer,
+    ToastsStore,
+    ToastsContainerPosition
+} from "react-toasts";
+import axios from "axios";
 const Menu = () => {
 const[servicemenu,setservicemenu]=useState([
     {
@@ -84,7 +89,32 @@ const[servicemenu,setservicemenu]=useState([
     
 
 ])
-    return (
+useEffect(() => {
+    axios
+        .get(
+            "http://hezare3vom.ratechcompany.com/api/app_categories",
+            {
+                headers: {"Content-Type": "application/json"}
+            }
+        )
+        .then(function (response) {
+            console.log(response.data,"kk")
+            if (response.data.success) {
+              // setservicemenu(response.data);
+                console.log(response.data)
+               
+
+            } else {
+                ToastsStore.error(response.data.error);
+            }
+        })
+        .catch(function (error) {
+            ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+        });
+        
+  },[]);
+   
+ return (
 
         <Nav className="menu">
             <div className="nav-link"><Link to="/">صفحه اصلی</Link></div>

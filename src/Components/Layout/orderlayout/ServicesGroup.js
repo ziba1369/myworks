@@ -14,7 +14,8 @@ const ServicesGroup = ({onClicks ,step, onChanges}) => {
     const [service, setService] = useState();
     const [optionservice, setOptionservice] = useState([]);
     const [types, setTypes] = useState();
-    const[optiontypes,setoptiontypes]= useState([])
+    const[optiontypes,setoptiontypes]= useState([]);
+
     const handleServiceChange = e => {
         
         setService(e.target.value);

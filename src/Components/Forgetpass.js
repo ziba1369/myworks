@@ -85,10 +85,7 @@ const Forgetpass = (props) => {
 
     // checkRegisterFirstButton function after rules value changed
     const loginfirstStep = () => {
-        setStep(2);
-
-    };
-    useEffect(() => {
+  
         var forgetpass = {
             mobile_number: mobile
         };
@@ -97,10 +94,10 @@ const Forgetpass = (props) => {
         console.log(response.data.success)
         if (response.data.success) {
             
-            alert(response.data.code);
+           // alert(response.data.code);
             ToastsStore.success(response.data.code);
             setVertification(response.data.code);
-            props.history.push("/");
+            setStep(2);
 
         } else {
             ToastsStore.error(response.data.error);
@@ -110,7 +107,7 @@ const Forgetpass = (props) => {
     .catch(function (error) {
         ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
     })
-},[mobile])
+    }
 
     //////////////////// SECOND STEP //////////////////////
     // states
@@ -167,24 +164,26 @@ const Forgetpass = (props) => {
     }, [active]);
 
     // checkRegisterSecondButton function after rules value changed
-    const loginSecondStep = () => {
-        setStep(3);
-    };
+    // const loginSecondStep = () => {
+    //     setStep(3);
+    // };
     const changeStep = () => {
         setStep(1)
     }
-    const forgetpass = {
-        mobile_number: mobile
-    };
-  useEffect(()=>{
-    axios.post("http://hezare3vom.ratechcompany.com/api/get_forget_pass_code", forgetpass, {headers: {'Content-Type': 'application/json'}})
+ 
+    const loginSecondStep = () =>{
+      const checkforgetpass={
+          mobile_number:mobile,
+          forget_pass_code:active
+      }
+    axios.post("http://hezare3vom.ratechcompany.com/api/check_forget_pass_code", checkforgetpass, {headers: {'Content-Type': 'application/json'}})
     .then(function (response) {
         console.log(response.data.success)
         if (response.data.success) {
-            alert(response.data.code);
             ToastsStore.success(response.data.code);
-            setVertification(response.data.code);
-            props.history.push("/");
+            setStep(3)
+            //setVertification(response.data.code);
+            //props.history.push("/");
 
         } else {
             ToastsStore.error(response.data.error);
@@ -194,7 +193,7 @@ const Forgetpass = (props) => {
     .catch(function (error) {
         ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
     })
-},[mobile])
+}
 
 
     //////////////////// THIRD STEP //////////////////////
@@ -226,7 +225,30 @@ const Forgetpass = (props) => {
 
     // checkRegisterThirdButton function after rules value changed
     const loginThirdStep = () => {
-        setStep(4);
+        const changepass={
+            mobile_number:mobile,
+            new_password:newpass,
+            forget_pass_code:active
+            
+        }
+      axios.post("http://hezare3vom.ratechcompany.com/api/change_forget_pass", changepass, {headers: {'Content-Type': 'application/json'}})
+      .then(function (response) {
+          console.log(response.data.success)
+          if (response.data.success) {
+              //ToastsStore.success('response.data.code');
+              setStep(4)
+              //setVertification(response.data.code);
+              //props.history.push("/");
+
+  
+          } else {
+              ToastsStore.error(response.data.error);
+          }
+      })
+  
+      .catch(function (error) {
+          ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+      })
     };
     const handlenewpass = e => {
         setnewpass(e.target.value);

@@ -9,7 +9,7 @@ import $ from "jquery";
 import axios from "axios";
 import * as Cookies from "js-cookie";
 
-const Forgetpass = () => {
+const Register = (props) => {
     const [step, setStep] = useState(1);
     const [firstStep, setFirstStep] = useState({display: "block"});
 
@@ -48,13 +48,14 @@ const Forgetpass = () => {
     }, [step]);
     //////////////////// FIRST STEP //////////////////////
     const [mobile, setMobile] = useState("");
-    const [vertification, setVertification] = useState("");
+    const [verification, setVerification] = useState("");
     const [RegisterFirst, setRegisterFirstStyle] = useState({
         backgroundColor: "#e1e1e1",
         border:"0px"
     });
     const checkRegisterFirstButton = () => {
-        if (mobile.length === 11) {
+        const phoneno=/^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
+        if (mobile.match(phoneno)) {
             setRegisterFirstStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
@@ -74,7 +75,7 @@ const Forgetpass = () => {
 
     // checkRegisterFirstButton function after rules value changed
     const loginfirstStep = props => {
-        setStep(2);
+        
 
         var login = {
             mobile_number: mobile
@@ -88,10 +89,8 @@ const Forgetpass = () => {
             .then(function (response) {
                // console.log(response.data.success);
                 if (response.data.success) {
-                    Cookies.set("token", response.data.code, {path: "/", expires: 7});
                     ToastsStore.success(response.data.code);
-                    setVertification(response.data.code);
-                    props.history.push("/");
+                    setStep(2)
                 } else {
                     ToastsStore.error(response.data.error);
                 }
@@ -101,10 +100,10 @@ const Forgetpass = () => {
             });
     };
     //////////////////// SECOND STEP //////////////////////
-    // states
+    //states
 
     const [active, setActive] = useState("");
-    // const[vertiification_code,setVertification]=useState([]);
+     //const[vertiification_code,setVerification]=useState([]);
     const [min, setMin] = useState(0);
     const [second, setSecond] = useState(60);
     const [RegisterSecond, setRegisterSecondStyle] = useState({
@@ -122,7 +121,9 @@ const Forgetpass = () => {
             setSecond(60);
 
             var login = {
-                mobile_number: mobile
+                mobile_number: mobile,
+                
+
             };
             axios
                 .post(
@@ -133,9 +134,9 @@ const Forgetpass = () => {
                 .then(function (response) {
                     //console.log(response.data.success);
                     if (response.data.success) {
-                        Cookies.set("token", response.data.code, {path: "/", expires: 7});
+                        Cookies.set("token", response.data.token, {path: "/", expires: 7});
                         ToastsStore.success(response.data.code);
-                        setVertification(response.data.code);
+                        setVerification(response.data.code);
                         props.history.push("/");
                     } else {
                         ToastsStore.error(response.data.error);
@@ -164,19 +165,12 @@ const Forgetpass = () => {
     }, [second, step]);
 
     // check conditions and enable/disable register button
-    const checkRegisterSecondButton = () => {
-        if (parseInt(active) === parseInt(vertification)) {
-            setRegisterSecondStyle({backgroundColor: "#1976d2"});
-            $("#rfbutton").removeAttr("disabled");
-        } else {
-            setRegisterSecondStyle({backgroundColor: "#e1e1e1",border:"0"});
-            $("#rfbutton").attr("disabled", "disabled");
-        }
-    };
+ 
 
     // change mobile value when changed
     const handlerActiveChange = e => {
         setActive(e.target.value);
+      
     };
     // checkRegisterFirstButton function after mobile value changed
     useEffect(() => {
@@ -185,14 +179,14 @@ const Forgetpass = () => {
 
     // checkRegisterFirstButton function after rules value changed
     const loginSecondStep = props => {
-        if (parseInt(active) === parseInt(vertification)) {
-            setStep(3);
-        }
-        //console.log(active, vertification);
+     
+        console.log(active, verification);
         var verti = {
             mobile_number: mobile,
-            vertification_code: vertification
+            verification_code: active
         };
+        
+        console.log(verti)
         axios
             .post(
                 "http://hezare3vom.ratechcompany.com/api/check_verification_code",
@@ -200,78 +194,88 @@ const Forgetpass = () => {
                 {headers: {"Content-Type": "application/json"}}
             )
             .then(function (response) {
-                //console.log(response.data.success);
+               console.log(response.data);
                 if (response.data.success) {
-                    Cookies.set("token", {path: "/", expires: 7});
-                    ToastsStore.success(response.data.code);
-                    props.history.push("/");
+                    console.log(response.data)
+                    setStep(3)
                 }
-            })
+            }
+            )
             .catch(function (error) {
                 ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
             });
+        
+        
     };
-
+    const checkRegisterSecondButton = () => {
+        if (parseInt(active)) {
+            setRegisterSecondStyle({backgroundColor: "#1976d2"});
+            $("#rfbutton").removeAttr("disabled");
+        } else {
+            setRegisterSecondStyle({backgroundColor: "#e1e1e1",border:"0"});
+            $("#rfbutton").attr("disabled", "disabled");
+        }
+    };
     //////////////////// THIRD STEP //////////////////////
 
     const [name, setName] = useState("");
     const [lastname, setLastName] = useState("");
-    const [certi, setCertifi] = useState("");
-    const[selectday,setselectday]=useState("");
+    const [certi, setCertifi] = useState([]);
+    
     const [birthday, setBirthday] = useState([
-        "روز"
-        ,1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29,
-        30,
-        31
+       
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31"
     ]);
-    const [birthvalue, setBirthvalue] = useState("روز");
+    const [birthvalue, setBirthvalue] = useState();
     const [birthmonth, setBirthmonth] = useState([
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
     ]);
-    const [birthmonthvalue, setBirthmonthvalue] = useState("ماه");
+    const [birthmonthvalue, setBirthmonthvalue] = useState();
     const [birthyear, setBirthyear] = useState([]);
-    const [birthyearvalue, setBirthyearvalue] = useState("سال");
-    const [pass, setPass] = useState("");
-    const [passr, setPassr] = useState("");
+    const [birthyearvalue, setBirthyearvalue] = useState();
+    const [pass, setPass] = useState([]);
+    const [passr, setPassr] = useState([]);
     const [RegisterThird, setRegisterThirdStyle] = useState({
         backgroundColor: "#e1e1e1",
         border:"0"
@@ -279,17 +283,8 @@ const Forgetpass = () => {
 
     // check conditions and enable/disable register button
 
-    useEffect(() => {
-        checkRegisterThirdButton();
-    }, [certi]);
-
-    useEffect(() => {
-        checkRegisterThirdButton();
-    }, [pass]);
-    useEffect(() => {
-        checkRegisterThirdButton();
-    }, [passr]);
-
+   
+   
     const handleName = e => {
         setName(e.target.value);
     };
@@ -302,12 +297,15 @@ const Forgetpass = () => {
     };
     const handleBirthday = e => {
         setBirthvalue(e.target.value);
+       
     };
     const handleBirthmonth = e => {
         setBirthmonthvalue(e.target.value);
+        
     };
     const handleBirthyear = e => {
         setBirthyearvalue(e.target.value);
+        console.log(e.target.value)
     };
     const handlePass = e => {
         setPass(e.target.value);
@@ -318,15 +316,16 @@ const Forgetpass = () => {
     const checkRegisterThirdButton = () => {
         // console.log(pass.length);
         if (
-            name.length > 1 &&
-            lastname.length > 1 &&
-            certi.length === 11 &&
-            pass.length > 1 &&
-            passr.length > 1 &&
-            pass === passr &&
-            birthday &&
-            birthmonth &&
-            birthyear
+            name.length>0 &&
+             lastname.length>0 &&
+            certi.length === 10 && 
+            birthvalue !==undefined &&
+            birthmonthvalue !==undefined &&
+            birthyearvalue !==undefined &&
+            pass.length>1 &&
+            passr.length>1 &&
+            pass === passr
+            
         ) {
             setRegisterThirdStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
@@ -335,36 +334,38 @@ const Forgetpass = () => {
             $("#rfbutton").attr("disabled", "disabled");
         }
     };
-
-    const loginThirdStep = props => {
-        var vertiification = {
-            name: name,
-            lastname: lastname,
-            national_code: certi,
-            mobile: mobile,
-            birth_day: selectday,
-            birth_month: birthmonth,
-            birth_year: birthyear,
-            password: pass
-        };
-         console.log(vertiification)
-        axios
-            .post(
-                "http://hezare3vom.ratechcompany.com/api/sign_up_app",
-                vertiification,
-                {headers: {"Content-Type": "application/json"}}
-            )
-            .then(function (response) {
-                console.log(response)
-                if (response.data.success) {
-                    Cookies.set("token", {path: "/", expires: 7});
-
-                    props.history.push("/");
-                } else {
-                    ToastsStore.error(response.data.error);
-                }
-            })
-    };
+    useEffect(() => {
+        checkRegisterThirdButton();
+    }, [name]);
+   
+    useEffect(() => {
+        checkRegisterThirdButton();
+    }, [lastname]);
+   
+    useEffect(() => {
+        checkRegisterThirdButton();
+    }, [certi]);
+   
+    useEffect(() => {
+        checkRegisterThirdButton();
+    
+    }, [birthvalue]);
+   
+    useEffect(() => {
+        checkRegisterThirdButton();
+    }, [birthmonthvalue]);
+   
+    useEffect(() => {
+        checkRegisterThirdButton();
+    }, [birthyearvalue]);
+   
+    useEffect(() => {
+        checkRegisterThirdButton();
+    }, [pass]);
+   
+    useEffect(() => {
+        checkRegisterThirdButton();
+    }, [passr]);
     useEffect(()=>{
         axios
         .get(
@@ -391,12 +392,39 @@ const Forgetpass = () => {
         });
 
     }, []);
- useEffect(()=>{
-    var e = document.getElementById("day");
-    var value = e.options[e.selectedIndex].value;
-    setselectday(value);
-   console.log(value)
- },[birthday])
+   
+
+    const loginThirdStep = props => {
+        var vertiification = {
+            name: name,
+            family: lastname,
+            national_code: certi,
+            mobile: mobile,
+            birth_day: birthvalue,
+            birth_month: birthmonthvalue,
+            birth_year: birthyearvalue,
+            password: pass
+        };
+         console.log(vertiification)
+        axios
+            .post(
+                "http://hezare3vom.ratechcompany.com/api/sign_up_app",
+                vertiification,
+                {headers: {"Content-Type": "application/json"}}
+            )
+            .then(function (response) {
+                console.log(response)
+                if (response.data.success) {
+                    Cookies.set("token", {path: "/", expires: 7});
+                         // props.history.push("/");
+                } else {
+                    ToastsStore.error(response.data.error);
+                }
+            })
+    };
+  
+    
+   
    
     ///////////////////////////////////////////
     return (
@@ -531,7 +559,11 @@ const Forgetpass = () => {
                                                 name="slelect"
                                                 required
                                                 className="day"
+                                               
                                             >
+                                                <option selected disabled>
+                                                    روز
+                                                </option>
                                                
                                                 {birthday.map(num => (
                                                     <option value={num}>{num}</option>
@@ -572,7 +604,7 @@ const Forgetpass = () => {
                                                     سال
                                                 </option>
                                                 {birthyear.map(num => (
-                                                    <option value="num">{num}</option>
+                                                    <option value={num}>{num}</option>
                                                 ))}
                                             </Form.Control>
                                         </Col>
@@ -602,6 +634,7 @@ const Forgetpass = () => {
                                     style={RegisterThird}
                                     onClick={loginThirdStep}
                                     className="loginbutton"
+                                    
                                 >
                                     ثبت
                                 </Button>
@@ -614,4 +647,4 @@ const Forgetpass = () => {
     );
 };
 
-export default Forgetpass;
+export default Register;
