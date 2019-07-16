@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Row, Col, Breadcrumb,Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import * as Cookies from "js-cookie";
 import Tabschoice from "./Layout/orderlayout/Tabschoice";
-import ServicesGroup from "./Layout/orderlayout/ServicesGroup";
 import Photoupload from "./Layout/orderlayout/Photoupload";
 import Confirmorder from "./Layout/orderlayout/Confirmorder";
 import Footer from "./Layout/Footer";
 import shenasnameh from '../images/Shenasname_1.jpg';
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
+} from "react-toasts";
+import * as Cookies from "js-cookie";
+import axios from "axios";
 const Order = props => {
   const [step, setCount] = useState(1);
   const [styleone, setStyleone] = useState();
@@ -400,6 +405,34 @@ const Order = props => {
     }
     setCount(5);
   };
+  useEffect(()=>{
+
+    axios
+    .get(
+        "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id="+Cookies.get('types'),
+        
+        {
+            headers: {"Content-Type": "application/json"}
+        }
+    )
+    .then(function (response) {
+      console.log(response.data)
+        if (response.data.success) {
+         setMadarek(response.data);
+            console.log('true')
+           
+
+        } else {
+            ToastsStore.error(response.data.error);
+            
+        }
+    })
+    .catch(function (error) {
+        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    });
+}, [Cookies.get('types')])
+
+   
   return (
     <React.Fragment>
       <Container>
@@ -441,11 +474,11 @@ const Order = props => {
        >
            <div>
             <p className="titlemadarek">توضیحات</p>
-           <p className="content">{madarek.contentExplain}</p>
+           <p className="content">{madarek.product_description}</p>
            </div>
            <div>
             <p className="titlemadarek">مزیت</p>
-           <p className="content">{madarek.contentBenefit}</p>
+           <p className="content">{madarek.product_feauures}</p>
            </div>
 
        </Col>

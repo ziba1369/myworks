@@ -11,14 +11,15 @@ import axios from "axios";
 import * as Cookies from "js-cookie";
 
 const Login = props => {
-  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
   const [pass, setPass] = useState("");
   const [loginButton, setLoginButtonStyle] = useState({
     backgroundColor: "#e1e1e1"
   });
   
   const checkLoginButton = () => {
-    if (name.length > 1 && pass.length > 1) {
+    const phoneno=/^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
+    if (mobile.match(phoneno) && pass.length > 1) {
       setLoginButtonStyle({ backgroundColor: "#1976d2" });
       $(".loginbutton").removeAttr("disabled");
     } else {
@@ -28,7 +29,7 @@ const Login = props => {
   };
 
   const handleName = e => {
-    setName(e.target.value);
+    setMobile(e.target.value);
   };
 
   const handlepassword = e => {
@@ -37,7 +38,7 @@ const Login = props => {
   // checkLoginButton function after mobile value changed
   useEffect(() => {
     checkLoginButton();
-  }, [name]);
+  }, [mobile]);
 
   // checkLoginButton function after password value changed
   useEffect(() => {
@@ -45,10 +46,11 @@ const Login = props => {
   }, [pass]);
 
   const loginbutton = () => {
+    
     const checkbox=document.getElementById('checkbox');
     const login = {
-      name: name,
-      pass: pass
+      mobile: mobile,
+      password: pass
     };
     axios
       .post("http://hezare3vom.ratechcompany.com/api/login_app", login, {
@@ -95,7 +97,7 @@ const Login = props => {
                 type="text"
                 placeholder=""
                 onChange={handleName}
-                vlaue={name}
+                vlaue={mobile}
                 required
               />
             </Form.Group>

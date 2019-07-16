@@ -266,7 +266,7 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
     if (Cookies.get("languages") !== null) {
      
      setLang(JSON.parse(Cookies.get("languages")))
-     console.log(languages)
+     //console.log(languages)
     }
   },[]);
   useEffect(()=>{

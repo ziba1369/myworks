@@ -14,7 +14,7 @@ import {
   } from "react-toasts";
 const Contatus = (props) => {
 const[name,setName]=useState("");
-const[tell,setTell]=useState("");
+const[tel,setTell]=useState("");
 const[email,setEmail]=useState("");
 const[issue,setIssue]=useState("");
 const[message,setMessage]=useState("");
@@ -27,7 +27,7 @@ const [loginButton, setLoginButtonStyle] = useState({backgroundColor: "#e1e1e1"}
 const checkLoginButton = () => {
     const phoneno=/^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
     const mailno=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (name.length >0 && tell.match(phoneno) && email.match(mailno) && issue.length>0 && message.length>0) {
+    if (name.length >0 && tel.match(phoneno) && email.match(mailno) && issue.length>0 && message.length>0) {
         setLoginButtonStyle({backgroundColor: "#1976d2"})
         $(".loginbutton").removeAttr("disabled");
     } else if(name.length===0){
@@ -66,7 +66,7 @@ const handleTell=(e)=>{
 
     checkLoginButton()
   },
-  [tell])
+  [tel])
   useEffect(()=>{
     checkLoginButton()
   },
@@ -77,10 +77,10 @@ const handleTell=(e)=>{
   useEffect(()=>{
     checkLoginButton()
   },[message])
-
+const sendHandler=()=>{
     const contactUs = {
         name: name,
-        tell: tell,
+        tel: tel,
         email:email,
         issue:issue,
         message:message
@@ -88,9 +88,10 @@ const handleTell=(e)=>{
     };
     axios.post("http://hezare3vom.ratechcompany.com/api/front/send_message", contactUs, {headers: {'Content-Type': 'application/json'}})
         .then(function (response) {
-            console.log(response.data.success)
+           // console.log(response.data)
             if (response.data.success) {
                 props.history.push("/");
+                console.log('contactus')
 
 
             } else {
@@ -100,8 +101,7 @@ const handleTell=(e)=>{
         .catch(function (error) {
             ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
         })
-  
-
+}
     return (
         <React.Fragment>
 
@@ -115,7 +115,7 @@ const handleTell=(e)=>{
                                     <Form.Label   >نام</Form.Label>
                                     <Form.Control onChange={handleName} size="sm" type="text" value={name}/>
                                     <Form.Label  >شماره همراه</Form.Label>
-                                    <Form.Control size="sm" type="tel" onChange={handleTell} vlaue={tell} id="phone" name="phone"/>
+                                    <Form.Control size="sm" type="tel" onChange={handleTell} vlaue={tel} id="phone" name="phone"/>
                                     <Form.Label id="email">ایمیل آدرس</Form.Label>
                                     <Form.Control  onChange={handleEmail}  value={email} size="sm" pattern="/^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" type="eamil"/>
                                     <Form.Label >موضوع</Form.Label>
@@ -131,7 +131,7 @@ const handleTell=(e)=>{
                         </Col>
                     </Row>
                     <Col xl={{span: 4, offset: 4}} md={{span: 4, offset: 4}} sm={12} xs={12}>
-                        <Button  style={loginButton} className="sendmessage loginbutton" type="submit"  block>ارسال پیام</Button>
+                        <Button  style={loginButton} className="sendmessage loginbutton" type="submit" onClick={sendHandler}  block>ارسال پیام</Button>
                     </Col>
                 </Col>
                 <Col xl={3} md={3} sm={12} xs={12} className="socialicon">

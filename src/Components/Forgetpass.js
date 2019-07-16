@@ -230,10 +230,12 @@ const Forgetpass = (props) => {
             new_password:newpass,
             forget_pass_code:active
             
+            
         }
+        console.log(active)
       axios.post("http://hezare3vom.ratechcompany.com/api/change_forget_pass", changepass, {headers: {'Content-Type': 'application/json'}})
       .then(function (response) {
-          console.log(response.data.success)
+         // console.log(response.data.success)
           if (response.data.success) {
               //ToastsStore.success('response.data.code');
               setStep(4)

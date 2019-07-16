@@ -90,6 +90,7 @@ const Register = (props) => {
                // console.log(response.data.success);
                 if (response.data.success) {
                     ToastsStore.success(response.data.code);
+                    Cookies.set("mobile", mobile, {path: "/", expires: 7})
                     setStep(2)
                 } else {
                     ToastsStore.error(response.data.error);
@@ -415,7 +416,7 @@ const Register = (props) => {
             .then(function (response) {
                 console.log(response)
                 if (response.data.success) {
-                    Cookies.set("token", {path: "/", expires: 7});
+                    Cookies.set("token",response.data.token, {path: "/", expires: 7});
                          // props.history.push("/");
                 } else {
                     ToastsStore.error(response.data.error);
