@@ -55,7 +55,7 @@ const Slide = () => {
                 <Col xl={12} md={12} sm={12} xs={12} className="pricebtn">
                     <ButtonToolbar className=" price">
                         <a href="#"><button className="btn-light-theme" >نرخ نامه مصوب ترجمه رسمی</button></a>
-                        <Link to='/order/1'><button className="btn-color-theme">ثبت سفارش آنلاین ترجمه</button></Link>
+                        <Link to='/services/all'><button className="btn-color-theme">ثبت سفارش آنلاین ترجمه</button></Link>
                     </ButtonToolbar>
                 </Col>
             </Row>

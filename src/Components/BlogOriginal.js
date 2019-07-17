@@ -37,10 +37,10 @@ const BlogOriginal = (props) => {
             }
         )
         .then(function (response) {
-          console.log(response)
+         // console.log(response)
             if (response.data.success) {
                 setNews([response.data]);
-                console.log(setNews)
+                //console.log(setNews)
               
                
             } else {

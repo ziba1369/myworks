@@ -87,10 +87,10 @@ const Menu = () => {
         headers: { "Content-Type": "application/json" }
       })
       .then(function(response) {
-        console.log(response.data, "kk");
+        //console.log(response.data, "kk");
         if (response.data.success) {
           // setservicemenu(response.data);
-          console.log(response.data);
+        //  console.log(response.data);
         } else {
           ToastsStore.error(response.data.error);
         }

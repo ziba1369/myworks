@@ -9,7 +9,7 @@ import $ from "jquery";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import * as Cookies from "js-cookie";
-
+import Footer from './Layout/Footer';
 const Login = props => {
   const [mobile, setMobile] = useState("");
   const [pass, setPass] = useState("");
@@ -57,7 +57,7 @@ const Login = props => {
         headers: { "Content-Type": "application/json" }
       })
       .then(function(response) {
-        console.log(response.data.success);
+        //console.log(response.data.success);
         if (response.data.success) {
           if (checkbox.checked) {
           Cookies.set("token", response.data.token, { path: "/", expires: 7 });
@@ -65,6 +65,7 @@ const Login = props => {
             Cookies.set("token", response.data.token, { path: "/", expires: 1 });
           }
           props.history.push("/");
+          window.location.reload();
         } else {
           ToastsStore.error(response.data.error);
         }
@@ -72,10 +73,12 @@ const Login = props => {
       .catch(function(error) {
         ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
       });
+      
   };
 
 
   return (
+    
     <div className="loginpage">
       <Container>
         <Col
@@ -140,8 +143,12 @@ const Login = props => {
             </p>
           </Form>
         </Col>
+   
       </Container>
+      <Footer/>
     </div>
+     
+   
   );
 };
 export default Login;

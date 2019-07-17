@@ -8,7 +8,7 @@ import {
 import $ from "jquery";
 import axios from "axios";
 import * as Cookies from "js-cookie";
-
+import Footer from './Layout/Footer';
 const Register = (props) => {
     const [step, setStep] = useState(1);
     const [firstStep, setFirstStep] = useState({display: "block"});
@@ -181,13 +181,13 @@ const Register = (props) => {
     // checkRegisterFirstButton function after rules value changed
     const loginSecondStep = props => {
      
-        console.log(active, verification);
+        //console.log(active, verification);
         var verti = {
             mobile_number: mobile,
             verification_code: active
         };
         
-        console.log(verti)
+        //console.log(verti)
         axios
             .post(
                 "http://hezare3vom.ratechcompany.com/api/check_verification_code",
@@ -195,9 +195,9 @@ const Register = (props) => {
                 {headers: {"Content-Type": "application/json"}}
             )
             .then(function (response) {
-               console.log(response.data);
+              // console.log(response.data);
                 if (response.data.success) {
-                    console.log(response.data)
+                    //console.log(response.data)
                     setStep(3)
                 }
             }
@@ -306,7 +306,7 @@ const Register = (props) => {
     };
     const handleBirthyear = e => {
         setBirthyearvalue(e.target.value);
-        console.log(e.target.value)
+        //console.log(e.target.value)
     };
     const handlePass = e => {
         setPass(e.target.value);
@@ -380,7 +380,7 @@ const Register = (props) => {
             if (response.data.success) {
                 
                 setBirthyear(response.data.year);
-                console.log(response.data.year)
+               // console.log(response.data.year)
                
 
             } else {
@@ -417,7 +417,8 @@ const Register = (props) => {
                 console.log(response)
                 if (response.data.success) {
                     Cookies.set("token",response.data.token, {path: "/", expires: 7});
-                         // props.history.push("/");
+                          props.history.push("/");
+                          window.location.onload();
                 } else {
                     ToastsStore.error(response.data.error);
                 }
@@ -642,8 +643,11 @@ const Register = (props) => {
                             </div>
                         </div>
                     </Col>
+                 
                 </Container>
+              
             </div>
+            <Footer/>
         </React.Fragment>
     );
 };

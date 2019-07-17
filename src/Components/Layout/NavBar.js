@@ -5,15 +5,20 @@ import Menu from "./Menu";
 import * as Cookies from "js-cookie";
 import logoutImage from '../../images/logout.svg';
 import profileImage from '../../images/profileee.svg';
-
+import axios from "axios";
+import $ from 'jquery';
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
+} from "react-toasts";
 const NavBar = () => {
   const [styleOne,setStyleOne]=useState({display:'flex'});
   const[styleTwo,setStyleTwo]=useState({display:'none'});
-  const token=Cookies.get('token');
-  console.log(token);
+  const[user,setUser]=useState([]);
   useEffect(()=>{
    
-  if(token!==undefined){
+  if(Cookies.get('token')!==undefined){
     setStyleOne({display:'none'});
     setStyleTwo({display:'flex'})
   }
@@ -21,7 +26,35 @@ const NavBar = () => {
     setStyleOne({display:'flex'});
     setStyleTwo({display:'none'})
   }
-  },[token])
+ 
+  },[Cookies.get('token')])
+ const handlelogout=()=>{
+  Cookies.remove('token');
+  window.location.reload();
+ }
+ useEffect(() => {
+  axios
+      .get(
+          "http://hezare3vom.ratechcompany.com/api/front/get_user_data?customer_token=" +Cookies.get('token') ,
+          {
+              headers: {"Content-Type": "application/json"}
+          }
+      )
+      .then(function (response) {
+          if (response.data.success) {
+              setUser(response.data);
+            
+              
+
+          } else {
+              ToastsStore.error(response.data.error);
+          }
+      })
+      .catch(function (error) {
+          ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+      });
+   
+},[]);
   return (
     <Row className="rtl">
       <Navbar
@@ -51,9 +84,9 @@ const NavBar = () => {
                 <Nav style={styleTwo} className="loginprofile">
                 <Col  xl={6} md={6} sm={12} xs={12}  >
                   <Nav className="user">
-                    <NavDropdown title="بهمن مهری" id="nav-dropdown">
+                   <NavDropdown title={`${user.customer_name} ${user.customer_family}`} id="nav-dropdown"> 
                     <span className="imageprofile"><NavDropdown.Item eventKey="4.1"><Image src={profileImage}/>پروفایل</NavDropdown.Item></span>
-                    <span className="imagelogout"> <NavDropdown.Item eventKey="4.2"><Image src={logoutImage}/>خروج از حساب کاربری</NavDropdown.Item></span>
+                    <span className="imagelogout" onClick={handlelogout}> <NavDropdown.Item eventKey="4.2"><Image src={logoutImage}/>خروج از حساب کاربری</NavDropdown.Item></span>
                     </NavDropdown>
                     </Nav>
                   </Col>

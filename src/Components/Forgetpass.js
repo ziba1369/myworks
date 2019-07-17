@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import $ from "jquery";
 import * as Cookies from "js-cookie";
+import Footer from './Layout/Footer';
 const Forgetpass = (props) => {
     const [step, setStep] = useState(1);
     const [firstStep, setFirstStep] = useState({display: "block"});
@@ -91,7 +92,7 @@ const Forgetpass = (props) => {
         };
         axios.post("http://hezare3vom.ratechcompany.com/api/get_forget_pass_code", forgetpass, {headers: {'Content-Type': 'application/json'}})
     .then(function (response) {
-        console.log(response.data.success)
+        //console.log(response.data.success)
         if (response.data.success) {
             
            // alert(response.data.code);
@@ -178,7 +179,7 @@ const Forgetpass = (props) => {
       }
     axios.post("http://hezare3vom.ratechcompany.com/api/check_forget_pass_code", checkforgetpass, {headers: {'Content-Type': 'application/json'}})
     .then(function (response) {
-        console.log(response.data.success)
+        //console.log(response.data.success)
         if (response.data.success) {
             ToastsStore.success(response.data.code);
             setStep(3)
@@ -232,7 +233,7 @@ const Forgetpass = (props) => {
             
             
         }
-        console.log(active)
+        //console.log(active)
       axios.post("http://hezare3vom.ratechcompany.com/api/change_forget_pass", changepass, {headers: {'Content-Type': 'application/json'}})
       .then(function (response) {
          // console.log(response.data.success)
@@ -275,7 +276,7 @@ const Forgetpass = (props) => {
     };
 
     return (
-        <React.Fragment>
+  
             <div className="loginpage">
                 <Container>
                     <Col
@@ -405,9 +406,12 @@ const Forgetpass = (props) => {
                             </div>
                         </div>
                     </Col>
+                   
                 </Container>
-            </div>
-        </React.Fragment>
+                <Footer/>
+           </div>
+  
+      
     );
 };
 

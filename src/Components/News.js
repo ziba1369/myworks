@@ -28,7 +28,7 @@ const Steptranslate = () => {
             .then(function (response) {
                 if (response.data.success) {
                     setNews(response.data.news);
-                    console.log(response.data.news)
+                    //console.log(response.data.news)
                    
 
                 } else {
@@ -51,7 +51,7 @@ const Steptranslate = () => {
             .then(function (response) {
                 if (response.data.success) {
                     setLastnews(response.data.news);
-                    console.log(response.data.news)
+                    //console.log(response.data.news)
                    
 
                 } else {

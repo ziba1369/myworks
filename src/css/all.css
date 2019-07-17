@@ -133,6 +133,9 @@ a:hover {
     color: #a9a9a9;
     vertical-align: 0px
 }
+.loginprofile .dropdown-menu.show span a {
+    padding: .6rem 1rem;
+}
 .imageprofile img{
         margin-left: .5rem;
         width: 12px;
@@ -1468,11 +1471,16 @@ img.imagemadrek {
 }
 p.titlemadarek {
     text-align: right;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 p.content {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-align: right;
+}
+.titletype{
+    font-size: 1.2rem;
+    color: #454f63;
+    text-align:right;
 }
 .titlesections.orderheader {
     padding: 2rem 0;
@@ -1938,8 +1946,16 @@ span.custom-file-container__custom-file__custom-file-control {
 /* toast */
 
 /* loginpage */
-.loginpage, .registerpage {
+/* .loginpage, .registerpage {
     padding: 4rem 0;
+} */
+.loginpage{
+    height:100%;
+    margin-top:2rem;
+}
+.registerpage{
+    height:100%;
+    margin-top:2rem;
 }
 
 p.textlogin {
@@ -2123,10 +2139,20 @@ p.forgetpass, p.activesys {
     margin: .3rem;
     border-color: #c1d0e8;
 }
-.foter-blog {
+.loginpage .container{
+    min-height: 42vh;
+}
+.registerpag .container{
+    min-height: 42vh;
+}
+.foter-blog  {
     background-color: #eff5ff;
-    padding: 2rem;
-    margin-top: 2rem;
+    padding: 2rem 2rem 0 2rem;
+    /* margin-top: 2rem; */
+   
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .foter-blog a {
     color: #454f63;

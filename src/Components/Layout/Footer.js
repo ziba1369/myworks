@@ -25,7 +25,7 @@ const Footer = () => {
             .then(function (response) {
                 if (response.data.success) {
                     setNews(response.data.news);
-                    console.log(response.data.news)
+                    //console.log(response.data.news)
                    
 
                 } else {

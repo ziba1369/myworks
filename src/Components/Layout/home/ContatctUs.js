@@ -91,7 +91,7 @@ const sendHandler=()=>{
            // console.log(response.data)
             if (response.data.success) {
                 props.history.push("/");
-                console.log('contactus')
+                //console.log('contactus')
 
 
             } else {
