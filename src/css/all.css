@@ -2213,5 +2213,73 @@ border-radius:0px
 .logoutpanel:hover,.logoutpanel:active {
     color: #f9575a !important;
 }
+.imagepanel {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
+    position: relative;
+    top: -10vh;
+    background-color: #fff;
+    display: block;
+    margin: 0 auto;
+}
+.image-panel-parent {
+    width: 100%;
+    position: relative;
+    height: 13vh;
+}
+.userpanel {
+    text-align: center;
+    padding: .3rem 0 2rem 0;
+}
+/* myorder/panelcustom */
+.myorder {
+    background-color: #454f63;
+
+}
+.myorder div {
+    color: #fff;
+    font-size: .8rem;
+    padding: .5rem;
+    text-align: center;
+    direction: rtl;
+}
+.menubar img {
+    width: 20px;
+    float: right;
+    margin: 0px .5rem;
+}
+.myorder .justify-content-start{
+    direction:rtl;
+}
+.myorder .nav-item a {
+    font-size: .8rem;
+}
+.myorderlist{
+    background-color:#f0f0f0;
+    height:100px;
+    margin-top: 1rem;
+   
+}
+.myorder {
+    direction: rtl;
+}
+.namepanel{
+    justify-content: center;
+    position: absolute;
+    display: block;
+    margin: 0 auto;
+    left: 29vw;
+    bottom: 22vh;
+}
+p.distance {
+    padding: 4rem 0;
+}
+.panel .container {
+    max-width: 94vw;
+}
+/* myorder/panelcustom */
 /* panelcustom */
+
 

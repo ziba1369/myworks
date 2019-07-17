@@ -1,61 +1,98 @@
-import React,{useState,useEffect} from 'react';
-import {Nav,Col,Tab,Row,Container} from 'react-bootstrap';
-import $  from 'jquery';
+import React, { useState, useEffect } from "react";
+import { Nav, Col, Tab, Row, Container, Image } from "react-bootstrap";
+import $ from "jquery";
+import Myorder from "./Layout/Panel/Myorder";
+import userimg from "../images/user.svg";
+import myorderimg from "../images/myorder.svg";
+import billimg from "../images/bill.svg";
+import inboximg from "../images/inbox.svg";
+import changepassimg from "../images/changepass.svg";
+import logout from "../images/logout.svg";
 const Panelcustom = () => {
-  useEffect(()=>{
-
-    $('.headersite').remove();
-  },[])
-    return ( 
-        <div className="panel">
-          <Container>
+  useEffect(() => {
+    $(".headersite").remove();
+  }, []);
+  return (
+    <div className="panel">
+      <Container>
+      <Row>
+      <p className="distance">
+      
+     </p>
+      </Row>
         <Tab.Container id="right-tabs-example" defaultActiveKey="first">
+          
           <Row>
-            <p className="textpanel">
-            لیست سفارشات
-           </p>
-            </Row>
-  <Row>
-  
-    <Col sm={9} className="content">
-      <Tab.Content>
-        <Tab.Pane eventKey="first">
-          kk
-        </Tab.Pane>
-        <Tab.Pane eventKey="second">
-         ll
-        </Tab.Pane>
-      </Tab.Content>
-    </Col>
-    <Col sm={3}  className="menubar">
-      <p className="imagepanel"></p>
-      <p>بهمن مهری</p>
-      <Nav variant="pills" className="flex-column">
-        <Nav.Item>
-          <Nav.Link eventKey="first">اصلاح حساب کاربری</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="second">سفارشات من</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="third">فاکتورهای من</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="fourth">ترجمه های من</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="fivth">تغییر کلمه عبور</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="sixth" className="logoutpanel">خروج</Nav.Link>
-        </Nav.Item>
-      </Nav>
-    </Col>
-  </Row>
-</Tab.Container>
-</Container>
-</div>
-     );
-}
- 
+            <Col sm={10} className="content">
+              <Tab.Content>
+                <Tab.Pane eventKey="first"></Tab.Pane>
+                <Tab.Pane eventKey="second">
+                  <Myorder />
+                </Tab.Pane>
+              </Tab.Content>
+            </Col>
+
+            <Col sm={2} className="menubar">
+              <div className="image-panel-parent">
+                <div className="imagepanel" />
+              </div>
+              <div className="userpanel">بهمن مهری</div>
+              <Nav variant="pills" className="flex-column">
+                <Nav.Item>
+                  <Nav.Link eventKey="first">
+                    <span>
+                      <Image src={userimg} alt="userimg" />
+                    </span>
+                    اصلاح حساب کاربری
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="second">
+                    <span>
+                      <Image src={myorderimg} alt="userimg" />
+                    </span>
+                    سفارشات من
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="third">
+                    <span>
+                      <Image src={billimg} alt="billImage" />
+                    </span>
+                    فاکتورهای من
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="fourth">
+                    <span>
+                      <Image src={inboximg} alt="inboximg" />
+                    </span>
+                    ترجمه های من
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="fivth">
+                    <span>
+                      <Image src={changepassimg} alt="changepass" />
+                    </span>
+                    تغییر کلمه عبور
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="sixth" className="logoutpanel">
+                    <span>
+                      <Image src={logout} alt="logout" />
+                    </span>
+                    خروج
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Col>
+          </Row>
+        </Tab.Container>
+      </Container>
+    </div>
+  );
+};
+
 export default Panelcustom;
