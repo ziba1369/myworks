@@ -276,6 +276,7 @@ const Forgetpass = (props) => {
     };
 
     return (
+        <React.Fragment>
   
             <div className="loginpage">
                 <Container>
@@ -408,10 +409,10 @@ const Forgetpass = (props) => {
                     </Col>
                    
                 </Container>
-                <Footer/>
+             
            </div>
-  
-      
+     <Footer/>
+     </React.Fragment>
     );
 };
 

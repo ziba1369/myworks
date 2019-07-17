@@ -163,6 +163,7 @@ const PriceServices = props => {
         setOffset(0)
     }, [props.match.params.id]);
     return (
+        <React.Fragment>
         <Container fluid className="contentpadding">
             <Row>
                 <Col
@@ -238,7 +239,7 @@ const PriceServices = props => {
                                             <p className="service-price" style={{cursor: "pointer"}} onClick={() => {
                                                 Cookies.set('service', props.match.params.id, {expires: 7, path: '/'});
                                                 Cookies.set('types', item.id, {expires: 7, path: '/'});
-                                                props.history.push("/order/2");
+                                                props.history.push("/order/1");
                                             }}>ثبت سفارش</p>
                                         </Card.Footer>
                                     </Card>
@@ -322,8 +323,10 @@ const PriceServices = props => {
                 <div/>
                 
             </Row>
-            <Footer/>
+         
         </Container>
+           <Footer/>
+   </React.Fragment>
     );
 };
 

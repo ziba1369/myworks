@@ -2139,16 +2139,16 @@ p.forgetpass, p.activesys {
     margin: .3rem;
     border-color: #c1d0e8;
 }
-.loginpage .container{
-    min-height: 42vh;
+.loginpage {
+    min-height: 37.6vh;
 }
-.registerpag .container{
-    min-height: 42vh;
+.registerpage {
+    min-height: 37.6vh;
 }
 .foter-blog  {
     background-color: #eff5ff;
     padding: 2rem 2rem 0 2rem;
-    /* margin-top: 2rem; */
+    margin-top: 2rem;
    
     bottom: 0;
     right: 0;
@@ -2177,4 +2177,40 @@ p a.dropdown-item {
 }
 }
 
+
+/* panelcustom */
+p.textpanel {
+    display: block;
+    margin: 0 auto;
+    padding: 2rem 0;
+    font-size: 1.1rem;
+}
+.panel .menubar {
+    background-color: #eff5ff;
+    display: block;
+    position: fixed;
+    height: 100%;
+    right: 0;
+    padding: 0px;
+}
+.panel .nav-item a {
+    color: #929599;
+    text-align: right;
+    font-size: .9rem;
+}
+.panel .nav-pills .nav-link.active, .panel .nav-pills .show>.nav-link {
+    background-color: #f7faff;
+    color: #000;
+    -webkit-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
+-moz-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
+box-shadow:0px 6px 10px -2px rgba(0, 0, 0, 0.32);
+border-radius:0px
+}
+.logoutpanel {
+    color: #f9575a !important;
+}
+.logoutpanel:hover,.logoutpanel:active {
+    color: #f9575a !important;
+}
+/* panelcustom */
 
