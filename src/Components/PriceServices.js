@@ -237,9 +237,9 @@ const PriceServices = props => {
                                         </Card.Body>
                                         <Card.Footer>
                                             <p className="service-price" style={{cursor: "pointer"}} onClick={() => {
-                                                Cookies.set('service', props.match.params.id, {expires: 7, path: '/'});
+                                                Cookies.set('title', item.title, {expires: 7, path: '/'});
                                                 Cookies.set('types', item.id, {expires: 7, path: '/'});
-                                                props.history.push("/order/1");
+                                                props.history.push("/order/" + item.slug);
                                             }}>ثبت سفارش</p>
                                         </Card.Footer>
                                     </Card>

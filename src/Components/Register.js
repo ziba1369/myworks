@@ -9,6 +9,7 @@ import $ from "jquery";
 import axios from "axios";
 import * as Cookies from "js-cookie";
 import Footer from './Layout/Footer';
+
 const Register = (props) => {
     const [step, setStep] = useState(1);
     const [firstStep, setFirstStep] = useState({display: "block"});
@@ -51,15 +52,15 @@ const Register = (props) => {
     const [verification, setVerification] = useState("");
     const [RegisterFirst, setRegisterFirstStyle] = useState({
         backgroundColor: "#e1e1e1",
-        border:"0px"
+        border: "0px"
     });
     const checkRegisterFirstButton = () => {
-        const phoneno=/^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
+        const phoneno = /^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
         if (mobile.match(phoneno)) {
             setRegisterFirstStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
-            setRegisterFirstStyle({backgroundColor: "#e1e1e1",border:"0px"});
+            setRegisterFirstStyle({backgroundColor: "#e1e1e1", border: "0px"});
             $("#rfbutton").attr("disabled", "disabled");
         }
     };
@@ -75,7 +76,7 @@ const Register = (props) => {
 
     // checkRegisterFirstButton function after rules value changed
     const loginfirstStep = props => {
-        
+
 
         var login = {
             mobile_number: mobile
@@ -87,7 +88,7 @@ const Register = (props) => {
                 {headers: {"Content-Type": "application/json"}}
             )
             .then(function (response) {
-               // console.log(response.data.success);
+                // console.log(response.data.success);
                 if (response.data.success) {
                     ToastsStore.success(response.data.code);
                     Cookies.set("mobile", mobile, {path: "/", expires: 7})
@@ -104,12 +105,12 @@ const Register = (props) => {
     //states
 
     const [active, setActive] = useState("");
-     //const[vertiification_code,setVerification]=useState([]);
+    //const[vertiification_code,setVerification]=useState([]);
     const [min, setMin] = useState(0);
     const [second, setSecond] = useState(60);
     const [RegisterSecond, setRegisterSecondStyle] = useState({
         backgroundColor: "#e1e1e1",
-        border:"0"
+        border: "0"
     });
     const [activSecond, setactiveSecondStyle] = useState({
         color: "#e1e1e1"
@@ -123,7 +124,7 @@ const Register = (props) => {
 
             var login = {
                 mobile_number: mobile,
-                
+
 
             };
             axios
@@ -138,7 +139,6 @@ const Register = (props) => {
                         Cookies.set("token", response.data.token, {path: "/", expires: 7});
                         ToastsStore.success(response.data.code);
                         setVerification(response.data.code);
-                        props.history.push("/");
                     } else {
                         ToastsStore.error(response.data.error);
                     }
@@ -166,12 +166,12 @@ const Register = (props) => {
     }, [second, step]);
 
     // check conditions and enable/disable register button
- 
+
 
     // change mobile value when changed
     const handlerActiveChange = e => {
         setActive(e.target.value);
-      
+
     };
     // checkRegisterFirstButton function after mobile value changed
     useEffect(() => {
@@ -180,13 +180,13 @@ const Register = (props) => {
 
     // checkRegisterFirstButton function after rules value changed
     const loginSecondStep = props => {
-     
+
         //console.log(active, verification);
         var verti = {
             mobile_number: mobile,
             verification_code: active
         };
-        
+
         //console.log(verti)
         axios
             .post(
@@ -195,25 +195,25 @@ const Register = (props) => {
                 {headers: {"Content-Type": "application/json"}}
             )
             .then(function (response) {
-              // console.log(response.data);
-                if (response.data.success) {
-                    //console.log(response.data)
-                    setStep(3)
+                    // console.log(response.data);
+                    if (response.data.success) {
+                        //console.log(response.data)
+                        setStep(3)
+                    }
                 }
-            }
             )
             .catch(function (error) {
                 ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
             });
-        
-        
+
+
     };
     const checkRegisterSecondButton = () => {
         if (parseInt(active)) {
             setRegisterSecondStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
-            setRegisterSecondStyle({backgroundColor: "#e1e1e1",border:"0"});
+            setRegisterSecondStyle({backgroundColor: "#e1e1e1", border: "0"});
             $("#rfbutton").attr("disabled", "disabled");
         }
     };
@@ -222,9 +222,9 @@ const Register = (props) => {
     const [name, setName] = useState("");
     const [lastname, setLastName] = useState("");
     const [certi, setCertifi] = useState([]);
-    
+
     const [birthday, setBirthday] = useState([
-       
+
         "01",
         "02",
         "03",
@@ -279,13 +279,12 @@ const Register = (props) => {
     const [passr, setPassr] = useState([]);
     const [RegisterThird, setRegisterThirdStyle] = useState({
         backgroundColor: "#e1e1e1",
-        border:"0"
+        border: "0"
     });
 
     // check conditions and enable/disable register button
 
-   
-   
+
     const handleName = e => {
         setName(e.target.value);
     };
@@ -298,11 +297,11 @@ const Register = (props) => {
     };
     const handleBirthday = e => {
         setBirthvalue(e.target.value);
-       
+
     };
     const handleBirthmonth = e => {
         setBirthmonthvalue(e.target.value);
-        
+
     };
     const handleBirthyear = e => {
         setBirthyearvalue(e.target.value);
@@ -317,83 +316,83 @@ const Register = (props) => {
     const checkRegisterThirdButton = () => {
         // console.log(pass.length);
         if (
-            name.length>0 &&
-             lastname.length>0 &&
-            certi.length === 10 && 
-            birthvalue !==undefined &&
-            birthmonthvalue !==undefined &&
-            birthyearvalue !==undefined &&
-            pass.length>1 &&
-            passr.length>1 &&
+            name.length > 0 &&
+            lastname.length > 0 &&
+            certi.length === 10 &&
+            birthvalue !== undefined &&
+            birthmonthvalue !== undefined &&
+            birthyearvalue !== undefined &&
+            pass.length > 1 &&
+            passr.length > 1 &&
             pass === passr
-            
+
         ) {
             setRegisterThirdStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
-            setRegisterThirdStyle({backgroundColor: "#e1e1e1",border:"0px"});
+            setRegisterThirdStyle({backgroundColor: "#e1e1e1", border: "0px"});
             $("#rfbutton").attr("disabled", "disabled");
         }
     };
     useEffect(() => {
         checkRegisterThirdButton();
     }, [name]);
-   
+
     useEffect(() => {
         checkRegisterThirdButton();
     }, [lastname]);
-   
+
     useEffect(() => {
         checkRegisterThirdButton();
     }, [certi]);
-   
+
     useEffect(() => {
         checkRegisterThirdButton();
-    
+
     }, [birthvalue]);
-   
+
     useEffect(() => {
         checkRegisterThirdButton();
     }, [birthmonthvalue]);
-   
+
     useEffect(() => {
         checkRegisterThirdButton();
     }, [birthyearvalue]);
-   
+
     useEffect(() => {
         checkRegisterThirdButton();
     }, [pass]);
-   
+
     useEffect(() => {
         checkRegisterThirdButton();
     }, [passr]);
-    useEffect(()=>{
+    useEffect(() => {
         axios
-        .get(
-            "http://hezare3vom.ratechcompany.com/api/get_year",
-           
-            {
-                headers: {"Content-Type": "application/json"}
-            }
-        )
-        .then(function (response) {
-            if (response.data.success) {
-                
-                setBirthyear(response.data.year);
-               // console.log(response.data.year)
-               
+            .get(
+                "http://hezare3vom.ratechcompany.com/api/get_year",
 
-            } else {
-                ToastsStore.error(response.data.error);
-                
-            }
-        })
-        .catch(function (error) {
-            ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-        });
+                {
+                    headers: {"Content-Type": "application/json"}
+                }
+            )
+            .then(function (response) {
+                if (response.data.success) {
+
+                    setBirthyear(response.data.year);
+                    // console.log(response.data.year)
+
+
+                } else {
+                    ToastsStore.error(response.data.error);
+
+                }
+            })
+            .catch(function (error) {
+                ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+            });
 
     }, []);
-   
+
 
     const loginThirdStep = props => {
         var vertiification = {
@@ -406,7 +405,7 @@ const Register = (props) => {
             birth_year: birthyearvalue,
             password: pass
         };
-         console.log(vertiification)
+        console.log(vertiification)
         axios
             .post(
                 "http://hezare3vom.ratechcompany.com/api/sign_up_app",
@@ -416,18 +415,19 @@ const Register = (props) => {
             .then(function (response) {
                 console.log(response)
                 if (response.data.success) {
-                    Cookies.set("token",response.data.token, {path: "/", expires: 7});
-                          props.history.push("/");
-                          window.location.onload();
+                    Cookies.set("token", response.data.token, {path: "/", expires: 7});
+                    Cookies.set("name", response.data.customer_name, {path: "/", expires: 7});
+                    Cookies.set("family", response.data.customer_family, {path: "/", expires: 7});
+                    Cookies.set("customer_img", response.data.customer_img, {path: "/", expires: 7});
+                    props.history.push("/");
+                    window.location.onload();
                 } else {
                     ToastsStore.error(response.data.error);
                 }
             })
     };
-  
-    
-   
-   
+
+
     ///////////////////////////////////////////
     return (
         <React.Fragment>
@@ -448,7 +448,7 @@ const Register = (props) => {
                                 />
                                 <p className="textlogin">عضویت</p>
                                 <Form.Group>
-                                  
+
                                     <Form.Label>شماره همراه</Form.Label>
                                     <Form.Control
                                         type="tel"
@@ -561,12 +561,12 @@ const Register = (props) => {
                                                 name="slelect"
                                                 required
                                                 className="day"
-                                               
+
                                             >
                                                 <option selected disabled>
                                                     روز
                                                 </option>
-                                               
+
                                                 {birthday.map(num => (
                                                     <option value={num}>{num}</option>
                                                 ))}
@@ -636,16 +636,16 @@ const Register = (props) => {
                                     style={RegisterThird}
                                     onClick={loginThirdStep}
                                     className="loginbutton"
-                                    
+
                                 >
                                     ثبت
                                 </Button>
                             </div>
                         </div>
                     </Col>
-                 
+
                 </Container>
-              
+
             </div>
             <Footer/>
         </React.Fragment>

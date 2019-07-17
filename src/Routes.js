@@ -28,7 +28,7 @@ function Routes() {
 
         },
         {
-            path: '/order/:step',
+            path: '/order/:name',
             component: Order,
             exact: true,
 

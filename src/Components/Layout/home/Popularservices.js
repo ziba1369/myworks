@@ -44,7 +44,7 @@ const Popularservices = (props) => {
                 .then(function (response) {
                     if (response.data.success) {
                         setinfo([...response.data.products,...Information]);
-                       //console.log([...response.data.products,...Information])
+                       console.log(response.data.products)
                        
     
                     } else {
@@ -81,11 +81,9 @@ const Popularservices = (props) => {
                 </div>
                 <div className="custom">
                     <Button type="submit" className="green" style={{cursor: "pointer"}} onClick={() => {
-                        Cookies.set('service', item.group_id, {expires: 7, path: '/'});
+                        Cookies.set('title', item.title, {expires: 7, path: '/'});
                         Cookies.set('types', item.id, {expires: 7, path: '/'});
-                        // Cookies.set('servicenqme', item.group_id, {expires: 7, path: '/'});
-                        // Cookies.set('typesname', types, {expires: 7, path: '/'});
-                        props.history.push("/order/1");
+                        props.history.push("/order/" + item.slug);
                     }}>ثبت سفارش</Button>
                 </div>
 

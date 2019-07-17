@@ -51,7 +51,7 @@ const Steptranslate = () => {
             .then(function (response) {
                 if (response.data.success) {
                     setLastnews(response.data.news);
-                    //console.log(response.data.news)
+                    console.log(response.data.news)
                    
 
                 } else {
@@ -86,7 +86,7 @@ const Steptranslate = () => {
                             {item.date}
                         </Col>
                     </Row>
-                    <Row className="contentnews rtl">{item.content}</Row>
+                    <Row className="contentnews rtl">{item.short}</Row>
                     <Row className="extracontent">
                     <Link to={'/blog/'+item.slug}> ادامه مطلب</Link>
                     </Row>
@@ -119,7 +119,7 @@ const Steptranslate = () => {
                             {item.date}
                         </Col>
                     </Row>
-                    <Row className="contentnews rtl">{item.content}</Row>
+                    <Row className="contentnews rtl">{item.short}</Row>
                     <Row className="extracontent">
                     <Link to={'/blog/'+item.slug}> ادامه مطلب</Link>
                     </Row>

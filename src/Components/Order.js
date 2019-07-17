@@ -14,7 +14,7 @@ import {
 import * as Cookies from "js-cookie";
 import axios from "axios";
 const Order = props => {
-  const [step, setCount] = useState(1);
+  const [step, setStep] = useState(1);
   const [styleone, setStyleone] = useState();
   const [styletwo, setStyletwo] = useState();
   const [stylethree, setStylethree] = useState();
@@ -33,12 +33,8 @@ const Order = props => {
         }
    );
   const increment = () => {
-    setCount(step + 1);
+    setStep(step + 1);
   };
-
-  useEffect(() => {
-    setCount(parseInt(props.match.params.step));
-  }, []);
 
   useEffect(() => {
     switch (step) {
@@ -374,36 +370,31 @@ const Order = props => {
         break;
     }
   }, [step]);
-  const handlerMadrak = () => {
-    if (step < 1) {
-      return step === 1;
-    }
-    setCount(1);
-  };
+
   const handlerType = () => {
-    if (step < 2) {
+    if (step < 1) {
       return step;
     }
 
-    setCount(2);
+    setStep(1);
   };
   const handlerUpload = () => {
+    if (step < 2) {
+      return step;
+    }
+    setStep(2);
+  };
+  const handlerConfirm = () => {
     if (step < 3) {
       return step;
     }
-    setCount(3);
+    setStep(3);
   };
-  const handlerConfirm = () => {
+  const handlerPay = () => {
     if (step < 4) {
       return step;
     }
-    setCount(4);
-  };
-  const handlerPay = () => {
-    if (step < 5) {
-      return step;
-    }
-    setCount(5);
+    setStep(4);
   };
   useEffect(()=>{
 
@@ -451,13 +442,10 @@ const Order = props => {
                 <Link to="/">صفحه اصلی</Link>
               </Breadcrumb.Item>
               <Breadcrumb.Item>
-                <Link to="/services">خدمات ترجمه</Link>
-              </Breadcrumb.Item>
-              <Breadcrumb.Item>
-                <Link to="/services">مدرک شناسایی</Link>
+                <Link to="/services/all">خدمات ترجمه</Link>
               </Breadcrumb.Item>
               <Breadcrumb.Item active href={null}>
-              شناسنامه
+              {Cookies.get('title')}
               </Breadcrumb.Item>
             </Breadcrumb>
             

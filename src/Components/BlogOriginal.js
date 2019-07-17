@@ -53,6 +53,7 @@ const BlogOriginal = (props) => {
         
   },[props.match.params.slug]);
   return (
+      <React.Fragment>
     <Container>
       <Row>
         <Col
@@ -68,7 +69,7 @@ const BlogOriginal = (props) => {
               <Link to="/">صفحه اصلی</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
-              <Link to="/services">اخبار</Link>
+              <Link to="/news">اخبار</Link>
             </Breadcrumb.Item>
 
             <Breadcrumb.Item active href={null}>
@@ -131,15 +132,16 @@ const BlogOriginal = (props) => {
           <Image src={i.img} alt={i.title} />
           <Col lg={12} xl={12} md={12} sm={12} xs={12}>
             <p className="detail-title">{i.short}</p>
-            <p>{i.content}</p>
+            <div dangerouslySetInnerHTML={{__html: i.content}}></div>
           </Col>
         </Col>
           )
           })
         }
       </Row>
-    <Footer/>
     </Container>
+    <Footer/>
+      </React.Fragment>
   );
 };
 
