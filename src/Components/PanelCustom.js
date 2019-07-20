@@ -49,7 +49,7 @@ const Panelcustom = (props) => {
                 <Nav.Item>
                   <Nav.Link eventKey="first">
                     <span>
-                      <Image src={userimg} alt="userimg" />
+                      <Image src={Cookies.get("customer_img")} alt="userimg" />
                     </span>
                     اصلاح حساب کاربری
                   </Nav.Link>
