@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Nav, Col, Tab, Row, Container, Image } from "react-bootstrap";
+import { Nav, Col, Tab, Row, Container, Image  ,Form} from "react-bootstrap";
 import $ from "jquery";
 import Myorder from "./Layout/Panel/Myorder";
+import EditProfile from './Layout/Panel/EditProfile';
 import userimg from "../images/user.svg";
 import myorderimg from "../images/myorder.svg";
 import billimg from "../images/bill.svg";
@@ -9,6 +10,7 @@ import inboximg from "../images/inbox.svg";
 import changepassimg from "../images/changepass.svg";
 import logout from "../images/logout.svg";
 import * as Cookies from "js-cookie";
+
 const Panelcustom = (props) => {
   useEffect(() => {
     $(".headersite").remove();
@@ -19,7 +21,18 @@ const Panelcustom = (props) => {
       Cookies.remove('token');
       props.history.push("/");
   };
-
+  // useEffect(() => {
+  //   switch (eventKey) {
+  //     case 'first':
+  //       firstStyle({display:'block'});
+  //       secondStyle({display:'none'});
+  
+  //     case 'second':
+  //       firstStyle({display:'none'});
+  //       secondStyle({display:'block'});
+  //   }
+  // }
+  // ,[eventKey])
   return (
     <div className="panel">
       <Container>
@@ -33,10 +46,13 @@ const Panelcustom = (props) => {
           <Row>
             <Col sm={10} className="content">
               <Tab.Content>
-                <Tab.Pane eventKey="first"></Tab.Pane>
-                <Tab.Pane eventKey="second">
-                  <Myorder />
+                <Tab.Pane  eventKey="first">
+                  <EditProfile/>
                 </Tab.Pane>
+                <Tab.Pane  eventKey="second">
+                  <Myorder/>
+                </Tab.Pane>
+
               </Tab.Content>
             </Col>
 

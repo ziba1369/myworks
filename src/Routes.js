@@ -64,7 +64,7 @@ function Routes() {
 
         },
         {
-            path: '/panel',
+            path: '/panel/',
             component:PanelCustom,
             exact: true,
 
