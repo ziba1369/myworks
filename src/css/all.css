@@ -2279,6 +2279,14 @@ p.distance {
 .panel .container {
     max-width: 94vw;
 }
+.imagepanel img {
+    float: none;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: table;
+    border-radius: 50%;
+}
 /* myorder/panelcustom */
 /* panelcustom */
 

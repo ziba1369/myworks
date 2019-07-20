@@ -42,14 +42,17 @@ const Panelcustom = (props) => {
 
             <Col sm={2} className="menubar">
               <div className="image-panel-parent">
-                <div className="imagepanel" />
+                <div className="imagepanel">
+                  <Image src={Cookies.get('customer_img')}/>
+                </div>
+
               </div>
               <div className="userpanel">{Cookies.get("name") + " " + Cookies.get("family")}</div>
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
                   <Nav.Link eventKey="first">
                     <span>
-                      <Image src={Cookies.get("customer_img")} alt="userimg" />
+                      <Image src={userimg} alt="userimg" />
                     </span>
                     اصلاح حساب کاربری
                   </Nav.Link>
