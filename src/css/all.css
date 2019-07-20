@@ -2270,7 +2270,7 @@ border-radius:0px
     position: absolute;
     display: block;
     margin: 0 auto;
-    left: 29vw;
+    left: 50%;
     bottom: 22vh;
 }
 p.distance {

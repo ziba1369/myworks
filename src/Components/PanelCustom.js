@@ -8,10 +8,18 @@ import billimg from "../images/bill.svg";
 import inboximg from "../images/inbox.svg";
 import changepassimg from "../images/changepass.svg";
 import logout from "../images/logout.svg";
-const Panelcustom = () => {
+import * as Cookies from "js-cookie";
+const Panelcustom = (props) => {
   useEffect(() => {
     $(".headersite").remove();
   }, []);
+
+    const handlelogout = () => {
+      
+      Cookies.remove('token');
+      props.history.push("/");
+  };
+
   return (
     <div className="panel">
       <Container>
@@ -36,7 +44,7 @@ const Panelcustom = () => {
               <div className="image-panel-parent">
                 <div className="imagepanel" />
               </div>
-              <div className="userpanel">بهمن مهری</div>
+              <div className="userpanel">{Cookies.get("name") + " " + Cookies.get("family")}</div>
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
                   <Nav.Link eventKey="first">
@@ -79,7 +87,7 @@ const Panelcustom = () => {
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="sixth" className="logoutpanel">
+                  <Nav.Link eventKey="sixth" className="logoutpanel" onClick={handlelogout}>
                     <span>
                       <Image src={logout} alt="logout" />
                     </span>
