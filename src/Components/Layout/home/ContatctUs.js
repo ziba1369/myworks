@@ -147,10 +147,10 @@ const sendHandler=()=>{
 
                     </Col>
                     <Col xl={12} md={12} sm={12} xs={12} className="fontawe ">
-                        <Link className="instagram"><FontAwesomeIcon icon={faInstagram}/></Link>
-                        <Link className="linkdin"><FontAwesomeIcon icon={faLinkedin}/></Link>
-                        <Link className="twitter"><FontAwesomeIcon icon={faTwitter}/></Link>
-                        <Link className="facebook"><FontAwesomeIcon icon={faFacebook}/></Link>
+                        <Link to="/" className="instagram"><FontAwesomeIcon icon={faInstagram}/></Link>
+                        <Link to="/" className="linkdin"><FontAwesomeIcon icon={faLinkedin}/></Link>
+                        <Link to="/" className="twitter"><FontAwesomeIcon icon={faTwitter}/></Link>
+                        <Link to="/" className="facebook"><FontAwesomeIcon icon={faFacebook}/></Link>
 
                     </Col>
                 </Col>

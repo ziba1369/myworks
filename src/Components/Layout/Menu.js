@@ -8,89 +8,105 @@ import {
   ToastsContainerPosition
 } from "react-toasts";
 import axios from "axios";
-const Menu = () => {
+const Menu = (props) => {
+
   const [servicemenu, setservicemenu] = useState([
-    {
-      title: "مدارک شناسایی",
-      link: "/services/1",
-      child: [
-        {
-          title: "یک",
-          link: "/services/1"
-        },
-        {
-          title: "دو",
-          link: "/services/1"
-        }
-      ]
-    },
-    {
-      title: "مدارک تحصیلی",
-      link: "/services/3",
-      child: [
-        {
-          title: "یک",
-          link: "/services/1"
-        },
-        {
-          title: "دو",
-          link: "/services/1"
-        }
-      ]
-    },
-    {
-      title: "مدارک مالی",
-      link: "/services/4",
-      child: [
-        {
-          title: "یک",
-          link: "/services/1"
-        },
-        {
-          title: "دو",
-          link: "/services/1"
-        }
-      ]
-    },
-    {
-      title: "مدارک شغلی",
-      link: "/services/2",
-      child: [
-        {
-          title: "یک",
-          link: "/services/1"
-        },
-        {
-          title: "دو",
-          link: "/services/1"
-        }
-      ]
-    },
-    {
-      title: "مدارک شرکتی",
-      link: "/services/0",
-      child: [
-        {
-          title: "یک",
-          link: "/services/1"
-        },
-        {
-          title: "دو",
-          link: "/services/1"
-        }
-      ]
-    }
-  ]);
+  //   {
+  //     id:'1',
+  //     title: "مدارک شناسایی",
+  //     link: "/services/1",
+  //     child: [
+  //       {
+  //         id:"11",
+  //         title: "یک",
+  //         link: "/services/1"
+  //       },
+  //       {
+  //         id:'12',
+  //         title: "دو",
+  //         link: "/services/1"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     title: "مدارک تحصیلی",
+  //     link: "/services/3",
+  //     id:'2',
+  //     child: [
+  //       {
+  //         id:'21',
+  //         title: "یک",
+  //         link: "/services/1"
+  //       },
+  //       {
+  //         id:'22',
+  //         title: "دو",
+  //         link: "/services/1"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     id:'3',
+  //     title: "مدارک مالی",
+  //     link: "/services/4",
+  //     child: [
+  //       {
+  //         id:'31',
+  //         title: "یک",
+  //         link: "/services/1"
+  //       },
+  //       {
+  //         id:'32',
+  //         title: "دو",
+  //         link: "/services/1"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     id:'4',
+  //     title: "مدارک شغلی",
+  //     link: "/services/2",
+  //     child: [
+  //       {
+  //         id:'41',
+  //         title: "یک",
+  //         link: "/services/1"
+  //       },
+  //       {
+  //         id:'42',
+  //         title: "دو",
+  //         link: "/services/1"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     id:'5',
+  //     title: "مدارک شرکتی",
+  //     link: "/services/0",
+  //     child: [
+  //       {
+  //         id:'51',
+  //         title: "یک",
+  //         link: "/services/1"
+  //       },
+  //       {
+  //         id:'52',
+  //         title: "دو",
+  //         link: "/services/1"
+  //       }
+  //     ]
+  //   }
+    ]);
   useEffect(() => {
     axios
-      .get("http://hezare3vom.ratechcompany.com/api/app_categories", {
+      .get("http://hezare3vom.ratechcompany.com/api/front/web_menu", {
         headers: { "Content-Type": "application/json" }
       })
       .then(function(response) {
-        //console.log(response.data, "kk");
+        
         if (response.data.success) {
-          // setservicemenu(response.data);
-        //  console.log(response.data);
+           setservicemenu(response.data.headers);
+           console.log(response.data.headers);
         } else {
           ToastsStore.error(response.data.error);
         }
@@ -120,19 +136,36 @@ const Menu = () => {
             <React.Fragment>
               <Row>
                 {servicemenu.map(item => {
+                 const link='/services/'+ item.id;
                   return (
-                    <Col lg={4} xl={4} md={4} key={item.id}>
+                    
+                    <Col lg={4} xl={4} md={4} key={item.id} >
                       <div className="smenu">
                         <p>
-                          <Dropdown.Item>
-                            <Link to={item.link}>{item.title}</Link>
-                          </Dropdown.Item>
-                        </p>
-                        {item.child.map(child => {
-                          return (
-                            <Dropdown.Item href={child.link} key={child.id}>
-                              {child.title}
+                         
+                          
+                        
+                          <Dropdown.Item  class="dropdown-item" role="button">
+                          <Link to={link}>
+                            {item.title}
+                          </Link>
                             </Dropdown.Item>
+                        
+                        
+                         
+                         
+                        </p>
+                        {item.subcat.map(child => {
+                         const childlink=link+"/"+child.slug;
+                          return (
+                        
+                            <Dropdown.Item  key={child.id}>
+                              <Link to={childlink}>
+                                {child.name}  
+                              </Link>
+                          
+                            </Dropdown.Item>
+                          
                           );
                         })}
                       </div>
@@ -149,19 +182,20 @@ const Menu = () => {
             <React.Fragment>
               <Row>
                 {servicemenu.map(item => {
+                    const link='/services/'+ item.id;
                   return (
                     <React.Fragment>
                       <p>
                         {" "}
-                        <Dropdown.Item>
-                          <Link to={item.link}>{item.title}</Link>
+                        <Dropdown.Item key={item.id}>
+                          <Link to={link}>{item.title}</Link>
                         </Dropdown.Item>
                       </p>
 
-                      {item.child.map(child => {
+                      {item.subcat.map(child => {
                         return (
-                          <Dropdown.Item href={child.link}>
-                            {child.title}
+                          <Dropdown.Item href={child.link } key={item.id}>
+                            {child.name}
                           </Dropdown.Item>
                         );
                       })}

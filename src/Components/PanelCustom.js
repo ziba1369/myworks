@@ -3,6 +3,8 @@ import { Nav, Col, Tab, Row, Container, Image  ,Form} from "react-bootstrap";
 import $ from "jquery";
 import Myorder from "./Layout/Panel/Myorder";
 import EditProfile from './Layout/Panel/EditProfile';
+import Mybill from './Layout/Panel/Mybill';
+import Mytranslate from './Layout/Panel/Mytranslate';
 import userimg from "../images/user.svg";
 import myorderimg from "../images/myorder.svg";
 import billimg from "../images/bill.svg";
@@ -19,7 +21,10 @@ const Panelcustom = (props) => {
     const handlelogout = () => {
       
       Cookies.remove('token');
+      Cookies.remove('name');
+      Cookies.remove('family');
       props.history.push("/");
+      window.location.reload();
   };
   // useEffect(() => {
   //   switch (eventKey) {
@@ -52,7 +57,12 @@ const Panelcustom = (props) => {
                 <Tab.Pane  eventKey="second">
                   <Myorder/>
                 </Tab.Pane>
-
+                <Tab.Pane  eventKey="third">
+                  <Mybill/>
+                </Tab.Pane>
+                <Tab.Pane  eventKey="fourth">
+                  <Mytranslate/>
+                </Tab.Pane>
               </Tab.Content>
             </Col>
 
