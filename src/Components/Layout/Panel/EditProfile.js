@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-  Nav,
   Col,
-  Tab,
   Row,
   Container,
-  Image,
   Form,
   Button
 } from "react-bootstrap";
@@ -21,7 +18,7 @@ import $ from "jquery";
 import axios from "axios";
 const EditProfile = (props) => {
   const [name, setName] = useState("");
-  const[image,setImage]=useState('');
+  const[imageprofile,setImageprofile]=useState('');
   const [lastname, setLastName] = useState("");
   const [certi, setCertifi] = useState([]);
   const [mobile, setMobile] = useState([]);
@@ -36,7 +33,7 @@ const EditProfile = (props) => {
     if (name.length > 1 &&
       lastname.length > 1 &&
       certi.length === 10 &&
-      mobile.match(phoneno)) {
+       mobile.length===11) {
       setRegister({
         backgroundColor: "#1976d2",
         border: "0px",
@@ -70,7 +67,7 @@ const EditProfile = (props) => {
   };
   const uploaderhandler=(e)=>
   {
-    setImage(e.target.files[0])
+    setImageprofile(e.target.files[0])
   }
   useEffect(() => {
     checkRegisterButton();
@@ -95,21 +92,26 @@ const EditProfile = (props) => {
     };
   })
   }, []);
-
+ console.log(imageprofile,'image');
   const sendEditRgister = () => {
-    const addimage=document.getElementById('showimage').style.backgroundImage;
-    //const sendfile=addimage.style.backgroundImage;
-  const editprofile={
-    customer_token:Cookies.get('token'),
-    profile_image:image,
-    name:name,
-    family:lastname,
-    national_code:certi
-  
-  }
+   
+  // const editprofile={
+  //   customer_token:Cookies.get('token'),
+  //   profile_image:imageprofile,
+  //   name:name,
+  //   family:lastname,
+  //   national_code:certi
+  // }
+  const formData = new FormData();
+        formData.append("customer_token", Cookies.get('token'));
+        formData.append("profile_image",imageprofile);
+        formData.append("name",name);
+        formData.append("family",lastname);
+        formData.append("national_code",certi);
+        console.log(formData)
     axios
-        .post("http://hezare3vom.ratechcompany.com/api/app_edit_profile",editprofile,{
-            headers: {"Content-Type": "application/json"}
+        .post("http://hezare3vom.ratechcompany.com/api/app_edit_profile",formData,{
+            headers: {"Content-Type": "multipart/form-data"}
         })
         .then(function (response) {
           console.log(response.data)
@@ -118,7 +120,7 @@ const EditProfile = (props) => {
                     Cookies.set("customer_token", response.data.token, {path: "/", expires: 7});
                     Cookies.set("name", response.data.name, {path: "/", expires: 7});
                     Cookies.set("family", response.data.lastname, {path: "/", expires: 7});
-                   // Cookies.set("profile_image", response.data.profile_image, {path: "/", expires: 7});
+                    Cookies.set("profile_image", response.data.profile_image, {path: "/", expires: 7});
                     Cookies.set("national_code", response.data.national_code, {path: "/", expires: 7});
                 props.history.push("/");
                 window.location.reload();

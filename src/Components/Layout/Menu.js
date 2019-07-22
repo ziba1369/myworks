@@ -131,7 +131,7 @@ const Menu = (props) => {
         className="submenu"
       >
         <Media
-          query="(min-width:768px)"
+          query="(min-width:992px)"
           render={() => (
             <React.Fragment>
               <Row>
@@ -139,7 +139,7 @@ const Menu = (props) => {
                  const link='/services/'+ item.id;
                   return (
                     
-                    <Col lg={4} xl={4} md={4} key={item.id} >
+                    <Col lg={4} xl={4}  key={item.id} >
                       <div className="smenu">
                         <p>
                          
@@ -177,7 +177,7 @@ const Menu = (props) => {
           )}
         />
         <Media
-          query="(max-width:768px)"
+          query="(max-width:991px)"
           render={() => (
             <React.Fragment>
               <Row>
@@ -193,9 +193,12 @@ const Menu = (props) => {
                       </p>
 
                       {item.subcat.map(child => {
+                        const childlink=link+"/"+child.slug;
                         return (
-                          <Dropdown.Item href={child.link } key={item.id}>
+                          <Dropdown.Item  key={item.id}>
+                            <Link to={childlink}>
                             {child.name}
+                            </Link>
                           </Dropdown.Item>
                         );
                       })}

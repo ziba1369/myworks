@@ -202,69 +202,8 @@ const PriceServices = props => {
                 </Col>
             </Row>
 
-            <Row>
-                <Col
-                    className="service-detail rtl"
-                    xl={9}
-                    lg={9}
-                    md={12}
-                    sm={12}
-                    xs={12}
-                >
-                    <Row>
-                        {props.match.params.id &&
-                        data.map(item => {
-                            return (
-                                <div
-                                    id="paginationcard"
-                                    key={item.id}
-                                    className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 rtl"
-                                >
-                                    <Card className="detail-card">
-                                        <Card.Body>
-                                            <Card.Title>{item.title}</Card.Title>
-                                            <Card.Text>
-                                                <p className="textprice text-gray ">هزینه ترجمه:</p>
-                                                <p className="numberprice ">
-
-                                                    {item.pricetrans}تومان
-                                                </p>
-                                                <p className="textprice text-gray ">
-                                                    هزینه نسخه اضافه:
-                                                </p>
-                                                <p className="numberprice">{item.extraprice}تومان</p>
-                                            </Card.Text>
-                                        </Card.Body>
-                                        <Card.Footer>
-                                            <p className="service-price" style={{cursor: "pointer"}} onClick={() => {
-                                                Cookies.set('title', item.title, {expires: 7, path: '/'});
-                                                Cookies.set('types', item.id, {expires: 7, path: '/'});
-                                                props.history.push("/order/" + item.slug);
-                                            }}>ثبت سفارش</p>
-                                        </Card.Footer>
-                                    </Card>
-                                </div>
-                            );
-                        })}
-                    </Row>
-                    {/* <Pagination
-                        activePage={activepage} // active page number
-                        itemsCountPerPage={2} // your limit value send to server with axios
-                        totalItemsCount={450} //TODO get it from server
-                        pageRangeDisplayed={5} // Number of pages visitor see in browser
-                        onChange={onPageChanged}
-                    /> */}
-                     <Paginatior
-         totalRecords={total}
-         pageLimit={pageLimit}
-        //  pageNeighbours={4}
-         setOffset={setOffset}
-         currentPage={currentPage}
-         setCurrentPage={setCurrentPage}
-      />
-                </Col>
-
-                <Col className="service-box" xl={3} lg={3} md={12} sm={12} xs={12}>
+            <div className="row rtl">
+            <Col className="service-box" xl={{span:3,offset:0}} lg={{span:3,offset:0}} md={{span:8,offset:2}} sm={{span:10,offset:1}} xs={{span:12,offset:0}}>
                     <Card className="gservices" style={{textAlign: "center"}}>
                         <Card.Body>
                             <Card.Title className="sbox-title">گروه بندی خدمات</Card.Title>
@@ -320,9 +259,71 @@ const PriceServices = props => {
                         </Card.Body>
                     </Card>
                 </Col>
+                <Col
+                    className="service-detail rtl"
+                    xl={{span:9,offset:0}}
+                    lg={{span:9,offset:0}}
+                    md={{span:8,offset:2}}
+                    sm={{span:10,offset:1}}
+                    xs={{span:10,offset:1}}
+                >
+                    <Row>
+                        {props.match.params.id &&
+                        data.map(item => {
+                            return (
+                                <div
+                                    id="paginationcard"
+                                    key={item.id}
+                                    className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 rtl"
+                                >
+                                    <Card className="detail-card">
+                                        <Card.Body>
+                                            <Card.Title>{item.title}</Card.Title>
+                                            <Card.Text>
+                                                <p className="textprice text-gray ">هزینه ترجمه:</p>
+                                                <p className="numberprice ">
+
+                                                    {item.pricetrans}تومان
+                                                </p>
+                                                <p className="textprice text-gray ">
+                                                    هزینه نسخه اضافه:
+                                                </p>
+                                                <p className="numberprice">{item.extraprice}تومان</p>
+                                            </Card.Text>
+                                        </Card.Body>
+                                        <Card.Footer>
+                                            <p className="service-price" style={{cursor: "pointer"}} onClick={() => {
+                                                Cookies.set('title', item.title, {expires: 7, path: '/'});
+                                                Cookies.set('types', item.id, {expires: 7, path: '/'});
+                                                props.history.push("/order/" + item.slug);
+                                            }}>ثبت سفارش</p>
+                                        </Card.Footer>
+                                    </Card>
+                                </div>
+                            );
+                        })}
+                    </Row>
+                    {/* <Pagination
+                        activePage={activepage} // active page number
+                        itemsCountPerPage={2} // your limit value send to server with axios
+                        totalItemsCount={450} //TODO get it from server
+                        pageRangeDisplayed={5} // Number of pages visitor see in browser
+                        onChange={onPageChanged}
+                    /> */}
+                     <Paginatior
+         totalRecords={total}
+         pageLimit={pageLimit}
+        //  pageNeighbours={4}
+         setOffset={setOffset}
+         currentPage={currentPage}
+         setCurrentPage={setCurrentPage}
+      />
+                </Col>
+
+               
                 <div/>
                 
-            </Row>
+            </div>
          
         </Container>
            <Footer/>

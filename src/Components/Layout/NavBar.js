@@ -51,7 +51,7 @@ const NavBar = () => {
               <Col xl={8} md={8} sm={12} xs={12}>
                 <Menu />
               </Col>
-              <Col xl={4} md={4} sm={12} xs={12}>
+              <Col xl={4} lg={4} md={12} sm={12} xs={12}>
                 <Nav style={styleOne} className="login">
                   <Col className="colortext" xl={6} md={6} sm={12} xs={12}>
                     <Link to="/register">ثبت نام</Link>

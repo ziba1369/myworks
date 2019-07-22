@@ -30,10 +30,6 @@ const checkLoginButton = () => {
     if (name.length >0 && tel.match(phoneno) && email.match(mailno) && issue.length>0 && message.length>0) {
         setLoginButtonStyle({backgroundColor: "#1976d2"})
         $(".loginbutton").removeAttr("disabled");
-    } else if(name.length===0){
-        setLoginButtonStyle({backgroundColor: "#e1e1e1"})
-        $(".loginbutton").attr("disabled", "disabled");
-        ToastsStore.warning("لطفا نام  را وارد نمایید");
     }
     else {
         setLoginButtonStyle({backgroundColor: "#e1e1e1"})
@@ -77,6 +73,17 @@ const handleTell=(e)=>{
   useEffect(()=>{
     checkLoginButton()
   },[message])
+  const blurEmail=()=>{
+    let mailno=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(email.length===1)
+    {  
+        ToastsStore.error('aaa')
+     }
+     else{
+        ToastsStore.error('bbbbbb')
+     }
+ 
+    }
 const sendHandler=()=>{
     const contactUs = {
         name: name,
@@ -116,8 +123,8 @@ const sendHandler=()=>{
                                     <Form.Control onChange={handleName} size="sm" type="text" value={name}/>
                                     <Form.Label  >شماره همراه</Form.Label>
                                     <Form.Control size="sm" type="tel" onChange={handleTell} vlaue={tel} id="phone" name="phone"/>
-                                    <Form.Label id="email">ایمیل آدرس</Form.Label>
-                                    <Form.Control  onChange={handleEmail}  value={email} size="sm" pattern="/^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" type="eamil"/>
+                                    <Form.Label id="email" >ایمیل آدرس</Form.Label>
+                                    <Form.Control  onChange={handleEmail}  onBlur={blurEmail} value={email} size="sm" pattern="/^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" type="eamil"/>
                                     <Form.Label >موضوع</Form.Label>
                                     <Form.Control  onChange={handleIssue} size="sm" value={issue} type="type"/>
                                 </Form.Group>

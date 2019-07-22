@@ -26,7 +26,7 @@ const Slide = () => {
                     <Container className="countries">
 
                         <Row className="justify-content-md-center">
-                            <Col xl={5} lg={5} md={6} sm={12} xs={12} className="Iran pulse"><img src={Iran}
+                            <Col xl={5} lg={5} md={6} sm={12} xs={12} className="Iran pulse"><img src={Iran} 
                                                                                                   alt={Iran}/></Col>
                         </Row>
                         <Row className="justify-content-md-center">

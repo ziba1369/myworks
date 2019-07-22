@@ -1,14 +1,7 @@
 
 import React, {useState,useEffect} from 'react';
 import {Col, Button, Row, Carousel} from 'react-bootstrap';
-// import bithSertificate from '../../../images/passport (1).svg';
-// import idCard from '../../../images/id-card.svg';
-// import score from '../../../images/exam.svg';
- import customtrans from '../../../images/document.svg';
-// import builddoc from '../../../images/contract.svg';
-// import workcer from '../../../images/work-certificate.svg';
-// import diploma from '../../../images/diploma.svg';
-// import marriage from '../../../images/marriage-certificate.svg';
+import customtrans from '../../../images/document.svg';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from '@fortawesome/free-regular-svg-icons';
 import Media from 'react-media';
@@ -70,11 +63,18 @@ const Popularservices = (props) => {
                         <p>{item.title}</p>
                     </div>
                     <div className="descriptiontrans">
-
-                        {item.description.map((des, i) => (
-                            <p key={i}>{des}<FontAwesomeIcon icon={faCheckCircle}/></p>))}
-
-
+                    <div className="descript">
+                        
+                    
+                        {item.description.map((des, i) =>
+                         (
+                           
+                            <p key={i}>{des}
+                           
+                            {des && <FontAwesomeIcon icon={faCheckCircle}/>}
+                            </p>))}
+                          
+                    </div>
                         <p style={{textAlign: "center"}}>قیمت (تومان)</p>
                         <p style={{textAlign: "center", fontSize: "1rem"}} className="green">{item.price}</p>
                     </div>

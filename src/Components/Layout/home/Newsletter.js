@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from "react";
 import {Image, Col, Row} from "react-bootstrap";
-import khabanameh from "../../../images/khabarnameh.jpg";
 import {Link} from "react-router-dom";
 import {faAngleDoubleLeft, faAngleDoubleRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

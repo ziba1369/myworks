@@ -462,7 +462,7 @@ useEffect(() => {
               </Col>
               <Col
                 className="tabsordercontent"
-                style={{ width: "300px" }}
+                style={{ minWidth: "300px",width:"300px" }}
                 xl={9}
                 lg={9}
                 md={9}

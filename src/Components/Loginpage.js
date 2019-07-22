@@ -10,7 +10,6 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import * as Cookies from "js-cookie";
 import Footer from './Layout/Footer';
-
 const Login = props => {
     const [mobile, setMobile] = useState("");
     const [pass, setPass] = useState("");

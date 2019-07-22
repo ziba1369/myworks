@@ -9,7 +9,6 @@ import $ from "jquery";
 import axios from "axios";
 import * as Cookies from "js-cookie";
 import Footer from './Layout/Footer';
-
 const Register = (props) => {
     const [step, setStep] = useState(1);
     const [firstStep, setFirstStep] = useState({display: "block"});
@@ -75,7 +74,7 @@ const Register = (props) => {
     }, [mobile]);
 
     // checkRegisterFirstButton function after rules value changed
-    const loginfirstStep = props => {
+    const loginfirstStep = () => {
 
 
         var login = {
@@ -118,7 +117,7 @@ const Register = (props) => {
     const changeStep = () => {
         setStep(1);
     };
-    const mobileStep = props => {
+    const mobileStep =()=> {
         if (second === 0) {
             setSecond(60);
 
@@ -179,7 +178,7 @@ const Register = (props) => {
     }, [active]);
 
     // checkRegisterFirstButton function after rules value changed
-    const loginSecondStep = props => {
+    const loginSecondStep = () => {
 
         //console.log(active, verification);
         var verti = {
@@ -394,7 +393,7 @@ const Register = (props) => {
     }, []);
 
 
-    const loginThirdStep = props => {
+    const loginThirdStep = () => {
         var vertiification = {
             name: name,
             family: lastname,
@@ -420,14 +419,16 @@ const Register = (props) => {
                     Cookies.set("family", response.data.customer_family, {path: "/", expires: 7});
                     Cookies.set("customer_img", response.data.customer_img, {path: "/", expires: 7});
                     props.history.push("/");
-                    window.location.onload();
+                    window.location.reload();
                 } else {
                     ToastsStore.error(response.data.error);
                 }
             })
     };
-
-
+if(Cookies.get('token')!==undefined)
+{
+    props.history.push("/");
+}
     ///////////////////////////////////////////
     return (
         <React.Fragment>
@@ -543,7 +544,7 @@ const Register = (props) => {
                                     />
                                     <Form.Label>کدملی</Form.Label>
                                     <Form.Control
-                                        type="number"
+                                        type="tel"
                                         placeholder=""
                                         onChange={handleCertificate}
                                         value={certi}

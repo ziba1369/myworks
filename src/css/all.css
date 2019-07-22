@@ -104,6 +104,9 @@ a:hover {
     padding: .5rem 1rem;
     width: 100%;
 }
+.login.navbar-nav div {
+    margin: 0px -1rem;
+}
 .loginprofile{
     align-items: center;
     justify-content: center;
@@ -201,6 +204,18 @@ span.imageprofile {
     width: 100%;
     display: inline-flex;
 }
+@media only screen and (max-width: 768px) {
+    .submenu p a.dropdown-item {
+        margin: 3rem 0 0px 0px;
+        border-bottom: 1px solid #e1e1e1;
+    }
+}
+@media only screen and (max-width: 768px) {
+.countries img {
+    width: 19vw;
+    text-align: center;
+}}
+
 .headersite {
     background-color: #eff5ff;
     width: 100%;
@@ -255,7 +270,9 @@ a.dropdown-item {
     color: #000 !important;
 }
 
-
+.smenu p a.dropdown-item {
+    border: 0px;
+}
 .slideone {
     background: url('../images/Group1866.svg') no-repeat center center;
     background-size: cover;
@@ -312,12 +329,12 @@ a.dropdown-item {
 .dist {
     margin: 0.3rem 0;
 }
-
+@media only screen and (min-width: 768px) {
 .countries img {
     width: 50%;
     text-align: center
 }
-
+}
 .countries div {
     text-align: center;
 }
@@ -337,7 +354,9 @@ footer, header, hgroup, menu, nav, section {
     margin: 0 0 0px 3rem;
 
 }
-
+.tab-content {
+    text-align: center;
+}
 .price {
     display: flex;
     flex-wrap: wrap;
@@ -678,7 +697,12 @@ button:focus {
     padding: .5rem 0;
     font-size: 1rem;
 }
-
+/* .descriptiontrans {
+    min-height: 178px;
+} */
+.descript {
+    height: 100px;
+}
 .descriptiontrans p {
     font-size: .8rem;
     font-family: fanum;
@@ -2150,6 +2174,18 @@ p.forgetpass, p.activesys {
 }
 .registerpage {
     min-height: 37.6vh;
+}
+.foter-blog h5 {
+    font-size: 1.1rem;
+}
+.foter-blog p {
+    font-size: .9rem;
+}
+.foter-blog span {
+    font-family: fanum;
+}
+.foter-blog svg {
+    font-size: 1.2rem;
 }
 .foter-blog  {
     background-color: #eff5ff;
