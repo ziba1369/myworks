@@ -14,7 +14,9 @@ const Login = props => {
     const [mobile, setMobile] = useState("");
     const [pass, setPass] = useState("");
     const [loginButton, setLoginButtonStyle] = useState({
-        backgroundColor: "#e1e1e1"
+        backgroundColor: "#e1e1e1",
+        border:"0",
+        boxShadow:"0"
     });
 
     const checkLoginButton = () => {
@@ -23,11 +25,29 @@ const Login = props => {
             setLoginButtonStyle({backgroundColor: "#1976d2"});
             $(".loginbutton").removeAttr("disabled");
         } else {
-            setLoginButtonStyle({backgroundColor: "#e1e1e1"});
+            setLoginButtonStyle({backgroundColor: "#e1e1e1",border:"0",boxShadow:"0"});
             $(".loginbutton").attr("disabled", "disabled");
         }
     };
-
+    const checkLoginEnter = () => {
+        const phoneno = /^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
+        if (mobile.match(phoneno) && pass.length > 1) {
+            setLoginButtonStyle({backgroundColor: "#1976d2"});
+            $(".loginbutton").removeAttr("disabled");
+            loginbutton();
+        } else {
+            setLoginButtonStyle({backgroundColor: "#e1e1e1",border:"0",boxShadow:"0"});
+            $(".loginbutton").attr("disabled", "disabled");
+        }
+    };
+    useEffect(()=>{
+        document.querySelector("#mobile").addEventListener("keypress", function (evt) {
+          if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+          {
+              evt.preventDefault();
+          }
+      },[mobile]);
+    })
     const handleName = e => {
         setMobile(e.target.value);
     };
@@ -104,8 +124,15 @@ const Login = props => {
                             <Form.Label>نام کاربری</Form.Label>
                             <Form.Control
                                 type="text"
+                                id="mobile"
                                 placeholder=""
                                 onChange={handleName}
+                                onKeyPress={event => {
+                                    if (event.key === 'Enter') 
+                                        {
+                                            checkLoginEnter()
+                                        }
+                                    }}
                                 vlaue={mobile}
                                 required
                             />
@@ -116,6 +143,12 @@ const Login = props => {
                                 type="password"
                                 placeholder=""
                                 onChange={handlepassword}
+                                onKeyPress={event => {
+                                    if (event.key === 'Enter') 
+                                        {
+                                            checkLoginEnter()
+                                        }
+                                    }}
                                 value={pass}
                                 required
                             />

@@ -90,7 +90,7 @@ const PriceServices = props => {
                 setStyletwo({color: '#454f63', backgroundColor: '#ebeeff', borderColor: '#5766b5'});
                 setStylethree({color: '#454f63', backgroundColor: '#ffdfe6', borderColor: '#ffdfe6'});
                 setStylefour({
-                    backgroundColor: "#deb69f",
+                    backgroundColor: "#0cb69f",
                     boxShadow: '0px 0px 15px -6px rgba(0,0,0,0.75)',
                     webkitboxShadow: '0px 0px 15px -6px rgba(0,0,0,0.75)',
                     MozwebkitboxShadow: '0px 0px 15px -6px rgba(0,0,0,0.75)',
@@ -293,9 +293,14 @@ const PriceServices = props => {
                                         </Card.Body>
                                         <Card.Footer>
                                             <p className="service-price" style={{cursor: "pointer"}} onClick={() => {
+                                                if(Cookies.get('token')){
                                                 Cookies.set('title', item.title, {expires: 7, path: '/'});
                                                 Cookies.set('types', item.id, {expires: 7, path: '/'});
                                                 props.history.push("/order/" + item.slug);
+                                                }
+                                                else{
+                                                    props.history.push("/login/");
+                                                }
                                             }}>ثبت سفارش</p>
                                         </Card.Footer>
                                     </Card>

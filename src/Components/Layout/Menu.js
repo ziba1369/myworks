@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Nav, NavDropdown, Row, Dropdown, Col } from "react-bootstrap";
 import Media from "react-media";
-import { Link } from "react-router-dom";
+import { Link,withRouter} from "react-router-dom";
 import {
   ToastsContainer,
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
+import * as Cookies from "js-cookie";
 import axios from "axios";
 const Menu = (props) => {
 
@@ -97,6 +98,12 @@ const Menu = (props) => {
   //     ]
   //   }
     ]);
+    // const childhandler=(item)=>{
+    //   Cookies.set('title', item.title, {expires: 7, path: '/'});
+    //   Cookies.set('types', item.id, {expires: 7, path: '/'});
+    //   props.history.push("/order/" + item.slug);
+    //   window.location.reload();
+    // }
   useEffect(() => {
     axios
       .get("http://hezare3vom.ratechcompany.com/api/front/web_menu", {
@@ -156,13 +163,16 @@ const Menu = (props) => {
                          
                         </p>
                         {item.subcat.map(child => {
-                         const childlink=link+"/"+child.slug;
+                        
                           return (
                         
-                            <Dropdown.Item  key={child.id}>
-                              <Link to={childlink}>
+                            <Dropdown.Item onClick={() =>{    Cookies.set('title', child.name, {expires: 7, path: '/'});
+                            Cookies.set('types', child.id, {expires: 7, path: '/'});
+                            props.history.push("/order/" + child.slug);
+                            } } key={child.id}>
+                             
                                 {child.name}  
-                              </Link>
+                              
                           
                             </Dropdown.Item>
                           
@@ -193,12 +203,15 @@ const Menu = (props) => {
                       </p>
 
                       {item.subcat.map(child => {
-                        const childlink=link+"/"+child.slug;
+                        
                         return (
-                          <Dropdown.Item  key={item.id}>
-                            <Link to={childlink}>
+                          <Dropdown.Item onClick={() =>{    Cookies.set('title', child.name, {expires: 7, path: '/'});
+                          Cookies.set('types', child.id, {expires: 7, path: '/'});
+                          props.history.push("/order/" + child.slug);
+                          } } key={child.id}>
+                            
                             {child.name}
-                            </Link>
+                           
                           </Dropdown.Item>
                         );
                       })}
@@ -225,4 +238,4 @@ const Menu = (props) => {
   );
 };
 
-export default Menu;
+export default withRouter(Menu);

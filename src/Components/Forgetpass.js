@@ -59,21 +59,40 @@ const Forgetpass = (props) => {
     const [mobile, setMobile] = useState("");
     const [vertification, setVertification] = useState("");
     const [RegisterFirst, setRegisterFirstStyle] = useState({
-        backgroundColor: "#e1e1e1"
-        ,border:"0px"
+        backgroundColor: "#e1e1e1",
+        border:"0",
+        boxShadow:"unset",
     });
-
+    useEffect(()=>{
+        document.querySelector("#mobile").addEventListener("keypress", function (evt) {
+          if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+          {
+              evt.preventDefault();
+          }
+      },[mobile]);
+       })
     // check conditions and enable/disable register button
     const checkRegisterFirstButton = () => {
-       const phoneno=/^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
+       const phoneno=/^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
         if (mobile.match(phoneno)) {
             setRegisterFirstStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
-            setRegisterFirstStyle({backgroundColor: "#e1e1e1"});
+            setRegisterFirstStyle({backgroundColor: "#e1e1e1", border:"0",boxShadow:"unset",});
             $("#rfbutton").attr("disabled", "disabled");
         }
     };
+    const checkRegisterFirstEnter = () => {
+        const phoneno=/^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
+         if (mobile.match(phoneno)) {
+             setRegisterFirstStyle({backgroundColor: "#1976d2"});
+             $("#rfbutton").removeAttr("disabled");
+             loginfirstStep()
+         } else {
+             setRegisterFirstStyle({backgroundColor: "#e1e1e1", border:"0",boxShadow:"unset",});
+             $("#rfbutton").attr("disabled", "disabled");
+         }
+     };
 
     // change mobile value when changed
     const handleMobileChange = e => {
@@ -113,7 +132,9 @@ const Forgetpass = (props) => {
     //////////////////// SECOND STEP //////////////////////
     // states
     const [activSecond, setactiveSecondStyle] = useState({
-        color: "#e1e1e1"
+        color: "#e1e1e1",
+        border:"0",
+        boxShadow:"unset",
     });
 
     const [active, setActive] = useState("");
@@ -121,7 +142,8 @@ const Forgetpass = (props) => {
     const [second, setSecond] = useState(60)
     const [RegisterSecond, setRegisterSecondStyle] = useState({
         backgroundColor: "#e1e1e1",
-        border:"0px"
+        border:"0",
+        boxShadow:"unset",
     });
     useEffect(() => {
         setMin(0)
@@ -138,7 +160,17 @@ const Forgetpass = (props) => {
             setRegisterSecondStyle({backgroundColor: "#1976d2"});
             $("#rfbutton").removeAttr("disabled");
         } else {
-            setRegisterSecondStyle({backgroundColor: "#e1e1e1"});
+            setRegisterSecondStyle({backgroundColor: "#e1e1e1", border:"0",boxShadow:"unset",});
+            $("#rfbutton").attr("disabled", "disabled");
+        }
+    };
+    const checkRegisterSecondEnter = () => {
+        if (active) {
+            setRegisterSecondStyle({backgroundColor: "#1976d2"});
+            $("#rfbutton").removeAttr("disabled");
+            loginSecondStep();
+        } else {
+            setRegisterSecondStyle({backgroundColor: "#e1e1e1", border:"0",boxShadow:"unset",});
             $("#rfbutton").attr("disabled", "disabled");
         }
     };
@@ -181,7 +213,7 @@ const Forgetpass = (props) => {
     .then(function (response) {
         //console.log(response.data.success)
         if (response.data.success) {
-            ToastsStore.success(response.data.code);
+            //ToastsStore.success(response.data.code);
             setStep(3)
             //setVertification(response.data.code);
             //props.history.push("/");
@@ -203,15 +235,26 @@ const Forgetpass = (props) => {
     const [newpassr, setnewpassr] = useState("");
     const [RegisterThird, setRegisterThirdStyle] = useState({
         backgroundColor: "#e1e1e1",
-        border:"0px"
+        border:"0",
+        boxShadow:"unset",
     });
     // check conditions and enable/disable register button
     const checkRegisteThirdButton = () => {
-        if (newpass === newpassr) {
+        if (newpass === newpassr && newpass.length>1 && newpassr.length>1) {
             setRegisterThirdStyle({backgroundColor: "#1976d2"});
             $("#rtbutton").removeAttr("disabled");
         } else {
-            setRegisterThirdStyle({backgroundColor: "#e1e1e1"});
+            setRegisterThirdStyle({backgroundColor: "#e1e1e1", border:"0",boxShadow:"unset",});
+            $("#rtbutton").attr("disabled", "disabled");
+        }
+    };
+    const checkRegisteThirdEnter = () => {
+        if (newpass === newpassr && newpass.length>1 && newpassr.length>1) {
+            setRegisterThirdStyle({backgroundColor: "#1976d2"});
+            $("#rtbutton").removeAttr("disabled");
+            loginThirdStep();
+        } else {
+            setRegisterThirdStyle({backgroundColor: "#e1e1e1", border:"0",boxShadow:"unset",});
             $("#rtbutton").attr("disabled", "disabled");
         }
     };
@@ -259,11 +302,33 @@ const Forgetpass = (props) => {
     const handlenewpassr = e => {
         setnewpassr(e.target.value);
     };
+    useEffect(()=>{
+        let borders=document.getElementsByClassName('borderpass');
+    
+        if(newpass!==newpassr && newpass.length>0 && newpassr.length>0)
+        {var i;
+        for (i = 0; i < borders.length; i++) {
+        borders[i].style.border = "1px solid red";
+        }
+         
+        }else if(newpass===newpassr && newpass.length>0 && newpassr.length>0){
+            var i;
+        for (i = 0; i < borders.length; i++) {
+        borders[i].style.border = "1px solid green";
+        }}else if(newpass.length===0 && newpassr.length===0){
+            for (i = 0; i < borders.length; i++) {
+                borders[i].style.border = " 1px solid #ced4da";
+                }
+           
+        }
+    
+    },[newpass,newpassr])
 
     //////////////////// FOURTH STEP //////////////////////
     // states
     const [RegisterFourth, setRegisterFourthStyle] = useState({
-        backgroundColor: "#1976d2"
+        backgroundColor: "#1976d2",
+       
     });
     // check conditions and enable/disable register button
     const checkRegisterThirdButton = () => {
@@ -272,7 +337,8 @@ const Forgetpass = (props) => {
 
     // checkRegisterFourthButton function after rules value changed
     const loginFourthStep = () => {
-        setStep(5);
+        //setStep(5);
+        props.history.push('/login')
     };
 
     return (
@@ -303,7 +369,14 @@ const Forgetpass = (props) => {
                                         type="tel"
                                         placeholder=""
                                         onChange={handleMobileChange}
+                                        onKeyPress={event => {
+                                            if (event.key === 'Enter') 
+                                                {
+                                                    checkRegisterFirstEnter()
+                                                }
+                                            }}
                                         vlaue={mobile}
+                                        id="mobile"
                                         required
                                     />
                                 </Form.Group>
@@ -316,6 +389,7 @@ const Forgetpass = (props) => {
                                     style={RegisterFirst}
                                     onClick={loginfirstStep}
                                     className="loginbutton"
+                                    
                                 >
                                     ورود
                                 </Button>
@@ -336,6 +410,12 @@ const Forgetpass = (props) => {
                                         placeholder=""
                                         onChange={handlerActiveChange}
                                         vlaue={active}
+                                        onKeyPress={event => {
+                                            if (event.key === 'Enter') 
+                                                {
+                                                    checkRegisterSecondEnter()
+                                                }
+                                            }}
                                         required
                                     />
                                     <p id="timer">0{min}:{second}</p>
@@ -363,6 +443,13 @@ const Forgetpass = (props) => {
                                     <Form.Control
                                         type="password"
                                         placeholder=""
+                                        onKeyPress={event => {
+                                            if (event.key === 'Enter') 
+                                                {
+                                                    checkRegisteThirdEnter()
+                                                }
+                                            }}
+                                        className="borderpass"
                                         onChange={handlenewpass}
                                         vlaue={newpass}
                                         required
@@ -373,8 +460,15 @@ const Forgetpass = (props) => {
                                     <Form.Control
                                         type="password"
                                         placeholder=""
+                                        onKeyPress={event => {
+                                            if (event.key === 'Enter') 
+                                                {
+                                                    checkRegisteThirdEnter()
+                                                }
+                                            }}
                                         onChange={handlenewpassr}
                                         vlaue={newpassr}
+                                        className="borderpass"
                                         required
                                     />
                                 </Form.Group>
@@ -399,6 +493,12 @@ const Forgetpass = (props) => {
                                     type="submit"
                                     id="rfobutton"
                                     style={RegisterFourth}
+                                    onKeyPress={event => {
+                                        if (event.key === 'Enter') 
+                                            {
+                                                loginFourthStep()
+                                            }
+                                        }}
                                     onClick={loginFourthStep}
                                     className="loginbutton"
                                 >

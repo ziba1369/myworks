@@ -75,10 +75,14 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
   });
 
   const valid = validation.map((item, index) => {
+    var val = [...validation];
     const validhandle = () => {
-      var val = [...validation];
+      if(item.needed!==1)
+      {
       val[index].checkin = !val[index].checkin;
+      
       setVal(val);
+      }
     };
     return (
       <Row key={item.id}>
@@ -92,7 +96,7 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
                 type="checkbox"
                 onChange={validhandle}
                 id={item.id}
-                checked={item.checkin? "checked ": ""}
+                checked={item.needed===1 ?"checked ":item.checkin? "checked ": ""}
               />
             </span>
           </p>

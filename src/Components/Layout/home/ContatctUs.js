@@ -23,7 +23,14 @@ const [loginButton, setLoginButtonStyle] = useState({backgroundColor: "#e1e1e1"}
 //     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 //     return re.test(email);
 //   }
-
+useEffect(()=>{
+    document.querySelector("#phone").addEventListener("keypress", function (evt) {
+      if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+      {
+          evt.preventDefault();
+      }
+  },[tel]);
+})
 const checkLoginButton = () => {
     const phoneno=/^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
     const mailno=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -46,7 +53,8 @@ const handleTell=(e)=>{
   
    }
    const handleEmail=(e)=>{
-    setEmail(e.target.value)
+        setEmail(e.target.value);
+
    }
    const handleIssue=(e)=>{
     setIssue(e.target.value)
@@ -63,8 +71,10 @@ const handleTell=(e)=>{
     checkLoginButton()
   },
   [tel])
-  useEffect(()=>{
+  
+  useEffect((e)=>{
     checkLoginButton()
+
   },
   [email])
   useEffect(()=>{
@@ -73,16 +83,16 @@ const handleTell=(e)=>{
   useEffect(()=>{
     checkLoginButton()
   },[message])
-  const blurEmail=()=>{
-    let mailno=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(email.length===1)
-    {  
-        ToastsStore.error('aaa')
-     }
-     else{
-        ToastsStore.error('bbbbbb')
-     }
- 
+  const blurEmail=(e)=>{
+    const mailno=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   
+    if(!(email.match(mailno)))
+    {
+       setEmail(e.target.value);
+    } else{
+       alert("ایمیل وارد شده اشتباه است")
+    }
+  
     }
 const sendHandler=()=>{
     const contactUs = {
@@ -122,8 +132,8 @@ const sendHandler=()=>{
                                     <Form.Label   >نام</Form.Label>
                                     <Form.Control onChange={handleName} size="sm" type="text" value={name}/>
                                     <Form.Label  >شماره همراه</Form.Label>
-                                    <Form.Control size="sm" type="tel" onChange={handleTell} vlaue={tel} id="phone" name="phone"/>
-                                    <Form.Label id="email" >ایمیل آدرس</Form.Label>
+                                    <Form.Control size="sm" type="number" onChange={handleTell} vlaue={tel} id="phone" name="phone"/>
+                                    <Form.Label id="email">ایمیل آدرس</Form.Label>
                                     <Form.Control  onChange={handleEmail}  onBlur={blurEmail} value={email} size="sm" pattern="/^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" type="eamil"/>
                                     <Form.Label >موضوع</Form.Label>
                                     <Form.Control  onChange={handleIssue} size="sm" value={issue} type="type"/>
