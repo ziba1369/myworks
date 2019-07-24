@@ -69,6 +69,25 @@ const EditProfile = (props) => {
   {
     setImageprofile(e.target.files[0])
   }
+  useEffect(()=>{
+    document.querySelector("#certi").addEventListener("keypress", function (evt) {
+      if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+      {
+          evt.preventDefault();
+      }
+  })
+
+},[certi])
+useEffect(()=>{
+ 
+  document.querySelector("#mobile").addEventListener("keypress", function (evt) {
+    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+})
+
+},[certi])
   useEffect(() => {
     checkRegisterButton();
   }, [lastname]);
@@ -197,6 +216,7 @@ const EditProfile = (props) => {
               onChange={handleLastName}
               value={lastname}
               required
+              
             />
           </Form.Group>
         </Col>
@@ -210,6 +230,7 @@ const EditProfile = (props) => {
               placeholder=""
               onChange={handleCertificate}
               value={certi}
+              id="certi"
               required
             />
           </Form.Group>
@@ -218,10 +239,11 @@ const EditProfile = (props) => {
           <Form.Group>
             <Form.Label>شماره همراه</Form.Label>
             <Form.Control
-              type="tel"
+              type="number"
               placeholder=""
               onChange={handleMobileChange}
               vlaue={mobile}
+              id="mobile"
               required
             />
           </Form.Group>

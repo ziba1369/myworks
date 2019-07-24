@@ -63,8 +63,8 @@ const NavBar = () => {
                   </Col>
                 </Nav>
                 <Nav style={styleTwo} className="loginprofile">
-                  <Col xl={6} md={6} sm={12} xs={12}>
-                    <Nav className="user">
+                  <Col className="userprofile" xl={6} md={6} sm={12} xs={12}>
+                    <Nav >
                       <NavDropdown
                         title={
                           Cookies.get("name") + " " + Cookies.get("family")
@@ -78,7 +78,7 @@ const NavBar = () => {
                             style={{color:'#000'}}
                             componentClass='span'
                           >
-                              <Link to="/panel">
+                              <Link to="/profile">
                             <Image src={profileImage} />
                             پروفایل
                             </Link>
@@ -94,7 +94,7 @@ const NavBar = () => {
                       </NavDropdown>
                     </Nav>
                   </Col>
-                  <Col xl={6} md={6} sm={12} xs={12}>
+                  <Col className="user" xl={6} md={6} sm={12} xs={12}>
                     <Link to="/login">
                       <Button className="sign">لیست سفارشات</Button>
                     </Link>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Row, Col, Breadcrumb,Image } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 import Tabschoice from "./Layout/orderlayout/Tabschoice";
 import Photoupload from "./Layout/orderlayout/Photoupload";
 import Confirmorder from "./Layout/orderlayout/Confirmorder";
@@ -87,8 +87,10 @@ const Order = props => {
         });
         setStyletwo({
           backgroundColor: "#fafafa",
-          border: "2px solid #e1e1e1",
-          color: "#495267"
+          position: "relative",
+          border:"0px solid #e1e1e1",
+          color: "#495267",
+          boxShadow: "0px 6px 10px -2px rgba(0, 0, 0, 0.32)",
         });
         setStylethree({
           backgroundColor: "#fafafa",
@@ -143,8 +145,10 @@ const Order = props => {
         });
         setStylethree({
           backgroundColor: "#fafafa",
-          border: "2px solid #e1e1e1",
-          color: "#495267"
+          position: "relative",
+          border:"0px solid #e1e1e1",
+          color: "#495267",
+          boxShadow: "0px 6px 10px -2px rgba(0, 0, 0, 0.32)",
         });
         setStylefour({
           backgroundColor: "#fafafa",
@@ -208,8 +212,10 @@ const Order = props => {
         });
         setStylefour({
           backgroundColor: "#fafafa",
-          border: "2px solid #e1e1e1",
-          color: "#495267"
+          position: "relative",
+          border:"0px solid #e1e1e1",
+          color: "#495267",
+          boxShadow: "0px 6px 10px -2px rgba(0, 0, 0, 0.32)",
         });
         setStylefive({
           backgroundColor: "#fafafa",
@@ -283,8 +289,10 @@ const Order = props => {
         });
         setStylefive({
           backgroundColor: "#fafafa",
-          border: "2px solid #e1e1e1",
-          color: "#495267"
+          position: "relative",
+          border:"0px solid #e1e1e1",
+          color: "#495267",
+          boxShadow: "0px 6px 10px -2px rgba(0, 0, 0, 0.32)",
         });
         setLineone({
           content: "",
@@ -362,8 +370,10 @@ const Order = props => {
         });
         setStylefive({
           backgroundColor: "#fafafa",
-          border: "2px solid #e1e1e1",
-          color: "#495267"
+          position: "relative",
+          border:"0px solid #e1e1e1",
+          color: "#495267",
+          boxShadow: "0px 6px 10px -2px rgba(0, 0, 0, 0.32)",
         });
 
         break;
@@ -431,7 +441,12 @@ if(Cookies.get('token'))
   setOrderuser({display:'block'});
 }
 },[])
-   
+if (Cookies.get('token') == null) {
+  return (
+      <Redirect to='/login'/>
+  );
+}
+else{
   return (
     <React.Fragment>
       <Container>
@@ -548,7 +563,7 @@ if(Cookies.get('token'))
             id="pay"
             className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer last"
           >
-            <Button size="lg" onClick={handlerPay}>
+            <Button size="lg" style={stylefour} onClick={handlerPay}>
               پرداخت
             </Button>
           </Col>
@@ -568,6 +583,7 @@ if(Cookies.get('token'))
       <Footer />
     </React.Fragment>
   );
+        }
 };
 
 export default Order;

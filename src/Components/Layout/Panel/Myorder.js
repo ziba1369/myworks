@@ -46,10 +46,10 @@ const Myorder = () => {
           
             <Col lg={1} xl={1} md={1}>ردیف</Col>
             <Col lg={2} xl={2} md={2}>عنوان سفارش</Col>
-            <Col lg={2} xl={2} md={2}>شماره سفارش</Col>
+            <Col lg={3} xl={3} md={3}>شماره سفارش</Col>
             <Col lg={2} xl={2} md={2}>تاریخ ثبت</Col>
             <Col lg={2} xl={2} md={2}>وضعیت</Col>
-            <Col lg={3} xl={3} md={3}>عملیات</Col>
+            <Col lg={2} xl={2} md={2}>عملیات</Col>
          
             </div>
             {order.map(item=>{
@@ -58,10 +58,10 @@ const Myorder = () => {
             <div className="row myorderlist">
             <Col lg={1} xl={1} md={1}>{item.id}</Col>
             <Col lg={2} xl={2} md={2}>{item.order_name}</Col>
-            <Col lg={2} xl={2} md={2}>{item.order_code}</Col>
+            <Col lg={3} xl={3} md={3}>{item.order_code}</Col>
             <Col lg={2} xl={2} md={2}>{item.created_at}</Col>
-            <Col lg={2} xl={2} md={2}>{item.statue}</Col>
-            <Col lg={3} xl={3} md={3}>عملیات</Col>
+            <Col lg={2} xl={2} md={2}>{item.status}</Col>
+            <Col lg={2} xl={2} md={2}>عملیات</Col>
             </div>
           )
           })

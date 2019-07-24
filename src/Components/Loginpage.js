@@ -6,7 +6,7 @@ import {
     ToastsContainerPosition
 } from "react-toasts";
 import $ from "jquery";
-import {Link} from "react-router-dom";
+import {Link,Redirect} from "react-router-dom";
 import axios from "axios";
 import * as Cookies from "js-cookie";
 import Footer from './Layout/Footer';
@@ -40,14 +40,18 @@ const Login = props => {
             $(".loginbutton").attr("disabled", "disabled");
         }
     };
+    
     useEffect(()=>{
+        if(document.getElementById("mobile"))
+       {
         document.querySelector("#mobile").addEventListener("keypress", function (evt) {
           if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
           {
               evt.preventDefault();
           }
-      },[mobile]);
-    })
+      })
+    }
+    },[mobile])
     const handleName = e => {
         setMobile(e.target.value);
     };
@@ -102,8 +106,9 @@ const Login = props => {
 
     };
 
-
-    return (
+  
+ if(Cookies.get('token') ==null)
+   { return (
 
         <div className="loginpage">
             <Container>
@@ -189,5 +194,13 @@ const Login = props => {
 
 
     );
+                                }
+     else{
+         return(
+           <Redirect to="/" />
+         )
+     }                       
+                                
 };
+
 export default Login;

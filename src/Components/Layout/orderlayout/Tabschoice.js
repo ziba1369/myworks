@@ -44,9 +44,11 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
     color: "#e1e1e1",
     border: "0px"
   });
+  
   const lnaguage = languages.map((item, index) => {
     const langhandle = () => {
-         var lng = [...languages];
+      
+      var lng = [...languages];
       lng[index].checkin = !lng[index].checkin;
       setLang(lng);
       
@@ -65,7 +67,7 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
                 type="checkbox"
                 id="langu"
                 className="langu"
-                checked={item.checkin? "checked ": ""}
+                checked={item.checkin? "checked": ""}
               />
             </span>
           </p>
@@ -76,13 +78,18 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
 
   const valid = validation.map((item, index) => {
     var val = [...validation];
+    if(val[index].needed===1){
+      val[index].checkin=true;
+    
+    }
     const validhandle = () => {
-      if(item.needed!==1)
+      if(val[index].needed===0)
       {
       val[index].checkin = !val[index].checkin;
       
       setVal(val);
       }
+     
     };
     return (
       <Row key={item.id}>
@@ -96,7 +103,7 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
                 type="checkbox"
                 onChange={validhandle}
                 id={item.id}
-                checked={item.needed===1 ?"checked ":item.checkin? "checked ": ""}
+                checked={item.needed===1 ?"checked ":item.checkin? "checked": ""}
               />
             </span>
           </p>
@@ -378,7 +385,7 @@ useEffect(() => {
       if (response.data.success) {
           
           setVal(response.data.product_certificates);
-          
+         
          
 
       } else {
@@ -391,6 +398,7 @@ useEffect(() => {
   });
 
 }, [types]);
+console.log(validation)
   return (
     <React.Fragment>
       <Row>
