@@ -2335,7 +2335,7 @@ border-radius:0px
 }
 .myorderlist{
     background-color:#f0f0f0;
-    height:100px;
+    padding: 1.2rem 0;
     margin-top: 1rem;
    
 }
