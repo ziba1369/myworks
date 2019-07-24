@@ -32,7 +32,7 @@ useEffect(()=>{
   },[tel]);
 })
 const checkLoginButton = () => {
-    const phoneno=/^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
+    const phoneno=/^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
     const mailno=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (name.length >0 && tel.match(phoneno) && email.match(mailno) && issue.length>0 && message.length>0) {
         setLoginButtonStyle({backgroundColor: "#1976d2"})
@@ -87,13 +87,19 @@ const handleTell=(e)=>{
     const mailno=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
    
     if(!(email.match(mailno)))
-    {
-       setEmail(e.target.value);
-    } else{
-       alert("ایمیل وارد شده اشتباه است")
-    }
+
+      ToastsStore.warning("کاربر گرامی لطفا ایمیل خود را با فرمت مناسب وارد نمایید")
+    
   
     }
+    const blurPhone=(e)=>{
+        const phoneno=/^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
+        if(!(tel.match(phoneno)))
+    
+          ToastsStore.warning("کاربر گرامی لطفا شماره همراه خود را با فرمت مناسب وارد نمایید")
+        
+      
+        }
 const sendHandler=()=>{
     const contactUs = {
         name: name,
@@ -121,7 +127,10 @@ const sendHandler=()=>{
 }
     return (
         <React.Fragment>
-
+  <ToastsContainer
+                  position={ToastsContainerPosition.TOP_CENTER}
+                  store={ToastsStore}
+                />
             <Row>
                 <Col xl={9} md={9} sm={12} xs={12} className="footercontent">
                     <h4 className="call titlesections">تماس با ما</h4>
@@ -132,7 +141,7 @@ const sendHandler=()=>{
                                     <Form.Label   >نام</Form.Label>
                                     <Form.Control onChange={handleName} size="sm" type="text" value={name}/>
                                     <Form.Label  >شماره همراه</Form.Label>
-                                    <Form.Control size="sm" type="number" onChange={handleTell} vlaue={tel} id="phone" name="phone"/>
+                                    <Form.Control size="sm" type="number" onBlur={blurPhone} onChange={handleTell} vlaue={tel} id="phone" name="phone"/>
                                     <Form.Label id="email">ایمیل آدرس</Form.Label>
                                     <Form.Control  onChange={handleEmail}  onBlur={blurEmail} value={email} size="sm" pattern="/^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/" type="eamil"/>
                                     <Form.Label >موضوع</Form.Label>

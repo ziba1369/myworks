@@ -21,6 +21,18 @@ const Register = props => {
     display: "none",
     marginTop: "60px"
   });
+  const mobileCheck=()=>{
+    const phoneno=/^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
+        if(!(mobile.match(phoneno)))
+    
+          ToastsStore.warning("کاربر گرامی لطفا شماره همراه خود را با فرمت مناسب وارد نمایید")
+        
+      
+        }
+  
+
+
+
  useEffect(()=>{
   document.querySelector("#mobile").addEventListener("keypress", function (evt) {
     if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
@@ -93,6 +105,7 @@ const Register = props => {
       $("#rfbutton").removeAttr("disabled");
       loginfirstStep()
     } else {
+      ToastsStore.warning('کاربر گرامی لطفا شماره همراه خود را با فرمت مناسب وارد نمایید')
       setRegisterFirstStyle({
         backgroundColor: "#e1e1e1",
         border: "0px",
@@ -391,7 +404,7 @@ const Register = props => {
     if (
       name.length > 0 &&
       lastname.length > 0 &&
-      certi.length === 10 &&
+      certi.length> 1 &&
       birthvalue !== undefined &&
       birthmonthvalue !== undefined &&
       birthyearvalue !== undefined &&
@@ -555,6 +568,7 @@ const Register = props => {
                     onChange={handleMobileChange}
                     id="mobile"
                     value={mobile}
+                    onBlur={mobileCheck}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
                         checkRegisterFirstEnter();
