@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Image, Col, Row} from "react-bootstrap";
 import khabanameh from "../images/khabarnameh.jpg";
 import {Link} from "react-router-dom";
+import NavBar from './Layout/NavBar';
 import Paginatior from "react-hooks-paginator";
 import axios from "axios";
 import {
@@ -133,6 +134,9 @@ const Steptranslate = () => {
      
     return ( 
         <React.Fragment>
+              <header>
+                <NavBar/>  
+             </header>
              <Row className=" slideone rtl">
                 <Col xl={{ span: 10, offset: 1}} md={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} xs={12} className="centerlogo">
                  {showlast}             

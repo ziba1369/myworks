@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row, Breadcrumb, Container, Image,Button,} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import NavBar from './Layout/NavBar';
 import khabanameh from "../images/khabarnameh.jpg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTwitter, faLinkedin, faInstagram, faFacebook} from "@fortawesome/free-brands-svg-icons";
@@ -54,6 +55,9 @@ const BlogOriginal = (props) => {
   },[props.match.params.slug]);
   return (
       <React.Fragment>
+          <header>
+                <NavBar/>  
+             </header>
     <Container>
       <Row>
         <Col

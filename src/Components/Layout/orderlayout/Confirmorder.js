@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import envelop from '../../../images/contract.svg';
 import {Col, Button, Row, Image} from 'react-bootstrap';
-
+import { Link } from "react-router-dom";
 const Confirmorder = ({onClicks, step, onChanges}) => {
     const [code, usecode] = useState(123456789)
     const handleSubmit = () => {
@@ -20,8 +20,10 @@ const Confirmorder = ({onClicks, step, onChanges}) => {
                 <p style={{fontSize: '.6rem', color: '#707069'}}>جهت پیگیری روند سفارش به بخش سفارش ها مراجعه کنید</p>
 
             </div>
-            <Button style={{width: '14rem'}} id="add1" onClick={handleSubmit} type="submit">
+            <Button style={{width: '14rem'}} id="add1" onClick={handleSubmit} >
+                <Link to="/profile/second">
                 سفارشات
+                </Link>
             </Button>
         </Col>
 

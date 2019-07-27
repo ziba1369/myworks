@@ -6,6 +6,7 @@ import Photoupload from "./Layout/orderlayout/Photoupload";
 import Confirmorder from "./Layout/orderlayout/Confirmorder";
 import Footer from "./Layout/Footer";
 import shenasnameh from '../images/Shenasname_1.jpg';
+import NavBar from './Layout/NavBar';
 import {
   ToastsContainer,
   ToastsStore,
@@ -449,6 +450,9 @@ if (Cookies.get('token') == null) {
 else{
   return (
     <React.Fragment>
+        <header>
+                <NavBar/>  
+             </header>
       <Container>
         <Row>
          

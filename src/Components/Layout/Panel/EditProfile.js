@@ -75,31 +75,31 @@ const EditProfile = props => {
     width: "11vw",
     borderRadius: ".25rem"
   });
-  const checkRegisterButton = () => {
-    const phoneno = /^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
-    if (name.length > 0 &&
-      lastname.length > 0 &&
-      certi.length === 10 &&
-      birthvalue !== undefined &&
-      birthmonthvalue !== undefined &&
-      birthyearvalue !== undefined ) {
-      setRegister({
-        backgroundColor: "#1976d2",
-        border: "0px",
-        width: "11vw",
+  // const checkRegisterButton = () => {
+  //   const phoneno = /^(9|09)(12|19|35|36|37|38|39|32|21|03|01)\d{7}$/;
+  //   if (name.length > 0 &&
+  //     lastname.length > 0 &&
+  //     certi.length === 10 &&
+  //     birthvalue !== undefined &&
+  //     birthmonthvalue !== undefined &&
+  //     birthyearvalue !== undefined ) {
+  //     setRegister({
+  //       backgroundColor: "#1976d2",
+  //       border: "0px",
+  //       width: "11vw",
      
-      });
-      $("#rfbutton").removeAttr("disabled");
-    } else {
-      setRegister({
-        backgroundColor: "#e1e1e1",
-        border: "0px",
-        width: "11vw",
+  //     });
+  //     $("#rfbutton").removeAttr("disabled");
+  //   } else {
+  //     setRegister({
+  //       backgroundColor: "#e1e1e1",
+  //       border: "0px",
+  //       width: "11vw",
       
-      });
-      $("#rfbutton").attr("disabled", "disabled");
-    }
-  };
+  //     });
+  //     $("#rfbutton").attr("disabled", "disabled");
+  //   }
+  // };
   const handleMobileChange = e => {
     setMobile(e.target.value);
   };
@@ -148,26 +148,26 @@ const EditProfile = props => {
   //     })
 
   // }, [certi])
-  useEffect(() => {
-    checkRegisterButton();
-  }, [lastname]);
+  // useEffect(() => {
+  //   checkRegisterButton();
+  // }, [lastname]);
 
-  useEffect(() => {
-    checkRegisterButton();
-  }, [certi]);
+  // useEffect(() => {
+  //   checkRegisterButton();
+  // }, [certi]);
 
-  useEffect(() => {
-    checkRegisterButton();
-  }, [mobile]);
-  useEffect(() => {
-    checkRegisterButton();
-  }, [birthvalue]);
-  useEffect(() => {
-    checkRegisterButton();
-  }, [birthmonthvalue]);
-  useEffect(() => {
-    checkRegisterButton();
-  }, [birthyearvalue]);
+  // useEffect(() => {
+  //   checkRegisterButton();
+  // }, [mobile]);
+  // useEffect(() => {
+  //   checkRegisterButton();
+  // }, [birthvalue]);
+  // useEffect(() => {
+  //   checkRegisterButton();
+  // }, [birthmonthvalue]);
+  // useEffect(() => {
+  //   checkRegisterButton();
+  // }, [birthyearvalue]);
 
   const changeprev = () => {
     document.getElementById("prev").style.display = "block";

@@ -13,12 +13,10 @@ import inboximg from "../images/inbox.svg";
 import changepassimg from "../images/changepass.svg";
 import logout from "../images/logout.svg";
 import * as Cookies from "js-cookie";
-import { Route,
-Link,} from "react-router-dom";
+import { Route,Link,} from "react-router-dom";
+
 const Panelcustom = (props) => {
-  useEffect(() => {
-    $(".headersite").remove();
-  }, []);
+
 
     const handlelogout = () => {
       

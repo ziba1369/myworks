@@ -258,7 +258,7 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
   };
   useEffect(() => {
     changeButton();
-   Cookies.set("languages",languages, {expires: 7,path: "/"});
+    Cookies.set("languages",languages, {expires: 7,path: "/"});
     // console.log(languages);
     
 
@@ -272,23 +272,7 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
     changeButton();
   }, [delivery]);
 
-  useEffect(() => {
-  
-    if (Cookies.get("languages") !== null) {
-     
-     setLang(JSON.parse(Cookies.get("languages")))
-     //console.log(languages)
-    }
-  },[]);
-  useEffect(()=>{
-     if(Cookies.get("validation") !== null) {
-     
-      setVal(JSON.parse(Cookies.get("validation")))
-     
-     }
-   
-     
-  },[]);
+
   useEffect(()=>{
     if(Cookies.get("delivery") !== null) {
      
@@ -342,9 +326,10 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
     Cookies.set('deliverynum',deliverynum(),{ expires: 7, path: '' })
 
   },[deliverynum])
-  useEffect(() => {
 
-  
+
+
+  useEffect(() => {
     axios
     .get(
         "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id="+types,
@@ -355,8 +340,20 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
     )
     .then(function (response) {
         if (response.data.success) {
-            
-            setLang(response.data.product_languages);
+            if (Cookies.get("languages") !== null) {
+              setLang(JSON.parse(Cookies.get("languages")))
+           
+             }else{
+              setLang(response.data.product_languages);
+            }
+
+            if(Cookies.get("validation") !== null) {
+     
+              setVal(JSON.parse(Cookies.get("validation")))
+             
+             } else {
+              setVal(response.data.product_certificates);
+             }
             
            
 
@@ -365,39 +362,10 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
             
         }
     })
-    // .catch(function (error) {
-    //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-    // });
+
 
 }, [types]);
-useEffect(() => {
 
-  
-  axios
-  .get(
-      "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id="+types,
-     
-      {
-          headers: {"Content-Type": "application/json"}
-      }
-  )
-  .then(function (response) {
-      if (response.data.success) {
-          
-          setVal(response.data.product_certificates);
-         
-         
-
-      } else {
-          ToastsStore.error(response.data.error);
-          
-      }
-  })
-  // .catch(function (error) {
-  //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-  // });
-
-}, [types]);
 console.log(validation)
   return (
     <React.Fragment>

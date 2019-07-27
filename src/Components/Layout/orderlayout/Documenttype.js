@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Card} from 'react-bootstrap';
-
+import { Link } from "react-router-dom";
 const Documenttype = () => {
     const [typedoc, changetypedoc] = useState({
         type: 'شناسنامه',
