@@ -13,32 +13,38 @@ const Relatedwebsites = () => {
         {
             id: 1,
             img: amozehparvaresh,
-            name: "amozehparvaresh"
+            name: "amozehparvaresh",
+            link:"http://www.medu.ir/fa/"
         },
         {
             id: 2,
             img: azaduni,
-            name: "azaduni"
+            name: "azaduni",
+            link:"https://www.iau.ac.ir/"
         },
         {
             id: 3,
             img: vezaratolom,
-            name: "vezaratolom"
+            name: "vezaratolom",
+            link:"https://www.saorg.ir/"
         },
         {
             id: 4,
             img: sabteahval,
-            name: "sabteahval"
+            name: "sabteahval",
+            link:"https://www.sabteahval.ir/"
         },
         {
             id: 5,
             img: kanonmotarjem,
-            name: "kanonmotarjem"
+            name: "kanonmotarjem",
+            link:"https://www.iacti.ir/"
         },
         {
             id: 6,
             img: dargahkhdamat,
-            nmae: "kanonmotarjem"
+            name: "dargahkhdamat",
+            link:"http://www.epolice.ir/news.php"
         }
     ])
     const logosazman = Information.map((item, inex) => {
@@ -46,7 +52,7 @@ const Relatedwebsites = () => {
 
             <Col key={item.id} xl={4} lg={4} md={4} sm={12} xs={12}>
                 <div className="relatedsite">
-                    <a href={null}>
+                    <a href={item.link} target="_blank">
                         <Image src={item.img} className={item.name} alt={item.img}/>
                     </a>
                 </div>

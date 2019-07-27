@@ -124,6 +124,7 @@ useEffect(()=>{
   const formData = new FormData();
         formData.append("customer_token", Cookies.get('token'));
         formData.append("profile_image",imageprofile);
+        formData.append("customer_image",Cookies.get('customer_img'));
         formData.append("name",name);
         formData.append("family",lastname);
         formData.append("national_code",certi);
@@ -133,7 +134,7 @@ useEffect(()=>{
             headers: {"Content-Type": "multipart/form-data"}
         })
         .then(function (response) {
-          console.log(response.data)
+          console.log(response.data,"poest")
             if (response.data.success) {
               alert(response.data)
                     Cookies.set("customer_token", response.data.token, {path: "/", expires: 7});

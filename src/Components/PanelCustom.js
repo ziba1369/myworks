@@ -12,7 +12,8 @@ import inboximg from "../images/inbox.svg";
 import changepassimg from "../images/changepass.svg";
 import logout from "../images/logout.svg";
 import * as Cookies from "js-cookie";
-
+import { Route,
+Link,} from "react-router-dom";
 const Panelcustom = (props) => {
   useEffect(() => {
     $(".headersite").remove();
@@ -38,6 +39,7 @@ const Panelcustom = (props) => {
   //   }
   // }
   // ,[eventKey])
+ 
   return (
     <div className="panel">
       <Container>
@@ -52,7 +54,7 @@ const Panelcustom = (props) => {
             <Col sm={10} className="content">
               <Tab.Content>
                 <Tab.Pane  eventKey="first">
-                  <EditProfile/>
+                <EditProfile/>
                 </Tab.Pane>
                 <Tab.Pane  eventKey="second">
                   <Myorder/>
@@ -76,15 +78,18 @@ const Panelcustom = (props) => {
               <div className="userpanel">{Cookies.get("name") + " " + Cookies.get("family")}</div>
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
-                  <Nav.Link eventKey="first">
+
+                  <Nav.Link  eventKey="first">
+                    
                     <span>
                       <Image src={userimg} alt="userimg" />
                     </span>
                     اصلاح حساب کاربری
+                  
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="second">
+                  <Nav.Link  eventKey="second">
                     <span>
                       <Image src={myorderimg} alt="userimg" />
                     </span>
@@ -108,15 +113,17 @@ const Panelcustom = (props) => {
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="fivth">
+                  <Link to="/changepass">
+                  <Nav.Link to="/changepass" eventKey="fivth">
                     <span>
                       <Image src={changepassimg} alt="changepass" />
                     </span>
                     تغییر کلمه عبور
                   </Nav.Link>
+                  </Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="sixth" className="logoutpanel" onClick={handlelogout}>
+                  <Nav.Link  eventKey="sixth" className="logoutpanel" onClick={handlelogout}>
                     <span>
                       <Image src={logout} alt="logout" />
                     </span>
