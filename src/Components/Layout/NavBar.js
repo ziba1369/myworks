@@ -78,7 +78,7 @@ const NavBar = () => {
                             style={{color:'#000'}}
                             componentClass='span'
                           >
-                              <Link to="/profile">
+                              <Link to="/profile/first">
                             <Image src={profileImage} />
                             پروفایل
                             </Link>
@@ -95,7 +95,7 @@ const NavBar = () => {
                     </Nav>
                   </Col>
                   <Col className="user" xl={6} md={6} sm={12} xs={12}>
-                    <Link to="/login">
+                    <Link to="/profile/second">
                       <Button className="sign">لیست سفارشات</Button>
                     </Link>
                   </Col>

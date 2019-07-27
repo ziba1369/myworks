@@ -64,7 +64,7 @@ function Routes() {
 
         },
         {
-            path: '/profile',
+            path: '/profile/:page',
             component:PanelCustom,
             exact: true,
 

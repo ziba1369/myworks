@@ -48,7 +48,7 @@ const Panelcustom = (props) => {
       
      </p>
       </Row>
-        <Tab.Container id="right-tabs-example" defaultActiveKey="first">
+        <Tab.Container id="right-tabs-example" defaultActiveKey={props.match.params.page}>
           
           <Row>
             <Col sm={10} className="content">
