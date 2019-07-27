@@ -75,9 +75,7 @@ function Routes() {
     return (
         <BrowserRouter>
             <React.Fragment>
-                <header>
-                    <NavBar/>
-                </header>
+              
                 {routers.map((route, index) => <Route key={index} {...route}/>)}
 
             </React.Fragment>

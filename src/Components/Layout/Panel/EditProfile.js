@@ -17,7 +17,6 @@ const EditProfile = props => {
     const [imageprofile, setImageprofile] = useState("");
     const [certi, setCertifi] = useState(Cookies.get("national_code"));
     const [mobile, setMobile] = useState([]);
-
     const [birthday, setBirthday] = useState([
         "01",
         "02",
@@ -79,7 +78,7 @@ const EditProfile = props => {
         console.log(name !== undefined);
         if (name !== undefined &&
             lastname !== undefined &&
-            certi !== undefined){
+            certi !== undefined) {
             if (name.length > 0 &&
                 lastname.length > 0 &&
                 certi.length === 10 &&
@@ -200,7 +199,7 @@ const EditProfile = props => {
                         path: "/",
                         expires: 7
                     });
-                    if (response.data.customer_image !== ""){
+                    if (response.data.customer_image !== "") {
                         Cookies.set("customer_img", response.data.customer_image, {
                             path: "/",
                             expires: 7

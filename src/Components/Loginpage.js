@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import NavBar from './Layout/NavBar';
 import {Container, Button, Col, Form} from "react-bootstrap";
 import {
     ToastsContainer,
@@ -109,7 +110,10 @@ const Login = props => {
   
  if(Cookies.get('token') ==null)
    { return (
-
+       <React.Fragment>
+        <header>
+         <NavBar/>  
+        </header>
         <div className="loginpage">
             <Container>
                 <Col
@@ -191,7 +195,7 @@ const Login = props => {
             </Container>
             <Footer/>
         </div>
-
+        </React.Fragment>
 
     );
                                 }

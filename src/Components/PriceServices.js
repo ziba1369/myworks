@@ -8,6 +8,7 @@ import {
     Col,
     Breadcrumb
 } from "react-bootstrap";
+import NavBar from  './Layout/NavBar';
 import {Link} from "react-router-dom";
 import Paginatior from "react-hooks-paginator";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
@@ -164,6 +165,9 @@ const PriceServices = props => {
     }, [props.match.params.id]);
     return (
         <React.Fragment>
+              <header>
+                <NavBar/>  
+             </header>
         <Container fluid className="contentpadding">
             <Row>
                 <Col

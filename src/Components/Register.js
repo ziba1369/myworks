@@ -9,6 +9,7 @@ import $ from "jquery";
 import axios from "axios";
 import * as Cookies from "js-cookie";
 import Footer from "./Layout/Footer";
+import NavBar from './Layout/NavBar';
 const Register = props => {
   const [step, setStep] = useState(1);
   const [firstStep, setFirstStep] = useState({ display: "block" });
@@ -543,6 +544,9 @@ const Register = props => {
    },[certi])
   return (
     <React.Fragment>
+        <header>
+                <NavBar/>  
+             </header>
       <div className="registerpage">
         <Container>
           <Col

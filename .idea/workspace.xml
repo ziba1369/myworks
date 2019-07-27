@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1316d98a-d05a-42e6-8ed8-22820e469441" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/BlogOriginal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/BlogOriginal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Forgetpass.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Forgetpass.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Layout/Panel/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Panel/EditProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/orderlayout/Confirmorder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/orderlayout/Confirmorder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/orderlayout/Documenttype.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/orderlayout/Documenttype.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/orderlayout/Tabschoice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/orderlayout/Tabschoice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Loginpage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Loginpage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/News.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/News.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Order.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PanelCustom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PanelCustom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PriceServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PriceServices.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/all.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/all.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,12 +33,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Components/Layout/Panel/EditProfile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2176">
-              <caret line="201" column="23" lean-forward="true" selection-end-line="424" />
+            <state relative-caret-position="-901">
+              <caret line="72" column="22" lean-forward="true" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
               <folding>
-                <element signature="e#807#1121#0" />
-                <element signature="e#1245#1369#0" />
-                <element signature="e#1634#1736#0" />
+                <element signature="e#821#1261#0" />
+                <element signature="e#1389#1563#0" />
               </folding>
             </state>
           </provider>
@@ -262,12 +274,12 @@
       <workItem from="1560834119128" duration="10436000" />
       <workItem from="1562409309108" duration="5565000" />
       <workItem from="1564211884090" duration="1034000" />
-      <workItem from="1564226283472" duration="5279000" />
+      <workItem from="1564226283472" duration="5786000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64159000" />
+    <option name="totallyTimeSpent" value="64666000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -580,12 +592,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Layout/Panel/EditProfile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2176">
-          <caret line="201" column="23" lean-forward="true" selection-end-line="424" />
+        <state relative-caret-position="-901">
+          <caret line="72" column="22" lean-forward="true" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
           <folding>
-            <element signature="e#807#1121#0" />
-            <element signature="e#1245#1369#0" />
-            <element signature="e#1634#1736#0" />
+            <element signature="e#821#1261#0" />
+            <element signature="e#1389#1563#0" />
           </folding>
         </state>
       </provider>

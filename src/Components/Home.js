@@ -8,10 +8,14 @@ import Popularservices from "./Layout/home/Popularservices";
 import Contatus from "./Layout/home/ContatctUs";
 import Relatedwebsites from "./Layout/home/Relatedwebsites";
 import Newsletter from "./Layout/home/Newsletter";
-
+import NavBar from "./Layout/NavBar";
 const Home = () => {
     return (
+       
         <React.Fragment>
+             <header>
+                <NavBar/>  
+             </header>
             <Col xl={12} md={12} sm={12} xs={12} className=" rtl">
                 <Slide/>
             </Col>
