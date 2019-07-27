@@ -45,9 +45,9 @@ const Popularservices = (props) => {
                         
                     }
                 })
-                .catch(function (error) {
-                    ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-                });
+                // .catch(function (error) {
+                //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+                // });
           }, []);
    
     const cardServices = Information.map((item, inex) => {

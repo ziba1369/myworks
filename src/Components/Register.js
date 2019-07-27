@@ -131,9 +131,7 @@ const Register = props => {
           ToastsStore.error(response.data.error);
         }
       })
-      .catch(function(error) {
-        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-      });
+    
   };
   //////////////////// SECOND STEP //////////////////////
   //states
@@ -179,9 +177,7 @@ const Register = props => {
             ToastsStore.error(response.data.error);
           }
         })
-        .catch(function(error) {
-          ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-        });
+    
     }
   };
 
@@ -236,9 +232,8 @@ const Register = props => {
           ToastsStore.error("کدفعالسازی اشتباه است");
         }
       })
-      .catch(function(error) {
-        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-      });
+   
+      
   };
   const checkRegisterSecondButton = () => {
     if (parseInt(active)) {
@@ -424,15 +419,16 @@ const Register = props => {
 
   useEffect(() => {
     checkRegisterThirdButton();
+   
   }, [birthvalue]);
 
   useEffect(() => {
-    checkRegisterThirdButton();
+   checkRegisterThirdButton();
   }, [birthmonthvalue]);
 
   useEffect(() => {
     checkRegisterThirdButton();
-  }, [birthyearvalue]);
+ }, [birthyearvalue]);
 
   useEffect(() => {
     checkRegisterThirdButton();
@@ -458,9 +454,7 @@ const Register = props => {
           ToastsStore.error(response.data.error);
         }
       })
-      .catch(function(error) {
-        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-      });
+  
   }, []);
 
   const loginThirdStep = () => {
@@ -497,6 +491,10 @@ const Register = props => {
             path: "/",
             expires: 7
           });
+          Cookies.set("national_code",certi, {path: "/",expires: 7});
+          Cookies.set("birth_month", birthmonthvalue, {path: "/",expires: 7});
+          Cookies.set("birth_year", birthyearvalue, {path: "/",expires: 7});
+          Cookies.set("birth_day",birthvalue, {path: "/",expires: 7});
           props.history.push("/");
           window.location.reload();
         } else {

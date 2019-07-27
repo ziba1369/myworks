@@ -365,9 +365,9 @@ const Tabschoice = ({ optiontype,onClicks, step, onChanges }) => {
             
         }
     })
-    .catch(function (error) {
-        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-    });
+    // .catch(function (error) {
+    //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    // });
 
 }, [types]);
 useEffect(() => {
@@ -393,9 +393,9 @@ useEffect(() => {
           
       }
   })
-  .catch(function (error) {
-      ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-  });
+  // .catch(function (error) {
+  //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+  // });
 
 }, [types]);
 console.log(validation)

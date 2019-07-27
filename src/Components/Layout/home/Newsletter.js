@@ -31,9 +31,9 @@ Cookies.set("newsdet",newsdet, {expires: 7,path: "/"});
                     ToastsStore.error(response.data.error);
                 }
             })
-            .catch(function (error) {
-                ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-            });
+            // .catch(function (error) {
+            //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+            // });
             
       },[]);
      

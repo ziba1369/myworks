@@ -121,9 +121,9 @@ const sendHandler=()=>{
                 ToastsStore.error(response.data.errmessage);
             }
         })
-        .catch(function (error) {
-            ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-        })
+        // .catch(function (error) {
+        //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+        // })
 }
     return (
         <React.Fragment>

@@ -2293,6 +2293,9 @@ border-radius:0px
     margin: 0 auto;
     left: 25%;
 }
+.imagepanel img{
+    border-radius:50%
+}
 .image-panel-parent {
     width: 100%;
     position: relative;
@@ -2320,7 +2323,6 @@ border-radius:0px
     float: right;
     margin: 0px;
     height: 100%;
-    border-radius:50%;
 
 }
 .menubar .nav-link img{

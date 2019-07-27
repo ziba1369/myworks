@@ -430,9 +430,9 @@ const Order = props => {
             
         }
     })
-    .catch(function (error) {
-        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-    });
+    // .catch(function (error) {
+    //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    // });
 }, [Cookies.get('types')])
 useEffect(()=>{
 if(Cookies.get('token'))

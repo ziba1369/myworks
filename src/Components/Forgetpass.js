@@ -124,9 +124,9 @@ const Forgetpass = (props) => {
         }
     })
 
-    .catch(function (error) {
-        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-    })
+    // .catch(function (error) {
+    //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    // })
     }
 
     //////////////////// SECOND STEP //////////////////////
@@ -223,9 +223,9 @@ const Forgetpass = (props) => {
         }
     })
 
-    .catch(function (error) {
-        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-    })
+    // .catch(function (error) {
+    //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+    // })
 }
 
 

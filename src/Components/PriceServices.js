@@ -152,9 +152,9 @@ const PriceServices = props => {
                     ToastsStore.error(response.data.error);
                 }
             })
-            .catch(function (error) {
-                ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-            });
+            // .catch(function (error) {
+            //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
+            // });
             console.log('ok')
       },[props.match.params.id,offset]);
      

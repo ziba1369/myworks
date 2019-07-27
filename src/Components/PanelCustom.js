@@ -3,6 +3,7 @@ import { Nav, Col, Tab, Row, Container, Image  ,Form} from "react-bootstrap";
 import $ from "jquery";
 import Myorder from "./Layout/Panel/Myorder";
 import EditProfile from './Layout/Panel/EditProfile';
+import Passchange from './Layout/Panel/Passcahnge';
 import Mybill from './Layout/Panel/Mybill';
 import Mytranslate from './Layout/Panel/Mytranslate';
 import userimg from "../images/user.svg";
@@ -65,6 +66,9 @@ const Panelcustom = (props) => {
                 <Tab.Pane  eventKey="fourth">
                   <Mytranslate/>
                 </Tab.Pane>
+                <Tab.Pane  eventKey="fifth">
+                  <Passchange/>
+                </Tab.Pane>
               </Tab.Content>
             </Col>
 
@@ -113,14 +117,14 @@ const Panelcustom = (props) => {
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link to="/changepass">
-                  <Nav.Link to="/changepass" eventKey="fivth">
+                  
+                  <Nav.Link  eventKey="fifth">
                     <span>
                       <Image src={changepassimg} alt="changepass" />
                     </span>
                     تغییر کلمه عبور
                   </Nav.Link>
-                  </Link>
+               
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link  eventKey="sixth" className="logoutpanel" onClick={handlelogout}>
