@@ -229,6 +229,7 @@ const Register = props => {
         if (response.data.success) {
           //console.log(response.data)
           setStep(3);
+         // Cookies.set("mobile",mobile, {path: "/",expires: 7});
         }else{
           ToastsStore.error("کدفعالسازی اشتباه است");
         }
@@ -496,6 +497,7 @@ const Register = props => {
           Cookies.set("birth_month", birthmonthvalue, {path: "/",expires: 7});
           Cookies.set("birth_year", birthyearvalue, {path: "/",expires: 7});
           Cookies.set("birth_day",birthvalue, {path: "/",expires: 7});
+         
           props.history.push("/");
           window.location.reload();
         } else {

@@ -77,10 +77,10 @@ useEffect(()=>{
     return (
         <Row className="news rtl">
             <Col className="newletter" xl={12} md={12} sm={12} xs={12}>
-                <h4 className="titlesections">خبرنامه</h4>
+                <h5 className="titlesections">خبرنامه</h5>
             </Col>
 
-            <Col xl={12} lg={12} md={12} sm={12} xs={12} className="newsletter">
+            <Col xl={{span:12,offset:0}} lg={{span:12,offset:0}} md={{span:10,offset:1}} sm={{span:10,offset:1}} xs={{span:10,offset:1}} className="newsletter">
                 {show}
                 <Row className="allnews ">
                     <p className="titlesections "><FontAwesomeIcon icon={faAngleDoubleRight}/><Link to="/news"><span className="seeall">مشاهده همه اخبار</span></Link><FontAwesomeIcon

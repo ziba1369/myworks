@@ -67,7 +67,7 @@ const Services = () => {
     const cards = info.map((item, index) => {
         return (
 
-            <div key={item.id} className="child col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4">
+            <div key={item.id} className="child col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 col-xs-2dot4">
                 <Card className="pulse noborder" style={{backgroundColor: item.color, boxShadow: item.boxshadow}}>
                     <Link to={item.history}>
                         <Card.Img variant="top" alt={item.alt} className={item.name} src={item.img}/>
@@ -84,8 +84,8 @@ const Services = () => {
 
     return (
         <Row className="services">
-            <Col className="servicestext titlesections" xl={12} md={12} sm={12} xs={12}><h4
-                className="titlesections">خدمات ترجمه</h4></Col>
+            <Col className="servicestext titlesections" xl={12} md={12} sm={{span:8,offset:2}} xs={{span:8,offset:2}}>
+                <h5  className="titlesections">خدمات ترجمه</h5></Col>
             {cards}
         </Row>
 

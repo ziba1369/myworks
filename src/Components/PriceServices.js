@@ -188,7 +188,7 @@ const PriceServices = props => {
                     </Breadcrumb>
                 </Col>
 
-                <Col className="service-search" xl={3} lg={3} md={12} sm={12} xs={12}>
+                <Col className="service-search" xl={{span:3,offset:0}} lg={{span:3,offset:0}} md={{span:8,offset:2}} sm={{span:8,offset:2}} xs={{span:8,offset:2}}>
                     <InputGroup>
                         <InputGroup.Prepend>
                             <InputGroup.Text id="basic-addon1">
@@ -207,7 +207,7 @@ const PriceServices = props => {
             </Row>
 
             <div className="row rtl">
-            <Col className="service-box" xl={{span:3,offset:0}} lg={{span:3,offset:0}} md={{span:8,offset:2}} sm={{span:10,offset:1}} xs={{span:12,offset:0}}>
+            <Col className="service-box" xl={{span:3,offset:0}} lg={{span:3,offset:0}} md={{span:8,offset:2}} sm={{span:8,offset:2}} xs={{span:8,offset:2}}>
                     <Card className="gservices" style={{textAlign: "center"}}>
                         <Card.Body>
                             <Card.Title className="sbox-title">گروه بندی خدمات</Card.Title>
@@ -268,8 +268,8 @@ const PriceServices = props => {
                     xl={{span:9,offset:0}}
                     lg={{span:9,offset:0}}
                     md={{span:8,offset:2}}
-                    sm={{span:10,offset:1}}
-                    xs={{span:10,offset:1}}
+                    sm={{span:8,offset:2}}
+                    xs={{span:8,offset:2}}
                 >
                     <Row>
                         {props.match.params.id &&

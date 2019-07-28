@@ -100,7 +100,7 @@ const Popularservices = (props) => {
 
     const carousel = Information.map((item, inex) => {
         return (
-            <Carousel.Item key={item.id}>
+            <Carousel.Item  key={item.id}>
                 <div className="servicetran">
                     <div className="imgtrans">
 
@@ -119,7 +119,7 @@ const Popularservices = (props) => {
                     </div>
                 </div>
                 <div className="custom">
-                    <Button type="submit" className="green">ثبت سفارش</Button>
+                    <Button  className="green">ثبت سفارش</Button>
                 </div>
 
 
@@ -133,7 +133,7 @@ const Popularservices = (props) => {
             <Media query="(min-width:769px)">
                 <Row className="popularservices rtl">
                     <Col className="servicestext" xl={12} md={12} sm={12} xs={12}>
-                        <h4 className="titlesections">خدمات پرمخاطب ترجمه</h4>
+                        <h5 className="titlesections">خدمات پرمخاطب ترجمه</h5>
 
                     </Col>
                     {cardServices}
@@ -145,7 +145,7 @@ const Popularservices = (props) => {
                         <h5 className="titlesections">خدمات پرمخاطب ترجمه</h5>
 
                     </Col>
-                    <Carousel interval={null}>
+                    <Carousel touch={true} interval={null}>
                         {carousel}
                     </Carousel>
                 </Row>

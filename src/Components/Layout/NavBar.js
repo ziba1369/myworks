@@ -47,8 +47,8 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Container fluid>
-            <Row className="col-xl-12 col-md-12 col-sm-12 col-xs-12">
-              <Col xl={8} md={8} sm={12} xs={12}>
+            <Row>
+              <Col xl={8} lg={8} md={12} sm={12} xs={12}>
                 <Menu />
               </Col>
               <Col xl={4} lg={4} md={12} sm={12} xs={12}>

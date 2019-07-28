@@ -41,7 +41,7 @@ const Panelcustom = (props) => {
  
   return (
     <div className="panel">
-      <Container>
+     
       <Row>
       <p className="distance">
       
@@ -136,7 +136,7 @@ const Panelcustom = (props) => {
             </Col>
           </Row>
         </Tab.Container>
-      </Container>
+    
     </div>
   );
 };

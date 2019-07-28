@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import {Image, Col, Row} from "react-bootstrap";
+import {Container,Image, Col, Row} from "react-bootstrap";
 import khabanameh from "../images/khabarnameh.jpg";
 import {Link} from "react-router-dom";
 import NavBar from './Layout/NavBar';
@@ -71,7 +71,7 @@ const Steptranslate = () => {
                 <Col className="newsimage" xl={4} lg={4} md={4} sm={12} xs={12}>
                     <Image src={item.img} alt={item.title}/>
                 </Col>
-                <Col xl={8} lg={8} md={8} sm={12} xs={12}>
+                <Col xl={8} lg={8} md={{span:10,offset:2}} sm={{span:10,offset:2}} xs={{span:10,offset:2}}>
                     <Row>
                         <Col
                             className="rtl titlenews"
@@ -137,6 +137,7 @@ const Steptranslate = () => {
               <header>
                 <NavBar/>  
              </header>
+             <Container fluid>
              <Row className=" slideone rtl">
                 <Col xl={{ span: 10, offset: 1}} md={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} xs={12} className="centerlogo">
                  {showlast}             
@@ -160,6 +161,7 @@ const Steptranslate = () => {
         />
     
       </div>
+      </Container>
       <Footer/>
         </React.Fragment>
      );

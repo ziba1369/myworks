@@ -89,8 +89,29 @@ const BlogOriginal = (props) => {
           </Breadcrumb>
         </Col>
       </Row>
-      <Row style={{ margin: "1rem 0.2rem 4rem .2rem" }}>
-        <Col lg={4} xl={4} md={4} sm={12} xs={12}>
+      <Row className="rtl">
+      <Col className="detailnews"
+          lg={{ span: 7, offset: 1 }}
+          xl={{ span: 7, offset: 1 }}
+          md={{ span: 10, offset: 1 }}
+          sm={{ span: 10, offset: 1 }}
+          xs={{ span: 10, offset: 1 }}
+        >
+      {newsdet.map(i=>{
+          return(
+           <React.Fragment>
+
+          <Image src={i.img} alt={i.title} />
+          <Col lg={12} xl={12} md={12} sm={12} xs={12}>
+            <p className="detail-title">{i.short}</p>
+            <div className="content-news" dangerouslySetInnerHTML={{__html: i.content}}></div>
+          </Col>
+          </React.Fragment>
+          )
+          })
+        }
+         </Col>
+        <Col lg={{ span:4, offset:0 }} xl={{ span:4, offset:0 }} md={{ span:10, offset:1 }} sm={{ span:10, offset:1 }} xs={12}>
           <div className="rlnews">
           <h5 className="head-rtnews">اخبارهای مرتبط</h5>
           {newsdet.map(i => {
@@ -122,26 +143,7 @@ const BlogOriginal = (props) => {
           </div>
 
         </Col>
-        {newsdet.map(i=>{
-          return(
-        <Col
-          className="detailnews"
-          lg={{ span: 7, offset: 1 }}
-          xl={{ span: 7, offset: 1 }}
-          md={{ span: 7, offset: 1 }}
-          sm={12}
-          xs={12}
-        >
-
-          <Image src={i.img} alt={i.title} />
-          <Col lg={12} xl={12} md={12} sm={12} xs={12}>
-            <p className="detail-title">{i.short}</p>
-            <div dangerouslySetInnerHTML={{__html: i.content}}></div>
-          </Col>
-        </Col>
-          )
-          })
-        }
+       
       </Row>
     </Container>
     <Footer/>

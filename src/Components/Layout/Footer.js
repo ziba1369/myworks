@@ -60,25 +60,25 @@ const Footer = () => {
                  )}
            </Col>
            <Col  xl={3} lg={3}  md={3}   sm={12}  xs={12} style={{textAlign:"center"}}> 
-           <Col xl={12} lg={3} md={12} sm={12} xs={12}>
-                      <p><img src={phoneIcon} alt={"phoneIcon"}/></p>
+           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 social">
+                    <p><img src={phoneIcon} alt={"phoneIcon"}/></p>
                       <p><span>021-44442131</span></p>
                       <p><span>021-44442131</span></p>
-                  </Col>
+                  </div>
 
-                  <Col xl={12} md={12} sm={12} xs={12}>
+                  <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 social">
                       <p><img src={emailIcon} alt={"emailIcon"}/></p>
                       <p className="mail"><span>info@Hezare3.com</span></p>
 
-                  </Col>
+                  </div>
 
            </Col> 
            <Col  xl={3} lg={3}  md={3}   sm={12}  xs={12}  style={{textAlign:"center"}}> 
-           <Col xl={12} md={12} sm={12} xs={12}>
-                      <p><img src={phoneIcon} alt={"phoneIcon"}/></p>
+           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 social">
+                    <p><img src={phoneIcon} alt={"phoneIcon"}/></p>
                       <p><span>میدان پونک ،ساختمان 130،طبقه 5ام، واحد320</span></p>
                      
-                  </Col>
+                  </div>
 
                   <Col xl={12} md={12} sm={12} xs={12} className="fontawe ">
                       <Link className="instagram"><FontAwesomeIcon icon={faInstagram}/></Link>

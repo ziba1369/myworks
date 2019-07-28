@@ -16,7 +16,7 @@ const EditProfile = props => {
     const [lastname, setLastName] = useState(Cookies.get("family"));
     const [imageprofile, setImageprofile] = useState("");
     const [certi, setCertifi] = useState(Cookies.get("national_code"));
-    const [mobile, setMobile] = useState([]);
+    const [mobile, setMobile] = useState(Cookies.get('mobile'));
     const [birthday, setBirthday] = useState([
         "01",
         "02",

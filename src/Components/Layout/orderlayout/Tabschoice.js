@@ -128,7 +128,7 @@ const Tabschoice = ({optiontype, onClicks, step, onChanges}) => {
                   name="deliver"
                   onChange={deliveryhandle}
                   id={item.id}
-                  checked={item.checkin ? "checked " : ""}
+                  checked={item.checkin ? "checked" : ""}
               />
             </span>
                     </p>
@@ -165,6 +165,7 @@ const Tabschoice = ({optiontype, onClicks, step, onChanges}) => {
         if (blang && bval && bdel) {
             Cookies.set("languages", languages, {expires: 7, path: "/"});
             Cookies.set("validation", validation, {expires: 7, path: "/"});
+            Cookies.set("delivery",delivery,{expires: 7, path: "/"});
             onClicks();
         } else if (blang === false) {
             ToastsStore.warning("لطفا یک زبان برای ترجمه انتخاب کنید");
@@ -338,22 +339,31 @@ const Tabschoice = ({optiontype, onClicks, step, onChanges}) => {
             )
             .then(function (response) {
                 if (response.data.success) {
-                    if (Cookies.get("languages") !== null) {
-                        setLang(JSON.parse(Cookies.get("languages")))
+                    if (Cookies.get("languages") !== undefined) {
+                        setLang(JSON.parse(Cookies.get("languages")));
+                        //console.log(JSON.parse(Cookies.get("languages")),"Cookies")
 
                     } else {
-
+                        setLang(response.data.product_languages);
                     }
-                    setLang(response.data.product_languages);
-                    if (Cookies.get("validation") !== null) {
+                    
+                    if (Cookies.get("validation") !== undefined) {
 
                         setVal(JSON.parse(Cookies.get("validation")))
 
                     } else {
+                        setVal(response.data.product_certificates);
 
                     }
-                    setVal(response.data.product_certificates);
+                    if (Cookies.get("delivery") !== undefined) {
 
+                        setDelivery(JSON.parse(Cookies.get("delivery")))
+
+                    }
+                    
+
+                 
+                   
                 } else {
                     ToastsStore.error(response.data.error);
 
@@ -363,7 +373,8 @@ const Tabschoice = ({optiontype, onClicks, step, onChanges}) => {
 
     }, [types]);
 
-    console.log(validation)
+    //console.log(validation)
+    //console.log(delivery)
     return (
         <React.Fragment>
             <Row>

@@ -71,7 +71,7 @@ const Login = props => {
     }, [pass]);
 
     const loginbutton = () => {
-
+        Cookies.set("mobile", mobile, {path: "/", expires: 7});
         const checkbox = document.getElementById('checkbox');
         const login = {
             mobile: mobile,
@@ -89,6 +89,7 @@ const Login = props => {
                         Cookies.set("name", response.data.customer_name, {path: "/", expires: 7});
                         Cookies.set("family", response.data.customer_family, {path: "/", expires: 7});
                         Cookies.set("customer_img", response.data.customer_img, {path: "/", expires: 7});
+                        
                     } else {
                         Cookies.set("token", response.data.token, {path: "/", expires: 1});
                         Cookies.set("name", response.data.customer_name, {path: "/", expires: 1});

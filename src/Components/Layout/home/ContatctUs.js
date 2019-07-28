@@ -133,7 +133,7 @@ const sendHandler=()=>{
                 />
             <Row>
                 <Col xl={9} md={9} sm={12} xs={12} className="footercontent">
-                    <h4 className="call titlesections">تماس با ما</h4>
+                    <h5 className="call titlesections">تماس با ما</h5>
                     <Row>
                         <Col xl={6} md={6} sm={12} xs={12}>
                             <Form>
