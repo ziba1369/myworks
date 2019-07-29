@@ -536,7 +536,7 @@ else{
 
           <Col
             id="kindtrans"
-            className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
+            className="col-xl-3 col-lg-3 col-md-3 col-xs-3 selectcer"
           >
             <Button style={styleone} onClick={handlerType} size="lg">
               نوع ترجمه
@@ -546,7 +546,7 @@ else{
 
           <Col
             id="upload"
-            className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
+            className="col-xl-3 col-lg-3 col-md-3 col-xs-3 selectcer"
           >
             <Button style={styletwo} onClick={handlerUpload} size="lg">
               آپلود مدارک
@@ -556,7 +556,7 @@ else{
 
           <Col
             id="confirm"
-            className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer"
+            className="col-xl-3 col-lg-3 col-md-3 col-xs-3 selectcer"
           >
             <Button size="lg" style={stylethree} onClick={handlerConfirm}>
               تایید سفارش
@@ -565,7 +565,7 @@ else{
           </Col>
           <Col
             id="pay"
-            className="col-2dot4 col-sm-2dot4 col-md-2dot4 col-lg-2dot4 col-xl-2dot4 selectcer last"
+            className="col-xl-3 col-lg-3 col-md-3 col-xs-3 selectcer last"
           >
             <Button size="lg" style={stylefour} onClick={handlerPay}>
               پرداخت

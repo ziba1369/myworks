@@ -43,6 +43,7 @@ const NavBar = () => {
         className="headersite nav-link"
         expand="lg"
         variant="custom"
+        style={{marginBottom:"-1px"}}
       >
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

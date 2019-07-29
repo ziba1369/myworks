@@ -59,7 +59,7 @@ const BlogOriginal = (props) => {
                 <NavBar/>  
              </header>
     <Container>
-      <Row>
+ 
         <Col
           className="service-breadcrumb"
           xl={12}
@@ -88,14 +88,15 @@ const BlogOriginal = (props) => {
             </Breadcrumb.Item>
           </Breadcrumb>
         </Col>
-      </Row>
+  
       <Row className="rtl">
       <Col className="detailnews"
           lg={{ span: 7, offset: 1 }}
           xl={{ span: 7, offset: 1 }}
-          md={{ span: 10, offset: 1 }}
-          sm={{ span: 10, offset: 1 }}
-          xs={{ span: 10, offset: 1 }}
+          md={{ span:8, offset:2 }}
+          sm={{ span:8, offset:2 }}
+          xs={{ span:8, offset:2  }}
+          style={{marginLeft: "4% !important",marginRight:"3% !important"}}
         >
       {newsdet.map(i=>{
           return(
@@ -111,7 +112,7 @@ const BlogOriginal = (props) => {
           })
         }
          </Col>
-        <Col lg={{ span:4, offset:0 }} xl={{ span:4, offset:0 }} md={{ span:10, offset:1 }} sm={{ span:10, offset:1 }} xs={12}>
+        <Col lg={{ span:4, offset:0 }} xl={{ span:4, offset:0 }} md={{ span:8, offset:2 }} sm={{ span:8, offset:2 }} xs={{ span:8, offset:2 }}>
           <div className="rlnews">
           <h5 className="head-rtnews">اخبارهای مرتبط</h5>
           {newsdet.map(i => {

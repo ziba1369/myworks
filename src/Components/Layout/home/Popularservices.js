@@ -119,7 +119,16 @@ const Popularservices = (props) => {
                     </div>
                 </div>
                 <div className="custom">
-                    <Button  className="green">ثبت سفارش</Button>
+                    <Button  className="green" style={{cursor: "pointer"}} onClick={() => {
+                       if(Cookies.get('token')){
+                        Cookies.set('title', item.title, {expires: 7, path: '/'});
+                        Cookies.set('types', item.id, {expires: 7, path: '/'});
+                        props.history.push("/order/" + item.slug);
+                       }
+                       else{
+                        props.history.push("/login/");
+                       }
+                    }}>ثبت سفارش</Button>
                 </div>
 
 

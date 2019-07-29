@@ -36,9 +36,7 @@ const Steptranslate = () => {
                     ToastsStore.error(response.data.error);
                 }
             })
-            // .catch(function (error) {
-            //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-            // });
+       
             
       },[]);
       useEffect(() => {
@@ -71,7 +69,7 @@ const Steptranslate = () => {
                 <Col className="newsimage" xl={4} lg={4} md={4} sm={12} xs={12}>
                     <Image src={item.img} alt={item.title}/>
                 </Col>
-                <Col xl={8} lg={8} md={{span:10,offset:2}} sm={{span:10,offset:2}} xs={{span:10,offset:2}}>
+                <Col xl={{span:8,offset:0}} lg={{span:8,offset:0}} md={{span:8,offset:0}} sm={{span:12,offset:0}} xs={{span:12,offset:0}}>
                     <Row>
                         <Col
                             className="rtl titlenews"
@@ -81,13 +79,13 @@ const Steptranslate = () => {
                             sm={12}
                             xs={12}
                         >
-                            <h5>{item.title}</h5>
+                            <h5 >{item.title}</h5>
                         </Col>
                         <Col className="newsdate" xl={4} lg={4} md={4} sm={12} xs={12}>
                             {item.date}
                         </Col>
                     </Row>
-                    <Row className="contentnews rtl">{item.short}</Row>
+                    <Row className="contentnews rtl" >{item.short}</Row>
                     <Row className="extracontent">
                     <Link to={'/blog/'+item.slug}> ادامه مطلب</Link>
                     </Row>
@@ -114,13 +112,13 @@ const Steptranslate = () => {
                             sm={12}
                             xs={12}
                         >
-                            <h5>{item.title}</h5>
+                            <h5 style={{fontSize:"1rem"}}>{item.title}</h5>
                         </Col>
                         <Col className="newsdate" xl={4} lg={4} md={4} sm={12} xs={12}>
                             {item.date}
                         </Col>
                     </Row>
-                    <Row className="contentnews rtl">{item.short}</Row>
+                    <Row className="contentnews rtl" style={{fontSize:".85rem"}}>{item.short}</Row>
                     <Row className="extracontent">
                     <Link to={'/blog/'+item.slug}> ادامه مطلب</Link>
                     </Row>
@@ -139,12 +137,12 @@ const Steptranslate = () => {
              </header>
              <Container fluid>
              <Row className=" slideone rtl">
-                <Col xl={{ span: 10, offset: 1}} md={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} xs={12} className="centerlogo">
+                <Col xl={{ span: 10, offset: 1}} md={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} xs={{ span: 10, offset: 1 }} className="centerlogo">
                  {showlast}             
                 </Col>
                 </Row>
                 <Row className="rtl" >
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 8, offset: 2 }} md={{ span: 8, offset: 2 }} sm={{ span: 8, offset: 4 }} xs={{ span: 8, offset: 2 }} className="newsletter">
+            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 8, offset: 2 }} md={{ span: 8, offset: 2 }} sm={{ span: 10, offset: 1 }} xs={{ span: 10, offset: 1 }} className="newsletter">
                 {show}
                 
             </Col>

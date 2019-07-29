@@ -50,7 +50,7 @@ const Relatedwebsites = () => {
     const logosazman = Information.map((item, inex) => {
         return (
 
-            <Col key={item.id} xl={4} lg={4} md={{span:10,offset:1}} sm={{span:10,offset:1}} xs={{span:10,offset:1}}>
+            <Col key={item.id} xl={4} lg={4} md={6} sm={{span:10,offset:1}} xs={{span:10,offset:1}}>
                 <div className="relatedsite">
                     <a href={item.link} target="_blank">
                         <Image src={item.img} className={item.name} alt={item.img}/>

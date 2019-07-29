@@ -334,7 +334,7 @@ span.imageprofile {
   box-shadow: unset !important;
 }
 a.dropdown-item {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .menu .dropdown-menu.show {
@@ -362,6 +362,11 @@ a.dropdown-item {
   background-size: cover;
   height: 90vh;
   background-position: bottom;
+}
+@media screen and (max-width: 992px) and (min-width: 768px){
+  .slideone {
+  height: 50vh;
+  }
 }
 
 .centerlogo {
@@ -639,7 +644,7 @@ button:focus {
   font-size: 1.1rem;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   /* .popularservices{
       margin:1rem;
     } */
@@ -671,10 +676,7 @@ button:focus {
     height: 100% !important;
   }
 
-  .carousel {
-    width: 70%;
-    margin: 0 auto;
-  }
+ 
 
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
@@ -706,6 +708,20 @@ button:focus {
     border-radius: 20px 20px 0px 0 !important;
   }
 }
+@media screen and (max-width: 768px) and (min-width: 576px){
+.carousel {
+  width: 50%;
+  margin: 0 auto;
+}
+}
+@media screen and (max-width: 576px) 
+{
+  .carousel {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
   @media only screen and (max-width: 768px) {
     .social p {
       font-size: 0.9rem;
@@ -762,8 +778,8 @@ button:focus {
   .col-md-2dot4 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 40%;
+    flex: 0 0 50%;
+    max-width: 50%;
   }
 }
 
@@ -776,6 +792,8 @@ button:focus {
   }
 }
 
+
+
 @media (min-width: 1140px) {
   .col-xl-2dot4 {
     -webkit-box-flex: 0;
@@ -785,6 +803,13 @@ button:focus {
   }
 }
 
+@media screen and (max-width: 1025px) and (min-height: 1200px) {
+
+  .col-lg-2dot4 {
+    flex: 0 0 33%;
+    max-width: 33%;
+}
+}
 .popularservices {
   margin: 1.3rem 0;
 }
@@ -824,7 +849,7 @@ button:focus {
     height: 100px;
 } */
 .descriptiontrans p {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-family: fanum;
 }
 
@@ -878,7 +903,10 @@ button:focus {
   margin: 1rem 0rem;
   background-color: #fff;
 }
-
+.relatedsites .col-md-6 {
+  display: table;
+  margin: 0 auto;
+}
 .relatedsites {
   background-color: #f5f9ff;
   padding: 3rem 0;
@@ -912,11 +940,12 @@ button:focus {
 .newsdate {
   text-align: left;
   color: #8d8d8d;
+  font-size: .9rem;
 }
 
-.newletter h5 {
+/* .newletter h5 {
   padding: 3rem 0;
-}
+} */
 
 .contnewsletter {
   border: 1px solid #e1e1e1;
@@ -945,6 +974,7 @@ button:focus {
   display: flex;
   justify-content: flex-end;
   padding: 1rem;
+  font-size: .9rem;
 }
 
 .titlenews {
@@ -998,7 +1028,7 @@ footer {
 }
 
 .form-label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .form-control-sm,
@@ -1453,6 +1483,7 @@ p.call {
 
 .contentpadding {
   padding: 0 3rem;
+  min-height: calc(100vh - 252px);
 }
 
 .textholder {
@@ -1507,6 +1538,15 @@ li.breadcrumb-item a {
   padding: 0 0 1.5rem 0;
   height: 3rem;
 }
+@media screen and (max-width: 768px){
+  .detail-card .card-title.h5 {
+  height: 0rem;
+  }
+  .card-body {
+    padding-top: 1.25rem !important;
+}
+}
+
 
 .detail-card .card-body {
   text-align: center;
@@ -1517,7 +1557,7 @@ li.breadcrumb-item a {
 }
 
 p.textprice {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 p.numberprice {
@@ -1576,7 +1616,13 @@ p.service-price {
 .service-detail {
   border-bottom: #fcfcfc;
 }
-
+@media screen and (max-width: 768px)
+{
+.service-detail {
+  display: table;
+  margin: 0 auto;
+}
+}
 span#basic-addon1 {
   background-color: #1976d2;
 }
@@ -1593,23 +1639,28 @@ svg.svg-inline--fa.fa-search.fa-w-16 {
 .contentnews {
   padding: 0 1rem;
   text-align: justify;
+  font-size: .75rem;
 }
 
 /* orderpage */
 .breadcrumb-item + .breadcrumb-item::before {
   padding: 0 0 0 0.6rem !important;
 }
-
+@media screen and (min-width:768px)
+{
 img.imagemadrek {
   width: 100%;
   max-height: 350px;
+  margin: 0 auto;
+  display: table;
+}
 }
 p.titlemadarek {
   text-align: right;
   font-size: 1rem;
 }
 p.content {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   text-align: right;
 }
 .titletype {
@@ -1624,7 +1675,11 @@ p.content {
 .orderbuttons {
   text-align: center;
 }
-
+@media only screen and (max-width:768px){
+  .orderbuttons {
+    display: none !important;
+}
+} 
 .orderbuttons button {
   padding: 1.3rem 1rem;
   max-width: 150px;
@@ -1756,6 +1811,12 @@ p.content {
   padding: 0.8rem 0rem 0.8rem 2rem;
   line-height: 2rem;
   font-size: 0.9rem;
+}
+@media screen and(main-with:768px){
+  .tabsordercontent{
+  min-width: 300px;
+  width: 300px;
+  }
 }
 
 .flex-column.tabsdet.nav.nav-pills {
@@ -1937,7 +1998,7 @@ div#left-tabs-example-tabpane-third {
 
 .servicesgroup .form-control {
   border-radius: 2rem;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #9c9c9c;
 }
 .blogviewer {
@@ -2032,7 +2093,7 @@ input[type="checkbox"]:checked:after {
 
 .upload-text {
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .uploadphotobox {
@@ -2076,7 +2137,7 @@ span.custom-file-container__custom-file__custom-file-control {
 /* confirmorder */
 .confirmorder {
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .confirmorder img {
@@ -2098,11 +2159,11 @@ span.custom-file-container__custom-file__custom-file-control {
     padding: 4rem 0;
 } */
 .loginpage {
-  height: 100%;
-  margin-top: 2rem;
+  height:calc(100vh - 252px);
+  margin-top: 2rem 0 0 0;
 }
 .registerpage {
-  height: 100%;
+  height: calc(100vh - 252px);
   margin-top: 2rem;
 }
 
@@ -2268,10 +2329,22 @@ p.activesys {
   margin-top: 2rem;
 }
 }
+@media only screen and (max-width: 992px){
+#paginationcard {
+  margin: 0 auto;
+  display: table;
+}
+}
+/* @media only screen and (max-width: 1024px),(min-height:1000px) {
+.col-lg-2dot4 {
+    flex: 0 0 30% !important;
+    max-width: 30% !important;
+}
+} */
 .detail-title {
   color: #454f63;
   text-align: right;
-  font-size: 1rem;
+  font-size: .9rem;
   padding: 1rem 0;
 }
 .content-news * {
@@ -2318,7 +2391,7 @@ p.activesys {
 }
 .loginpage {
   min-height: 37.6vh;
-  margin: 5rem 0;
+  margin: 5rem 0 0 0;
 }
 .registerpage {
   min-height: 37.6vh;
@@ -2340,7 +2413,8 @@ p.activesys {
   background-color: #eff5ff;
   padding: 2rem 2rem 0 2rem;
   margin-top: 2rem;
-
+  position: relative;
+  margin-bottom: 0px;
   bottom: 0;
   right: 0;
   left: 0;
@@ -2350,6 +2424,31 @@ p.activesys {
 }
 .fontawe {
   padding-top: 4.3rem;
+}
+@media screen and (max-width:768px){
+  .fontawe {
+    padding-top: 0px !important;
+  }
+}
+@media screen and (max-width: 992px) and (min-width: 768px){
+  .fontawe {
+    padding-top: 1rem;
+  }
+  .instagram {
+    padding: 0 .2rem !important;
+   
+}
+.linkdin {
+    padding: 0 0.1rem !important;
+}   
+.twitter {
+  padding: 0 .2rem !important;
+ 
+}
+.facebook {
+  padding: 0 0 0 .2rem !important;
+  
+}
 }
 .foter-blog * {
   color: #1d2b48;
@@ -2430,7 +2529,7 @@ p.textpanel {
 }
 .myorder div {
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   padding: 0.5rem;
   text-align: center;
   direction: rtl;
@@ -2449,7 +2548,7 @@ p.textpanel {
   direction: rtl;
 }
 .myorder .nav-item a {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 .myorderlist {
   background-color: #f0f0f0;
@@ -2463,7 +2562,7 @@ p.textpanel {
   justify-items: center;
   align-items: center;
   font-family: fanum;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 .myorder {
   direction: rtl;

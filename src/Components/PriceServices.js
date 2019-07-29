@@ -188,7 +188,7 @@ const PriceServices = props => {
                     </Breadcrumb>
                 </Col>
 
-                <Col className="service-search" xl={{span:3,offset:0}} lg={{span:3,offset:0}} md={{span:8,offset:2}} sm={{span:8,offset:2}} xs={{span:8,offset:2}}>
+                <Col className="service-search" xl={{span:3,offset:0}} lg={{span:3,offset:0}} md={{span:10,offset:1}} sm={{span:10,offset:1}} xs={{span:10,offset:1}}>
                     <InputGroup>
                         <InputGroup.Prepend>
                             <InputGroup.Text id="basic-addon1">
@@ -207,7 +207,7 @@ const PriceServices = props => {
             </Row>
 
             <div className="row rtl">
-            <Col className="service-box" xl={{span:3,offset:0}} lg={{span:3,offset:0}} md={{span:8,offset:2}} sm={{span:8,offset:2}} xs={{span:8,offset:2}}>
+            <Col className="service-box" xl={{span:3,offset:0}} lg={{span:3,offset:0}} md={{span:6,offset:0}} sm={{span:8,offset:2}} xs={{span:10,offset:1}}>
                     <Card className="gservices" style={{textAlign: "center"}}>
                         <Card.Body>
                             <Card.Title className="sbox-title">گروه بندی خدمات</Card.Title>
@@ -267,11 +267,11 @@ const PriceServices = props => {
                     className="service-detail rtl"
                     xl={{span:9,offset:0}}
                     lg={{span:9,offset:0}}
-                    md={{span:8,offset:2}}
-                    sm={{span:8,offset:2}}
-                    xs={{span:8,offset:2}}
+                    md={{span:6,offset:0}}
+                    sm={{span:11,offset:0}}
+                    xs={{span:11,offset:0}}
                 >
-                    <Row>
+                   <Row>
                         {props.match.params.id &&
                         data.map(item => {
                             return (
@@ -311,7 +311,7 @@ const PriceServices = props => {
                                 </div>
                             );
                         })}
-                    </Row>
+                 </Row>
                     {/* <Pagination
                         activePage={activepage} // active page number
                         itemsCountPerPage={2} // your limit value send to server with axios

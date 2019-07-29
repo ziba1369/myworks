@@ -194,8 +194,9 @@ const Login = props => {
                 </Col>
 
             </Container>
-            <Footer/>
+           
         </div>
+        <Footer/>
         </React.Fragment>
 
     );

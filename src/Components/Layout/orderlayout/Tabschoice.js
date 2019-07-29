@@ -407,10 +407,10 @@ const Tabschoice = ({optiontype, onClicks, step, onChanges}) => {
                 <Col
                     xl={6}
                     lg={6}
-                    md={6}
+                    md={9}
                     sm={12}
                     xs={12}
-                    style={{borderRadius: "1rem", height: "100%"}}
+                    style={{borderRadius: "1rem"}}
                 >
                     <TabContainer
                         id="left-tabs-example"
@@ -450,11 +450,11 @@ const Tabschoice = ({optiontype, onClicks, step, onChanges}) => {
                             </Col>
                             <Col
                                 className="tabsordercontent"
-                                style={{minWidth: "300px", width: "300px"}}
+                                // style={{minWidth: "300px", width: "300px"}}
                                 xl={9}
                                 lg={9}
-                                md={9}
-                                sm={9}
+                                md={12}
+                                sm={12}
                             >
                                 <Tab.Content>
                                     <Tab.Pane className="tabcheckbox" eventKey="first">
@@ -525,7 +525,7 @@ const Tabschoice = ({optiontype, onClicks, step, onChanges}) => {
                         </div>
                     </TabContainer>
                 </Col>
-                <Col xl={3} lg={3} md={3} sm={12} xs={12} className="Continue-order">
+                <Col xl={3} lg={3} md={12} sm={12} xs={12} className="Continue-order">
                     <ToastsContainer
                         position={ToastsContainerPosition.TOP_CENTER}
                         store={ToastsStore}
