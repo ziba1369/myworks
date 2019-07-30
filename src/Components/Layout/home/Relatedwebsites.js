@@ -52,7 +52,7 @@ const Relatedwebsites = () => {
 
             <Col key={item.id} xl={4} lg={4} md={6} sm={{span:10,offset:1}} xs={{span:10,offset:1}}>
                 <div className="relatedsite">
-                    <a href={item.link} target="_blank">
+                    <a href={item.link} target="_blank" rel="nofollow">
                         <Image src={item.img} className={item.name} alt={item.img}/>
                     </a>
                 </div>

@@ -22,7 +22,8 @@ import inboximg from "../images/inbox.svg";
 import changepassimg from "../images/changepass.svg";
 import logout from "../images/logout.svg";
 import * as Cookies from "js-cookie";
-import { Route, Link } from "react-router-dom";
+import { slide as Menu } from 'react-burger-menu';
+import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Media from "react-media";
 const Panelcustom = props => {
   const handlelogout = () => {
@@ -47,17 +48,20 @@ const Panelcustom = props => {
 
   return (
     <div className="panel">
-      <Row>
+     
         <p className="distance" />
-      </Row>
+     
       <Tab.Container
         id="right-tabs-example"
         defaultActiveKey={props.match.params.page}
       >
-        <Row className="rtl">
+        
+          <React.Fragment>
+          <Row className="rtl">
           <Media
             query="(min-width:992px)"
             render={() => (
+              <React.Fragment>
               <Col sm={2} className="menubar">
                 <div className="image-panel-parent">
                   <div className="imagepanel">
@@ -122,30 +126,7 @@ const Panelcustom = props => {
                   </Nav.Item>
                 </Nav>
               </Col>
-            )}
-          />
-          <Media
-            query="(max-width:991px)"
-            render={() => (
-              <React.Fragment>
-                <Row>
-                <Navbar  expand="lg" >
-
-                  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                  <Navbar.Collapse id="responsive-navbar-nav">
-                  <Nav variant="pills" className="flex-column">
-                  <Nav.Item>
-                  <Nav.Link eventKey="third">Features</Nav.Link> 
-                  </Nav.Item>
-                  </Nav>
-                  </Navbar.Collapse>
-                  </Navbar>
-                  
-                </Row>
-              </React.Fragment>
-            )}
-          />
-          <Col sm={10} className="content">
+              <Col sm={10} className="content">
             <Tab.Content>
               <Tab.Pane eventKey="first">
                 <EditProfile />
@@ -164,7 +145,36 @@ const Panelcustom = props => {
               </Tab.Pane>
             </Tab.Content>
           </Col>
-        </Row>
+             </React.Fragment>
+            )}/>
+                 </Row>
+              <Media
+           query="(max-width:991px)"
+           render={() => (
+          
+              <div id="outer-container">
+            <Menu  right >
+            <Link id="editprofile" className="menu-item" to={'/profile/first'}>اصلاح حساب کاربری <Image src={userimg} alt="userimg" /></Link>
+            <Link id="myorder" className="menu-item" to={'/profile/second'}>سفارشات من <Image src={myorderimg} alt="myorderimg" /></Link>
+            <Link  id="mybill" className="menu-item" to={'/profile/third'}>فاکتورهای من <Image src={billimg} alt="billimg" /></Link>
+            <Link  id="mytrans" className="menu-item" to={'/profile/fourth'}>ترجمه های من <Image src={inboximg} alt="inboximg" /></Link>
+            <Link  id="changepass" className="menu-item" to={'/profile/fifth'}>تغییر کلمه عبور <Image src={changepassimg} alt="changepassimg" /></Link>
+            <Link  id="logout" className="logoutpanel" onClick={handlelogout}>خروج <Image src={logout} alt="logout" /> </Link>
+            </Menu>
+            <main id="page-wrap">
+            {props.match.params.page === "first" ? 
+            <EditProfile/>:props.match.params.page === "second"?
+           <Mybill/>:props.match.params.page==="third"?
+           <Mytranslate/>:"a" }
+              
+          
+            </main>
+         
+           </div>
+           
+           )}/>
+            </React.Fragment>
+     
       </Tab.Container>
     </div>
   );

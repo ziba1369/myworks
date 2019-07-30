@@ -10,13 +10,7 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
     border: "0px",
     backgroundColor: "#e1e1e1"
   });
-  const [typedoc, changetypedoc] = useState({
-    type: "شناسنامه",
-    countchoose: "۱",
-    accept: "۱",
-    extradoc: "۰",
-    deliverytype: "عادی"
-  });
+  const [typedoc, changetypedoc] = useState([]);
 
   const changeprev = () => {
     document.getElementById("prev").style.display = "block";
@@ -25,44 +19,44 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
   const handleSubmit = () => {
     onClicks();
   };
-  useEffect(() => {
-    new FileUploadWithPreview("myUniqueUploadId");
-    window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
-      // e.detail.uploadId
-      // e.detail.cachedFileArray
-      // e.detail.addedFilesCount
-      // Use e.detail.uploadId to match up to your specific input;
-      if (e.detail.addedFilesCount > 0) {
-        setLoginButtonStyle({ backgroundColor: "#007bff" });
-        $(".loginbutton").removeAttr("disabled");
-      } else {
-        setLoginButtonStyle({ backgroundColor: "#e1e1e1", border: "0px" });
-        $(".loginbutton").attr("disabled", "disabled");
-      }
+  // useEffect(() => {
+  //   new FileUploadWithPreview("myUniqueUploadId");
+  //   window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
+  //     // e.detail.uploadId
+  //     // e.detail.cachedFileArray
+  //     // e.detail.addedFilesCount
+  //     // Use e.detail.uploadId to match up to your specific input;
+  //     if (e.detail.addedFilesCount > 0) {
+  //       setLoginButtonStyle({ backgroundColor: "#007bff" });
+  //       $(".loginbutton").removeAttr("disabled");
+  //     } else {
+  //       setLoginButtonStyle({ backgroundColor: "#e1e1e1", border: "0px" });
+  //       $(".loginbutton").attr("disabled", "disabled");
+  //     }
 
-      const pictures = {
-        pic: e.detail.cachedFileArray.tokens
-      };
-    });
-    window.addEventListener("fileUploadWithPreview:imageDeleted", function(e) {
-      // e.detail.uploadId
-      // e.detail.cachedFileArray
-      // e.detail.addedFilesCount
-      // Use e.detail.uploadId to match up to your specific input
-      if (e.detail.cachedFileArray.length > 0) {
-        setLoginButtonStyle({ backgroundColor: "#007bff" });
-        $(".loginbutton").removeAttr("disabled");
-      } else {
-        setLoginButtonStyle({ backgroundColor: "#e1e1e1", border: "0px" });
-        $(".loginbutton").attr("disabled", "disabled");
-      }
+  //     const pictures = {
+  //       pic: e.detail.cachedFileArray.tokens
+  //     };
+  //   });
+  //   window.addEventListener("fileUploadWithPreview:imageDeleted", function(e) {
+  //     // e.detail.uploadId
+  //     // e.detail.cachedFileArray
+  //     // e.detail.addedFilesCount
+  //     // Use e.detail.uploadId to match up to your specific input
+  //     // if (e.detail.cachedFileArray.length > 0) {
+  //     //   setLoginButtonStyle({ backgroundColor: "#007bff" });
+  //     //   $(".loginbutton").removeAttr("disabled");
+  //     // } else {
+  //     //   setLoginButtonStyle({ backgroundColor: "#e1e1e1", border: "0px" });
+  //     //   $(".loginbutton").attr("disabled", "disabled");
+  //     // }
 
-      console.log(e.detail.cachedFileArray.length);
-      const pictures = {
-        pic: e.detail.cachedFileArray.tokens
-      };
-    });
-  }, []);
+  //     console.log(e.detail.cachedFileArray.length);
+  //     const pictures = {
+  //       pic: e.detail.cachedFileArray.tokens
+  //     };
+  //   });
+  // }, []);
 
   return (
     <React.Fragment>
@@ -70,7 +64,7 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
         <Card className="documenttype ">
           <Card.Header>نوع مدرک ترجمه</Card.Header>
           <Card.Body>
-            <Card.Title>{typedoc.type}</Card.Title>
+            <Card.Title> {Cookies.get('title')}</Card.Title>
             <Card.Text>
               زبان ترجمه<span>{Cookies.get("languagenum")} مورد</span>
             </Card.Text>

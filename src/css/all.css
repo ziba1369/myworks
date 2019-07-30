@@ -381,6 +381,7 @@ a.dropdown-item {
   margin: 3rem;
 }
 
+
 /* .logoslideone {
   background-image: url(/static/media/Ghazaeie-logo-LimooGraphic.927259a6.png);
   background-position: 100%;
@@ -914,10 +915,10 @@ button:focus {
 
 .relatedsite img {
   max-height: 100px;
-   max-width: 100px;
   display: block;
   margin: 0 auto;
   height: 80vh;
+  padding: .5rem;
 }
 
 .centertext {
@@ -1060,10 +1061,15 @@ p.call {
   border-top-left-radius: 18px;
   border-bottom-left-radius: 18px;
 }
-
-.socialicon div {
-  padding: 0rem 0 1rem;
+.address{
+  font-size: .9rem;
+  font-family: fanum;
 }
+
+.socialicon img {
+  width: 16%;
+}
+
 
 .linkdin {
   padding: 0 0.1rem;
@@ -2163,7 +2169,7 @@ span.custom-file-container__custom-file__custom-file-control {
   margin-top: 2rem 0 0 0;
 }
 .registerpage {
-  height: calc(100vh - 252px);
+  height: 100%;
   margin-top: 2rem;
 }
 
@@ -2393,10 +2399,10 @@ p.activesys {
   min-height: 37.6vh;
   margin: 5rem 0 0 0;
 }
-.registerpage {
+/* .registerpage {
   min-height: 37.6vh;
   margin: 5rem 0;
-}
+} */
 .foter-blog h5 {
   font-size: 1.1rem;
 }
@@ -2422,9 +2428,9 @@ p.activesys {
 .foter-blog a {
   color: #454f63;
 }
-.fontawe {
+/* .fontawe {
   padding-top: 4.3rem;
-}
+} */
 @media screen and (max-width:768px){
   .fontawe {
     padding-top: 0px !important;
@@ -2523,6 +2529,71 @@ p.textpanel {
   text-align: center;
   padding: 0.3rem 0 2rem 0;
 }
+.bm-burger-button {
+  position: fixed;
+  width: 25px;
+  height: 20px;
+  right: 36px;
+  top: 36px;
+}
+ 
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+ 
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #a90000;
+}
+ 
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+ 
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+ 
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+ 
+/* General sidebar styles */
+.bm-menu {
+  background: #eff5ff;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+ 
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+ 
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+ 
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+ 
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
 /* myorder/panelcustom */
 .myorder {
   background-color: #454f63;
@@ -2576,11 +2647,26 @@ p.textpanel {
   bottom: 0;
   top: -77px;
 }
+@media only screen and (min-width:992px)
+{
 p.distance {
-  padding: 4rem 0;
+  padding: 4rem 1rem;
+  width: 100%;
+  direction: rtl;
+}
+}
+@media only screen and (max-width:991px){
+
+p.distance {
+  position: absolute;
+  margin-top: 0;
+}
 }
 .panel .container {
   max-width: 94vw;
+}
+a#logout {
+  text-align: right;
 }
 .imaepanel img {
   float: none;
@@ -2596,6 +2682,25 @@ p.distance {
   max-width: 400px;
   margin: 0 auto;
 }
+@media only screen and (max-width:992px) {
+  .editprofile {
+    width: 100% !important;
+}
+.upload-preview{
+  width: 18vh !important;
+}
+}
+.bm-item img {
+ width: 10% !important;
+}
+.bm-item.menu-item {
+  text-align: right;
+  text-align: right;
+  color: #929599;
+  font-size: .8rem;
+  padding: .7rem 0;
+  direction: ltr;
+}
 label.uploadremove {
   visibility: hidden;
   position: relative;
@@ -2608,7 +2713,6 @@ label.uploadremove {
   bottom: 51px !important;
   z-index: -1 !important;
   background-color: #fff !important;
-  width: 9vw !important;
   height: 18vh !important;
   overflow: hidden !important;
   border-radius: 56% !important;

@@ -363,9 +363,6 @@ const Register = props => {
       name.length > 0 &&
       lastname.length > 0 &&
       certi.length === 10 &&
-      birthvalue !== undefined &&
-      birthmonthvalue !== undefined &&
-      birthyearvalue !== undefined &&
       pass.length > 1 &&
       passr.length > 1 &&
       pass === passr
@@ -387,9 +384,6 @@ const Register = props => {
       name.length > 0 &&
       lastname.length > 0 &&
       certi.length> 1 &&
-      birthvalue !== undefined &&
-      birthmonthvalue !== undefined &&
-      birthyearvalue !== undefined &&
       pass.length > 1 &&
       passr.length > 1 &&
       pass === passr

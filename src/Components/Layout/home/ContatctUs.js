@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {Row, Col, Form, Button} from 'react-bootstrap';
 import phoneIcon from '../../../images/phone-symbol-of-an-auricular-inside-a-circle.svg';
+import placeholder from '../../../images/placeholder.svg';
 import emailIcon from '../../../images/email.svg';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTwitter, faLinkedin, faInstagram, faFacebook} from "@fortawesome/free-brands-svg-icons";
@@ -170,6 +171,12 @@ const sendHandler=()=>{
                     <Col xl={12} md={12} sm={12} xs={12}>
                         <p><img src={emailIcon} alt={"emailIcon"}/></p>
                         <p className="mail"><span>info@Hezare3.com</span></p>
+
+                    </Col>
+                    
+                    <Col xl={12} md={12} sm={12} xs={12}>
+                        <p><img src={placeholder} alt={"placehilder"}/></p>
+                        <p className="address"><span>میدان پونک-ساختمان پنجم-طبقه 6ام</span></p>
 
                     </Col>
                     <Col xl={12} md={12} sm={12} xs={12} className="fontawe ">

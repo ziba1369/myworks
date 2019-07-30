@@ -81,10 +81,7 @@ const EditProfile = props => {
             certi !== undefined) {
             if (name.length > 0 &&
                 lastname.length > 0 &&
-                certi.length === 10 &&
-                birthvalue !== undefined &&
-                birthmonthvalue !== undefined &&
-                birthyearvalue !== undefined) {
+                certi.length === 10 ) {
                 setRegister({
                     backgroundColor: "#1976d2",
                     border: "0px",
@@ -410,7 +407,7 @@ const EditProfile = props => {
                         id="rfbutton"
                         style={Register}
                         onClick={sendEditRgister}
-                        className="loginbutton"
+                        className="loginbutton editprofile"
                     >
                         ثبت
                     </Button>
