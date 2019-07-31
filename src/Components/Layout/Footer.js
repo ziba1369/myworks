@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTwitter, faLinkedin, faInstagram, faFacebook} from "@fortawesome/free-brands-svg-icons";
 import phoneIcon from '../../images/phone-symbol-of-an-auricular-inside-a-circle.svg';
 import emailIcon from '../../images/email.svg';
+import placeholder from '../../images/placeholder.svg';
 import {
     ToastsContainer,
     ToastsStore,
@@ -75,7 +76,7 @@ const Footer = () => {
            </Col> 
            <Col  xl={3} lg={3}  md={3}   sm={12}  xs={12}  style={{textAlign:"center"}}> 
            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 social">
-                    <p><img src={phoneIcon} alt={"phoneIcon"}/></p>
+                    <p><img src={placeholder} alt={"placeholder"}/></p>
                       <p><span>میدان پونک ،ساختمان 130،طبقه 5ام، واحد320</span></p>
                      
                   </div>

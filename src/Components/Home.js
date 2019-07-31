@@ -8,14 +8,21 @@ import Popularservices from "./Layout/home/Popularservices";
 import Contatus from "./Layout/home/ContatctUs";
 import Relatedwebsites from "./Layout/home/Relatedwebsites";
 import Newsletter from "./Layout/home/Newsletter";
+import MetaTags from 'react-meta-tags';
 import NavBar from "./Layout/NavBar";
 const Home = () => {
     return (
-       
+      
         <React.Fragment>
              <header>
                 <NavBar/>  
              </header>
+             {/* <MetaTags>
+            <title>Page 1</title>
+            <meta name="description" content="Some description." />
+            <meta property="og:title" content="MyApp" />
+            <meta property="og:image" content="path/to/image.jpg" />
+          </MetaTags> */}
             <Col xl={12} md={12} sm={12} xs={12} className=" rtl">
                 <Slide/>
             </Col>

@@ -7,7 +7,8 @@ import {
   Container,
   Image,
   Navbar,
-  Form
+  Form,
+  Button
 } from "react-bootstrap";
 import $ from "jquery";
 import Myorder from "./Layout/Panel/Myorder";
@@ -35,13 +36,13 @@ const Panelcustom = props => {
   };
   // useEffect(() => {
   //   switch (eventKey) {
-  //     case 'first':
-  //       firstStyle({display:'block'});
-  //       secondStyle({display:'none'});
+  //     case 'editprofile':
+  //       editprofileStyle({display:'block'});
+  //       myordersStyle({display:'none'});
 
-  //     case 'second':
-  //       firstStyle({display:'none'});
-  //       secondStyle({display:'block'});
+  //     case 'myorders':
+  //       editprofileStyle({display:'none'});
+  //       myordersStyle({display:'block'});
   //   }
   // }
   // ,[eventKey])
@@ -49,8 +50,10 @@ const Panelcustom = props => {
   return (
     <div className="panel">
      
-        <p className="distance" />
-     
+        <p className="distance">
+          <Button><Link to="/">صفحه اصلی</Link></Button>
+        </p>
+       
       <Tab.Container
         id="right-tabs-example"
         defaultActiveKey={props.match.params.page}
@@ -73,7 +76,7 @@ const Panelcustom = props => {
                 </div>
                 <Nav variant="pills" className="flex-column">
                   <Nav.Item>
-                    <Nav.Link eventKey="first">
+                    <Nav.Link eventKey="editprofile">
                       <span>
                         <Image src={userimg} alt="userimg" />
                       </span>
@@ -81,7 +84,7 @@ const Panelcustom = props => {
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="second">
+                    <Nav.Link eventKey="myorders">
                       <span>
                         <Image src={myorderimg} alt="userimg" />
                       </span>
@@ -89,7 +92,7 @@ const Panelcustom = props => {
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="third">
+                    <Nav.Link eventKey="mybill">
                       <span>
                         <Image src={billimg} alt="billImage" />
                       </span>
@@ -97,7 +100,7 @@ const Panelcustom = props => {
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="fourth">
+                    <Nav.Link eventKey="mytranslate">
                       <span>
                         <Image src={inboximg} alt="inboximg" />
                       </span>
@@ -105,7 +108,7 @@ const Panelcustom = props => {
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="fifth">
+                    <Nav.Link eventKey="changepass">
                       <span>
                         <Image src={changepassimg} alt="changepass" />
                       </span>
@@ -128,20 +131,20 @@ const Panelcustom = props => {
               </Col>
               <Col sm={10} className="content">
             <Tab.Content>
-              <Tab.Pane eventKey="first">
-                <EditProfile />
+              <Tab.Pane eventKey="editprofile">
+                <EditProfile/>
               </Tab.Pane>
-              <Tab.Pane eventKey="second">
-                <Myorder />
+              <Tab.Pane eventKey="myorders">
+                <Myorder/>
               </Tab.Pane>
-              <Tab.Pane eventKey="third">
-                <Mybill />
+              <Tab.Pane eventKey="mybill">
+                <Mybill/>
               </Tab.Pane>
-              <Tab.Pane eventKey="fourth">
-                <Mytranslate />
+              <Tab.Pane eventKey="mytranslate">
+                <Mytranslate/>
               </Tab.Pane>
-              <Tab.Pane eventKey="fifth">
-                <Passchange />
+              <Tab.Pane eventKey="changepass">
+                <Passchange/>
               </Tab.Pane>
             </Tab.Content>
           </Col>
@@ -154,18 +157,21 @@ const Panelcustom = props => {
           
               <div id="outer-container">
             <Menu  right >
-            <Link id="editprofile" className="menu-item" to={'/profile/first'}>اصلاح حساب کاربری <Image src={userimg} alt="userimg" /></Link>
-            <Link id="myorder" className="menu-item" to={'/profile/second'}>سفارشات من <Image src={myorderimg} alt="myorderimg" /></Link>
-            <Link  id="mybill" className="menu-item" to={'/profile/third'}>فاکتورهای من <Image src={billimg} alt="billimg" /></Link>
-            <Link  id="mytrans" className="menu-item" to={'/profile/fourth'}>ترجمه های من <Image src={inboximg} alt="inboximg" /></Link>
-            <Link  id="changepass" className="menu-item" to={'/profile/fifth'}>تغییر کلمه عبور <Image src={changepassimg} alt="changepassimg" /></Link>
+            <Link id="editprofile" className="menu-item" to={'/profile/editprofile'}>اصلاح حساب کاربری <Image src={userimg} alt="userimg" /></Link>
+            <Link id="myorder" className="menu-item" to={'/profile/myorders'}>سفارشات من <Image src={myorderimg} alt="myorderimg" /></Link>
+            <Link  id="mybill" className="menu-item" to={'/profile/mybill'}>فاکتورهای من <Image src={billimg} alt="billimg" /></Link>
+            <Link  id="mytrans" className="menu-item" to={'/profile/mytranslate'}>ترجمه های من <Image src={inboximg} alt="inboximg" /></Link>
+            <Link  id="changepass" className="menu-item" to={'/profile/changepass'}>تغییر کلمه عبور <Image src={changepassimg} alt="changepassimg" /></Link>
             <Link  id="logout" className="logoutpanel" onClick={handlelogout}>خروج <Image src={logout} alt="logout" /> </Link>
             </Menu>
             <main id="page-wrap">
-            {props.match.params.page === "first" ? 
-            <EditProfile/>:props.match.params.page === "second"?
-           <Mybill/>:props.match.params.page==="third"?
-           <Mytranslate/>:"a" }
+            {props.match.params.page === "editprofile" ? 
+            <EditProfile/>:props.match.params.page === "myorders"?
+            <Myorder/>:props.match.params.page==="mybill"?
+            <Mybill/>:props.match.params.page==="mytranslate"?
+            <Mytranslate/>:props.match.params.page==="changepass"?
+            <Passchange/>:props.match.params.page==="Passchange"?
+           <Mytranslate/>:"undefined"}
               
           
             </main>

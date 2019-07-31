@@ -146,7 +146,7 @@ const checkRegisterButton = () => {
             id="rfbutton"
             style={Register}
             onClick={sendCahngepass}
-            className="loginbutton"
+            className="loginbutton chanepassprof"
           >
             ثبت
           </Button>

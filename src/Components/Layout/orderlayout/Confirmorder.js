@@ -20,8 +20,8 @@ const Confirmorder = ({onClicks, step, onChanges}) => {
                 <p style={{fontSize: '.6rem', color: '#707069'}}>جهت پیگیری روند سفارش به بخش سفارش ها مراجعه کنید</p>
 
             </div>
-            <Button style={{width: '14rem'}} id="add1" onClick={handleSubmit} >
-                <Link to="/profile/second">
+            <Button style={{width: '14rem',color:'#fff'}} id="add1" onClick={handleSubmit} >
+                <Link style={{width: '14rem',color:'#fff'}} to="/profile/second">
                 سفارشات
                 </Link>
             </Button>

@@ -1,3 +1,4 @@
+// -----------------------------import npm-----------------------------------------
 import React, { useState, useEffect } from "react";
 import { Container, Button, Col, Row, Form } from "react-bootstrap";
 import {
@@ -10,30 +11,23 @@ import axios from "axios";
 import * as Cookies from "js-cookie";
 import Footer from "./Layout/Footer";
 import NavBar from './Layout/NavBar';
+
 const Register = props => {
+  // -----------------------------define variable-----------------------------------------
   const [step, setStep] = useState(1);
   const [firstStep, setFirstStep] = useState({ display: "block" });
-
-  const [secondStep, setSecondStep] = useState({
-    display: "none",
-    marginTop: "60px"
-  });
-  const [thirdStep, setThirdStep] = useState({
-    display: "none",
-    marginTop: "60px"
-  });
+  const [secondStep, setSecondStep] = useState({display: "none",marginTop: "60px"});
+  const [thirdStep, setThirdStep] = useState({display: "none",marginTop: "60px"});
+  // -----------------------------check mobile regex----------------------------------------- 
   const mobileCheck=()=>{
-    const phoneno=/^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
+  const phoneno=/^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
         if(!(mobile.match(phoneno)))
     
           ToastsStore.warning("کاربر گرامی لطفا شماره همراه خود را با فرمت مناسب وارد نمایید")
         
       
         }
-  
-
-
-
+   // -----------------------------check change  step -----------------------------------------
 
   useEffect(() => {
     switch (step) {
@@ -59,6 +53,8 @@ const Register = props => {
         break;
     }
   }, [step]);
+
+
   //////////////////// FIRST STEP //////////////////////
   const [mobile, setMobile] = useState("");
   const [verification, setVerification] = useState("");
@@ -217,7 +213,7 @@ const Register = props => {
       verification_code: active
     };
 
-    //console.log(verti)
+    
     axios
       .post(
         "http://hezare3vom.ratechcompany.com/api/check_verification_code",

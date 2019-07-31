@@ -34,12 +34,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
   const [languages, setLang] = useState([]);
   const [validation, setVal] = useState([]);
   const [count, setcount] = useState(0);
-  const [normaldelivery,setNormaldelivery]=useState("");
-  const[fastDelivery,setFastdelivery]=useState("");
-  const [delivery, setDelivery] = useState([
-    { type: "automatic", name: "عادی", id: 1, checkin: false, price:normaldelivery },
-    { type: "express", name: "فوری", id: 2, checkin: false, price:fastDelivery}
-  ]);
+
+  const [delivery, setDelivery] = useState([]);
   
   const [styleone, setStyleone] = useState({
     borderColor: "#e1e1e1",
@@ -149,10 +145,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       )
       .then(function(response) {
         if (response.data.success) {
-            setNormaldelivery(response.data.product_normal_price);
-            setFastdelivery(response.data.product_fast_price);
-          
-
+            console.log(response.data.product_languages)
 
           if (Cookies.get("languages") !== undefined) {
             setLang(JSON.parse(Cookies.get("languages")));
@@ -170,8 +163,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
             setDelivery(JSON.parse(Cookies.get("delivery")));
           }
           else {
-            setDelivery([{ type: "automatic", name: "عادی", id: 1, checkin: false, price:normaldelivery },
-          { type: "express", name: "فوری", id: 2, checkin: false, price:fastDelivery}]);
+            setDelivery([{ type: "automatic", name: "عادی", id: 1, checkin: false, price:response.data.product_normal_price},
+          { type: "express", name: "فوری", id: 2, checkin: false, price:response.data.product_fast_price}]);
           }
         }
            else {
@@ -308,16 +301,10 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
     changeButton();
   }, [validation]);
   useEffect(() => {
-    Cookies.set("delivery", delivery, { expires: 7, path: "/" });
     changeButton();
   }, [delivery]);
 
-  useEffect(() => {
-    if (Cookies.get("delivery") !== null) {
-      setDelivery(JSON.parse(Cookies.get("delivery")));
-    }
-  }, []);
-
+ 
   const sumValue = () => {
     let sumd = 0;
     let sumv = 0;
@@ -358,10 +345,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
     Cookies.set("deliverynum", deliverynum(), { expires: 7, path: "" });
   }, [deliverynum]);
 
- 
-  console.log(normaldelivery,"py")
-  //console.log(validation)
-  //console.log(delivery)
+
   return (
     <React.Fragment>
   

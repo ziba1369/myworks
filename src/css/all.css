@@ -2403,6 +2403,9 @@ p.activesys {
   min-height: 37.6vh;
   margin: 5rem 0;
 } */
+.foter-blog img {
+  width: 37px;
+}
 .foter-blog h5 {
   font-size: 1.1rem;
 }
@@ -2626,6 +2629,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding: 1.2rem 0;
   margin-top: 1rem;
 }
+@media only screen and (max-width:992px){
+  .myorderlist div:nth-child(odd) {
+    background-color: #454f63;
+    padding: .3rem;
+    color: #fff;
+}
+}
 .row.myorderlist {
   text-align: center;
   direction: rtl;
@@ -2638,6 +2648,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .myorder {
   direction: rtl;
 }
+@media only screen and (min-width:992px){
 .namepanel {
   justify-content: center;
   position: absolute;
@@ -2647,19 +2658,67 @@ Note: Beware of modifying this element as it can break the animations - you shou
   bottom: 0;
   top: -77px;
 }
+}
+@media only screen and (max-width:992px){
+  .contentpanel {
+    padding: 0 2rem;
+}
+.namepanel {
+  position: relative;
+  text-align: center;
+  left: 0px;
+}
+.chanepassprof {
+  width: 100% !important;
+}
+div#showimage {
+  display: table;
+  margin: 0 auto;
+  position: relative;
+  left: 4rem;
+}
+}
+
+.panel .content {
+  padding: 0 3rem;
+}
 @media only screen and (min-width:992px)
 {
 p.distance {
   padding: 4rem 1rem;
   width: 100%;
   direction: rtl;
+  text-align: right;
 }
+.distance a {
+  color: #fff;
+  font-size: 1rem;
+}
+.distance button {
+  position: relative;
+  top: -1rem;
+  right: 1.5rem;
+}
+}
+.distance a:hover{
+ color:#fff
 }
 @media only screen and (max-width:991px){
 
+  .distance button {
+   margin:1rem
+}
+.namepanel{
+  z-index: -1;
+}
 p.distance {
+  text-align: right;
   position: absolute;
-  margin-top: 0;
+  margin-top: 10px;
+}
+.distance a {
+  color: #fff;
+  font-size: 1rem;
 }
 }
 .panel .container {

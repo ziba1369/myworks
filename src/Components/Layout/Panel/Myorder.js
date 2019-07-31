@@ -83,7 +83,7 @@ const Myorder = () => {
 <Media
            query="(max-width:992px)"
            render={() => (
-            <div>
+            <div className="contentpanel" >
             {order.map(item=>{
               Cookies.set('order_id',item.id, {expires: 7, path: '/'})
           return(

@@ -2,13 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Card, FormLabel } from "react-bootstrap";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
+import {
+  ToastsStore,
+  ToastsContainer,
+  ToastsContainerPosition
+} from "react-toasts";
 import axios from "axios";
 import $ from "jquery";
 import * as Cookies from "js-cookie";
 const Photoupload = ({ onClicks, step, onChanges }) => {
-  const [loginButton, setLoginButtonStyle] = useState({
+
+  const [photoStep, setPhotoStep] = useState({
     border: "0px",
-    backgroundColor: "#e1e1e1"
+    backgroundColor: "#007bff"
   });
   const [typedoc, changetypedoc] = useState([]);
 
@@ -19,45 +25,87 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
   const handleSubmit = () => {
     onClicks();
   };
-  // useEffect(() => {
-  //   new FileUploadWithPreview("myUniqueUploadId");
-  //   window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
-  //     // e.detail.uploadId
-  //     // e.detail.cachedFileArray
-  //     // e.detail.addedFilesCount
-  //     // Use e.detail.uploadId to match up to your specific input;
-  //     if (e.detail.addedFilesCount > 0) {
-  //       setLoginButtonStyle({ backgroundColor: "#007bff" });
-  //       $(".loginbutton").removeAttr("disabled");
-  //     } else {
-  //       setLoginButtonStyle({ backgroundColor: "#e1e1e1", border: "0px" });
-  //       $(".loginbutton").attr("disabled", "disabled");
-  //     }
 
-  //     const pictures = {
-  //       pic: e.detail.cachedFileArray.tokens
-  //     };
-  //   });
-  //   window.addEventListener("fileUploadWithPreview:imageDeleted", function(e) {
-  //     // e.detail.uploadId
-  //     // e.detail.cachedFileArray
-  //     // e.detail.addedFilesCount
-  //     // Use e.detail.uploadId to match up to your specific input
-  //     // if (e.detail.cachedFileArray.length > 0) {
-  //     //   setLoginButtonStyle({ backgroundColor: "#007bff" });
-  //     //   $(".loginbutton").removeAttr("disabled");
-  //     // } else {
-  //     //   setLoginButtonStyle({ backgroundColor: "#e1e1e1", border: "0px" });
-  //     //   $(".loginbutton").attr("disabled", "disabled");
-  //     // }
 
-  //     console.log(e.detail.cachedFileArray.length);
-  //     const pictures = {
-  //       pic: e.detail.cachedFileArray.tokens
-  //     };
-  //   });
-  // }, []);
 
+
+  useEffect(() => {
+    new FileUploadWithPreview("myUniqueUploadId");
+    window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
+      // e.detail.uploadId
+      // e.detail.cachedFileArray
+      // e.detail.addedFilesCount
+      // Use e.detail.uploadId to match up to your specific input;
+    
+
+      const pictures = {
+        pic: e.detail.cachedFileArray.tokens
+      };
+    });
+    window.addEventListener("fileUploadWithPreview:imageDeleted", function(e) {
+      // e.detail.uploadId
+      // e.detail.cachedFileArray
+      // e.detail.addedFilesCount
+      // Use e.detail.uploadId to match up to your specific input
+      // if (e.detail.cachedFileArray.length > 0) {
+      //   setLoginButtonStyle({ backgroundColor: "#007bff" });
+      //   $(".loginbutton").removeAttr("disabled");
+      // } else {
+      //   setLoginButtonStyle({ backgroundColor: "#e1e1e1", border: "0px" });
+      //   $(".loginbutton").attr("disabled", "disabled");
+      // }
+
+      console.log(e.detail.cachedFileArray.length);
+      const pictures = {
+        pic: e.detail.cachedFileArray.tokens
+      };
+    });
+  }, []);
+
+ useEffect(()=>{
+const orderlanguages=JSON.parse(Cookies.get('languages'));
+const order_languages=orderlanguages.map((item, index) => {
+  if(item.checkin)
+   {
+     
+      return (item.name.replace("به", "|")|item.price)
+   }
+} );
+console.log(order_languages,"py");
+const orderset={
+  customer_token: Cookies.get('token'),
+  // order_name:,
+  // customer_description:,
+  // order_type:"custom,normal",
+  // translate_type:"fast,normal",
+  // page_count:,
+  // copy_count:,
+  // weight_added_version:,
+  // normal_price:,
+  // fast_price:,
+  // totalprice:,
+  // need_certificate:,
+  // order_file_count:,
+  // order_languages:,
+
+}
+
+
+  axios
+  .post(
+    "http://hezare3vom.ratechcompany.com/api/app_make_order",
+     orderset,
+    { headers: { "Content-Type": "application/json" } }
+  )
+  .then(function(response) {
+    // console.log(response.data.success);
+    if (response.data.success) {
+     console.log(response.data)
+    } else {
+      ToastsStore.error(response.data.error);
+    }
+  })
+ },[])
   return (
     <React.Fragment>
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
@@ -155,7 +203,7 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
         <Button
           onClick={handleSubmit}
           className="loginbutton"
-          style={loginButton}
+          style={photoStep}
         >
           ادامه سفارش
         </Button>

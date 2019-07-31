@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Row, Col} from 'react-bootstrap';
-import Phone from '../../../images/89926.png';
+import Phone from '../../../images/Group1962.png';
 import googleplay from '../../../images/google-play.svg';
 import playstore from '../../../images/app-store.svg';
 
