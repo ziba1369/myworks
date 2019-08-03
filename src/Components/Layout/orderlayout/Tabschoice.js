@@ -110,18 +110,20 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
 
   const typedelivery = delivery.map((item, index) => {
     const deliveryhandle = () => {
+      console.log(index)
       var del = [...delivery];
-      del[index].checkin = !del[index].checkin;
+      del[0].checkin = !del[0].checkin;
+      del[1].checkin = !del[1].checkin;
       setDelivery(del);
     };
     return (
-      <Row>
+      <Row key={index}>
         <Col sm={6}>{item.name}</Col>
         <Col sm={6}>
           <p>
             <span>
               <Form.Check
-                type="radio"
+                type="checkbox"
                 name="deliver"
                 onChange={deliveryhandle}
                 id={item.id}
@@ -163,13 +165,14 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
             setDelivery(JSON.parse(Cookies.get("delivery")));
           }
           else {
-            setDelivery([{ type: "automatic", name: "عادی", id: 1, checkin: false, price:response.data.product_normal_price},
-          { type: "express", name: "فوری", id: 2, checkin: false, price:response.data.product_fast_price}]);
+            setDelivery([{ type: "normal", name: "عادی", id: 1, checkin: true, price:response.data.product_normal_price},
+          { type: "fast", name: "فوری", id: 2, checkin: false, price:response.data.product_fast_price}]);
           }
         }
            else {
           ToastsStore.error(response.data.error);
         }
+        
       });
   }, [types]);
   const handleSubmit = () => {
@@ -201,6 +204,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       Cookies.set("languages", languages, { expires: 7, path: "/" });
       Cookies.set("validation", validation, { expires: 7, path: "/" });
       Cookies.set("delivery", delivery, { expires: 7, path: "/" });
+    
       onClicks();
     } else if (blang === false) {
       ToastsStore.warning("لطفا یک زبان برای ترجمه انتخاب کنید");
@@ -210,6 +214,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       ToastsStore.warning("لطفا نحوه ارسال  را  برای ترجمه انتخاب کنید");
     }
   };
+
   const changeButton = () => {
     let blang = false;
     let bval = false;
@@ -339,13 +344,16 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
   }, [acceptnum]);
 
   useEffect(() => {
-    Cookies.set("count", count, { expires: 7, path: "" });
+    Cookies.set("countorder", count, { expires: 7, path: "" });
   }, [count]);
   useEffect(() => {
     Cookies.set("deliverynum", deliverynum(), { expires: 7, path: "" });
   }, [deliverynum]);
 
-
+  useEffect(()=>{
+    Cookies.set("sumValue", sumValue(), { expires: 7, path: "/" });
+  },[sumValue])
+ 
   return (
     <React.Fragment>
   

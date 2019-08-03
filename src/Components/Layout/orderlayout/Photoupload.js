@@ -11,7 +11,7 @@ import axios from "axios";
 import $ from "jquery";
 import * as Cookies from "js-cookie";
 const Photoupload = ({ onClicks, step, onChanges }) => {
-
+  const [orderFileCount, setOrderFilecount] = useState(0);
   const [photoStep, setPhotoStep] = useState({
     border: "0px",
     backgroundColor: "#007bff"
@@ -23,11 +23,64 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
   };
 
   const handleSubmit = () => {
+    const orderlanguages = JSON.parse(Cookies.get("languages"));
+    const order_lang = orderlanguages.filter(item => item.checkin===true)
+    const order_languages=order_lang.map(item=>{
+     return  item.name.replace("به", "|")+"|"+item.price ;
+    })
+    
+    const orderValidation = JSON.parse(Cookies.get("validation"));
+    const order_cert = orderValidation.filter(item => item.checkin===true)
+    const order_certificate=order_cert.map(item=>{
+      return  item.name +","+item.price;
+    })
+
+    const translate_type = JSON.parse(Cookies.get("delivery"));
+    const deliverytype = translate_type.map(item => {
+      if (item.checkin) {
+        return item.type;
+      }
+    });
+    const deliveryprice = translate_type.map(item => {
+      if (item.checkin) {
+        return item.price;
+      }
+    });
+
+    const orderset = {
+      customer_token: Cookies.get("token"),
+      order_name: Cookies.get("title"),
+      customer_description:'',
+      order_type: "normal",
+      translate_type: deliverytype,
+      page_count: 0,
+      copy_count: Cookies.get("countorder"),
+      weight_added_version: 0,
+      normal_price: deliveryprice[0],
+      fast_price: deliveryprice[0],
+      totalprice: Cookies.get("sumValue"),
+      need_certificate: 0,
+      order_file_count: orderFileCount,
+      order_languages: order_languages,
+      order_certificate:order_certificate
+    };
+    console.log(orderset);
+
+    axios
+      .post(
+        "http://hezare3vom.ratechcompany.com/api/app_make_order",
+        orderset,
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then(function(response) {
+        console.log(response.data);
+        if (response.data.success) {
+        } else {
+          ToastsStore.error(response.data.error);
+        }
+      });
     onClicks();
   };
-
-
-
 
   useEffect(() => {
     new FileUploadWithPreview("myUniqueUploadId");
@@ -36,7 +89,7 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
       // e.detail.cachedFileArray
       // e.detail.addedFilesCount
       // Use e.detail.uploadId to match up to your specific input;
-    
+      setOrderFilecount(e.detail.addedFilesCount);
 
       const pictures = {
         pic: e.detail.cachedFileArray.tokens
@@ -55,64 +108,21 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
       //   $(".loginbutton").attr("disabled", "disabled");
       // }
 
-      console.log(e.detail.cachedFileArray.length);
+      // console.log(e.detail.cachedFileArray.length);
       const pictures = {
         pic: e.detail.cachedFileArray.tokens
       };
     });
   }, []);
 
- useEffect(()=>{
-const orderlanguages=JSON.parse(Cookies.get('languages'));
-const order_languages=orderlanguages.map((item, index) => {
-  if(item.checkin)
-   {
-     
-      return (item.name.replace("به", "|")|item.price)
-   }
-} );
-console.log(order_languages,"py");
-const orderset={
-  customer_token: Cookies.get('token'),
-  // order_name:,
-  // customer_description:,
-  // order_type:"custom,normal",
-  // translate_type:"fast,normal",
-  // page_count:,
-  // copy_count:,
-  // weight_added_version:,
-  // normal_price:,
-  // fast_price:,
-  // totalprice:,
-  // need_certificate:,
-  // order_file_count:,
-  // order_languages:,
 
-}
-
-
-  axios
-  .post(
-    "http://hezare3vom.ratechcompany.com/api/app_make_order",
-     orderset,
-    { headers: { "Content-Type": "application/json" } }
-  )
-  .then(function(response) {
-    // console.log(response.data.success);
-    if (response.data.success) {
-     console.log(response.data)
-    } else {
-      ToastsStore.error(response.data.error);
-    }
-  })
- },[])
   return (
     <React.Fragment>
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
         <Card className="documenttype ">
           <Card.Header>نوع مدرک ترجمه</Card.Header>
           <Card.Body>
-            <Card.Title> {Cookies.get('title')}</Card.Title>
+            <Card.Title> {Cookies.get("title")}</Card.Title>
             <Card.Text>
               زبان ترجمه<span>{Cookies.get("languagenum")} مورد</span>
             </Card.Text>
@@ -198,7 +208,7 @@ const orderset={
           size="lg"
         >
           <p>مجموع هزینه ها</p>
-          <p>2500000 تومان</p>
+          <p>{Cookies.get("sumValue")}</p>
         </Button>
         <Button
           onClick={handleSubmit}
