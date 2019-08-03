@@ -26,7 +26,7 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
     const orderlanguages = JSON.parse(Cookies.get("languages"));
     const order_lang = orderlanguages.filter(item => item.checkin===true)
     const order_languages=order_lang.map(item=>{
-     return  item.name.replace("به", "|")+"|"+item.price ;
+     return  item.name.split(" به ")[0]+"|"+item.name.split(" به ")[1]+"|"+item.price ;
     })
     
     const orderValidation = JSON.parse(Cookies.get("validation"));
@@ -36,29 +36,29 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
     })
 
     const translate_type = JSON.parse(Cookies.get("delivery"));
-    const deliverytype = translate_type.map(item => {
-      if (item.checkin) {
-        return item.type;
-      }
-    });
-    const deliveryprice = translate_type.map(item => {
-      if (item.checkin) {
-        return item.price;
-      }
-    });
+    const deliver = translate_type.filter(item =>(item.checkin===true));
+    const deliverytype=deliver.map(item=>{
+      return item.type;
+    })
+     
+    const deliverypr = translate_type.filter(item =>(item.checkin===true));
+    const deliveryprice=deliverypr.map(item=>{
+      return item.price;
+    })
+     
 
     const orderset = {
       customer_token: Cookies.get("token"),
       order_name: Cookies.get("title"),
       customer_description:'',
       order_type: "normal",
-      translate_type: deliverytype,
+      translate_type: deliverytype[0],
       page_count: 0,
       copy_count: Cookies.get("countorder"),
       weight_added_version: 0,
       normal_price: deliveryprice[0],
       fast_price: deliveryprice[0],
-      totalprice: Cookies.get("sumValue"),
+      total_price: Cookies.get("sumValue"),
       need_certificate: 0,
       order_file_count: orderFileCount,
       order_languages: order_languages,
