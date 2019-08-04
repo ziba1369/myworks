@@ -1,166 +1,177 @@
-
-import React, {useState,useEffect} from 'react';
-import {Col, Button, Row, Carousel} from 'react-bootstrap';
-import customtrans from '../../../images/document.svg';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheckCircle} from '@fortawesome/free-regular-svg-icons';
-import Media from 'react-media';
+import React, { useState, useEffect } from "react";
+import { Col, Button, Row, Carousel } from "react-bootstrap";
+import customtrans from "../../../images/document.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
+import Media from "react-media";
 import * as Cookies from "js-cookie";
-import {withRouter} from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import {
-    ToastsContainer,
-    ToastsStore,
-    ToastsContainerPosition
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
 } from "react-toasts";
-const Popularservices = (props) => {
-
-    const [Information, setinfo] = useState([
-        {
-            id: 4,
-            img: customtrans,
-            title: "ترجمه سفارشی",
-            description: ['ترجمه رسمی', 'مهرمترجم رسمی', 'مهر دادگستری'],
-            price: '۲۵۰۰'
-        }
-    ]);
-    useEffect(()=>{
-      
-            axios
-                .get(
-                    "http://hezare3vom.ratechcompany.com/api/front/get_popular_products",
-                    props.match.params.id,
-                    {
-                        headers: {"Content-Type": "application/json"}
-                    }
-                )
-                .then(function (response) {
-                    if (response.data.success) {
-                        setinfo([...response.data.products,...Information]);
-                       console.log(response.data.products)
-                       
-    
-                    } else {
-                        ToastsStore.error(response.data.error);
-                        
-                    }
-                })
-                // .catch(function (error) {
-                //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-                // });
-          }, []);
-   
-    const cardServices = Information.map((item, inex) => {
-        return (
-
-
-            <Col key={item.id} xl={3} lg={3} md={3} sm={12} xs={12} className="popularservices">
-                <div className="servicetran">
-                    <div className="imgtrans">
-
-                        <p className="jello"><img src={item.img} alt={"item.img"}/></p>
-
-                        <p>{item.title}</p>
-                    </div>
-                    <div className="descriptiontrans">
-                    <div className="descript">
-                        
-                    
-                        {item.description.map((des, i) =>
-                         (
-                           
-                            <p key={i}>{des}
-                           
-                            {des && <FontAwesomeIcon icon={faCheckCircle}/>}
-                            </p>))}
-                          
-                    </div>
-                        <p style={{textAlign: "center"}}>قیمت (تومان)</p>
-                        <p style={{textAlign: "center", fontSize: "1rem"}} className="green">{item.price}</p>
-                    </div>
-                </div>
-                <div className="custom">
-                    <Button type="submit" className="green" style={{cursor: "pointer"}} onClick={() => {
-                       if(Cookies.get('token')){
-                        Cookies.set('title', item.title, {expires: 7, path: '/'});
-                        Cookies.set('types', item.id, {expires: 7, path: '/'});
-                        props.history.push("/order/" + item.slug);
-                       }
-                       else{
-                        props.history.push("/login/");
-                       }
-                    }}>ثبت سفارش</Button>
-                </div>
-
-            </Col>
-
-
-        )
-    })
-
-    const carousel = Information.map((item, inex) => {
-        return (
-            <Carousel.Item  key={item.id}>
-                <div className="servicetran">
-                    <div className="imgtrans">
-
-                        <p className="jello"><img src={item.img} alt={"item.img"}/></p>
-
-                        <p>{item.title}</p>
-                    </div>
-                    <div className="descriptiontrans">
-
-                        {item.description.map((des, i) => (
-                            <p key={i}>{des}<FontAwesomeIcon icon={faCheckCircle}/></p>))}
-
-
-                        <p style={{textAlign: "center"}}>قیمت (تومان)</p>
-                        <p style={{textAlign: "center"}} className="green">{item.price}</p>
-                    </div>
-                </div>
-                <div className="custom">
-                    <Button  className="green" style={{cursor: "pointer"}} onClick={() => {
-                       if(Cookies.get('token')){
-                        Cookies.set('title', item.title, {expires: 7, path: '/'});
-                        Cookies.set('types', item.id, {expires: 7, path: '/'});
-                        props.history.push("/order/" + item.slug);
-                       }
-                       else{
-                        props.history.push("/login/");
-                       }
-                    }}>ثبت سفارش</Button>
-                </div>
-
-
-            </Carousel.Item>
-
-
-        )
-    })
+////////////////populerservices function/////////////////
+const Popularservices = props => {
+  ////////////////custom order/////////////////
+  const [Information, setinfo] = useState([
+    {
+      id: 4,
+      img: customtrans,
+      title: "ترجمه سفارشی",
+      description: ["ترجمه رسمی", "مهرمترجم رسمی", "مهر دادگستری"],
+      price: "۲۵۰۰"
+    }
+  ]);
+  ////////////////card services in normal resolationr/////////////////
+  const cardServices = Information.map((item, inex) => {
     return (
-        <React.Fragment>
-            <Media query="(min-width:769px)">
-                <Row className="popularservices rtl">
-                    <Col className="servicestext" xl={12} md={12} sm={12} xs={12}>
-                        <h5 className="titlesections">خدمات پرمخاطب ترجمه</h5>
+      <div
+        className="popularservices col-xl-3 col-lg-3 col-md-3 col-sm-12"
+        key={item.id}
+      >
+        <div className="servicetran">
+          <div className="imgtrans">
+            <p className="jello">
+              <img src={item.img} alt={"item.img"} />
+            </p>
 
-                    </Col>
-                    {cardServices}
-                </Row>
-            </Media>
-            <Media query="(max-width:768px)">
-                <Row className="popularservices rtl">
-                    <Col className="servicestext" xl={12} md={12} sm={12} xs={12}>
-                        <h5 className="titlesections">خدمات پرمخاطب ترجمه</h5>
+            <p>{item.title}</p>
+          </div>
+          <div className="descriptiontrans">
+            <div className="descript">
+              {item.description.map((des, i) => (
+                <p key={i.id}>
+                  {des}
 
-                    </Col>
-                    <Carousel touch={true} interval={null}>
-                        {carousel}
-                    </Carousel>
-                </Row>
-            </Media>
-        </React.Fragment>
+                  {des && <FontAwesomeIcon icon={faCheckCircle} />}
+                </p>
+              ))}
+            </div>
+            <p style={{ textAlign: "center" }}>قیمت (تومان)</p>
+            <p
+              style={{ textAlign: "center", fontSize: "1rem" }}
+              className="green"
+            >
+              {item.price}
+            </p>
+          </div>
+        </div>
+        <div className="custom">
+          <Button
+            type="submit"
+            className="green"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              if (Cookies.get("token")) {
+                Cookies.set("title", item.title, { expires: 7, path: "/" });
+                Cookies.set("types", item.id, { expires: 7, path: "/" });
+                props.history.push("/order/" + item.slug);
+              } else {
+                props.history.push("/login/");
+              }
+            }}
+          >
+            ثبت سفارش
+          </Button>
+        </div>
+      </div>
     );
-}
+  });
+  ////////////////card services in responsive/////////////////
+  const carousel = Information.map((item, inex) => {
+    return (
+      <Carousel.Item key={item.id}>
+        <div className="servicetran">
+          <div className="imgtrans">
+            <p className="jello">
+              <img src={item.img} alt={"item.img"} />
+            </p>
+
+            <p>{item.title}</p>
+          </div>
+          <div className="descriptiontrans">
+            {item.description.map((des, i) => (
+              <p key={i}>
+                {des}
+                <FontAwesomeIcon icon={faCheckCircle} />
+              </p>
+            ))}
+
+            <p style={{ textAlign: "center" }}>قیمت (تومان)</p>
+            <p style={{ textAlign: "center" }} className="green">
+              {item.price}
+            </p>
+          </div>
+        </div>
+        <div className="custom">
+          <Button
+            className="green"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              if (Cookies.get("token")) {
+                Cookies.set("title", item.title, { expires: 7, path: "/" });
+                Cookies.set("types", item.id, { expires: 7, path: "/" });
+                props.history.push("/order/" + item.slug);
+              } else {
+                props.history.push("/login/");
+              }
+            }}
+          >
+            ثبت سفارش
+          </Button>
+        </div>
+      </Carousel.Item>
+    );
+  });
+  ////////////////useeffect set data from server/////////////////
+  useEffect(() => {
+    axios
+      .get(
+        "http://hezare3vom.ratechcompany.com/api/front/get_popular_products",
+        props.match.params.id,
+        {
+          headers: { "Content-Type": "application/json" }
+        }
+      )
+      .then(function(response) {
+        if (response.data.success) {
+          setinfo([...response.data.products, ...Information]);
+          console.log(response.data.products);
+        } else {
+          ToastsStore.error(response.data.error);
+        }
+      });
+  }, []);
+
+  ////////////////main return/////////////////
+  return (
+    <React.Fragment>
+      <ToastsContainer
+        position={ToastsContainerPosition.TOP_CENTER}
+        store={ToastsStore}
+      />
+      <Media query="(min-width:769px)">
+        <div className="row popularservices rtl">
+          <div className="servicestext col-xl-12 col-md-12 col-sm-12 col-xs-12">
+            <h5 className="titlesections">خدمات پرمخاطب ترجمه</h5>
+          </div>
+          {cardServices}
+        </div>
+      </Media>
+      <Media query="(max-width:768px)">
+        <div className="row popularservices rtl">
+          <div className="servicestext col-xl-12 col-md-12 col-sm-12 col-xs-12">
+            <h5 className="titlesections">خدمات پرمخاطب ترجمه</h5>
+          </div>
+          <Carousel touch={true} interval={null}>
+            {carousel}
+          </Carousel>
+        </div>
+      </Media>
+    </React.Fragment>
+  );
+};
 
 export default withRouter(Popularservices);

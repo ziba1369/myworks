@@ -7,14 +7,13 @@ import {faTwitter, faLinkedin, faInstagram, faFacebook} from "@fortawesome/free-
 import phoneIcon from '../../images/phone-symbol-of-an-auricular-inside-a-circle.svg';
 import emailIcon from '../../images/email.svg';
 import placeholder from '../../images/placeholder.svg';
-import {
-    ToastsContainer,
-    ToastsStore,
-    ToastsContainerPosition
-  } from "react-toasts";
+import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
+////////////////footer function/////////////////
 const Footer = () => {
+    ////////////////set inintal variable/////////////////
     const [newsdet, setNews] = useState([]);
     const  pageLimit=3;
+    //////////////////use effect to get data from srever////
     useEffect(() => {
         axios
             .get(
@@ -33,9 +32,7 @@ const Footer = () => {
                     ToastsStore.error(response.data.error);
                 }
             })
-            // .catch(function (error) {
-            //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-            // });
+           
             
       },[]);
     return ( 

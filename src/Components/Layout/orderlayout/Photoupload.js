@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Row, Card, FormLabel } from "react-bootstrap";
+import { Button, Col, Row, Card } from "react-bootstrap";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
 import {
@@ -8,49 +8,47 @@ import {
   ToastsContainerPosition
 } from "react-toasts";
 import axios from "axios";
-import $ from "jquery";
 import * as Cookies from "js-cookie";
+////////////////////photoupload function /////////////////////////////
 const Photoupload = ({ onClicks, step, onChanges }) => {
-  const [orderFileCount, setOrderFilecount] = useState(0);
-  const [photoStep, setPhotoStep] = useState({
-    border: "0px",
-    backgroundColor: "#007bff"
-  });
-  const [typedoc, changetypedoc] = useState([]);
-
+////////////////////////set variable/////////////////////////////////
+const [orderFileCount, setOrderFilecount] = useState(0);
+const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
+////////////////////////preview image/////////////////////////////////
   const changeprev = () => {
     document.getElementById("prev").style.display = "block";
   };
-
+////////////////////////handle submit/////////////////////////////////
   const handleSubmit = () => {
+    ////////////////////////send choose languages to server /////////////////////////////////
     const orderlanguages = JSON.parse(Cookies.get("languages"));
-    const order_lang = orderlanguages.filter(item => item.checkin===true)
-    const order_languages=order_lang.map(item=>{
-     return  item.name.split(" به ")[0]+"|"+item.name.split(" به ")[1]+"|"+item.price ;
-    })
-    
+    const order_lang = orderlanguages.filter(item => item.checkin === true);
+    const order_languages = order_lang.map(item => {
+      return (
+        item.name.split(" به ")[0] +
+        "|" +
+        item.name.split(" به ")[1] +
+        "|" +
+        item.price
+      );
+    });
+  ////////////////////////send choose certificate to server /////////////////////////////////
     const orderValidation = JSON.parse(Cookies.get("validation"));
-    const order_cert = orderValidation.filter(item => item.checkin===true)
-    const order_certificate=order_cert.map(item=>{
-      return  item.name +","+item.price;
-    })
-
+    const order_cert = orderValidation.filter(item => item.checkin === true);
+    const order_certificate = order_cert.map(item => {
+      return item.name + "," + item.price;
+    });
+  ////////////////////////send choose deliver to server /////////////////////////////////
     const translate_type = JSON.parse(Cookies.get("delivery"));
-    const deliver = translate_type.filter(item =>(item.checkin===true));
-    const deliverytype=deliver.map(item=>{
-      return item.type;
-    })
-     
-    const deliverypr = translate_type.filter(item =>(item.checkin===true));
-    const deliveryprice=deliverypr.map(item=>{
-      return item.price;
-    })
-     
-
+    const deliver = translate_type.filter(item => item.checkin === true);
+    const deliverytype = deliver.map(item => {return item.type;});
+    const deliverypr = translate_type.filter(item => item.checkin === true);
+    const deliveryprice = deliverypr.map(item => {return item.price});
+  ////////////////////////set items to send server /////////////////////////////////
     const orderset = {
       customer_token: Cookies.get("token"),
       order_name: Cookies.get("title"),
-      customer_description:'',
+      customer_description: "",
       order_type: "normal",
       translate_type: deliverytype[0],
       page_count: 0,
@@ -62,10 +60,10 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
       need_certificate: 0,
       order_file_count: orderFileCount,
       order_languages: order_languages,
-      order_certificate:order_certificate
+      order_certificate: order_certificate
     };
-    console.log(orderset);
-
+   
+  ////////////////////////send data to server /////////////////////////////////
     axios
       .post(
         "http://hezare3vom.ratechcompany.com/api/app_make_order",
@@ -81,43 +79,28 @@ const Photoupload = ({ onClicks, step, onChanges }) => {
       });
     onClicks();
   };
-
+  ////////////////////////useeffectfor upload photo /////////////////////////////////
   useEffect(() => {
     new FileUploadWithPreview("myUniqueUploadId");
     window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
-      // e.detail.uploadId
-      // e.detail.cachedFileArray
-      // e.detail.addedFilesCount
-      // Use e.detail.uploadId to match up to your specific input;
       setOrderFilecount(e.detail.addedFilesCount);
-
       const pictures = {
         pic: e.detail.cachedFileArray.tokens
       };
     });
     window.addEventListener("fileUploadWithPreview:imageDeleted", function(e) {
-      // e.detail.uploadId
-      // e.detail.cachedFileArray
-      // e.detail.addedFilesCount
-      // Use e.detail.uploadId to match up to your specific input
-      // if (e.detail.cachedFileArray.length > 0) {
-      //   setLoginButtonStyle({ backgroundColor: "#007bff" });
-      //   $(".loginbutton").removeAttr("disabled");
-      // } else {
-      //   setLoginButtonStyle({ backgroundColor: "#e1e1e1", border: "0px" });
-      //   $(".loginbutton").attr("disabled", "disabled");
-      // }
-
-      // console.log(e.detail.cachedFileArray.length);
       const pictures = {
         pic: e.detail.cachedFileArray.tokens
       };
     });
   }, []);
-
-
+  ////////////////////////main return /////////////////////////////////
   return (
     <React.Fragment>
+      <ToastsContainer
+        position={ToastsContainerPosition.TOP_CENTER}
+        store={ToastsStore}
+      />
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
         <Card className="documenttype ">
           <Card.Header>نوع مدرک ترجمه</Card.Header>

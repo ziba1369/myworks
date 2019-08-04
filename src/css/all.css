@@ -2790,4 +2790,7 @@ label.upladersize {
 .dropdown-item span[role="button"] {
   display: inline-block;
 }
+.panel .custom-file-container__image-preview {
+  width: 115px;
+}
 /* panelcustom */

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Row, Col, Container, ButtonToolbar} from 'react-bootstrap';
-import {Link} from "react-router-dom";
+import { Row, ButtonToolbar } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import Logotranslate from '../../../images/Ghazaeie-logo-LimooGraphic.png'
 import Iran from "../../../images/iran.svg";
 import France from "../../../images/france.svg";
@@ -9,55 +9,49 @@ import Italy from "../../../images/italy.svg";
 import Germany from "../../../images/germany.svg";
 import Turkey from "../../../images/turkey.svg";
 import Emirates from "../../../images/united-arab-emirates.svg";
-
+///////////////////////////slide function///////////////////////
 const Slide = () => {
     return (
         <React.Fragment>
 
             <Row className=" slideone rtl">
-                <Col xl={6} md={6} sm={12} xs={12} className="centerlogo">
+                <div className="centerlogo col-xl-6 col-md-6 col-sm-12 col-xs-12">
                     <p className="logoslide">
-                        <img src={Logotranslate} alt={"Logotranslate"}/>
+                        <img src={Logotranslate} alt={"Logotranslate"} />
                     </p>
                     <p className="office">دفتر ترجمه رسمی ۴۴۹ تهران</p>
                     <p className="owner">مترجم مسئول: موسوی</p>
-                </Col>
-                <Col xl={6} md={6} sm={12} xs={12} className="groupflags">
-                    <Container className="countries">
+                </div>
+                <div className="groupflags col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                    <div className="container countries">
 
-                        <Row className="justify-content-md-center">
-                            <Col xl={5} lg={5} md={6} sm={12} xs={12} className="Iran pulse"><img src={Iran} 
-                                                                                                  alt={Iran}/></Col>
-                        </Row>
-                        <Row className="justify-content-md-center">
-                            <Col xl={4} lg={4} md={6} sm={6} xs={6} className="France dist pulse"><img src={France}
-                                                                                                       alt={France}/></Col>
-                            <Col xl={4} lg={4} md={6} sm={6} xs={6} className="England dist pulse"><img src={England}
-                                                                                                        alt={England}/></Col>
-                        </Row>
-                        <Row className="justify-content-md-center">
-                            <Col xl={4} lg={4} md={6} sm={6} xs={6} className="Italy dist pulse"><img src={Italy}
-                                                                                                      alt={Italy}/></Col>
-                            <Col xl={4} lg={4} md={6} sm={6} xs={6} className="Germany dist pulse"><img src={Germany}
-                                                                                                        alt={Germany}/></Col>
-                        </Row>
-                        <Row className="justify-content-md-center">
-                            <Col xl={4} lg={4} md={6} sm={6} xs={6} className="Turkey dist pulse"><img src={Turkey}
-                                                                                                       alt={Turkey}/></Col>
-                            <Col xl={4} lg={4} md={6} sm={6} xs={6} className="Emirates dist pulse"><img src={Emirates}
-                                                                                                         alt={Emirates}/></Col>
-                        </Row>
+                        <div className="row justify-content-md-center">
+                            <div className="col-xl-5 col-lg-5 col-md-6 col-sm-12 col-xs-12 Iran pulse"><img src={Iran}
+                                alt={Iran} /></div>
+                        </div>
+                        <div className="row justify-content-md-center">
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 France dist pulse"><img src={France} alt={France} /></div>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 England dist pulse"><img src={England}  alt={England} /></div>
+                        </div>
+                        <div className="row justify-content-md-center">
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 Italy dist pulse"><img src={Italy} alt={Italy} /></div>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 Germany dist pulse"><img src={Germany} alt={Germany} /></div>
+                        </div>
+                        <div className="row justify-content-md-center">
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 Turkey dist pulse"><img src={Turkey} alt={Turkey} /></div>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 Emirates dist pulse"><img src={Emirates} alt={Emirates} /></div>
+                        </div>
 
-                    </Container>
-                </Col>
+                    </div>
+                </div>
             </Row>
             <Row>
-                <Col xl={12} md={12} sm={12} xs={12} className="pricebtn">
+                <div xl={12} md={12} sm={12} xs={12} className="pricebtn col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ButtonToolbar className=" price">
-                        <a href="#"><button className="btn-light-theme" >نرخ نامه مصوب ترجمه رسمی</button></a>
+                        <Link to='#'><button className="btn-light-theme" >نرخ نامه مصوب ترجمه رسمی</button></Link>
                         <Link to='/services/all'><button className="btn-color-theme">ثبت سفارش آنلاین ترجمه</button></Link>
                     </ButtonToolbar>
-                </Col>
+                </div>
             </Row>
 
         </React.Fragment>

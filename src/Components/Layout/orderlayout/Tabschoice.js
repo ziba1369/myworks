@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Form,
-  Col,
-  Nav,
-  Row,
-  Tab,
-  TabContainer,
-  Image,
-  Card
-} from "react-bootstrap";
+import {Button,Form,Col,Nav,Row,Tab,TabContainer,Image,Card} from "react-bootstrap";
 import adddoc from "../../../images/add-documents.svg";
 import delitype from "../../../images/deliverytype.svg";
 import acceptsign from "../../../images/acceptsign.svg";
@@ -21,29 +11,21 @@ import {
 } from "react-toasts";
 import axios from "axios";
 import * as Cookies from "js-cookie";
-
+////////////////////////tabchoice function /////////////////////////////////
 const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
+  /////////////////////set variable ///////////////////////
   const types = Cookies.get("types");
-  const [typedoc, changetypedoc] = useState({
-    type: "شناسنامه",
-    countchoose: "۱",
-    accept: "۱",
-    extradoc: "۰",
-    deliverytype: "عادی"
-  });
   const [languages, setLang] = useState([]);
   const [validation, setVal] = useState([]);
   const [count, setcount] = useState(0);
-
   const [delivery, setDelivery] = useState([]);
-  
   const [styleone, setStyleone] = useState({
     borderColor: "#e1e1e1",
     backgroundColor: "#fafafa",
     color: "#e1e1e1",
     border: "0px"
   });
-
+  ////////////////////////set data to languages /////////////////////////////////
   const lnaguage = languages.map((item, index) => {
     const langhandle = () => {
       var lng = [...languages];
@@ -53,7 +35,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
 
     return (
       <Row>
-        <Col sm={8}>{item.name}</Col>
+        <Col sm={8} key={item.id}>{item.name}</Col>
         <Col sm={4}>
           <p className="stylenumprice">
             {item.price} <span className="styletoman"> تومان</span>
@@ -72,7 +54,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       </Row>
     );
   });
-
+  ////////////////////////set data to certificate/////////////////////////////////
   const valid = validation.map((item, index) => {
     var val = [...validation];
     if (val[index].needed === 1) {
@@ -107,17 +89,17 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       </Row>
     );
   });
-
+  ////////////////////////set data to delivery/////////////////////////////////
   const typedelivery = delivery.map((item, index) => {
     const deliveryhandle = () => {
-      console.log(index)
+      console.log(index);
       var del = [...delivery];
       del[0].checkin = !del[0].checkin;
       del[1].checkin = !del[1].checkin;
       setDelivery(del);
     };
     return (
-      <Row key={index}>
+      <Row key={item.id}>
         <Col sm={6}>{item.name}</Col>
         <Col sm={6}>
           <p>
@@ -135,19 +117,20 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       </Row>
     );
   });
+  ////////////////////////set data from server/////////////////////////////////
   useEffect(() => {
     axios
       .get(
         "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id=" +
-          types,
+        types,
 
         {
           headers: { "Content-Type": "application/json" }
         }
       )
-      .then(function(response) {
+      .then(function (response) {
         if (response.data.success) {
-            console.log(response.data.product_languages)
+          console.log(response.data.product_languages);
 
           if (Cookies.get("languages") !== undefined) {
             setLang(JSON.parse(Cookies.get("languages")));
@@ -163,18 +146,30 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
           }
           if (Cookies.get("delivery") !== undefined) {
             setDelivery(JSON.parse(Cookies.get("delivery")));
+          } else {
+            setDelivery([
+              {
+                type: "normal",
+                name: "عادی",
+                id: 1,
+                checkin: true,
+                price: response.data.product_normal_price
+              },
+              {
+                type: "fast",
+                name: "فوری",
+                id: 2,
+                checkin: false,
+                price: response.data.product_fast_price
+              }
+            ]);
           }
-          else {
-            setDelivery([{ type: "normal", name: "عادی", id: 1, checkin: true, price:response.data.product_normal_price},
-          { type: "fast", name: "فوری", id: 2, checkin: false, price:response.data.product_fast_price}]);
-          }
-        }
-           else {
+        } else {
           ToastsStore.error(response.data.error);
         }
-        
       });
   }, [types]);
+  ///////////////////handle button to next step///////////////////////////
   const handleSubmit = () => {
     let blang = false;
     let bval = false;
@@ -204,7 +199,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       Cookies.set("languages", languages, { expires: 7, path: "/" });
       Cookies.set("validation", validation, { expires: 7, path: "/" });
       Cookies.set("delivery", delivery, { expires: 7, path: "/" });
-    
+
       onClicks();
     } else if (blang === false) {
       ToastsStore.warning("لطفا یک زبان برای ترجمه انتخاب کنید");
@@ -214,7 +209,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       ToastsStore.warning("لطفا نحوه ارسال  را  برای ترجمه انتخاب کنید");
     }
   };
-
+  ////////////////////////change button active&color/////////////////////////////////
   const changeButton = () => {
     let blang = false;
     let bval = false;
@@ -270,6 +265,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       });
     }
   };
+  ////////////////////////count choosed languages/////////////////////////////////
+  //eslint-disable-next-line
   const languagenum = () => {
     let w = 0;
     for (let x in languages) {
@@ -279,6 +276,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
     }
     return w;
   };
+  ////////////////////////count choosed certificate/////////////////////////////////
+   //eslint-disable-next-line
   const acceptnum = () => {
     let w = 0;
     for (let x in validation) {
@@ -288,7 +287,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
     }
     return w;
   };
-
+  ////////////////////////count choosed certificate/////////////////////////////////
+   //eslint-disable-next-line
   const deliverynum = () => {
     let z;
     for (let x in delivery) {
@@ -298,9 +298,11 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
     }
     return z;
   };
+
+  ////////////////////////check change login button/////////////////////////////////
+  
   useEffect(() => {
     changeButton();
-    // console.log(languages);
   }, [languages]);
   useEffect(() => {
     changeButton();
@@ -308,8 +310,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
   useEffect(() => {
     changeButton();
   }, [delivery]);
-
- 
+  ////////////////////////sum all vlaue of orders/////////////////////////////////
+ //eslint-disable-next-line
   const sumValue = () => {
     let sumd = 0;
     let sumv = 0;
@@ -336,9 +338,13 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       return sum + sumv + sumd;
     }
   };
+
+  ////////////////////////set data in cookie/////////////////////////////////
+
   useEffect(() => {
     Cookies.set("languagenum", languagenum(), { expires: 7, path: "" });
   }, [languagenum]);
+
   useEffect(() => {
     Cookies.set("acceptnum", acceptnum(), { expires: 7, path: "" });
   }, [acceptnum]);
@@ -350,183 +356,175 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
     Cookies.set("deliverynum", deliverynum(), { expires: 7, path: "" });
   }, [deliverynum]);
 
-  useEffect(()=>{
+  useEffect(() => {
     Cookies.set("sumValue", sumValue(), { expires: 7, path: "/" });
-  },[sumValue])
- 
+  }, [sumValue]);
+
   return (
     <React.Fragment>
-  
-        <Col xl={3} lg={3} md={3} sm={12} xs={12}>
-          <Card className="documenttype">
-            <Card.Header>نوع مدرک ترجمه</Card.Header>
-            <Card.Body>
-              <Card.Title>{Cookies.get('title')}</Card.Title>
-              <Card.Text>
-                زبان ترجمه
-                <span>
-                  {languagenum()}
-                  مورد
-                </span>
-              </Card.Text>
-              <Card.Text>
-                مهرو تاییدات<span>{acceptnum()} مورد</span>
-              </Card.Text>
-              <Card.Text>
-                نسخه اضافه<span>{count} مورد</span>
-              </Card.Text>
-              <Card.Text>
-                نوع تحویل<span>{deliverynum()}</span>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
+      <Col xl={3} lg={3} md={3} sm={12} xs={12}>
+        <Card className="documenttype">
+          <Card.Header>نوع مدرک ترجمه</Card.Header>
+          <Card.Body>
+            <Card.Title>{Cookies.get("title")}</Card.Title>
+            <Card.Text>
+              زبان ترجمه
+              <span>
+                {languagenum()}
+                مورد
+              </span>
+            </Card.Text>
+            <Card.Text>
+              مهرو تاییدات<span>{acceptnum()} مورد</span>
+            </Card.Text>
+            <Card.Text>
+              نسخه اضافه<span>{count} مورد</span>
+            </Card.Text>
+            <Card.Text>
+              نوع تحویل<span>{deliverynum()}</span>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Col>
 
-        <Col
-          xl={6}
-          lg={6}
-          md={9}
-          sm={12}
-          xs={12}
-          style={{ borderRadius: "1rem" }}
+      <Col
+        xl={6}
+        lg={6}
+        md={9}
+        sm={12}
+        xs={12}
+        style={{ borderRadius: "1rem" }}
+      >
+        <TabContainer
+          id="left-tabs-example"
+          //  onChange={changeButton}
+          defaultActiveKey="first"
         >
-          <TabContainer
-            id="left-tabs-example"
-            //  onChange={changeButton}
-            defaultActiveKey="first"
-          >
-            <div className="row bordertab">
-              <Col className="tabsorder" xl={3} lg={3} md={3} sm={3}>
-                <Nav
-                  variant="pills"
-                  className="flex-column tabsdet hvr-sweep-to-bottom"
-                >
-                  <Nav.Item>
-                    <Nav.Link eventKey="first">
-                      <Image src={tranlatelang} />
-                      زبان ترجمه
-                    </Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link eventKey="second">
-                      <Image src={acceptsign} />
-                      مهرو تاییدات
-                    </Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link eventKey="third">
-                      <Image src={adddoc} />
-                      نسخه اضافه
-                    </Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link eventKey="fourth">
-                      <Image src={delitype} /> نوع تحویل
-                    </Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </Col>
-              <Col
-                className="tabsordercontent"
-                // style={{minWidth: "300px", width: "300px"}}
-                xl={9}
-                lg={9}
-                md={12}
-                sm={12}
+          <div className="row bordertab">
+            <Col className="tabsorder" xl={3} lg={3} md={3} sm={3}>
+              <Nav
+                variant="pills"
+                className="flex-column tabsdet hvr-sweep-to-bottom"
               >
-                <Tab.Content>
-                  <Tab.Pane className="tabcheckbox" eventKey="first">
-                    {lnaguage}
-                  </Tab.Pane>
-                  <Tab.Pane className="tabcheckbox" eventKey="second">
-                    {valid}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="third">
-                    <p
-                      style={{
-                        color: "#454f63",
-                        textAlign: "center",
-                        fontSize: "1rem",
-                        paddingTop: "2rem"
-                      }}
-                      className="col-x1-12 col-lg-12 col-md-12 col-sm-12  col-xs-12"
-                    >
-                      تعداد نسخه اضافه
-                    </p>
-                    <div className="counter">
-                      <div className="incre col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12">
-                        <Button
-                          className="increase"
-                          onClick={() => setcount(prevCount => prevCount + 1)}
-                        >
-                          +
-                        </Button>
-                      </div>
-                      <div className="text col-xl-8 col-lg-8 col-md-8 col-sm-12  col-xs-12">
-                        {count}
-                      </div>
-                      <div className="dec col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12">
-                        <Button
-                          className="decrease col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12"
-                          onClick={() => {
-                            if (count <= 0) setcount(0);
-                            else {
-                              setcount(prevCount => prevCount - 1);
-                            }
-                          }}
-                        >
-                          -
-                        </Button>
-                      </div>
-                    </div>
-                  </Tab.Pane>
-                  <Tab.Pane
-                    className="tabcheckbox"
-                    style={{ textAlign: "center" }}
-                    eventKey="fourth"
+                <Nav.Item>
+                  <Nav.Link eventKey="first">
+                    <Image src={tranlatelang} />
+                    زبان ترجمه
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="second">
+                    <Image src={acceptsign} />
+                    مهرو تاییدات
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="third">
+                    <Image src={adddoc} />
+                    نسخه اضافه
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="fourth">
+                    <Image src={delitype} /> نوع تحویل
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Col>
+            <Col className="tabsordercontent"
+              // style={{minWidth: "300px", width: "300px"}}
+              xl={9}
+              lg={9}
+              md={12}
+              sm={12}
+            >
+              <Tab.Content>
+                <Tab.Pane className="tabcheckbox" eventKey="first">
+                  {lnaguage}
+                </Tab.Pane>
+                <Tab.Pane className="tabcheckbox" eventKey="second">
+                  {valid}
+                </Tab.Pane>
+                <Tab.Pane eventKey="third">
+                  <p
+                    style={{
+                      color: "#454f63",
+                      textAlign: "center",
+                      fontSize: "1rem",
+                      paddingTop: "2rem"
+                    }}
+                    className="col-x1-12 col-lg-12 col-md-12 col-sm-12  col-xs-12"
                   >
-                    <p
-                      style={{
-                        color: "#454f63",
-                        textAlign: "center",
-                        fontSize: "1rem",
-                        paddingTop: "2rem"
-                      }}
-                      className="col-x1-12 col-lg-12 col-md-12 col-sm-12  col-xs-12"
-                    >
-                      زمان تحویل ترجمه
-                    </p>
-                    {typedelivery}
-                  </Tab.Pane>
-                </Tab.Content>
-              </Col>
-            </div>
-          </TabContainer>
-        </Col>
-        <Col xl={3} lg={3} md={12} sm={12} xs={12} className="Continue-order">
-          <ToastsContainer
-            position={ToastsContainerPosition.TOP_CENTER}
-            store={ToastsStore}
-          />
+                    تعداد نسخه اضافه
+                  </p>
+                  <div className="counter">
+                    <div className="incre col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12">
+                      <Button
+                        className="increase"
+                        onClick={() => setcount(prevCount => prevCount + 1)}
+                      >
+                        +
+                      </Button>
+                    </div>
+                    <div className="text col-xl-8 col-lg-8 col-md-8 col-sm-12  col-xs-12">
+                      {count}
+                    </div>
+                    <div className="dec col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12">
+                      <Button
+                        className="decrease col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12"
+                        onClick={() => {
+                          if (count <= 0) setcount(0);
+                          else {
+                            setcount(prevCount => prevCount - 1);
+                          }
+                        }}
+                      >
+                        -
+                      </Button>
+                    </div>
+                  </div>
+                </Tab.Pane>
+                <Tab.Pane
+                  className="tabcheckbox"
+                  style={{ textAlign: "center" }}
+                  eventKey="fourth"
+                >
+                  <p
+                    style={{
+                      color: "#454f63",
+                      textAlign: "center",
+                      fontSize: "1rem",
+                      paddingTop: "2rem"
+                    }}
+                    className="col-x1-12 col-lg-12 col-md-12 col-sm-12  col-xs-12"
+                  >
+                    زمان تحویل ترجمه
+                  </p>
+                  {typedelivery}
+                </Tab.Pane>
+              </Tab.Content>
+            </Col>
+          </div>
+        </TabContainer>
+      </Col>
+      <Col xl={3} lg={3} md={12} sm={12} xs={12} className="Continue-order">
+        <ToastsContainer
+          position={ToastsContainerPosition.TOP_CENTER}
+          store={ToastsStore}
+        />
 
-          <Button
-            style={{ margin: "1rem 0", fontSize: ".8rem", fontFamily: "fanum" }}
-            variant="primary"
-            size="lg"
-          >
-            <p>مجموع هزینه ها</p>
-            <p>{sumValue()} تومان</p>
-          </Button>
-          <Button
-            style={styleone}
-            id="add1"
-            onClick={handleSubmit}
-            type="submit"
-          >
-            ادامه سفارش
-          </Button>
-        </Col>
-      
+        <Button
+          style={{ margin: "1rem 0", fontSize: ".8rem", fontFamily: "fanum" }}
+          variant="primary"
+          size="lg"
+        >
+          <p>مجموع هزینه ها</p>
+          <p>{sumValue()} تومان</p>
+        </Button>
+        <Button style={styleone} id="add1" onClick={handleSubmit} type="submit">
+          ادامه سفارش
+        </Button>
+      </Col>
     </React.Fragment>
   );
 };

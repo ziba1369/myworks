@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import envelop from '../../../images/contract.svg';
-import {Col, Button, Row, Image} from 'react-bootstrap';
+import {Col, Button, Image} from 'react-bootstrap';
 import { Link } from "react-router-dom";
+//////////////////////function confirmorder////////////////////////////////
 const Confirmorder = ({onClicks, step, onChanges}) => {
-    const [code, usecode] = useState(123456789)
+//////////////////////set varible for code//////////////////////////////// 
+    const [code] = useState(123456789)
+//////////////////////handlecilck to next step////////////////////////////////
     const handleSubmit = () => {
-
         onClicks();
-
     };
-
+//////////////////////main return////////////////////////////////
     return (
         <Col xl={12} lg={12} md={12} sm={12} xs={12}
              style={{borderRadius: '1rem', height: "100%", textAlign: "center"}}>

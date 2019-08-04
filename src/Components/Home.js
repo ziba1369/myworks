@@ -10,6 +10,7 @@ import Relatedwebsites from "./Layout/home/Relatedwebsites";
 import Newsletter from "./Layout/home/Newsletter";
 import MetaTags from 'react-meta-tags';
 import NavBar from "./Layout/NavBar";
+//////////////////home function/////////////////////
 const Home = () => {
     return (
       
