@@ -620,7 +620,9 @@ button:focus {
 .services .card {
   margin-bottom: 15px;
 }
-
+span#basic-addon1 {
+  cursor: pointer;
+}
 .services .card-img-top {
   padding: 30px 15px;
   margin-bottom: 15px;

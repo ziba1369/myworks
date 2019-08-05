@@ -389,6 +389,8 @@ const Order = props => {
   const handlerType = () => {
     if (step < 1) {
       return step;
+    } else if (step === 3) {
+      return step;
     }
 
     setStep(1);
@@ -396,6 +398,8 @@ const Order = props => {
   //////////handler go to step2////////////
   const handlerUpload = () => {
     if (step < 2) {
+      return step;
+    } else if (step === 3) {
       return step;
     }
     setStep(2);

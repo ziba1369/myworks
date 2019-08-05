@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import envelop from '../../../images/contract.svg';
 import {Col, Button, Image} from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import * as Cookies from "js-cookie";
 //////////////////////function confirmorder////////////////////////////////
 const Confirmorder = ({onClicks, step, onChanges}) => {
 //////////////////////set varible for code//////////////////////////////// 
-    const [code] = useState(123456789)
+   
 //////////////////////handlecilck to next step////////////////////////////////
     const handleSubmit = () => {
         onClicks();
@@ -17,7 +18,7 @@ const Confirmorder = ({onClicks, step, onChanges}) => {
             <div className="confirmorder ">
                 <p><Image src={envelop}/></p>
                 <p>لطفا منتظر نتیجه بررسی صحت فایلها باشید</p>
-                <p>کدرهگیری سفارش <span style={{color: '#1976d2'}}>{code}</span></p>
+                <p>کدرهگیری سفارش <span style={{color: '#1976d2'}}>{Cookies.get("order_code")}</span></p>
                 <p style={{fontSize: '.6rem', color: '#707069'}}>جهت پیگیری روند سفارش به بخش سفارش ها مراجعه کنید</p>
 
             </div>

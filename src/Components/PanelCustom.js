@@ -10,7 +10,6 @@ import {
   Form,
   Button
 } from "react-bootstrap";
-import $ from "jquery";
 import Myorder from "./Layout/Panel/Myorder";
 import EditProfile from "./Layout/Panel/EditProfile";
 import Passchange from "./Layout/Panel/Passcahnge";

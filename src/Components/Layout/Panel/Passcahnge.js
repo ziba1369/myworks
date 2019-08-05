@@ -5,11 +5,13 @@ import {
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
+import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import * as Cookies from "js-cookie";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
 import $ from "jquery";
 import axios from "axios";
+import { withRouter } from "react-router";
 //////////////////function changepass/////////////////////
 const Passchange = props => {
   //////////////set initial variable/////////////////////
@@ -71,8 +73,30 @@ const Passchange = props => {
   }, [newpassr]);
   //////////////send changed pass to server////////////////
   const sendCahngepass = () => {
-    Cookies.remove("token");
-    window.location.reload();
+    const password={
+      customer_token:Cookies.get('token'),
+      old_password:pass,
+      new_password:newpass,
+
+    }
+    axios
+    .post(
+      "http://hezare3vom.ratechcompany.com/api/app_change_password",
+      password,
+      { headers: { "Content-Type": "application/json" } }
+    )
+    .then(function(response) {
+      // console.log(response.data.success);
+      if (response.data.success) {
+        Cookies.remove("token");
+        props.history.push("/");
+       
+       
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+  
   };
   //////////////use effect to match pass border////////////////
   useEffect(() => {
@@ -172,4 +196,4 @@ const Passchange = props => {
   );
 };
 
-export default Passchange;
+export default withRouter(Passchange);

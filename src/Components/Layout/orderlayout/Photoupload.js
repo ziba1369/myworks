@@ -13,11 +13,29 @@ import * as Cookies from "js-cookie";
 const Photoupload = ({ onClicks, step, onChanges }) => {
 ////////////////////////set variable/////////////////////////////////
 const [orderFileCount, setOrderFilecount] = useState(0);
+const[orderCode,setOrdercode]=useState();
+const [photoUpload,setPhotoUpload]=useState();
 const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
 ////////////////////////preview image/////////////////////////////////
   const changeprev = () => {
     document.getElementById("prev").style.display = "block";
   };
+   ////////////////////////useeffectfor upload photo /////////////////////////////////
+   useEffect(() => {
+    new FileUploadWithPreview("myUniqueUploadId");
+    window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
+      setOrderFilecount(e.detail.addedFilesCount);
+      setPhotoUpload(e.detail.cachedFileArray);
+      const pictures = {
+        pic: e.detail.cachedFileArray.tokens
+      };
+    });
+    window.addEventListener("fileUploadWithPreview:imageDeleted", function(e) {
+      const pictures = {
+        pic: e.detail.cachedFileArray.tokens
+      };
+    });
+  }, []);
 ////////////////////////handle submit/////////////////////////////////
   const handleSubmit = () => {
     ////////////////////////send choose languages to server /////////////////////////////////
@@ -44,56 +62,79 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
     const deliverytype = deliver.map(item => {return item.type;});
     const deliverypr = translate_type.filter(item => item.checkin === true);
     const deliveryprice = deliverypr.map(item => {return item.price});
+    console.log(photoUpload,"ooo");
   ////////////////////////set items to send server /////////////////////////////////
-    const orderset = {
-      customer_token: Cookies.get("token"),
-      order_name: Cookies.get("title"),
-      customer_description: "",
-      order_type: "normal",
-      translate_type: deliverytype[0],
-      page_count: 0,
-      copy_count: Cookies.get("countorder"),
-      weight_added_version: 0,
-      normal_price: deliveryprice[0],
-      fast_price: deliveryprice[0],
-      total_price: Cookies.get("sumValue"),
-      need_certificate: 0,
-      order_file_count: orderFileCount,
-      order_languages: order_languages,
-      order_certificate: order_certificate
-    };
+
+    const formDataorder = new FormData();
+  
+      formDataorder.append("customer_token", Cookies.get("token"));
+      formDataorder.append("order_name",Cookies.get("title"));
+      formDataorder.append("customer_description","");
+      formDataorder.append("order_type","normal");
+      formDataorder.append("translate_type",deliverytype[0]);
+      formDataorder.append("page_count",0);
+      formDataorder.append("copy_count",Cookies.get("countorder"));
+      formDataorder.append("weight_added_version", 0);
+      formDataorder.append("normal_price",deliveryprice[0]);
+      formDataorder.append("fast_price", deliveryprice[0]);
+      formDataorder.append("total_price", Cookies.get("sumValue"))
+      formDataorder.append("need_certificate",0);
+      formDataorder.append("order_file_count",orderFileCount);
+      console.log(photoUpload!==undefined)
+      if(photoUpload!==undefined)
+      {
+        
+      photoUpload.map((item,index) =>{
+      
+        formDataorder.append("order_file_"+ index ,photoUpload[0]);
+       
+      })
+      }
+      formDataorder.append("order_languages",order_languages);
+      formDataorder.append("order_certificate",order_certificate);
+
+  
+   
    
   ////////////////////////send data to server /////////////////////////////////
+    
     axios
       .post(
         "http://hezare3vom.ratechcompany.com/api/app_make_order",
-        orderset,
-        { headers: { "Content-Type": "application/json" } }
+        formDataorder,
+        { headers: { "Content-Type": "multipart/form-data"} }
       )
       .then(function(response) {
-        console.log(response.data);
+       console.log(response.data)
         if (response.data.success) {
+          Cookies.set("order_code", response.data.order_code, { path: "/", expires: 7 })
+          onClicks();
         } else {
           ToastsStore.error(response.data.error);
         }
+      
+       
+        
       });
-    onClicks();
+    
+
+
+    ///////////////////////////////remove-cookied//////////////////////////////////
+    Cookies.remove('acceptnum');
+    Cookies.remove('countorder');
+    Cookies.remove('countorder');
+    Cookies.remove('delivery');
+    Cookies.remove('deliverynum');
+    Cookies.remove('languagenum');
+    Cookies.remove('languages');
+    Cookies.remove('sumValue');
+    Cookies.remove('types');
+    Cookies.remove('validation');
+
+
+
   };
-  ////////////////////////useeffectfor upload photo /////////////////////////////////
-  useEffect(() => {
-    new FileUploadWithPreview("myUniqueUploadId");
-    window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
-      setOrderFilecount(e.detail.addedFilesCount);
-      const pictures = {
-        pic: e.detail.cachedFileArray.tokens
-      };
-    });
-    window.addEventListener("fileUploadWithPreview:imageDeleted", function(e) {
-      const pictures = {
-        pic: e.detail.cachedFileArray.tokens
-      };
-    });
-  }, []);
+
   ////////////////////////main return /////////////////////////////////
   return (
     <React.Fragment>
@@ -156,6 +197,7 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
                     accept="*"
                     multiple
                     aria-label=""
+                  
                   />
                   <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                   <span className="custom-file-container__custom-file__custom-file-control" />

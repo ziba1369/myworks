@@ -60,7 +60,7 @@ const PriceServices = props => {
     backgroundColor: "#ffe7bd",
     borderColor: "#ffe7bd"
   });
-////////////////change dolor selected button///////////////
+////////////////change color selected button///////////////
 
   useEffect(() => {
     switch (props.match.params.id) {
@@ -275,7 +275,32 @@ const PriceServices = props => {
         break;
     }
   }, [props.match.params.id]);
-
+/////////////////////////search handler////////////////////
+const searchhandler=()=>{
+  setOffset(0);
+   let value=document.getElementById("showSearch").value;
+   axios
+   .get(
+     "http://hezare3vom.ratechcompany.com/api/front/get_products_list?limit=" +
+       pageLimit +
+       "&offset=0&category_id=" +
+       props.match.params.id+"&search_query="+value,
+     {
+       headers: { "Content-Type": "application/json" }
+     }
+   )
+   .then(function(response) {
+     if (response.data.success) {
+       setData(response.data.products);
+       setTotal(response.data.total);
+       
+       
+     } else {
+       ToastsStore.error(response.data.error);
+     }
+   });
+  
+}
   /////////////get products data from server/////////////////////
   useEffect(() => {
     axios
@@ -294,6 +319,7 @@ const PriceServices = props => {
         if (response.data.success) {
           setData(response.data.products);
           setTotal(response.data.total);
+         
         } else {
           ToastsStore.error(response.data.error);
         }
@@ -339,7 +365,7 @@ const PriceServices = props => {
           >
             <InputGroup>
               <InputGroup.Prepend>
-                <InputGroup.Text id="basic-addon1">
+                <InputGroup.Text onClick={searchhandler} id="basic-addon1">
                   <FontAwesomeIcon icon={faSearch} />
                 </InputGroup.Text>
               </InputGroup.Prepend>
@@ -349,6 +375,7 @@ const PriceServices = props => {
                 type="text"
                 placeholder="نام خدمات یا نوع مدرک را جستجو کنید"
                 aria-label="Search"
+                id="showSearch"
               />
             </InputGroup>
           </Col>
