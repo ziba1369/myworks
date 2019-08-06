@@ -30,16 +30,16 @@ const Slide = () => {
                                 alt={Iran} /></div>
                         </div>
                         <div className="row justify-content-md-center">
-                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 France dist pulse"><img src={France} alt={France} /></div>
-                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 England dist pulse"><img src={England}  alt={England} /></div>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 France dist pulse"><img src={France} alt={France} /></div>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 England dist pulse"><img src={England}  alt={England} /></div>
                         </div>
                         <div className="row justify-content-md-center">
-                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 Italy dist pulse"><img src={Italy} alt={Italy} /></div>
-                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 Germany dist pulse"><img src={Germany} alt={Germany} /></div>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 Italy dist pulse"><img src={Italy} alt={Italy} /></div>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 Germany dist pulse"><img src={Germany} alt={Germany} /></div>
                         </div>
                         <div className="row justify-content-md-center">
-                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 Turkey dist pulse"><img src={Turkey} alt={Turkey} /></div>
-                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6 Emirates dist pulse"><img src={Emirates} alt={Emirates} /></div>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 Turkey dist pulse"><img src={Turkey} alt={Turkey} /></div>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 Emirates dist pulse"><img src={Emirates} alt={Emirates} /></div>
                         </div>
 
                     </div>

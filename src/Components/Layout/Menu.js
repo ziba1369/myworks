@@ -31,6 +31,9 @@ const Menu = props => {
 
   return (
     <Nav className="menu">
+        <ToastsContainer   position={ToastsContainerPosition.TOP_CENTER}
+        store={ToastsStore}
+      />
       <div className="nav-link">
         <Link to="/">صفحه اصلی</Link>
       </div>

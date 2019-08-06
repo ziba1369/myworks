@@ -337,7 +337,7 @@ const EditProfile = props => {
         </Col>
         <Col xl={6} lg={6} md={6} xs={12}>
           <Form.Label>تاریخ تولد</Form.Label>
-          <Row>
+          <div className="row date">
             <Col xl={4} lg={4} md={4} sm={12} xs={12}>
               <Form.Control
                 id="day"
@@ -396,7 +396,7 @@ const EditProfile = props => {
                 ))}
               </Form.Control>
             </Col>
-          </Row>
+          </div>
         </Col>
 
         <Col xl={6} lg={6} md={6} xs={12}>

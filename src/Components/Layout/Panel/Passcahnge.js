@@ -5,9 +5,7 @@ import {
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
-import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import * as Cookies from "js-cookie";
-import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
 import $ from "jquery";
 import axios from "axios";
@@ -112,8 +110,8 @@ const Passchange = props => {
       newpass.length > 0 &&
       newpassr.length > 0
     ) {
-      var i;
-      for (i = 0; i < borders.length; i++) {
+      
+      for (let i = 0; i < borders.length; i++) {
         borders[i].style.border = "1px solid green";
       }
     } else if (newpass.length === 0 && newpassr.length === 0) {
@@ -124,7 +122,7 @@ const Passchange = props => {
   }, [newpass, newpassr]);
 
   return (
-    <div className="container rtl" style={{ maxWidth: "65vw" }}>
+    <div className="container rtl changepasspanel" style={{ maxWidth: "65vw" }}>
       <ToastsContainer
         position={ToastsContainerPosition.TOP_CENTER}
         store={ToastsStore}

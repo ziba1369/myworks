@@ -25,10 +25,12 @@ import * as Cookies from "js-cookie";
 import { slide as Menu } from 'react-burger-menu';
 import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Media from "react-media";
-
+import Logotranslate from '../images/Ghazaeie-logo-LimooGraphic.png';
 /////////////main/////////////
 const Panelcustom = props => {
+const[menu,setMenu]=useState(false);
   /////////////logout///////////// 
+ 
     const handlelogout = () => {
       Cookies.remove("token");
       Cookies.remove("name");
@@ -39,11 +41,18 @@ const Panelcustom = props => {
   
     return (
       <div className="panel">
-        <p className="distance">
-          <Button>
-            <Link to="/">صفحه اصلی</Link>
-          </Button>
-        </p>
+        <div className="distance">
+        <div className="profilelink">
+          <img src={Logotranslate} alt={"Logotranslate"} />
+          
+          <p>
+            <Link to="/">
+              دفتر ترجمه رسمی ۴۴۹ تهران
+            </Link>
+          </p>
+          
+          </div>
+        </div>
   
         <Tab.Container
           id="right-tabs-example"
@@ -66,7 +75,7 @@ const Panelcustom = props => {
                         {Cookies.get("name") + " " + Cookies.get("family")}
                       </div>
                       <Nav variant="pills" className="flex-column">
-                        <Nav.Item>
+                        <Nav.Item >
                           <Nav.Link eventKey="editprofile">
                             <span>
                               <Image src={userimg} alt="userimg" />
@@ -148,18 +157,34 @@ const Panelcustom = props => {
               query="(max-width:991px)"
               render={() => (
                 <div id="outer-container">
-                  <Menu right>
+                  
+                  <Menu right 
+                  customBurgerIcon={ false }
+                  disableAutoFocus
+                  customCrossIcon={ false }
+                  isOpen={ menu } onStateChange={() => setMenu(menu) } >
+                    <p className="closeprofile" onClick={()=>setMenu(false)}></p>
+                    <div className="profilelink">
+                    <Link to="/">
+                    <img src={Logotranslate} alt={"Logotranslate"} />
+                    <span>دفتر ترجمه رسمی ۴۴۹ تهران</span>
+                    </Link>
+                    </div>
+                    
                     <Link
                       id="editprofile"
                       className="menu-item"
                       to={"/profile/editprofile"}
+                      onClick={()=>setMenu(false)}
+                      
                     >
                       اصلاح حساب کاربری <Image src={userimg} alt="userimg" />
                     </Link>
                     <Link
                       id="myorder"
                       className="menu-item"
-                      to={"/profile/myorders"}
+                      to="/profile/myorders"
+                      onClick={ ()=>setMenu(!menu)}
                     >
                       سفارشات من <Image src={myorderimg} alt="myorderimg" />
                     </Link>
@@ -167,6 +192,8 @@ const Panelcustom = props => {
                       id="mybill"
                       className="menu-item"
                       to={"/profile/mybill"}
+                      onClick={()=>setMenu(false)}
+                    
                     >
                       فاکتورهای من <Image src={billimg} alt="billimg" />
                     </Link>
@@ -174,6 +201,8 @@ const Panelcustom = props => {
                       id="mytrans"
                       className="menu-item"
                       to={"/profile/mytranslate"}
+                      onClick={()=>setMenu(false)}
+                    
                     >
                       ترجمه های من <Image src={inboximg} alt="inboximg" />
                     </Link>
@@ -181,6 +210,7 @@ const Panelcustom = props => {
                       id="changepass"
                       className="menu-item"
                       to={"/profile/changepass"}
+                      onClick={()=>setMenu(false)}
                     >
                       تغییر کلمه عبور{" "}
                       <Image src={changepassimg} alt="changepassimg" />
@@ -194,6 +224,7 @@ const Panelcustom = props => {
                     </Link>
                   </Menu>
                   <main id="page-wrap">
+                    <div className="profileopen" onClick={()=>setMenu(true)}></div>
                     {props.match.params.page === "editprofile" ? (
                       <EditProfile />
                     ) : props.match.params.page === "myorders" ? (

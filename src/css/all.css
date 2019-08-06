@@ -717,6 +717,19 @@ span#basic-addon1 {
   margin: 0 auto;
 }
 }
+@media screen and (max-width: 1025px) and (min-height: 1200px) {
+  .slideone {
+    background: url(/static/media/Group1866.af30c99a.svg) no-repeat center center;
+    background-size: cover;
+    height: 48vh;
+    background-position: bottom;
+}
+
+.Phone img {
+  width: 19vh;
+}
+  }
+  
 @media screen and (max-width: 576px) 
 {
   .carousel {
@@ -2518,12 +2531,11 @@ p.textpanel {
   height: 130px;
   border-radius: 50%;
   box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
-  position: absolute;
+  position: relative;
   top: -10vh;
   background-color: #fff;
-  display: block;
-  margin: 0 auto;
-  left: 25%;
+  display: table;
+  margin:0 auto
 }
 .imagepanel img {
   border-radius: 50%;
@@ -2535,7 +2547,7 @@ p.textpanel {
 }
 .userpanel {
   text-align: center;
-  padding: 0.3rem 0 2rem 0;
+  padding: 1.3rem 0 1rem 0;
 }
 .bm-burger-button {
   position: fixed;
@@ -2544,7 +2556,14 @@ p.textpanel {
   right: 36px;
   top: 36px;
 }
- 
+ @media screen and (max-width:992px){
+  .panel .container {
+    max-width: 90vw !important;
+}
+.date div {
+  padding: .5rem;
+}
+ }
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   background: #373a47;
@@ -2634,11 +2653,23 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding: 1.2rem 0;
   margin-top: 1rem;
 }
+.changepasspanel {
+  padding: 3rem 0;
+}
 @media only screen and (max-width:992px){
   .myorderlist div:nth-child(odd) {
     background-color: #454f63;
-    padding: .3rem;
+   
     color: #fff;
+}
+.myorderlist div{
+  padding: .5rem;
+}
+.row.myorderlist {
+  border: 1px solid #123456;
+}
+.row.myorderlist{
+ padding: 0px
 }
 }
 .row.myorderlist {
@@ -2649,6 +2680,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   align-items: center;
   font-family: fanum;
   font-size: 0.75rem;
+
 }
 .myorder {
   direction: rtl;
@@ -2662,6 +2694,26 @@ Note: Beware of modifying this element as it can break the animations - you shou
   left: 50%;
   bottom: 0;
   top: -77px;
+}
+}
+.profilelink span {
+  display: block;
+  color: #000;
+}
+@media only screen and (max-width:992px){
+.profilelink img {
+  width: 20% ;
+}
+}
+@media only screen and (min-width:992px){
+  .profilelink img {
+    display: none 
+}
+.distance {
+  padding: 2rem;
+}
+.profilelink p a{
+  color:#000 !important
 }
 }
 @media only screen and (max-width:992px){
@@ -2682,8 +2734,16 @@ div#showimage {
   position: relative;
   left: 4rem;
 }
+.profilelink {
+  display: none;
 }
 
+}
+.bm-item.profilelink {
+  text-align: center;
+  font-size: 1rem;
+  color: #000;
+}
 .panel .content {
   padding: 0 3rem;
 }
@@ -2742,6 +2802,25 @@ a#logout {
 }
 /* myorder/panelcustom */
 /* editprofile */
+.closeprofile {
+  background-image: url("../images/close.svg");
+  width: 20px;
+  height: 20px;
+  /* background-color: red;\   */
+  text-align: right;
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+}
+.profileopen{
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  width: 20px;
+  height: 20px;
+  background-image: url(/static/media/Hamburger.67640484.svg);
+}
+
 .custom-file-container {
   max-width: 400px;
   margin: 0 auto;
