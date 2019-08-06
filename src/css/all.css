@@ -2419,7 +2419,10 @@ p.activesys {
   margin: 5rem 0;
 } */
 .mail span {
-  font-family: byekan;
+  font-family: byekan !important;
+}
+.socialicon span {
+  font-family: fanum;
 }
 .foter-blog img {
   width: 37px;
@@ -2504,6 +2507,12 @@ p.textpanel {
   background-color: #eff5ff;
   padding: 0px;
   
+}
+.panel h5 {
+    text-align: center;
+    display: table;
+    margin: 0 auto;
+    padding: 0 0 1rem;
 }
 .panel .nav-item a {
   color: #929599;
@@ -2665,9 +2674,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .myorderlist div{
   padding: .5rem;
 }
-.row.myorderlist {
+/* .row.myorderlist {
   border: 1px solid #123456;
-}
+} */
 .row.myorderlist{
  padding: 0px
 }
@@ -2732,7 +2741,8 @@ div#showimage {
   display: table;
   margin: 0 auto;
   position: relative;
-  left: 4rem;
+  left: 2rem;
+  top:5%;
 }
 .profilelink {
   display: none;
@@ -2743,6 +2753,7 @@ div#showimage {
   text-align: center;
   font-size: 1rem;
   color: #000;
+  margin: 0 0 3rem;
 }
 .panel .content {
   padding: 0 3rem;
@@ -2804,8 +2815,8 @@ a#logout {
 /* editprofile */
 .closeprofile {
   background-image: url("../images/close.svg");
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   /* background-color: red;\   */
   text-align: right;
   position: absolute;
@@ -2831,6 +2842,7 @@ a#logout {
 }
 .upload-preview{
   width: 18vh !important;
+
 }
 }
 .bm-item img {
@@ -2853,7 +2865,7 @@ label.uploadremove {
 .upload-preview {
   position: relative;
   border: 9px !important;
-  bottom: 51px !important;
+  bottom: 40px !important;
   z-index: -1 !important;
   background-color: #fff !important;
   height: 18vh !important;

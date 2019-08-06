@@ -431,6 +431,7 @@ const Order = props => {
       )
       .then(function(response) {
         if (response.data.success) {
+          setMadarek(response.data)
         } else {
           ToastsStore.error(response.data.error);
         }

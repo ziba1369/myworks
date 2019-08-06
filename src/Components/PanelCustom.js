@@ -158,10 +158,11 @@ const[menu,setMenu]=useState(false);
               render={() => (
                 <div id="outer-container">
                   
-                  <Menu right 
+                  <Menu right
                   customBurgerIcon={ false }
                   disableAutoFocus
                   customCrossIcon={ false }
+                  disableOverlayClick={() => setMenu(!menu)}
                   isOpen={ menu } onStateChange={() => setMenu(menu) } >
                     <p className="closeprofile" onClick={()=>setMenu(false)}></p>
                     <div className="profilelink">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Col, Button, Row, Carousel } from "react-bootstrap";
+import { Button ,Carousel } from "react-bootstrap";
 import customtrans from "../../../images/document.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
