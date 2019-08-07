@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Nav,
-  Col,
-  Tab,
-  Row,
-  Container,
-  Image,
-  Navbar,
-  Form,
-  Button
-} from "react-bootstrap";
+import {Nav,Col,Tab,Row,Container,Image,Navbar,Form,Button} from "react-bootstrap";
 import Myorder from "./Layout/Panel/Myorder";
 import EditProfile from "./Layout/Panel/EditProfile";
 import Passchange from "./Layout/Panel/Passcahnge";

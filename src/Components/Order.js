@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Button,
-  Row,
-  Col,
-  Breadcrumb,
-  Image
-} from "react-bootstrap";
+import {Container,Button,Row,Col,Breadcrumb,Image} from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import Tabschoice from "./Layout/orderlayout/Tabschoice";
 import Photoupload from "./Layout/orderlayout/Photoupload";
 import Confirmorder from "./Layout/orderlayout/Confirmorder";
 import Footer from "./Layout/Footer";
 import NavBar from "./Layout/NavBar";
-import {
-  ToastsContainer,
-  ToastsStore,
-  ToastsContainerPosition
-} from "react-toasts";
+import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
 import * as Cookies from "js-cookie";
 import axios from "axios";
 //////////////order function////////////////////
@@ -391,6 +380,9 @@ const Order = props => {
       return step;
     } else if (step === 3) {
       return step;
+    }else if(step===4)
+    {
+      return step
     }
 
     setStep(1);
@@ -401,6 +393,9 @@ const Order = props => {
       return step;
     } else if (step === 3) {
       return step;
+    }else if(step===4)
+    {
+      return step
     }
     setStep(2);
   };
@@ -408,6 +403,11 @@ const Order = props => {
   const handlerConfirm = () => {
     if (step < 3) {
       return step;
+    }else if (step === 3) {
+      return step;
+    }else if(step===4)
+    {
+      return step
     }
     setStep(3);
   };

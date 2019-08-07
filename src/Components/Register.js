@@ -1,11 +1,7 @@
 // -----------------------------import npm-----------------------------------------
 import React, { useState, useEffect } from "react";
 import { Container, Button, Col, Row, Form } from "react-bootstrap";
-import {
-  ToastsStore,
-  ToastsContainer,
-  ToastsContainerPosition
-} from "react-toasts";
+import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts";
 import $ from "jquery";
 import axios from "axios";
 import * as Cookies from "js-cookie";
@@ -97,11 +93,7 @@ const Register = props => {
     }
   };
 
-  // change mobile value when changed
-  const handleMobileChange = e => {
- 
-    setMobile(e.target.value);
-  };
+
   // checkRegisterFirstButton function after mobile value changed
   useEffect(() => {
     checkRegisterFirstButton();
@@ -145,9 +137,7 @@ const Register = props => {
   const [activSecond, setactiveSecondStyle] = useState({
     color: "#e1e1e1"
   });
-  const changeStep = () => {
-    setStep(1);
-  };
+
   const mobileStep = () => {
     if (second === 0) {
       setSecond(60);
@@ -196,10 +186,7 @@ const Register = props => {
 
   // check conditions and enable/disable register button
 
-  // change mobile value when changed
-  const handlerActiveChange = e => {
-    setActive(e.target.value);
-  };
+ 
   // checkRegisterFirstButton function after mobile value changed
   useEffect(() => {
     checkRegisterSecondButton();
@@ -326,35 +313,8 @@ const Register = props => {
   });
 
   // check conditions and enable/disable register button
-
-  const handleName = e => {
-    setName(e.target.value);
-  };
-  const handleLastName = e => {
-    setLastName(e.target.value);
-  };
-
-  const handleCertificate = e => {
-    setCertifi(e.target.value);
-  };
-  const handleBirthday = e => {
-    setBirthvalue(e.target.value);
-  };
-  const handleBirthmonth = e => {
-    setBirthmonthvalue(e.target.value);
-  };
-  const handleBirthyear = e => {
-    setBirthyearvalue(e.target.value);
-    //console.log(e.target.value)
-  };
-  const handlePass = e => {
-    setPass(e.target.value);
-  };
-  const handlePassr = e => {
-    setPassr(e.target.value);
-  };
   const checkRegisterThirdButton = () => {
-    // console.log(pass.length);
+
     if (
       name.length > 0 &&
       lastname.length > 0 &&
@@ -536,6 +496,10 @@ const Register = props => {
    },[certi])
   return (
     <React.Fragment>
+       <ToastsContainer
+        position={ToastsContainerPosition.TOP_CENTER}
+        store={ToastsStore}
+      />
         <header>
                 <NavBar/>  
              </header>
@@ -558,9 +522,9 @@ const Register = props => {
                 <Form.Group>
                   <Form.Label>شماره همراه</Form.Label>
                   <Form.Control
-                    type="number"
+                    type="tel"
                     placeholder=""
-                    onChange={handleMobileChange}
+                    onChange={e=>{setMobile(e.target.value)}}
                     id="mobile"
                     value={mobile}
                     onBlur={mobileCheck}
@@ -599,7 +563,7 @@ const Register = props => {
                   <Form.Control
                     type="password"
                     placeholder=""
-                    onChange={handlerActiveChange}
+                    onChange={e=>{setActive(e.target.value)}}
                     vlaue={active}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
@@ -619,7 +583,7 @@ const Register = props => {
                     >
                       ارسال مجدد کد فعالسازی
                     </a>
-                    <a onClick={changeStep} className="leftreg">
+                    <a onClick={()=>{setStep(1)}} className="leftreg">
                       اصلاح شماره تماس
                     </a>
                   </p>
@@ -648,7 +612,7 @@ const Register = props => {
                   <Form.Control
                     type="text"
                     placeholder=""
-                    onChange={handleName}
+                    onChange={ e =>{setName(e.target.value)}}
                     value={name}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
@@ -661,7 +625,7 @@ const Register = props => {
                   <Form.Control
                     type="text"
                     placeholder=""
-                    onChange={handleLastName}
+                    onChange={e => {setLastName(e.target.value)}}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
                         checkRegisterThirdEnter();
@@ -672,7 +636,7 @@ const Register = props => {
                   />
                   <Form.Label>کدملی</Form.Label>
                   <Form.Control
-                    type="number"
+                    type="tel"
                     placeholder=""
                     onKeyPress={event => {
                       if (event.key === "Enter") {
@@ -680,7 +644,7 @@ const Register = props => {
                       }
                     }}
                     id="certi"
-                    onChange={handleCertificate}
+                    onChange={e => {setCertifi(e.target.value)}}
                     value={certi}
                     required
                   />
@@ -691,7 +655,7 @@ const Register = props => {
                         id="day"
                         as="select"
                         type="select"
-                        onChange={handleBirthday}
+                        onChange={ e => {setBirthvalue(e.target.value)}}
                         value={birthvalue}
                         name="slelect"
                         onKeyPress={event => {
@@ -717,7 +681,7 @@ const Register = props => {
                         id="groups"
                         as="select"
                         type="select"
-                        onChange={handleBirthmonth}
+                        onChange={e => {setBirthmonthvalue(e.target.value)}}
                         value={birthmonthvalue}
                         name="slelect"
                         required
@@ -736,7 +700,7 @@ const Register = props => {
                         id="groups"
                         as="select"
                         type="select"
-                        onChange={handleBirthyear}
+                        onChange={e => {setBirthyearvalue(e.target.value)}}
                         value={birthyearvalue}
                         name="slelect"
                         required
@@ -754,7 +718,7 @@ const Register = props => {
                   <Form.Control
                     type="password"
                     placeholder=""
-                    onChange={handlePass}
+                    onChange={e => {setPass(e.target.value)}}
                     value={pass}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
@@ -768,7 +732,7 @@ const Register = props => {
                   <Form.Control
                     type="password"
                     placeholder=""
-                    onChange={handlePassr}
+                    onChange={ e => {setPassr(e.target.value)}}
                     className="borderpass"
                     onKeyPress={event => {
                       if (event.key === "Enter") {

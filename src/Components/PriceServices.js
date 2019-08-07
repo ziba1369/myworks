@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Button,
-  Card,
-  InputGroup,
-  Row,
-  Col,
-  Breadcrumb
-} from "react-bootstrap";
+import {Container,Button,Card,InputGroup,Row,Col,Breadcrumb} from "react-bootstrap";
 import NavBar from "./Layout/NavBar";
 import { Link } from "react-router-dom";
 import Paginatior from "react-hooks-paginator";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import {
-  ToastsContainer,
-  ToastsStore,
-  ToastsContainerPosition
-} from "react-toasts";
+import {ToastsContainer, ToastsStore,ToastsContainerPosition} from "react-toasts";
 import * as Cookies from "js-cookie";
 import Footer from "./Layout/Footer";
 /////////////price srvices function/////////////////

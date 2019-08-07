@@ -29,26 +29,7 @@ const Contatus = props => {
   const [loginButton, setLoginButtonStyle] = useState({
     backgroundColor: "#e1e1e1"
   });
-  /////////////handlername/////////////////////
-  const handleName = e => {
-    setName(e.target.value);
-  };
-  /////////////handlertell/////////////////////
-  const handleTell = e => {
-    setTell(e.target.value);
-  };
-  /////////////handleremail/////////////////////
-  const handleEmail = e => {
-    setEmail(e.target.value);
-  };
-  /////////////hanlderissue/////////////////////
-  const handleIssue = e => {
-    setIssue(e.target.value);
-  };
-  /////////////hanldermessage/////////////////////
-  const handleMessage = e => {
-    setMessage(e.target.value);
-  };
+
   /////////////active login button/////////////////////
   const checkLoginButton = () => {
     const phoneno = /^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
@@ -164,7 +145,7 @@ const Contatus = props => {
                 <Form.Group>
                   <Form.Label>نام</Form.Label>
                   <Form.Control
-                    onChange={handleName}
+                    onChange={e => {setName(e.target.value)}}
                     size="sm"
                     type="text"
                     value={name}
@@ -174,14 +155,14 @@ const Contatus = props => {
                     size="sm"
                     type="number"
                     onBlur={blurPhone}
-                    onChange={handleTell}
+                    onChange={e => {setTell(e.target.value)}}
                     vlaue={tel}
                     id="phone"
                     name="phone"
                   />
                   <Form.Label id="email">ایمیل آدرس</Form.Label>
                   <Form.Control
-                    onChange={handleEmail}
+                    onChange={e => {setEmail(e.target.value)}}
                     onBlur={blurEmail}
                     value={email}
                     size="sm"
@@ -190,7 +171,7 @@ const Contatus = props => {
                   />
                   <Form.Label>موضوع</Form.Label>
                   <Form.Control
-                    onChange={handleIssue}
+                    onChange={e => {setIssue(e.target.value)}}
                     size="sm"
                     value={issue}
                     type="type"
@@ -201,7 +182,7 @@ const Contatus = props => {
             <Col xl={6} md={6} sm={12} xs={12}>
               <Form>
                 <Form.Label value={message}>متن پیام</Form.Label>
-                <Form.Control onChange={handleMessage} as="textarea" rows="9" />
+                <Form.Control onChange={e => {setMessage(e.target.value)}} as="textarea" rows="9" />
               </Form>
             </Col>
           </Row>

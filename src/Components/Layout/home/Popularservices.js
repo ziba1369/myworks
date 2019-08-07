@@ -28,9 +28,7 @@ const Popularservices = props => {
   const cardServices = Information.map((item, inex) => {
     return (
       <div
-        className="popularservices col-xl-3 col-lg-3 col-md-3 col-sm-12"
-        key={item.id}
-      >
+        className="popularservices col-xl-3 col-lg-3 col-md-3 col-sm-12" key={item.id}>
         <div className="servicetran">
           <div className="imgtrans">
             <p className="jello">
@@ -42,7 +40,7 @@ const Popularservices = props => {
           <div className="descriptiontrans">
             <div className="descript">
               {item.description.map((des, i) => (
-                <p key={i.id}>
+                <p key={des.id}>
                   {des}
 
                   {des && <FontAwesomeIcon icon={faCheckCircle} />}
@@ -165,7 +163,7 @@ const Popularservices = props => {
           <div className="servicestext col-xl-12 col-md-12 col-sm-12 col-xs-12">
             <h5 className="titlesections">خدمات پرمخاطب ترجمه</h5>
           </div>
-          <Carousel touch={true} interval={null}>
+          <Carousel touch interval={null}>
             {carousel}
           </Carousel>
         </div>

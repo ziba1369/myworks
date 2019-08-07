@@ -4,11 +4,7 @@ import { Link } from "react-router-dom";
 import NavBar from "./Layout/NavBar";
 import Paginatior from "react-hooks-paginator";
 import axios from "axios";
-import {
-  ToastsContainer,
-  ToastsStore,
-  ToastsContainerPosition
-} from "react-toasts";
+import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
 import Footer from "./Layout/Footer";
 /////////////////news function///////////////////////////
 const Steptranslate = () => {

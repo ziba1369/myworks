@@ -119,34 +119,7 @@ const EditProfile = props => {
       }
     }
   };
-  /////////// set name in variable ////////////
-  const handleName = e => {
-    setName(e.target.value);
-  };
-  /////////// set lastname in variable ////////////
-  const handleLastName = e => {
-    setLastName(e.target.value);
-  };
-  /////////// set certificate in variable ////////////
-  const handleCertificate = e => {
-    setCertifi(e.target.value);
-  };
-  /////////// set birthday  in variable ////////////
-  const handleBirthday = e => {
-    setBirthvalue(e.target.value);
-  };
-  /////////// set birthmonth  in variable ////////////
-  const handleBirthmonth = e => {
-    setBirthmonthvalue(e.target.value);
-  };
-  /////////// set birthyear  in variable ////////////
-  const handleBirthyear = e => {
-    setBirthyearvalue(e.target.value);
-  };
-  /////////// set image  in variable ////////////
-  const uploaderhandler = e => {
-    setImageprofile(e.target.files[0]);
-  };
+
   /////////// set keypress for image ////////////
   useEffect(() => {
     document
@@ -253,12 +226,8 @@ const EditProfile = props => {
         store={ToastsStore}
       />
       <Row>
-        <Col
-          xl={{ span: 2, offset: 5 }}
-          lg={{ span: 2, offset: 5 }}
-          md={{ span: 2, offset: 5 }}
-          xs={{ span: 2, offset: 5 }}
-        >
+        <div className="profpic">
+       
           <div
             className="custom-file-container"
             data-upload-id="myUniqueUploadId"
@@ -279,7 +248,7 @@ const EditProfile = props => {
                 className="custom-file-container__custom-file__custom-file-input"
                 accept="*"
                 aria-label="Choose File"
-                onChange={uploaderhandler}
+                onChange={e=>{setImageprofile(e.target.files[0])}}
               />
               <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
               <span className="custom-file-container__custom-file__custom-file-control" />
@@ -289,7 +258,7 @@ const EditProfile = props => {
               className="custom-file-container__image-preview upload-preview"
             />
           </div>
-        </Col>
+        </div>
       </Row>
       <Row>
         <h5>مشخصات شخصی</h5>
@@ -302,7 +271,7 @@ const EditProfile = props => {
             <Form.Control
               type="text"
               placeholder=""
-              onChange={handleName}
+              onChange={e => {setName(e.target.value)}}
               value={name}
               required
             />
@@ -314,7 +283,7 @@ const EditProfile = props => {
             <Form.Control
               type="text"
               placeholder=""
-              onChange={handleLastName}
+              onChange={e=>{setLastName(e.target.value)}}
               value={lastname}
               required
             />
@@ -326,9 +295,9 @@ const EditProfile = props => {
           <Form.Group>
             <Form.Label>کدملی</Form.Label>
             <Form.Control
-              type="number"
+              type="tel"
               placeholder=""
-              onChange={handleCertificate}
+              onChange={e=>{setCertifi(e.target.value)}}
               value={certi}
               id="certi"
               required
@@ -343,7 +312,7 @@ const EditProfile = props => {
                 id="day"
                 as="select"
                 type="select"
-                onChange={handleBirthday}
+                onChange={e=>{setBirthvalue(e.target.value)}}
                 value={birthvalue}
                 name="slelect"
                 required
@@ -364,7 +333,7 @@ const EditProfile = props => {
                 id="groups"
                 as="select"
                 type="select"
-                onChange={handleBirthmonth}
+                onChange={e=>{setBirthmonthvalue(e.target.value)}}
                 value={birthmonthvalue}
                 name="slelect"
                 required
@@ -383,7 +352,7 @@ const EditProfile = props => {
                 id="groups"
                 as="select"
                 type="select"
-                onChange={handleBirthyear}
+                onChange={e=>{setBirthyearvalue(e.target.value);}}
                 value={birthyearvalue}
                 name="slelect"
                 required

@@ -1,16 +1,13 @@
 import React, {useState, useEffect} from "react";
 import NavBar from './Layout/NavBar';
 import {Container, Button, Col, Form} from "react-bootstrap";
-import {
-    ToastsContainer,
-    ToastsStore,
-    ToastsContainerPosition
-} from "react-toasts";
+import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
 import $ from "jquery";
 import {Link,Redirect} from "react-router-dom";
 import axios from "axios";
 import * as Cookies from "js-cookie";
 import Footer from './Layout/Footer';
+///////////////////////////////login function///////////////////////////////
 const Login = props => {
     const [mobile, setMobile] = useState("");
     const [pass, setPass] = useState("");

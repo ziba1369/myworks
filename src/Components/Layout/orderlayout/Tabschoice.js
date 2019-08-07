@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {Button,Form,Col,Nav,Row,Tab,TabContainer,Image,Card} from "react-bootstrap";
+import {Button,Form,Col,Nav,Row,Tab,TabContainer,Image,Card,Accordion} from "react-bootstrap";
 import adddoc from "../../../images/add-documents.svg";
 import delitype from "../../../images/deliverytype.svg";
 import acceptsign from "../../../images/acceptsign.svg";
 import tranlatelang from "../../../images/translatellang.svg";
-import {
-  ToastsContainer,
-  ToastsStore,
-  ToastsContainerPosition
-} from "react-toasts";
+import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
 import axios from "axios";
 import * as Cookies from "js-cookie";
+import Media from "react-media";
 ////////////////////////tabchoice function /////////////////////////////////
 const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
   /////////////////////set variable ///////////////////////
@@ -35,11 +32,11 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
 
     return (
       <Row>
-        <Col sm={8} key={item.id}>{item.name}</Col>
-        <Col sm={4}>
-          <p className="stylenumprice">
+       <div className="col-8 text-services">{item.name}</div>
+        <Col xl={4} lg={4} md={4} sm={4} xs={4}>
+          <div className="stylenumprice">
             {item.price} <span className="styletoman"> تومان</span>
-            <span>
+            
               <Form.Check
                 onChange={langhandle}
                 value={item.value}
@@ -48,8 +45,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
                 className="langu"
                 checked={item.checkin ? "checked" : ""}
               />
-            </span>
-          </p>
+           
+          </div>
         </Col>
       </Row>
     );
@@ -69,8 +66,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
     };
     return (
       <Row key={item.id}>
-        <Col sm={8}>{item.name}</Col>
-        <Col sm={4}>
+        <div className="col-8 text-services">{item.name}</div>
+        <Col xl={4} lg={4} md={4} sm={4} xs={4}>
           <p className="stylenumprice">
             {item.price} <span className="styletoman"> تومان</span>
             <span>
@@ -100,8 +97,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
     };
     return (
       <Row key={item.id}>
-        <Col sm={6}>{item.name}</Col>
-        <Col sm={6}>
+        <div className="col-8 text-services">{item.name}</div>
+        <Col xl={4} lg={4} md={4} sm={4} xs={4}>
           <p>
             <span>
               <Form.Check
@@ -400,6 +397,9 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
           //  onChange={changeButton}
           defaultActiveKey="first"
         >
+          <Media
+          query="(min-width:991px)"
+          render={() => (
           <div className="row bordertab">
             <Col className="tabsorder" xl={3} lg={3} md={3} sm={3}>
               <Nav
@@ -494,7 +494,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
                       color: "#454f63",
                       textAlign: "center",
                       fontSize: "1rem",
-                      paddingTop: "2rem"
+                      padding: "1rem 0rem 1rem 2rem"
                     }}
                     className="col-x1-12 col-lg-12 col-md-12 col-sm-12  col-xs-12"
                   >
@@ -505,6 +505,73 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
               </Tab.Content>
             </Col>
           </div>
+          )}/>
+           <Media
+        query="(max-width:992px)"
+        render={() => (
+          <Accordion defaultActiveKey="0">
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="0">
+              زبان ترجمه
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="0">
+                <Card.Body>{lnaguage}</Card.Body>
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="1">
+              مهرو تاییدات
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="1">
+                <Card.Body>{valid}</Card.Body>
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="2">
+              تعداد نسخه اضافه
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="2">
+                <Card.Body> 
+                  <div className="counter">
+                        <div className="incre col-2">
+                          <Button
+                            className="increase"
+                            onClick={() => setcount(prevCount => prevCount + 1)}
+                          >
+                            +
+                          </Button>
+                        </div>
+                        <div className="text col-8">
+                          {count}
+                        </div>
+                        <div className="dec col-2">
+                          <Button
+                            className="decrease col-2"
+                            onClick={() => {
+                              if (count <= 0) setcount(0);
+                              else {
+                                setcount(prevCount => prevCount - 1);
+                              }
+                            }}
+                          >
+                            -
+                          </Button>
+                        </div>
+                      </div>
+                      </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="3">
+              زمان تحویل ترجمه
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="3">
+                <Card.Body> {typedelivery}</Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+        )}
+      />
         </TabContainer>
       </Col>
       <Col xl={3} lg={3} md={12} sm={12} xs={12} className="Continue-order">
@@ -512,6 +579,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
           position={ToastsContainerPosition.TOP_CENTER}
           store={ToastsStore}
         />
+        
 
         <Button
           style={{ margin: "1rem 0", fontSize: ".8rem", fontFamily: "fanum" }}

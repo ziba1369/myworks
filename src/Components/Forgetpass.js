@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./Layout/NavBar";
-import { Container, Button, Col, Form } from "react-bootstrap";
-import {
-  ToastsStore,
-  ToastsContainer,
-  ToastsContainerPosition
-} from "react-toasts";
+import {Container, Button, Col, Form } from "react-bootstrap";
+import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts";
 import axios from "axios";
 import $ from "jquery";
 import * as Cookies from "js-cookie";
@@ -113,10 +109,7 @@ const Forgetpass = props => {
     }
   };
 
-  // change mobile value when changed
-  const handleMobileChange = e => {
-    setMobile(e.target.value);
-  };
+
   // checkForgetFirstButton function after mobile value changed
   useEffect(() => {
     checkForgetFirstButton();
@@ -214,22 +207,11 @@ const Forgetpass = props => {
     return () => clearInterval(interval);
   }, [second, step]);
 
-  // change mobile value when changed
-  const handlerActiveChange = e => {
-    setActive(e.target.value);
-  };
+ 
   // checkForgetSecondButton function after mobile value changed
   useEffect(() => {
     checkForgetSecondButton();
   }, [active]);
-
-  // checkForgetSecondButton function after rules value changed
-  // const loginSecondStep = () => {
-  //     setStep(3);
-  // };
-  const changeStep = () => {
-    setStep(1);
-  };
 
   const loginSecondStep = () => {
     const checkforgetpass = {
@@ -253,10 +235,6 @@ const Forgetpass = props => {
           ToastsStore.error(response.data.error);
         }
       });
-
-    // .catch(function (error) {
-    //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-    // })
   };
 
   //////////////////// THIRD STEP //////////////////////
@@ -335,12 +313,7 @@ const Forgetpass = props => {
         ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
       });
   };
-  const handlenewpass = e => {
-    setnewpass(e.target.value);
-  };
-  const handlenewpassr = e => {
-    setnewpassr(e.target.value);
-  };
+
   useEffect(() => {
     let borders = document.getElementsByClassName("borderpass");
 
@@ -410,7 +383,7 @@ const Forgetpass = props => {
                   <Form.Control
                     type="tel"
                     placeholder=""
-                    onChange={handleMobileChange}
+                    onChange={e => {setMobile(e.target.value)}}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
                         checkForgetFirstEnter();
@@ -448,7 +421,7 @@ const Forgetpass = props => {
                   <Form.Control
                     type="password"
                     placeholder=""
-                    onChange={handlerActiveChange}
+                    onChange={ e => {setActive(e.target.value)}}
                     vlaue={active}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
@@ -464,7 +437,7 @@ const Forgetpass = props => {
                     <a className="rightreg" style={activSecond}>
                       ارسال مجدد کد فعالسازی
                     </a>
-                    <a onClick={changeStep} className="leftreg">
+                    <a onClick={() => {setStep(1)}} className="leftreg">
                       اصلاح شماره تماس
                     </a>
                   </p>
@@ -496,7 +469,7 @@ const Forgetpass = props => {
                       }
                     }}
                     className="borderpass"
-                    onChange={handlenewpass}
+                    onChange={e => {setnewpass(e.target.value)}}
                     vlaue={newpass}
                     required
                   />
@@ -511,7 +484,7 @@ const Forgetpass = props => {
                         checkRegisteThirdEnter();
                       }
                     }}
-                    onChange={handlenewpassr}
+                    onChange={ e => {setnewpassr(e.target.value)}}
                     vlaue={newpassr}
                     className="borderpass"
                     required

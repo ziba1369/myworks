@@ -2,18 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Card } from "react-bootstrap";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
-import {
-  ToastsStore,
-  ToastsContainer,
-  ToastsContainerPosition
-} from "react-toasts";
+import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts";
 import axios from "axios";
 import * as Cookies from "js-cookie";
 ////////////////////photoupload function /////////////////////////////
 const Photoupload = ({ onClicks, step, onChanges }) => {
 ////////////////////////set variable/////////////////////////////////
 const [orderFileCount, setOrderFilecount] = useState(0);
-const[orderCode,setOrdercode]=useState();
 const [photoUpload,setPhotoUpload]=useState();
 const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
 ////////////////////////preview image/////////////////////////////////

@@ -74,9 +74,7 @@ const NavBar = () => {
                         <NavDropdown.Item
                           eventKey="4.1"
                           className="imageprofile"
-                          style={{ color: "#000" }}
-                          componentClass="span"
-                        >
+                          style={{ color: "#000" }}>
                           <Link to="/profile/editprofile">
                             <Image src={profileImage} />
                             پروفایل

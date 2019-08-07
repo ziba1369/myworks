@@ -7,7 +7,6 @@ import Register from './Components/Register';
 import React from 'react';
 import {Route, BrowserRouter} from 'react-router-dom';
 import News from './Components/News';
-import NavBar from './Components/Layout/NavBar';
 import BlogOriginal from './Components/BlogOriginal';
 import PanelCustom from './Components/PanelCustom';
 function Routes() {

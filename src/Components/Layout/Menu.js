@@ -22,7 +22,7 @@ const Menu = props => {
       .then(function(response) {
         if (response.data.success) {
           setservicemenu(response.data.headers);
-          console.log(response.data.headers);
+         
         } else {
           ToastsStore.error(response.data.error);
         }
@@ -57,7 +57,7 @@ const Menu = props => {
                     <Col lg={4} xl={4} key={item.id}>
                       <div className="smenu">
                         <p>
-                          <Dropdown.Item class="dropdown-item" role="button">
+                          <Dropdown.Item className="dropdown-item" role="button">
                             <Link to={link}>{item.title}</Link>
                           </Dropdown.Item>
                         </p>

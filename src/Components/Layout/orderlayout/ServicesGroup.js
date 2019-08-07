@@ -1,10 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Row, Button, Col, Form, Card} from "react-bootstrap";
-import {
-    ToastsContainer,
-    ToastsStore,
-    ToastsContainerPosition
-} from "react-toasts";
+import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
 import $ from 'jquery';
 import axios from "axios";
 import * as Cookies from "js-cookie";
@@ -15,16 +11,6 @@ const ServicesGroup = ({onClicks ,step, onChanges}) => {
     const [optionservice, setOptionservice] = useState([]);
     const [types, setTypes] = useState();
     const[optiontypes,setoptiontypes]= useState([]);
-
-    const handleServiceChange = e => {
-        
-        setService(e.target.value);
-
-    };
-    
-    const handleTypeTransChange = e => {
-        setTypes(e.target.value);
-    };
     const handleSubmit = () => {
         if (service === undefined) {
             document.getElementById("groups").style.borderColor = "red";
@@ -113,9 +99,7 @@ useEffect(()=>{
                 
             }
         })
-        .catch(function (error) {
-            ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-        });
+      
 
     }, [service]);
 
@@ -160,7 +144,7 @@ useEffect(()=>{
                                     id="groups"
                                     as="select"
                                     type="select"
-                                    onChange={handleServiceChange}
+                                    onChange={e=>{setService(e.target.value)}}
                                     vlaue={service}
                                     name="slelect"
                                     required
@@ -184,7 +168,7 @@ useEffect(()=>{
                                     as="select"
                                     id="types"
                                     type="select"
-                                    onChange={handleTypeTransChange}
+                                    onChange={e =>{setTypes(e.target.value)}}
                                     vlaue={types}
                                     name="typedocservice"
                                     required

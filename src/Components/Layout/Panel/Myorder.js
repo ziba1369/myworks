@@ -19,10 +19,10 @@ const Myorder = () => {
         }
       )
       .then(function(response) {
-        console.log(response.data, "www");
+     
         if (response.data.success) {
           setOrder(response.data.orders);
-          console.log(response.data.orders);
+         
         } else {
           ToastsStore.error(response.data.error);
         }
@@ -42,7 +42,7 @@ const Myorder = () => {
         query="(min-width:992px)"
         render={() => (
           <React.Fragment>
-            <div className="row myorder">
+            <div className="row myorder normal">
               <Col lg={1} xl={1} md={1}>
                 ردیف
               </Col>
@@ -101,40 +101,40 @@ const Myorder = () => {
               Cookies.set("order_id", item.id, { expires: 7, path: "/" });
               return (
                 <div className="row myorderlist">
-                  <Col lg={1} xl={1} md={1}>
+                  <Col lg={12} xl={12} md={12}>
                     ردیف
                   </Col>
-                  <Col lg={1} xl={1} md={1}>
+                  <Col lg={12} xl={12} md={12}>
                     {item.id}
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={12} xl={12} md={12}>
                     عنوان سفارش
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={12} xl={12} md={12}>
                     {item.order_name}
                   </Col>
-                  <Col lg={3} xl={3} md={3}>
+                  <Col lg={12} xl={12} md={12}>
                     شماره سفارش
                   </Col>
-                  <Col lg={3} xl={3} md={3}>
+                  <Col lg={12} xl={12} md={12}>
                     {item.order_code}
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={12} xl={12} md={12}>
                     تاریخ ثبت
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={12} xl={12} md={12}>
                     {item.created_at}
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={12} xl={12} md={12}>
                     وضعیت
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={12} xl={12} md={12}>
                     {item.status}
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={12} xl={12} md={12}>
                     عملیات
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={12} xl={12} md={12}>
                     عملیات
                   </Col>
                 </div>

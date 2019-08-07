@@ -22,18 +22,9 @@ const Passchange = props => {
     width: "11vw",
     borderRadius: ".25rem"
   });
-  //////////////set password value in variable////////////////
-  const handlepass = e => {
-    setPass(e.target.value);
-  };
-  //////////////set newpassword value in variable////////////////
-  const handleNewPass = e => {
-    setNewpass(e.target.value);
-  };
-  //////////////set repeat newpassword value in variable////////////////
-  const handleNewPassr = e => {
-    setNewpassr(e.target.value);
-  };
+
+ 
+
   //////////////set password value in variable////////////////
   const checkChangePassButton = () => {
     if (
@@ -137,7 +128,7 @@ const Passchange = props => {
             <Form.Control
               type="password"
               placeholder=""
-              onChange={handlepass}
+              onChange={e => {setPass(e.target.value)}}
               value={pass}
               required
             />
@@ -151,7 +142,7 @@ const Passchange = props => {
             <Form.Control
               type="password"
               placeholder=""
-              onChange={handleNewPass}
+              onChange={e => {setNewpass(e.target.value)}}
               value={newpass}
               className="borderpass"
               required
@@ -164,7 +155,7 @@ const Passchange = props => {
             <Form.Control
               type="password"
               placeholder=""
-              onChange={handleNewPassr}
+              onChange={e => {setNewpassr(e.target.value)}}
               value={newpassr}
               className="borderpass"
               required
