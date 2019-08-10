@@ -2968,3 +2968,141 @@ label.upladersize {
   width: 115px;
 }
 /* panelcustom */
+/* contactus page */
+.address-translate img,.work-time img{
+  width:30px;
+  margin: 0 0 0 1rem;
+}
+.address-translate p {
+  text-align: right
+}
+.address-translate span {
+  font-size: .9rem;
+}
+.phone-translate img  {
+  text-align: right;
+  float: right;
+}
+.phone-translate p{
+  text-align: right;
+  float: right;
+}
+span.tell-translate {
+  display: block;
+}
+.phone-translate img {
+  width: 25px;
+  margin: 0 0 0 1.5rem;
+}
+.work-days p {
+  font-size: .7rem;
+ 
+}
+
+.work-days .time{
+font-size:.7rem;
+background-color: #eff5ff;
+padding: .4rem .8rem;
+margin: .3rem;
+border-radius: 12px;
+}
+.address-translate img {
+  width: 25px;
+  margin: 0 0 0 1rem;
+}
+.work-time img {
+  width: 25px;
+}
+.work-time p {
+  text-align: right;
+}
+.work-days .col-xl-6 {
+  margin: 0 auto;
+  display: table;
+  text-align: right;
+  position: relative;
+  right: 32px;
+}
+.seller-expert span {
+  float: right;
+  font-size: 0.9rem;
+}
+.work-time span {
+  font-size: .9rem;
+}
+.box {
+  background-color: #eff5ff;
+  margin: 2rem 0.94rem;
+  border-radius: 10px;
+}
+iframe {
+  width: 100%;
+}
+.nameapp {
+  color: #4ca73e;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: .3rem;
+}
+
+.nameapp1 {
+  color: #20bdd8;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: .3rem;
+}
+.seller-expert .boxcontent {
+  padding: .8rem 0;
+}
+.seller-expert .box {
+  margin: 1rem;
+}
+.seller-expert .phone{
+font-size: .8rem;
+text-align: center;
+margin-bottom: 0rem !important;
+}
+.boxcontent img {
+  width: 100%;
+}
+.row.contactpage {
+  font-family: fanum;
+}
+.titlepage {
+  text-align: center;
+  margin: 0rem 0 1rem 0;
+  color: #0e4d8b;
+  font-size: 1.2rem;
+}
+
+/* contactus page */
+/* aboutus */
+.text-about{
+  text-align: right;
+  font-size: .8rem;
+  line-height: 1.5rem;
+}
+.text-licence {
+  color: #0e4d8b;
+}
+.image-licence img{
+  width:100%
+}
+.text-licence {
+  color: #0e4d8b;
+  text-align: right;
+  width: 100%;
+}
+.coworker {
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+.coworker li {
+  font-size: .8rem;
+  text-align: right;
+  direction: rtl;
+  line-height: 1.8rem;
+  list-style-type: circle;
+}
+/* aboutus */

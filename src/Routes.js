@@ -9,6 +9,8 @@ import {Route, BrowserRouter} from 'react-router-dom';
 import News from './Components/News';
 import BlogOriginal from './Components/BlogOriginal';
 import PanelCustom from './Components/PanelCustom';
+import ContactUs from './Components/ContactUs';
+import AboutUs from './Components/AboutUs';
 function Routes() {
 
     const routers = [
@@ -68,6 +70,16 @@ function Routes() {
             exact: true,
 
         },
+        {
+            path:'/contactus',
+            component:ContactUs,
+            exact:true
+        },
+        {
+            path:'/aboutus',
+            component:AboutUs,
+            exact:true
+        }
 
     ];
 

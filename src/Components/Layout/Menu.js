@@ -135,10 +135,10 @@ const Menu = props => {
       </NavDropdown>
 
       <div className="nav-link">
-        <Link to="/">تماس باما</Link>
+        <Link to="/contactus">تماس باما</Link>
       </div>
       <div className="nav-link">
-        <Link to="/">درباره ما</Link>
+        <Link to="/aboutus">درباره ما</Link>
       </div>
     </Nav>
   );
