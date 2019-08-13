@@ -3098,11 +3098,29 @@ margin-bottom: 0rem !important;
   border: 1px solid #000;
   border-radius: 10px;
 }
-.coworker li {
+.coworker .text-coworker {
   font-size: .8rem;
-  text-align: right;
+  text-align: center;
   direction: rtl;
   line-height: 1.8rem;
   list-style-type: circle;
+  font-family: fanum;
+  padding: .3rem 0;
+}
+ul.ul-coworker {
+  padding: 0px;
+  width:100%
+}
+span.circle-coworker {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  position: relative;
+  top: .3rem;
+  left: .7rem;
 }
 /* aboutus */
