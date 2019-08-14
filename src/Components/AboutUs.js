@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { Container, Image, Col, Row, Breadcrumb } from "react-bootstrap";
+import { Image, Col, Row, Breadcrumb } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavBar from "./Layout/NavBar";
 import Footer from "./Layout/Footer";
@@ -31,7 +31,7 @@ const AboutUs = () => {
       <header>
         <NavBar />
       </header>
-      <Container>
+      <div className="container padding-about">
         <Row>
           <Col
             className="service-breadcrumb"
@@ -51,9 +51,9 @@ const AboutUs = () => {
         </Row>
         <div className="titlepage">درباره ما</div>
         <div className="row aboutpage">
-          <React.Fragment>
+         
           <Row>
-          <p className="text-about">
+          <p className="text-about  col-xl-12 col-lg-12 col-md-12 col-xs-12 col-sm-12">
             دارالترجمه رسمی هزاره سوم، با مجوز قوه قضاییه و با شماره پروانه
             تاسیس دارالترجمه رسمی 340 تهران از سال 1385 رسماً فعالیت خود را در
             زمینه ترجمه رسمی اسناد و مدارک آغاز نمود.این دارالترجمه همچنین دارای
@@ -104,7 +104,7 @@ const AboutUs = () => {
           </Row> 
           <div className="row" style={{width:"100%",margin:"0px",padding: "0px"}}>
           <p className="text-licence">همکاران دارالترجمه</p>
-          <div className="coworker">
+          <div className="coworker col-xl-12 col-lg-12 col-md-12 col-xs-12 col-sm-12">
             <div className="ul-coworker" >
               <div className="text-coworker"><span className="circle-coworker"></span>جناب آقای محمد قوچی مترجم  رسمی قوه قضاییه با شماره پروانه 927 دارای مدرک لیسانس زبان و ادبیات انگلیسی و نیز لیسانس حقوق و همچنین مدرک فوق لیسانس حقوق</div>
               <div className="text-coworker"><span className="circle-coworker"></span>جناب آقای محمد قوچی مترجم  رسمی قوه قضاییه با شماره پروانه 927 دارای مدرک لیسانس زبان و ادبیات انگلیسی و نیز لیسانس حقوق و همچنین مدرک فوق لیسانس حقوق</div>
@@ -118,9 +118,9 @@ const AboutUs = () => {
             </div>
           </div>
           </div> 
-          </React.Fragment> 
+        
         </div>
-      </Container>
+      </div>
       <Footer />
     </React.Fragment>
   );

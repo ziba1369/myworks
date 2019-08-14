@@ -3,6 +3,7 @@ import {Nav,Col,Tab,Row,Container,Image,Navbar,Form,Button} from "react-bootstra
 import Myorder from "./Layout/Panel/Myorder";
 import EditProfile from "./Layout/Panel/EditProfile";
 import Passchange from "./Layout/Panel/Passcahnge";
+import Dashboard from "./Layout/Panel/Dashboard";
 import Mybill from "./Layout/Panel/Mybill";
 import Mytranslate from "./Layout/Panel/Mytranslate";
 import userimg from "../images/user.svg";
@@ -28,26 +29,38 @@ const[menu,setMenu]=useState(false);
       props.history.push("/");
       window.location.reload();
     };
-  
+   
     return (
       <div className="panel">
-        <div className="distance">
+        {/* <div className="distance"> */}
+        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 header-profile">
         <div className="profilelink">
-          <img src={Logotranslate} alt={"Logotranslate"} />
+          <img src={Logotranslate} alt={"Logotranslate"} className="logosite"/>
           
-          <p>
+          <p className="panel-name">
             <Link to="/">
               دفتر ترجمه رسمی ۴۴۹ تهران
             </Link>
           </p>
           
+          {/* </div> */}
+          <div className="image-panel-parent">
+                        <div className="imagepanel">
+                          <Image src={Cookies.get("customer_img")} />
+                        </div>
+                      </div>
+                      <div className="userpanel">
+                        {Cookies.get("name") + " " + Cookies.get("family")}
+                      </div>
           </div>
+       
         </div>
   
         <Tab.Container
           id="right-tabs-example"
           defaultActiveKey={props.match.params.page}
         >
+        
           <React.Fragment>
             <Row className="rtl">
             {/* /////////////normal-menu///////////// */}
@@ -56,53 +69,76 @@ const[menu,setMenu]=useState(false);
                 render={() => (
                   <React.Fragment>
                     <Col sm={2} className="menubar">
-                      <div className="image-panel-parent">
-                        <div className="imagepanel">
-                          <Image src={Cookies.get("customer_img")} />
-                        </div>
-                      </div>
-                      <div className="userpanel">
-                        {Cookies.get("name") + " " + Cookies.get("family")}
-                      </div>
                       <Nav variant="pills" className="flex-column">
-                        <Nav.Item >
-                          <Nav.Link eventKey="editprofile">
+                      <Nav.Item>
+                          <Nav.Link eventKey="dashboard">
+                            <Link to="/profile/dashboard">
                             <span>
-                              <Image src={userimg} alt="userimg" />
+                              <Image src={myorderimg} alt="userimg" />
                             </span>
-                            اصلاح حساب کاربری
+                            داشبورد
+                            </Link>
+                          </Nav.Link>
+                        
+                        </Nav.Item>
+                        <Nav.Item>
+                          <Nav.Link eventKey="neworder">
+                            <Link to="/services/1">
+                            <span>
+                              <Image src={myorderimg} alt="userimg" />
+                            </span>
+                            ثبت ترجمه جدید
+                            </Link>
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                           <Nav.Link eventKey="myorders">
+                          <Link to="/profile/myorders">
                             <span>
                               <Image src={myorderimg} alt="userimg" />
                             </span>
                             سفارشات من
+                            </Link>
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                           <Nav.Link eventKey="mybill">
+                          <Link to="/profile/mybills">
                             <span>
                               <Image src={billimg} alt="billImage" />
                             </span>
                             فاکتورهای من
+                            </Link>
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                           <Nav.Link eventKey="mytranslate">
+                          <Link to="/profile/mytranslates">
                             <span>
                               <Image src={inboximg} alt="inboximg" />
                             </span>
                             ترجمه های من
+                            </Link>
+                          </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item >
+                          <Nav.Link eventKey="editprofile">
+                          <Link to="/profile/mybills">
+                            <span>
+                              <Image src={userimg} alt="userimg" />
+                            </span>
+                            اصلاح حساب کاربری
+                            </Link>
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                           <Nav.Link eventKey="changepass">
+                          <Link to="/profile/changepass">
                             <span>
                               <Image src={changepassimg} alt="changepass" />
                             </span>
                             تغییر کلمه عبور
+                            </Link>
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
@@ -121,9 +157,13 @@ const[menu,setMenu]=useState(false);
                     </Col>
                     <Col sm={10} className="content">
                       <Tab.Content>
+                      <Tab.Pane eventKey="dashboard">
+                          <Dashboard/>
+                        </Tab.Pane>
                         <Tab.Pane eventKey="editprofile">
                           <EditProfile />
                         </Tab.Pane>
+                        
                         <Tab.Pane eventKey="myorders">
                           <Myorder />
                         </Tab.Pane>
@@ -161,16 +201,25 @@ const[menu,setMenu]=useState(false);
                     <span>دفتر ترجمه رسمی ۴۴۹ تهران</span>
                     </Link>
                     </div>
-                    
                     <Link
-                      id="editprofile"
+                      id="dashboard"
                       className="menu-item"
-                      to={"/profile/editprofile"}
+                      to="/profile/dashboard"
                       onClick={()=>setMenu(false)}
                       
                     >
-                      اصلاح حساب کاربری <Image src={userimg} alt="userimg" />
+                      داشبورد <Image src={userimg} alt="userimg" />
                     </Link>
+                    <Link
+                      id="newtrans"
+                      className="menu-item"
+                      to={"/services/1"}
+                      onClick={()=>setMenu(false)}
+                      
+                    >
+                        ثبت ترجمه جدید <Image src={userimg} alt="userimg" />
+                    </Link>
+                  
                     <Link
                       id="myorder"
                       className="menu-item"
@@ -182,7 +231,7 @@ const[menu,setMenu]=useState(false);
                     <Link
                       id="mybill"
                       className="menu-item"
-                      to={"/profile/mybill"}
+                      to="/profile/mybill"
                       onClick={()=>setMenu(false)}
                     
                     >
@@ -191,16 +240,25 @@ const[menu,setMenu]=useState(false);
                     <Link
                       id="mytrans"
                       className="menu-item"
-                      to={"/profile/mytranslate"}
+                      to="/profile/mytranslate"
                       onClick={()=>setMenu(false)}
                     
                     >
                       ترجمه های من <Image src={inboximg} alt="inboximg" />
                     </Link>
                     <Link
+                      id="editprofile"
+                      className="menu-item"
+                      to="/profile/editprofile"
+                      onClick={()=>setMenu(false)}
+                      
+                    >
+                      اصلاح حساب کاربری <Image src={userimg} alt="userimg" />
+                    </Link>
+                    <Link
                       id="changepass"
                       className="menu-item"
-                      to={"/profile/changepass"}
+                      to="/profile/changepass"
                       onClick={()=>setMenu(false)}
                     >
                       تغییر کلمه عبور{" "}
@@ -216,7 +274,9 @@ const[menu,setMenu]=useState(false);
                   </Menu>
                   <main id="page-wrap">
                     <div className="profileopen" onClick={()=>setMenu(true)}></div>
-                    {props.match.params.page === "editprofile" ? (
+                    {props.match.params.page === "dashboard" ? (
+                      <Dashboard/>
+                    ) :props.match.params.page === "editprofile" ? (
                       <EditProfile />
                     ) : props.match.params.page === "myorders" ? (
                       <Myorder />

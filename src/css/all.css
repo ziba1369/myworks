@@ -2570,6 +2570,8 @@ p.textpanel {
   color: #929599;
   text-align: right;
   font-size: 0.9rem;
+  width: 100%;
+  display: inline-block;
 }
 .panel .nav-pills .nav-link.active,
 .panel .nav-pills .show > .nav-link {
@@ -2588,18 +2590,17 @@ p.textpanel {
   color: #f9575a !important;
 }
 .imagepanel {
-  width: 130px;
-  height: 130px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
-  position: relative;
-  bottom: 67px;
-  background-color: #fff;
-  display: table;
-  margin:0 auto
+  position: absolute;
+  top: 25%;
 }
 .imagepanel img {
   border-radius: 50%;
+  width: 100%;
+  height: 100%;
 }
 .image-panel-parent {
   width: 100%;
@@ -2607,8 +2608,10 @@ p.textpanel {
   height: 50px;
 }
 .userpanel {
-  text-align: center;
-  padding: 1.3rem 0 1rem 0;
+  position: absolute;
+  top: 36%;
+  left: 6%;
+  font-size: .9rem;
 }
 .bm-burger-button {
   position: fixed;
@@ -2699,7 +2702,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin: 0px;
   height: 100%;
 }
-.menubar .nav-link img {
+.menubar .nav-link img,.menuprofile img {
   width: 20px;
   margin: 0px 0.5rem;
 }
@@ -2767,7 +2770,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 }
 @media only screen and (min-width:992px){
-  .profilelink img {
+  .logosite {
     display: none 
 }
 .distance {
@@ -2823,6 +2826,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .panel .content {
   padding: 0 3rem;
+  margin:4rem 0;
 }
 
 .panel label.upladersize {
@@ -2892,8 +2896,22 @@ a#logout {
   display: table;
   border-radius: 50%;
 }
+.header-profile {
+  background-color: #eff5ff;
+  height: 80px;
+
+}
+p.panel-name {
+  text-align: right;
+  display: inline-block;
+  right: 1rem;
+  position: absolute;
+  top: 1.5rem;
+  z-index: 9;
+}
 /* myorder/panelcustom */
 /* editprofile */
+
 .closeprofile {
   background-image: url("../images/close.svg");
   width: 25px;
@@ -2967,6 +2985,75 @@ label.upladersize {
 .panel .custom-file-container__image-preview {
   width: 115px;
 }
+/* dashboard */
+.countorder {
+  background-color: #dac2d4;
+  border-radius: 10px;
+}
+.paybox {
+  background-color: #97ceff;
+  border-radius: 10px;
+}
+.readytrans{
+  background-color: #95f8d9;
+  border-radius: 10px; 
+}
+.info-panel {
+  font-family: fanum;
+  padding: 0 5rem;
+}
+.info-panel div {
+  margin: 0 auto;
+  padding: .5rem;
+}
+.lastorder p {
+  text-align: right;
+  display: block;
+  padding: 1rem 0;
+  width: 100%;
+}
+.lastorder-box {
+  border: 1px solid #454f63;
+  width: 100%;
+  border-radius: 10px;
+}
+.lastorder-title {
+    background-color: #454f63;
+    border-top-left-radius: 6px;
+    position: relative;
+    display: flex;
+    border-top-right-radius: 6px;
+    padding: .5rem;
+
+}
+.lasorderlist{
+  text-align: center;
+  direction: rtl;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  font-family: fanum;
+  font-size: 0.75rem;
+  background-color: #f0f0f0;
+  padding: 1.2rem 0;
+}
+.lastorder-title div {
+  text-align: center;
+  font-size: .8rem;
+  color: #fff;
+  padding: .6rem 0;
+}
+.lastorderlist {
+  display: flex;
+}
+@media only screen  and (max-width:992px){
+  .info-panel div {
+    padding: .5rem;
+    margin: 1rem;
+    text-align: center;
+}
+}
+/* dashboard */
 /* panelcustom */
 /* contactus page */
 .address-translate img,.work-time img{
@@ -3078,7 +3165,7 @@ margin-bottom: 0rem !important;
 /* contactus page */
 /* aboutus */
 .text-about{
-  text-align: right;
+  text-align: justify;
   font-size: .8rem;
   line-height: 1.5rem;
 }
@@ -3122,5 +3209,21 @@ span.circle-coworker {
   position: relative;
   top: .3rem;
   left: .7rem;
+}
+@media only screen and (max-width:768px){
+  .padding-about{
+   padding: 0 2rem !important;
+  }
+  .image-licence img {
+    width: 100%;
+    margin: 1rem 0;
+}
+.text-licence{
+  padding:0 15px 
+}
+}
+p.text-about {
+  text-align: justify;
+  direction: rtl;
 }
 /* aboutus */
