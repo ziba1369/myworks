@@ -3226,4 +3226,55 @@ p.text-about {
   text-align: justify;
   direction: rtl;
 }
+/* basket */
+.basket-text {
+  text-align: right;
+  direction: rtl;
+}
+.items-basket {
+  border: 1px solid #e1e1e1;
+  background-color: #fcfcfc;
+  border-radius: 10px;
+  text-align: center;
+  padding: 1rem;
+  font-family: fanum;
+  font-size: .8rem;
+  line-height: 1.8rem;
+}
+
+.colseicon img {
+  width: 32px;
+}
+.items-basket {
+  padding: 1rem .3rem;
+  margin: 0.5rem;
+  flex: 0 0 23% !important;
+}
+.buttonsell {
+  background-color: #007bff;
+  border: 0px;
+  border-radius: 10px;
+ 
+}
+.buttonsell span {
+  display: block;
+  padding: 1rem;
+  color: #fff;
+  font-family: fanum;
+  text-align: center;
+  font-size: .9rem;
+}
+.buttonpay {
+  background-color: #0cb69f;
+  border: 0;
+  display: block;
+  width: 100%;
+  margin: 1rem 0;
+  border-radius: 10px;
+  padding: 1rem;
+  color: #fff;
+  text-align: center;
+  font-size: .9rem;
+}
+/* basket */
 /* aboutus */

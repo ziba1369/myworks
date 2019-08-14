@@ -91,7 +91,7 @@ const Services = () => {
  ////////////////main return //////////////////
   return (
     <div className="row services">
-      <div className="servicestext titlesections col-xl-12 col-md-12 col-sm-8 col-8 offset-sm-2 offset-2">
+      <div className="servicestext titlesections col-12">
         <h5 className="titlesections">خدمات ترجمه</h5>
       </div>
       {cards}
