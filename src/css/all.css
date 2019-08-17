@@ -3244,6 +3244,7 @@ p.text-about {
 
 .colseicon img {
   width: 32px;
+  cursor: pointer;
 }
 .items-basket {
   padding: 1rem .3rem;
