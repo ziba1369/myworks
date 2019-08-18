@@ -3276,5 +3276,18 @@ p.text-about {
   text-align: center;
   font-size: .9rem;
 }
+/* customorder */
+.title-customorder,.type-customorder,.confirm-customorder,.text-customorder textarea {
+  margin-top: 40%;
+}
+.title-customorder input[type="text"] {
+  width: 80%;
+}
+span.input-title {
+  width: 60%;
+  display: inline-block;
+  text-align: right;
+}
+/* customorder */
 /* basket */
 /* aboutus */

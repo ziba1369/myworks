@@ -12,6 +12,7 @@ import PanelCustom from './Components/PanelCustom';
 import ContactUs from './Components/ContactUs';
 import AboutUs from './Components/AboutUs';
 import Basket from './Components/Basket';
+import CustomOrder from './Components/CustomOrder';
 function Routes() {
 
     const routers = [
@@ -84,6 +85,11 @@ function Routes() {
         {
             path:'/basket',
             component:Basket,
+            exact:true
+        }
+        ,{
+            path:'/customorder',
+            component:CustomOrder,
             exact:true
         }
 
