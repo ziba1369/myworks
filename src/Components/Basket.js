@@ -10,45 +10,45 @@ const Basket = () => {
   const [basket, setBasket] = useState([
     {
       name: "شناسنامه",
-      id: 123456,
+      id: 1,
       date: "1398/05/24",
       price: 23000
     },
     {
       name: "شناسنامه",
-      id: 123456,
+      id:2,
       date: "1398/05/24",
       price: 23000
     },
     {
       name: "شناسنامه",
-      id: 123456,
+      id:3,
       date: "1398/05/24",
       price: 23000
     },
     {
       name: "شناسنامه",
-      id: 123456,
+      id:4,
       date: "1398/05/24",
       price: 23000
     },
     {
       name: "شناسنامه",
-      id: 123456,
+      id:5,
       date: "1398/05/24",
       price: 23000
     },
     {
       name: "شناسنامه",
-      id: 123456,
+      id:6,
       date: "1398/05/24",
       price: 23000
     }
   ]);
   const deleteItems=itemId=>{
-    
     const items = basket.filter(item => item.id !== itemId);
     setBasket(items);
+    console.log(itemId)
   }
   
   return (
@@ -91,8 +91,8 @@ const Basket = () => {
                     مبلغ سفارش:
                     <span style={{ color: "#0cb69f" }}>{item.price}تومان</span>
                   </p>
-                  <p className="colseicon" onClick={deleteItems}>
-                    <img src={colseIcon} alt={colseIcon} />
+                  <p className="colseicon" >
+                    <img onClick={()=>{deleteItems(item.id)}} src={colseIcon} alt={colseIcon} />
                   </p>
                 </div>
               );

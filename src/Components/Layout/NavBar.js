@@ -92,8 +92,8 @@ const NavBar = () => {
                     </Nav>
                   </Col>
                   <Col className="user" xl={6} md={6} sm={12} xs={12}>
-                    <Link to="/profile/myorders">
-                      <Button className="sign">لیست سفارشات</Button>
+                    <Link to="/basket">
+                      <Button className="sign">سبدخرید</Button>
                     </Link>
                   </Col>
                 </Nav>
