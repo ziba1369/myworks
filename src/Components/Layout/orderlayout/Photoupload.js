@@ -6,14 +6,48 @@ import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts"
 import axios from "axios";
 import * as Cookies from "js-cookie";
 ////////////////////photoupload function /////////////////////////////
-const Photoupload = ({ onClicks, step, onChanges }) => {
+const Photoupload = ({ onClicks, step, onChanges,orderFileCount, setOrderFilecount,photoUpload,setPhotoUpload,languages,validation,delivery,countorder }) => {
 ////////////////////////set variable/////////////////////////////////
-const [orderFileCount, setOrderFilecount] = useState(0);
-const [photoUpload,setPhotoUpload]=useState();
+
 const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
 ////////////////////////preview image/////////////////////////////////
+
   const changeprev = () => {
     document.getElementById("prev").style.display = "block";
+  };
+  ///////////////////////////////////////////////////
+    ////////////////////////count choosed languages/////////////////////////////////
+  //eslint-disable-next-line
+  const languagenum = () => {
+    let w = 0;
+    for (let x in languages) {
+      if (languages[x].checkin) {
+        w++;
+      }
+    }
+    return w;
+  };
+  ////////////////////////count choosed certificate/////////////////////////////////
+   //eslint-disable-next-line
+  const acceptnum = () => {
+    let w = 0;
+    for (let x in validation) {
+      if (validation[x].checkin) {
+        w++;
+      }
+    }
+    return w;
+  };
+  ////////////////////////count choosed certificate/////////////////////////////////
+   //eslint-disable-next-line
+  const deliverynum = () => {
+    let z;
+    for (let x in delivery) {
+      if (delivery[x].checkin) {
+        z = delivery[x].name;
+      }
+    }
+    return z;
   };
    ////////////////////////useeffectfor upload photo /////////////////////////////////
    useEffect(() => {
@@ -34,7 +68,7 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
 ////////////////////////handle submit/////////////////////////////////
   const handleSubmit = () => {
     ////////////////////////send choose languages to server /////////////////////////////////
-    const orderlanguages = JSON.parse(Cookies.get("languages"));
+    const orderlanguages = languages;
     const order_lang = orderlanguages.filter(item => item.checkin === true);
     const order_languages = order_lang.map(item => {
       return (
@@ -46,18 +80,18 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
       );
     });
   ////////////////////////send choose certificate to server /////////////////////////////////
-    const orderValidation = JSON.parse(Cookies.get("validation"));
+    const orderValidation =validation;
     const order_cert = orderValidation.filter(item => item.checkin === true);
     const order_certificate = order_cert.map(item => {
       return item.name + "," + item.price;
     });
   ////////////////////////send choose deliver to server /////////////////////////////////
-    const translate_type = JSON.parse(Cookies.get("delivery"));
+    const translate_type = delivery;
     const deliver = translate_type.filter(item => item.checkin === true);
     const deliverytype = deliver.map(item => {return item.type;});
     const deliverypr = translate_type.filter(item => item.checkin === true);
     const deliveryprice = deliverypr.map(item => {return item.price});
-    console.log(photoUpload,"ooo");
+    
   ////////////////////////set items to send server /////////////////////////////////
 
     const formDataorder = new FormData();
@@ -68,7 +102,7 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
       formDataorder.append("order_type","normal");
       formDataorder.append("translate_type",deliverytype[0]);
       formDataorder.append("page_count",0);
-      formDataorder.append("copy_count",Cookies.get("countorder"));
+      formDataorder.append("copy_count",countorder);
       formDataorder.append("weight_added_version", 0);
       formDataorder.append("normal_price",deliveryprice[0]);
       formDataorder.append("fast_price", deliveryprice[0]);
@@ -114,19 +148,7 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
     
 
 
-    ///////////////////////////////remove-cookied//////////////////////////////////
-    Cookies.remove('acceptnum');
-    Cookies.remove('countorder');
-    Cookies.remove('countorder');
-    Cookies.remove('delivery');
-    Cookies.remove('deliverynum');
-    Cookies.remove('languagenum');
-    Cookies.remove('languages');
-    Cookies.remove('sumValue');
-    Cookies.remove('types');
-    Cookies.remove('validation');
-
-
+   
 
   };
 
@@ -143,16 +165,16 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
           <Card.Body>
             <Card.Title> {Cookies.get("title")}</Card.Title>
             <Card.Text>
-              زبان ترجمه<span>{Cookies.get("languagenum")} مورد</span>
+              زبان ترجمه<span>{languagenum()} مورد</span>
             </Card.Text>
             <Card.Text>
-              مهرو تاییدات<span>{Cookies.get("acceptnum")} مورد</span>
+              مهرو تاییدات<span>{acceptnum()} مورد</span>
             </Card.Text>
             <Card.Text>
-              نسخه اضافه<span>{Cookies.get("count")} مورد</span>
+              نسخه اضافه<span>{countorder} مورد</span>
             </Card.Text>
             <Card.Text>
-              نوع تحویل<span>{Cookies.get("deliverynum")}</span>
+              نوع تحویل<span>{deliverynum()}</span>
             </Card.Text>
           </Card.Body>
         </Card>

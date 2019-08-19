@@ -1,27 +1,39 @@
 import React, { useState, useEffect } from "react";
-import {Button,Form,Col,Nav,Row,Tab,TabContainer,Image,Card,Accordion} from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Col,
+  Nav,
+  Row,
+  Tab,
+  TabContainer,
+  Image,
+  Card,
+  Accordion
+} from "react-bootstrap";
 import adddoc from "../../../images/add-documents.svg";
 import delitype from "../../../images/deliverytype.svg";
 import acceptsign from "../../../images/acceptsign.svg";
 import tranlatelang from "../../../images/translatellang.svg";
-import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
+} from "react-toasts";
 import axios from "axios";
 import * as Cookies from "js-cookie";
 import Media from "react-media";
 ////////////////////////tabchoice function /////////////////////////////////
-const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
+const Tabschoice = ({
+  optiontype,
+  onClicks,
+  step,
+  onChanges,
+  data,
+  setdata
+}) => {
   /////////////////////set variable ///////////////////////
 
-  const [customOrder,setCustomorder]=useState({
-    languages:[],
-    title:'',
-    des:'',
-    confirm:0,
-    type:0,
-   
-  
-  })
-  
   const [styleone, setStyleone] = useState({
     borderColor: "#e1e1e1",
     backgroundColor: "#fafafa",
@@ -30,108 +42,87 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
   });
 
   //////////////////////////set langu/////////////////////////
-  const languaselect = (index) => {
-    let customOrderCheck = {...customOrder};
-    if (customOrder.languages[index].status === 0) {
-        customOrderCheck.languages[index].status = 1
-    } else if (customOrder.languages[index].status === 1) {
-        customOrderCheck.languages[index].status = 0
+  const languaselect = index => {
+    let dataCheck = { ...data };
+    if (data.languages[index].status === 0) {
+     
+      dataCheck.languages[index].status = 1;
+    } else if (data.languages[index].status === 1) {
+      dataCheck.languages[index].status = 0;
     }
-    setCustomorder(customOrderCheck);
-};
-
+    setdata(dataCheck);
+  };
+  
   ////////////////////////set data to languages /////////////////////////////////
 
-  const lnaguage = customOrder.languages.map((item, index) => {
+  const lnaguage = data.languages.map((item, index) => {
     return (
       <Row>
-       <div className="col-8 text-services">{item.lang}</div>
+        <div className="col-8 text-services">{item.lang}</div>
         <Col xl={4} lg={4} md={4} sm={4} xs={4}>
           <div className="stylenumprice">
-           
+            <Form.Check
+              value={item.lang}
+              type="checkbox"
+              id="langu"
+              name="langu"
+              className="langu"
+              onChange={() => {
+                languaselect(index);
+              }}
+              checked={item.status === 0?"checked":""}
             
-              <Form.Check
-                
-                value={item.lang}
-                type="checkbox"
-                id="langu"
-                className="langu"
-                onChange={()=>{languaselect(index)}}
-                
-              />
-           
+            />
           </div>
         </Col>
       </Row>
     );
   });
 
-/////////////////////////////////////handler title/////////////////////////////
-  const setChangetitle=(e)=>{
-    let customOrderCopy={...customOrder};
-    customOrderCopy.title=e.target.value
-    setCustomorder(customOrderCopy)
-  }
+  /////////////////////////////////////handler title/////////////////////////////
+  const setChangetitle = e => {
+    let dataCopy = { ...data };
+    dataCopy.title = e.target.value;
+    setdata(dataCopy);
+  };
   /////////////////////////////////////handler des/////////////////////////////
-  const  setChangedes=(e)=>{
-    let customOrderCopy={...customOrder};
-    customOrderCopy.des=e.target.value
-    setCustomorder(customOrderCopy)
-  }
+  const setChangedes = e => {
+    let dataCopy = { ...data };
+    dataCopy.des = e.target.value;
+    setdata(dataCopy);
+  };
   ///////////////////////////////handler confirm///////////////////////////////
-  const confirmChange=(index)=>{
-    let customOrderCopy={...customOrder};
-    customOrderCopy.confirm=index;
-    setCustomorder(customOrderCopy)
-  }
+  const confirmChange = index => {
+    let dataCopy = { ...data };
+    if (dataCopy.confirm === 1) {
+      setdata(dataCopy);
+    } else {
+      dataCopy.confirm = index;
+      setdata(dataCopy);
+    }
+  };
   /////////////////////////////////handler type translate///////////////////////
-  const typeTranslateChange=(index)=>{
-    let customOrderCopy={...customOrder};
-    customOrderCopy.type=index;
-    setCustomorder(customOrderCopy);
-    
+  const typeTranslateChange = index => {
+    let dataCopy = { ...data };
+    if (dataCopy.confirm === 1) {
+      setdata(dataCopy);
+    } else {
+    dataCopy.type = index;
+    setdata(dataCopy);
+    }
+  };
+
+  ///////////////////////////////////////useeffect setcookie/////////////////////////////////////
+  for (let i in data.languages) {
+    if (data.languages[i].status === 0) {
+      console.log(data);
+    }
   }
-
-  ////////////////////////set data from server/////////////////////////////////
-  useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/app_get_languages", 
-        
-
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function (response) {
-        if(response.data.success)
-        {
-   
-          let lang = [];
-          for (let i in response.data.languages) {
-              lang.push({
-                  lang: response.data.languages[i],
-                  status: 1
-              })
-          }
-          setCustomorder({
-            languages:lang,
-            title:'',
-            des:'',
-            confirm:0,
-            type:0,
-          });
-
-        }
-      
-      });
-  }, []);
-
   //////////////////////////////////////num of languages/////////////////////////
   const languagenum = () => {
     let w = 0;
-    for (let x in customOrder.languages) {
-      if (customOrder.languages[x].status===0) {
+    for (let x in data.languages) {
+      if (data.languages[x].status === 0) {
         w++;
       }
     }
@@ -139,54 +130,61 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
   };
   //////////////////////////////////handle newxt step///////////////////////////////////////////////////////////////////
   const handleTabs = () => {
-    if(languagenum()>0 && customOrder.title.length>1 && customOrder.type!==undefined && customOrder.confirm!==undefined)
-    {
-      onClicks()
+    if (
+      languagenum() > 0 &&
+      data.title.length > 1 &&
+      data.type !== undefined &&
+      data.confirm !== undefined
+    ) {
+      onClicks();
     }
-  }
+  };
   //////////////////////////////////// change button/////////////////////////////////////////////////////
-  const handleChangeButton=()=>{
-    if(languagenum()>0 && customOrder.title.length>1 && customOrder.type!==undefined && customOrder.confirm!==undefined)
-    {setStyleone({
+  const handleChangeButton = () => {
+    if (
+      languagenum() > 0 &&
+      data.title.length > 1 &&
+      data.type !== undefined &&
+      data.confirm !== undefined
+    ) {
+      setStyleone({
         backgroundColor: "#1976d2",
         borderRadius: "5px",
         boxShadow: "0px 6px 10px -2px rgba(0, 0, 0, 0.32)",
         color: "#fff"
-    })}
-  }
-  useEffect(()=>{
-    handleChangeButton()}
-    ,[customOrder])
-  ////////////////////////////////////////////post data/////////////////////////////////////////////////
-
+      });
+    }
+  };
+  useEffect(() => {
+    handleChangeButton();
+  }, [data]);
 
   ////////////////////////////////////////////////////////////
   return (
     <React.Fragment>
-       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
+      <Col xl={3} lg={3} md={3} sm={12} xs={12}>
         <Card className="documenttype">
           <Card.Header>نوع مدرک ترجمه</Card.Header>
           <Card.Body>
-            <Card.Title>{Cookies.get("title")}</Card.Title>
             <Card.Text>
               زبان ترجمه
               <span>
-              {languagenum()}
+                {languagenum()}
                 مورد
               </span>
             </Card.Text>
             <Card.Text>
-             عنوان سفارش<span>{customOrder.title}</span>
+              عنوان سفارش<span>{data.title}</span>
             </Card.Text>
             <Card.Text>
-              تاییدات<span>{customOrder.confirm===1 ?'رسمی':'غیررسمی'}</span>
+              تاییدات<span>{data.confirm === 1 ? "رسمی" : "غیررسمی"}</span>
             </Card.Text>
             <Card.Text>
-              نوع تحویل<span>{customOrder.type===1 ?'فوری':'عادی'}</span>
+              نوع تحویل<span>{data.type === 1 ? "فوری" : "عادی"}</span>
             </Card.Text>
           </Card.Body>
         </Card>
-      </Col> 
+      </Col>
 
       <Col
         xl={6}
@@ -202,91 +200,153 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
           defaultActiveKey="first"
         >
           <Media
-          query="(min-width:991px)"
-          render={() => (
-          <div className="row bordertab">
-            <Col className="tabsorder" xl={3} lg={3} md={3} sm={3}>
-              <Nav
-                variant="pills"
-                className="flex-column tabsdet hvr-sweep-to-bottom"
-              >
-                <Nav.Item>
-                  <Nav.Link eventKey="first">
-                    <Image src={tranlatelang} />
-                    زبان ترجمه
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="second">
-                    <Image src={acceptsign} />
-                    عنوان سفارش
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="third">
-                    <Image src={adddoc} />
-                    توضیحات سفارش
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="fourth">
-                    <Image src={delitype} /> تاییدات
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="fifth">
-                    <Image src={delitype} /> نوع تحویل
-                  </Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </Col>
-            <Col className="tabsordercontent"
-              // style={{minWidth: "300px", width: "300px"}}
-              xl={9}
-              lg={9}
-              md={12}
-              sm={12}
-            >
-              <Tab.Content>
-                <Tab.Pane className="tabcheckbox" eventKey="first">
-                  {lnaguage}
-                </Tab.Pane>
-                <Tab.Pane className="tabcheckbox title-customorder" eventKey="second">
-                   <p >
-                     <input type="text" value={customOrder.title}  onChange={(e)=>{setChangetitle(e)}}/>
-                  </p>
-                </Tab.Pane>
-                <Tab.Pane className="tabcheckbox text-customorder" eventKey="third">
-                  <p>
-                   <textarea rows="4" cols="50"  type="text" value={customOrder.des} onChange={(e)=>{setChangedes(e)}}/>
-                  </p>
-                </Tab.Pane>
-                <Tab.Pane className="tabcheckbox confirm-customorder" eventKey="fourth">
-                  <p>
-                    <span className="input-title">رسمی</span>  <input type="radio" name="certi" checked={customOrder.confirm===0?"checked":''} className="nameorder" value="0" onChange={()=>confirmChange(0)}/>
-                 </p>
-                 <p>
-                    <span className="input-title">غیررسمی</span> <input type="radio" name="certi" checked={customOrder.confirm===1?"checked":''} className="nameorder" value="1" onChange={()=>confirmChange(1)} />
-                 </p>
-                </Tab.Pane>
-                <Tab.Pane
-                  className="tabcheckbox  type-customorder"
-                  style={{ textAlign: "center" }}
-                  eventKey="fifth"
+            query="(min-width:991px)"
+            render={() => (
+              <div className="row bordertab">
+                <Col
+                  className="tabsorder customordertabs"
+                  xl={4}
+                  lg={4}
+                  md={12}
+                  sm={12}
                 >
-                  <p>
-                  <span className="input-title">عادی</span>  <input type="radio" name="type" checked={customOrder.type===0?"checked":''} className="nameorder" value="0" onChange={()=>typeTranslateChange(0,'عادی')}/>
-                 </p>
-                 <p>
-                 <span className="input-title">فوری</span>  <input type="radio" name="type" checked={customOrder.type===1?"checked":''} className="nameorder" value="1" onChange={()=>typeTranslateChange(1,'فوری')} />
-                 </p>
-                  
-                </Tab.Pane>
-              </Tab.Content>
-            </Col>
-          </div>
-          )}/>
-           {/* <Media
+                  <Nav
+                    variant="pills"
+                    className="flex-column tabsdet hvr-sweep-to-bottom"
+                  >
+                    <Nav.Item>
+                      <Nav.Link eventKey="first">
+                        <Image src={tranlatelang} />
+                        زبان ترجمه
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="second">
+                        <Image src={acceptsign} />
+                        عنوان سفارش
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="third">
+                        <Image src={adddoc} />
+                        توضیحات سفارش
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="fourth">
+                        <Image src={delitype} /> تاییدات
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="fifth">
+                        <Image src={delitype} /> نوع تحویل
+                      </Nav.Link>
+                    </Nav.Item>
+                  </Nav>
+                </Col>
+                <Col
+                  className="tabsordercontent"
+                  // style={{minWidth: "300px", width: "300px"}}
+                  xl={8}
+                  lg={8}
+                  md={12}
+                  sm={12}
+                >
+                  <Tab.Content>
+                    <Tab.Pane className="tabcheckbox" eventKey="first">
+                      {lnaguage}
+                    </Tab.Pane>
+                    <Tab.Pane
+                      className="tabcheckbox title-customorder"
+                      eventKey="second"
+                    >
+                      <p>
+                        <input
+                          type="text"
+                          value={data.title}
+                          onChange={e => {
+                            setChangetitle(e);
+                          }}
+                        />
+                      </p>
+                    </Tab.Pane>
+                    <Tab.Pane
+                      className="tabcheckbox text-customorder"
+                      eventKey="third"
+                    >
+                      <p>
+                        <textarea
+                          rows="4"
+                          cols="50"
+                          type="text"
+                          value={data.des}
+                          onChange={e => {
+                            setChangedes(e);
+                          }}
+                        />
+                      </p>
+                    </Tab.Pane>
+                    <Tab.Pane
+                      className="tabcheckbox confirm-customorder"
+                      eventKey="fourth"
+                    >
+                      <p>
+                        <span className="input-title">رسمی</span>{" "}
+                        <input
+                          type="radio"
+                          name="certi"
+                          checked={data.confirm === 1 ? "checked" : ""}
+                          className="nameorder"
+                          value="1"
+                          onChange={() => confirmChange(1)}
+                        />
+                      </p>
+                      <p>
+                        <span className="input-title">غیررسمی</span>{" "}
+                        <input
+                          type="radio"
+                          name="certi"
+                          checked={data.confirm === 0 ? "checked" : ""}
+                          className="nameorder"
+                          value="0"
+                          onChange={() => confirmChange(0)}
+                        />
+                      </p>
+                    </Tab.Pane>
+                    <Tab.Pane
+                      className="tabcheckbox  type-customorder"
+                      style={{ textAlign: "center" }}
+                      eventKey="fifth"
+                    >
+                      <p>
+                        <span className="input-title">عادی</span>{" "}
+                        <input
+                          type="radio"
+                          name="type"
+                          checked={data.type === 0 ? "checked" : ""}
+                          className="nameorder"
+                          value="0"
+                          onChange={() => typeTranslateChange(0)}
+                        />
+                      </p>
+                      <p>
+                        <span className="input-title">فوری</span>{" "}
+                        <input
+                          type="radio"
+                          name="type"
+                          checked={data.type === 1 ? "checked" : ""}
+                          className="nameorder"
+                          value="1"
+                          onChange={() => typeTranslateChange(1)}
+                        />
+                      </p>
+                    </Tab.Pane>
+                  </Tab.Content>
+                </Col>
+              </div>
+            )}
+          />
+          {/* <Media
         query="(max-width:992px)"
         render={() => (
           <Accordion defaultActiveKey="0">
@@ -359,10 +419,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
           position={ToastsContainerPosition.TOP_CENTER}
           store={ToastsStore}
         />
-        
 
-        
-        <Button style={styleone} id="add1" onClick={handleTabs}  type="submit">
+        <Button style={styleone} id="add1" onClick={handleTabs} type="submit">
           ادامه سفارش
         </Button>
       </Col>

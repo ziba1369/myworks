@@ -9,13 +9,9 @@ import axios from "axios";
 import * as Cookies from "js-cookie";
 import Media from "react-media";
 ////////////////////////tabchoice function /////////////////////////////////
-const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
+const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,validation,setVal,delivery,setDelivery,countorder,setcountorder }) => {
   /////////////////////set variable ///////////////////////
-  const types = Cookies.get("types");
-  const [languages, setLang] = useState([]);
-  const [validation, setVal] = useState([]);
-  const [count, setcount] = useState(0);
-  const [delivery, setDelivery] = useState([]);
+ 
   const [styleone, setStyleone] = useState({
     borderColor: "#e1e1e1",
     backgroundColor: "#fafafa",
@@ -114,58 +110,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       </Row>
     );
   });
-  ////////////////////////set data from server/////////////////////////////////
-  useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id=" +
-        types,
 
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function (response) {
-        if (response.data.success) {
-          console.log(response.data.product_languages);
-
-          if (Cookies.get("languages") !== undefined) {
-            setLang(JSON.parse(Cookies.get("languages")));
-            //console.log(JSON.parse(Cookies.get("languages")),"Cookies")
-          } else {
-            setLang(response.data.product_languages);
-          }
-
-          if (Cookies.get("validation") !== undefined) {
-            setVal(JSON.parse(Cookies.get("validation")));
-          } else {
-            setVal(response.data.product_certificates);
-          }
-          if (Cookies.get("delivery") !== undefined) {
-            setDelivery(JSON.parse(Cookies.get("delivery")));
-          } else {
-            setDelivery([
-              {
-                type: "normal",
-                name: "عادی",
-                id: 1,
-                checkin: true,
-                price: response.data.product_normal_price
-              },
-              {
-                type: "fast",
-                name: "فوری",
-                id: 2,
-                checkin: false,
-                price: response.data.product_fast_price
-              }
-            ]);
-          }
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
-  }, [types]);
   ///////////////////handle button to next step///////////////////////////
   const handleSubmit = () => {
     let blang = false;
@@ -193,10 +138,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       }
     }
     if (blang && bval && bdel) {
-      Cookies.set("languages", languages, { expires: 7, path: "/" });
-      Cookies.set("validation", validation, { expires: 7, path: "/" });
-      Cookies.set("delivery", delivery, { expires: 7, path: "/" });
-
+ 
       onClicks();
     } else if (blang === false) {
       ToastsStore.warning("لطفا یک زبان برای ترجمه انتخاب کنید");
@@ -329,33 +271,14 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
       }
     }
 
-    if (count > 0) {
-      return (count + 1) * (sum + sumv + sumd);
+    if (countorder > 0) {
+      return (countorder + 1) * (sum + sumv + sumd);
     } else {
       return sum + sumv + sumd;
     }
   };
 
   ////////////////////////set data in cookie/////////////////////////////////
-
-  useEffect(() => {
-    Cookies.set("languagenum", languagenum(), { expires: 7, path: "" });
-  }, [languagenum]);
-
-  useEffect(() => {
-    Cookies.set("acceptnum", acceptnum(), { expires: 7, path: "" });
-  }, [acceptnum]);
-
-  useEffect(() => {
-    Cookies.set("countorder", count, { expires: 7, path: "" });
-  }, [count]);
-  useEffect(() => {
-    Cookies.set("deliverynum", deliverynum(), { expires: 7, path: "" });
-  }, [deliverynum]);
-
-  useEffect(() => {
-    Cookies.set("sumValue", sumValue(), { expires: 7, path: "/" });
-  }, [sumValue]);
 
   return (
     <React.Fragment>
@@ -375,7 +298,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
               مهرو تاییدات<span>{acceptnum()} مورد</span>
             </Card.Text>
             <Card.Text>
-              نسخه اضافه<span>{count} مورد</span>
+              نسخه اضافه<span>{countorder} مورد</span>
             </Card.Text>
             <Card.Text>
               نوع تحویل<span>{deliverynum()}</span>
@@ -461,21 +384,21 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
                     <div className="incre col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12">
                       <Button
                         className="increase"
-                        onClick={() => setcount(prevCount => prevCount + 1)}
+                        onClick={() => setcountorder(prevCount => prevCount + 1)}
                       >
                         +
                       </Button>
                     </div>
                     <div className="text col-xl-8 col-lg-8 col-md-8 col-sm-12  col-xs-12">
-                      {count}
+                      {countorder}
                     </div>
                     <div className="dec col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12">
                       <Button
                         className="decrease col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12"
                         onClick={() => {
-                          if (count <= 0) setcount(0);
+                          if (countorder <= 0) setcountorder(0);
                           else {
-                            setcount(prevCount => prevCount - 1);
+                            setcountorder(prevCount => prevCount - 1);
                           }
                         }}
                       >
@@ -536,21 +459,21 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges }) => {
                         <div className="incre col-2">
                           <Button
                             className="increase"
-                            onClick={() => setcount(prevCount => prevCount + 1)}
+                            onClick={() => setcountorder(prevCount => prevCount + 1)}
                           >
                             +
                           </Button>
                         </div>
                         <div className="text col-8">
-                          {count}
+                          {countorder}
                         </div>
                         <div className="dec col-2">
                           <Button
                             className="decrease col-2"
                             onClick={() => {
-                              if (count <= 0) setcount(0);
+                              if (countorder <= 0) setcountorder(0);
                               else {
-                                setcount(prevCount => prevCount - 1);
+                                setcountorder(prevCount => prevCount - 1);
                               }
                             }}
                           >

@@ -6,11 +6,10 @@ import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts"
 import axios from "axios";
 import * as Cookies from "js-cookie";
 ////////////////////photoupload function /////////////////////////////
-const Photoupload = ({ onClicks, step, onChanges }) => {
+const Photoupload = ({ onClicks, step, onChanges,photo,setPhoto,photoCount,setPhotoCount,data }) => {
 ////////////////////////set variable/////////////////////////////////
-const [orderFileCount, setOrderFilecount] = useState(0);
-const [photoUpload,setPhotoUpload]=useState();
-const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
+
+const [customPhotoStep] = useState({border: "0px",backgroundColor: "#007bff"});
 ////////////////////////preview image/////////////////////////////////
   const changeprev = () => {
     document.getElementById("prev").style.display = "block";
@@ -19,8 +18,8 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
    useEffect(() => {
     new FileUploadWithPreview("myUniqueUploadId");
     window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
-      setOrderFilecount(e.detail.addedFilesCount);
-      setPhotoUpload(e.detail.cachedFileArray);
+     setPhotoCount(e.detail.addedFilesCount);
+       setPhoto(e.detail.cachedFileArray);
       const pictures = {
         pic: e.detail.cachedFileArray.tokens
       };
@@ -31,105 +30,21 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
       };
     });
   }, []);
+
+////////////////////////////////
+const languagenum = () => {
+  let w=0;
+  for (let x in data.languages) {
+    if (data.languages[x].status===0) {
+      w++;
+    }
+  }
+  return w;
+};
 ////////////////////////handle submit/////////////////////////////////
-  const handleSubmit = () => {
-    ////////////////////////send choose languages to server /////////////////////////////////
-    const orderlanguages = JSON.parse(Cookies.get("languages"));
-    const order_lang = orderlanguages.filter(item => item.checkin === true);
-    const order_languages = order_lang.map(item => {
-      return (
-        item.name.split(" به ")[0] +
-        "|" +
-        item.name.split(" به ")[1] +
-        "|" +
-        item.price
-      );
-    });
-  ////////////////////////send choose certificate to server /////////////////////////////////
-    const orderValidation = JSON.parse(Cookies.get("validation"));
-    const order_cert = orderValidation.filter(item => item.checkin === true);
-    const order_certificate = order_cert.map(item => {
-      return item.name + "," + item.price;
-    });
-  ////////////////////////send choose deliver to server /////////////////////////////////
-    const translate_type = JSON.parse(Cookies.get("delivery"));
-    const deliver = translate_type.filter(item => item.checkin === true);
-    const deliverytype = deliver.map(item => {return item.type;});
-    const deliverypr = translate_type.filter(item => item.checkin === true);
-    const deliveryprice = deliverypr.map(item => {return item.price});
-    console.log(photoUpload,"ooo");
-  ////////////////////////set items to send server /////////////////////////////////
-
-    const formDataorder = new FormData();
-  
-      formDataorder.append("customer_token", Cookies.get("token"));
-      formDataorder.append("order_name",Cookies.get("title"));
-      formDataorder.append("customer_description","");
-      formDataorder.append("order_type","normal");
-      formDataorder.append("translate_type",deliverytype[0]);
-      formDataorder.append("page_count",0);
-      formDataorder.append("copy_count",Cookies.get("countorder"));
-      formDataorder.append("weight_added_version", 0);
-      formDataorder.append("normal_price",deliveryprice[0]);
-      formDataorder.append("fast_price", deliveryprice[0]);
-      formDataorder.append("total_price", Cookies.get("sumValue"))
-      formDataorder.append("need_certificate",0);
-      formDataorder.append("order_file_count",orderFileCount);
-      console.log(photoUpload!==undefined)
-      if(photoUpload!==undefined)
-      {
-        
-      photoUpload.map((item,index) =>{
-      
-        formDataorder.append("order_file_"+ index ,photoUpload[0]);
-       
-      })
-      }
-      formDataorder.append("order_languages",order_languages);
-      formDataorder.append("order_certificate",order_certificate);
-
-  
-   
-   
-  ////////////////////////send data to server /////////////////////////////////
-    
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/app_make_order",
-        formDataorder,
-        { headers: { "Content-Type": "multipart/form-data"} }
-      )
-      .then(function(response) {
-       console.log(response.data)
-        if (response.data.success) {
-          Cookies.set("order_code", response.data.order_code, { path: "/", expires: 7 })
-          onClicks();
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      
-       
-        
-      });
-    
-
-
-    ///////////////////////////////remove-cookied//////////////////////////////////
-    Cookies.remove('acceptnum');
-    Cookies.remove('countorder');
-    Cookies.remove('countorder');
-    Cookies.remove('delivery');
-    Cookies.remove('deliverynum');
-    Cookies.remove('languagenum');
-    Cookies.remove('languages');
-    Cookies.remove('sumValue');
-    Cookies.remove('types');
-    Cookies.remove('validation');
-
-
-
+const handleSubmit = () => {
+    onClicks()
   };
-
   ////////////////////////main return /////////////////////////////////
   return (
     <React.Fragment>
@@ -138,21 +53,22 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
         store={ToastsStore}
       />
       <Col xl={3} lg={3} md={3} sm={12} xs={12}>
-        <Card className="documenttype ">
-          <Card.Header>نوع مدرک ترجمه</Card.Header>
+        <Card className="documenttype">
+          
           <Card.Body>
-            <Card.Title> {Cookies.get("title")}</Card.Title>
+            <Card.Title></Card.Title>
             <Card.Text>
-              زبان ترجمه<span>{Cookies.get("languagenum")} مورد</span>
+              زبان ترجمه<span>{languagenum()} مورد</span>
             </Card.Text>
             <Card.Text>
-              مهرو تاییدات<span>{Cookies.get("acceptnum")} مورد</span>
+             عنوان سفارش<span>{data.title}</span>
             </Card.Text>
             <Card.Text>
-              نسخه اضافه<span>{Cookies.get("count")} مورد</span>
+              مهرو تاییدات<span>{data.confirm===1?"رسمی":"غیررسمی"}</span>
             </Card.Text>
+            
             <Card.Text>
-              نوع تحویل<span>{Cookies.get("deliverynum")}</span>
+              نوع تحویل<span>{data.type===1?"فوری":"عادی"}</span>
             </Card.Text>
           </Card.Body>
         </Card>
@@ -233,7 +149,7 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
         <Button
           onClick={handleSubmit}
           className="loginbutton"
-          style={photoStep}
+          style={customPhotoStep}
         >
           ادامه سفارش
         </Button>

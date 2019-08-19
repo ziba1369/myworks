@@ -3289,6 +3289,10 @@ span.input-title {
   display: inline-block;
   text-align: right;
 }
+.customordertabs{
+    flex: 29% !important;
+    max-width: 28% !important;
+}
 /* customorder */
 /* basket */
 /* aboutus */

@@ -25,6 +25,20 @@ const Order = props => {
   const [madarek, setMadarek] = useState([]);
   const [blogviewer, setBlogviewer] = useState({ display: "block" });
   const [orderuser, setOrderuser] = useState({ display: "none" });
+
+  //////////////////////tabchoice///////////////////////
+  const [customOrder,setCustomorder]=useState({
+    languages:[],
+    title:'',
+    des:'',
+    confirm:0,
+    type:0,
+   
+  
+  })
+  //////////////////////////photoupload////////////////////////////
+  const [customOrderFileCount, setCustomOrderFileCount] = useState(0);
+  const [customPhotoUpload,setcustomPhotoUpload]=useState();
   //////////////add step////////////////////
   const increment = () => {
     setStep(step + 1);
@@ -422,21 +436,35 @@ const Order = props => {
   useEffect(() => {
     axios
       .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id=" +
-          Cookies.get("types"),
-
+        "http://hezare3vom.ratechcompany.com/api/app_get_languages", 
         {
           headers: { "Content-Type": "application/json" }
         }
       )
-      .then(function(response) {
-        if (response.data.success) {
-          setMadarek(response.data)
-        } else {
-          ToastsStore.error(response.data.error);
+      .then(function (response) {
+        if(response.data.success)
+        {
+   
+          let lang = [];
+          for (let i in response.data.languages) {
+              lang.push({
+                  lang: response.data.languages[i],
+                  status: 1
+              })
+          }
+          setCustomorder({
+            languages:lang,
+            title:'',
+            des:'',
+            confirm:0,
+            type:0,
+          });
+
         }
+      
       });
-  }, [Cookies.get("types")]);
+    
+  }, []);
   //////////check user is login////////////////
   useEffect(() => {
     if (Cookies.get("token")) {
@@ -447,6 +475,69 @@ const Order = props => {
   if (Cookies.get("token") == null) {
     return <Redirect to="/login" />;
   } else {
+
+ ////////////////////////handle submit/////////////////////////////////
+ const handleSubmit = () => {
+ 
+  ////////////////////////set items to send server /////////////////////////////////
+
+    const formDataorder = new FormData();
+  
+      formDataorder.append("customer_token", Cookies.get("token"));
+      formDataorder.append("order_name",Cookies.get("title"));
+      formDataorder.append("customer_description","");
+      formDataorder.append("order_type","normal");
+      formDataorder.append("translate_type",customOrder.type);
+      formDataorder.append("page_count",0);
+      formDataorder.append("weight_added_version", 0);
+      formDataorder.append("total_price", Cookies.get("sumValue"))
+      formDataorder.append("need_certificate",0);
+      formDataorder.append("order_file_count",customOrderFileCount);
+    
+      if(customPhotoUpload!==undefined)
+      {
+        
+        customPhotoUpload.map((item,index) =>{
+      
+        formDataorder.append("order_file_"+ index ,customPhotoUpload[0]);
+       
+      })
+      }
+      formDataorder.append("order_languages",customOrder.languages);
+      formDataorder.append("order_certificate",customOrder.confirm);
+
+  
+   
+   
+  ////////////////////////send data to server /////////////////////////////////
+    
+    axios
+      .post(
+        "http://hezare3vom.ratechcompany.com/api/app_make_order",
+        formDataorder,
+        { headers: { "Content-Type": "multipart/form-data"} }
+      )
+      .then(function(response) {
+       console.log(response.data)
+        if (response.data.success) {
+          Cookies.set("order_code", response.data.order_code, { path: "/", expires: 7 })
+         
+        } else {
+          ToastsStore.error(response.data.error);
+        }
+      
+       
+        
+      });
+    
+
+
+   
+
+
+  };
+
+   
     return (
       <React.Fragment>
         <header>
@@ -467,11 +558,11 @@ const Order = props => {
                   <Link to="/">صفحه اصلی</Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                  <Link to="/services/all">خدمات ترجمه</Link>
+                  <Link to="/services/all">ترجمه سفارشی</Link>
                 </Breadcrumb.Item>
-                <Breadcrumb.Item active href={null}>
+                {/* <Breadcrumb.Item active href={null}>
                   {Cookies.get("title")}
-                </Breadcrumb.Item>
+                </Breadcrumb.Item> */}
               </Breadcrumb>
             </Col>
           </Row>
@@ -534,8 +625,8 @@ const Order = props => {
             style={{ paddingTop: "3rem", paddingBottom: "3rem" }}
           >
             {/* {step === 1 && <ServicesGroup onClicks={increment} count={step} />} */}
-            {step === 1 && <Tabschoice onClicks={increment} count={step} />}
-            {step === 2 && <Photoupload onClicks={increment} count={step} />}
+            {step === 1 && <Tabschoice onClicks={increment} count={step} data={customOrder} setdata={(customorderdata)=>setCustomorder(customorderdata)} />}
+            {step === 2 && <Photoupload onClicks={increment} count={step}  data={customOrder} photo={customPhotoUpload} setPhoto={(customPhotoUpload)=>{setcustomPhotoUpload(customPhotoUpload)}} photoCount={customOrderFileCount} setPhotoCount={(customOrderFileCount)=>{setCustomOrderFileCount(customOrderFileCount)}} />}
             {step === 3 && <Confirmorder onClicks={increment} count={step} />}
           </Row>
         </Container>

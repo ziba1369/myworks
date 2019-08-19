@@ -25,6 +25,14 @@ const Order = props => {
   const [madarek, setMadarek] = useState([]);
   const [blogviewer, setBlogviewer] = useState({ display: "block" });
   const [orderuser, setOrderuser] = useState({ display: "none" });
+  ////////////////////////tabchoice/////////////////////////////////////////
+  const [languages, setLang] = useState([]);
+  const [validation, setVal] = useState([]);
+  const [delivery, setDelivery] = useState([]);
+  const [count, setcount] = useState(0);
+  /////////////////////////photoupload///////////////////////////////
+  const [orderFileCount, setOrderFilecount] = useState(0);
+  const [photoUpload,setPhotoUpload]=useState();
   //////////////add step////////////////////
   const increment = () => {
     setStep(step + 1);
@@ -436,7 +444,50 @@ const Order = props => {
           ToastsStore.error(response.data.error);
         }
       });
+
+
+
+      axios
+      .get(
+        "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id=" +
+        Cookies.get("types"),
+
+        {
+          headers: { "Content-Type": "application/json" }
+        }
+      )
+      .then(function (response) {
+        if (response.data.success) {
+         
+
+            setLang(response.data.product_languages);
+          
+            setVal(response.data.product_certificates);
+        
+            setDelivery([
+              {
+                type: "normal",
+                name: "عادی",
+                id: 1,
+                checkin: true,
+                price: response.data.product_normal_price
+              },
+              {
+                type: "fast",
+                name: "فوری",
+                id: 2,
+                checkin: false,
+                price: response.data.product_fast_price
+              }
+            ]);
+          }
+         else {
+          ToastsStore.error(response.data.error);
+        }
+      });
   }, [Cookies.get("types")]);
+
+  
   //////////check user is login////////////////
   useEffect(() => {
     if (Cookies.get("token")) {
@@ -561,8 +612,8 @@ const Order = props => {
             style={{ paddingTop: "3rem", paddingBottom: "3rem" }}
           >
             {/* {step === 1 && <ServicesGroup onClicks={increment} count={step} />} */}
-            {step === 1 && <Tabschoice onClicks={increment} count={step} />}
-            {step === 2 && <Photoupload onClicks={increment} count={step} />}
+            {step === 1 && <Tabschoice onClicks={increment} count={step} languages={languages} setLang={(languagesdata)=>setLang(languagesdata)} validation={validation} setVal={(valdata)=>setVal(valdata)} delivery={delivery} setDelivery={(deldata)=>setDelivery(deldata)} countorder={count} setcountorder={(countdata)=>{setcount(countdata)}}/>}
+            {step === 2 && <Photoupload onClicks={increment} count={step} languages={languages} setLang={(languagesdata)=>setLang(languagesdata)} validation={validation} setVal={(valdata)=>setVal(valdata)} delivery={delivery} setDelivery={(deldata)=>setDelivery(deldata)} countorder={count} setcountorder={(countdata)=>{setcount(countdata)}} orderFileCount={orderFileCount} setOrderFilecount={(orderfile)=>setOrderFilecount(orderfile)} photoUpload={photoUpload} setPhotoUpload={(photo)=>setPhotoUpload(photo)} />}
             {step === 3 && <Confirmorder onClicks={increment} count={step} />}
           </Row>
         </Container>
