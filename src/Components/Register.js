@@ -1,29 +1,37 @@
 // -----------------------------import npm-----------------------------------------
 import React, { useState, useEffect } from "react";
 import { Container, Button, Col, Row, Form } from "react-bootstrap";
-import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts";
+import {
+  ToastsStore,
+  ToastsContainer,
+  ToastsContainerPosition
+} from "react-toasts";
 import $ from "jquery";
-import axios from "axios";
 import * as Cookies from "js-cookie";
 import Footer from "./Layout/Footer";
-import NavBar from './Layout/NavBar';
-
+import NavBar from "./Layout/NavBar";
+import {registerApi,get_verification_code,check_verification_code,getYear} from "../api/api";
 const Register = props => {
   // -----------------------------define variable-----------------------------------------
   const [step, setStep] = useState(1);
   const [firstStep, setFirstStep] = useState({ display: "block" });
-  const [secondStep, setSecondStep] = useState({display: "none",marginTop: "60px"});
-  const [thirdStep, setThirdStep] = useState({display: "none",marginTop: "60px"});
-  // -----------------------------check mobile regex----------------------------------------- 
-  const mobileCheck=()=>{
-  const phoneno=/^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
-        if(!(mobile.match(phoneno)))
-    
-          ToastsStore.warning("کاربر گرامی لطفا شماره همراه خود را با فرمت مناسب وارد نمایید")
-        
-      
-        }
-   // -----------------------------check change  step -----------------------------------------
+  const [secondStep, setSecondStep] = useState({
+    display: "none",
+    marginTop: "60px"
+  });
+  const [thirdStep, setThirdStep] = useState({
+    display: "none",
+    marginTop: "60px"
+  });
+  // -----------------------------check mobile regex-----------------------------------------
+  const mobileCheck = () => {
+    const phoneno = /^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
+    if (!mobile.match(phoneno))
+      ToastsStore.warning(
+        "کاربر گرامی لطفا شماره همراه خود را با فرمت مناسب وارد نمایید"
+      );
+  };
+  // -----------------------------check change  step -----------------------------------------
 
   useEffect(() => {
     switch (step) {
@@ -50,7 +58,6 @@ const Register = props => {
     }
   }, [step]);
 
-
   //////////////////// FIRST STEP //////////////////////
   const [mobile, setMobile] = useState("");
   const [verification, setVerification] = useState("");
@@ -59,7 +66,7 @@ const Register = props => {
     border: "0px",
     boxShadow: "unset"
   });
-  
+
   const checkRegisterFirstButton = () => {
     const phoneno = /^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
     if (mobile.match(phoneno)) {
@@ -75,15 +82,16 @@ const Register = props => {
     }
   };
 
-
   const checkRegisterFirstEnter = () => {
     const phoneno = /^(9|09)(12|19|30|33|35|36|37|38|39|32|21|03|02|04|05|41|31|34|01|10|11|13|14|15|16|17|18|19|90|91|92)\d{7}$/;
     if (mobile.match(phoneno)) {
       setRegisterFirstStyle({ backgroundColor: "#1976d2" });
       $("#rfbutton").removeAttr("disabled");
-      loginfirstStep()
+      loginfirstStep();
     } else {
-      ToastsStore.warning('کاربر گرامی لطفا شماره همراه خود را با فرمت مناسب وارد نمایید')
+      ToastsStore.warning(
+        "کاربر گرامی لطفا شماره همراه خود را با فرمت مناسب وارد نمایید"
+      );
       setRegisterFirstStyle({
         backgroundColor: "#e1e1e1",
         border: "0px",
@@ -93,7 +101,6 @@ const Register = props => {
     }
   };
 
-
   // checkRegisterFirstButton function after mobile value changed
   useEffect(() => {
     checkRegisterFirstButton();
@@ -101,16 +108,7 @@ const Register = props => {
 
   // checkRegisterFirstButton function after rules value changed
   const loginfirstStep = () => {
-    var login = {
-      mobile_number: mobile
-    };
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/get_verification_code",
-        login,
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then(function(response) {
+    get_verification_code(mobile,(response)=>{
         // console.log(response.data.success);
         if (response.data.success) {
           ToastsStore.success(response.data.code);
@@ -119,8 +117,7 @@ const Register = props => {
         } else {
           ToastsStore.error(response.data.error);
         }
-      })
-    
+      });
   };
   //////////////////// SECOND STEP //////////////////////
   //states
@@ -141,30 +138,20 @@ const Register = props => {
   const mobileStep = () => {
     if (second === 0) {
       setSecond(60);
-
-      var login = {
-        mobile_number: mobile
-      };
-      axios
-        .post(
-          "http://hezare3vom.ratechcompany.com/api/get_verification_code",
-          login,
-          { headers: { "Content-Type": "application/json" } }
-        )
-        .then(function(response) {
+      get_verification_code(mobile,(response)=>{
           //console.log(response.data.success);
           if (response.data.success) {
-            Cookies.set("token", response.data.token, {
-              path: "/",
-              expires: 7
-            });
+            // Cookies.set("token", response.data.token, {
+            //   path: "/",
+            //   expires: 7
+            // });
+            
             ToastsStore.success(response.data.code);
             setVerification(response.data.code);
           } else {
             ToastsStore.error(response.data.error);
           }
-        })
-    
+        });
     }
   };
 
@@ -186,7 +173,6 @@ const Register = props => {
 
   // check conditions and enable/disable register button
 
- 
   // checkRegisterFirstButton function after mobile value changed
   useEffect(() => {
     checkRegisterSecondButton();
@@ -194,31 +180,17 @@ const Register = props => {
 
   // checkRegisterFirstButton function after rules value changed
   const loginSecondStep = () => {
-    //console.log(active, verification);
-    var verti = {
-      mobile_number: mobile,
-      verification_code: active
-    };
-
-    
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/check_verification_code",
-        verti,
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then(function(response) {
+   
+    check_verification_code(mobile,active,(response)=>{
         // console.log(response.data);
         if (response.data.success) {
           //console.log(response.data)
           setStep(3);
-         // Cookies.set("mobile",mobile, {path: "/",expires: 7});
-        }else{
+          // Cookies.set("mobile",mobile, {path: "/",expires: 7});
+        } else {
           ToastsStore.error("کدفعالسازی اشتباه است");
         }
-      })
-   
-      
+      });
   };
   const checkRegisterSecondButton = () => {
     if (parseInt(active)) {
@@ -237,7 +209,7 @@ const Register = props => {
     if (parseInt(active)) {
       setRegisterSecondStyle({ backgroundColor: "#1976d2" });
       $("#rfbutton").removeAttr("disabled");
-      loginSecondStep()
+      loginSecondStep();
     } else {
       setRegisterSecondStyle({
         backgroundColor: "#e1e1e1",
@@ -314,7 +286,6 @@ const Register = props => {
 
   // check conditions and enable/disable register button
   const checkRegisterThirdButton = () => {
-
     if (
       name.length > 0 &&
       lastname.length > 0 &&
@@ -339,15 +310,14 @@ const Register = props => {
     if (
       name.length > 0 &&
       lastname.length > 0 &&
-      certi.length> 1 &&
+      certi.length > 1 &&
       pass.length > 1 &&
       passr.length > 1 &&
       pass === passr
     ) {
       setRegisterThirdStyle({ backgroundColor: "#1976d2" });
       $("#rfbutton").removeAttr("disabled");
-      loginThirdStep()
-
+      loginThirdStep();
     } else {
       setRegisterThirdStyle({
         backgroundColor: "#e1e1e1",
@@ -371,16 +341,15 @@ const Register = props => {
 
   useEffect(() => {
     checkRegisterThirdButton();
-   
   }, [birthvalue]);
 
   useEffect(() => {
-   checkRegisterThirdButton();
+    checkRegisterThirdButton();
   }, [birthmonthvalue]);
 
   useEffect(() => {
     checkRegisterThirdButton();
- }, [birthyearvalue]);
+  }, [birthyearvalue]);
 
   useEffect(() => {
     checkRegisterThirdButton();
@@ -390,45 +359,27 @@ const Register = props => {
     checkRegisterThirdButton();
   }, [passr]);
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/get_year",
-
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
+       getYear((response)=>{
         if (response.data.success) {
           setBirthyear(response.data.year);
           // console.log(response.data.year)
         } else {
           ToastsStore.error(response.data.error);
         }
-      })
-  
+      });
   }, []);
 
   const loginThirdStep = () => {
-    var vertiification = {
-      name: name,
-      family: lastname,
-      national_code: certi,
-      mobile: mobile,
-      birth_day: birthvalue,
-      birth_month: birthmonthvalue,
-      birth_year: birthyearvalue,
-      password: pass
-    };
-    console.log(vertiification);
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/sign_up_app",
-        vertiification,
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then(function(response) {
-        console.log(response);
+    registerApi(
+      name,
+      lastname,
+      certi,
+      mobile,
+      birthvalue,
+      birthmonthvalue,
+      birthyearvalue,
+      pass,
+      (response) => {
         if (response.data.success) {
           Cookies.set("token", response.data.token, { path: "/", expires: 7 });
           Cookies.set("name", response.data.customer_name, {
@@ -443,17 +394,21 @@ const Register = props => {
             path: "/",
             expires: 7
           });
-          Cookies.set("national_code",certi, {path: "/",expires: 7});
-          Cookies.set("birth_month", birthmonthvalue, {path: "/",expires: 7});
-          Cookies.set("birth_year", birthyearvalue, {path: "/",expires: 7});
-          Cookies.set("birth_day",birthvalue, {path: "/",expires: 7});
-         
+          Cookies.set("national_code", certi, { path: "/", expires: 7 });
+          Cookies.set("birth_month", birthmonthvalue, {
+            path: "/",
+            expires: 7
+          });
+          Cookies.set("birth_year", birthyearvalue, { path: "/", expires: 7 });
+          Cookies.set("birth_day", birthvalue, { path: "/", expires: 7 });
+
           props.history.push("/");
           window.location.reload();
         } else {
           ToastsStore.error(response.data.error);
         }
-      });
+      }
+    );
   };
   if (Cookies.get("token") !== undefined) {
     props.history.push("/");
@@ -478,31 +433,39 @@ const Register = props => {
     }
   }, [pass, passr]);
   ///////////////////////////////////////////
-  useEffect(()=>{
-    document.querySelector("#mobile").addEventListener("keypress", function (evt) {
-      if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-      {
+  useEffect(() => {
+    document
+      .querySelector("#mobile")
+      .addEventListener("keypress", function(evt) {
+        if (
+          (evt.which != 8 && evt.which != 0 && evt.which < 48) ||
+          evt.which > 57
+        ) {
           evt.preventDefault();
-      }
-  })
-   },[mobile])
-   useEffect(()=>{
-    document.querySelector("#certi").addEventListener("keypress", function (evt) {
-      if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-      {
+        }
+      });
+  }, [mobile]);
+  useEffect(() => {
+    document
+      .querySelector("#certi")
+      .addEventListener("keypress", function(evt) {
+        if (
+          (evt.which != 8 && evt.which != 0 && evt.which < 48) ||
+          evt.which > 57
+        ) {
           evt.preventDefault();
-      }
-  });
-   },[certi])
+        }
+      });
+  }, [certi]);
   return (
     <React.Fragment>
-       <ToastsContainer
+      <ToastsContainer
         position={ToastsContainerPosition.TOP_CENTER}
         store={ToastsStore}
       />
-        <header>
-                <NavBar/>  
-             </header>
+      <header>
+        <NavBar />
+      </header>
       <div className="registerpage">
         <Container>
           <Col
@@ -524,7 +487,9 @@ const Register = props => {
                   <Form.Control
                     type="tel"
                     placeholder=""
-                    onChange={e=>{setMobile(e.target.value)}}
+                    onChange={e => {
+                      setMobile(e.target.value);
+                    }}
                     id="mobile"
                     value={mobile}
                     onBlur={mobileCheck}
@@ -546,7 +511,7 @@ const Register = props => {
                   onClick={loginfirstStep}
                   className="loginbutton"
                 >
-                 ارسال کد فعالسازی
+                  ارسال کد فعالسازی
                 </Button>
               </div>
               <div style={secondStep}>
@@ -563,7 +528,9 @@ const Register = props => {
                   <Form.Control
                     type="password"
                     placeholder=""
-                    onChange={e=>{setActive(e.target.value)}}
+                    onChange={e => {
+                      setActive(e.target.value);
+                    }}
                     vlaue={active}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
@@ -583,7 +550,12 @@ const Register = props => {
                     >
                       ارسال مجدد کد فعالسازی
                     </a>
-                    <a onClick={()=>{setStep(1)}} className="leftreg">
+                    <a
+                      onClick={() => {
+                        setStep(1);
+                      }}
+                      className="leftreg"
+                    >
                       اصلاح شماره تماس
                     </a>
                   </p>
@@ -612,7 +584,9 @@ const Register = props => {
                   <Form.Control
                     type="text"
                     placeholder=""
-                    onChange={ e =>{setName(e.target.value)}}
+                    onChange={e => {
+                      setName(e.target.value);
+                    }}
                     value={name}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
@@ -625,7 +599,9 @@ const Register = props => {
                   <Form.Control
                     type="text"
                     placeholder=""
-                    onChange={e => {setLastName(e.target.value)}}
+                    onChange={e => {
+                      setLastName(e.target.value);
+                    }}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
                         checkRegisterThirdEnter();
@@ -644,7 +620,9 @@ const Register = props => {
                       }
                     }}
                     id="certi"
-                    onChange={e => {setCertifi(e.target.value)}}
+                    onChange={e => {
+                      setCertifi(e.target.value);
+                    }}
                     value={certi}
                     required
                   />
@@ -655,7 +633,9 @@ const Register = props => {
                         id="day"
                         as="select"
                         type="select"
-                        onChange={ e => {setBirthvalue(e.target.value)}}
+                        onChange={e => {
+                          setBirthvalue(e.target.value);
+                        }}
                         value={birthvalue}
                         name="slelect"
                         onKeyPress={event => {
@@ -681,7 +661,9 @@ const Register = props => {
                         id="groups"
                         as="select"
                         type="select"
-                        onChange={e => {setBirthmonthvalue(e.target.value)}}
+                        onChange={e => {
+                          setBirthmonthvalue(e.target.value);
+                        }}
                         value={birthmonthvalue}
                         name="slelect"
                         required
@@ -700,7 +682,9 @@ const Register = props => {
                         id="groups"
                         as="select"
                         type="select"
-                        onChange={e => {setBirthyearvalue(e.target.value)}}
+                        onChange={e => {
+                          setBirthyearvalue(e.target.value);
+                        }}
                         value={birthyearvalue}
                         name="slelect"
                         required
@@ -718,7 +702,9 @@ const Register = props => {
                   <Form.Control
                     type="password"
                     placeholder=""
-                    onChange={e => {setPass(e.target.value)}}
+                    onChange={e => {
+                      setPass(e.target.value);
+                    }}
                     value={pass}
                     onKeyPress={event => {
                       if (event.key === "Enter") {
@@ -732,7 +718,9 @@ const Register = props => {
                   <Form.Control
                     type="password"
                     placeholder=""
-                    onChange={ e => {setPassr(e.target.value)}}
+                    onChange={e => {
+                      setPassr(e.target.value);
+                    }}
                     className="borderpass"
                     onKeyPress={event => {
                       if (event.key === "Enter") {

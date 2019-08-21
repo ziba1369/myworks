@@ -6,7 +6,7 @@ import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts"
 import axios from "axios";
 import * as Cookies from "js-cookie";
 ////////////////////photoupload function /////////////////////////////
-const Photoupload = ({ onClicks, step, onChanges,photo,setPhoto,photoCount,setPhotoCount,data }) => {
+const Photoupload = ({ onClicks, step, onChanges,customOrderFileCount,setCustomOrderFileCount,customPhotoUpload,setcustomPhotoUpload,data,handledata }) => {
 ////////////////////////set variable/////////////////////////////////
 
 const [customPhotoStep] = useState({border: "0px",backgroundColor: "#007bff"});
@@ -18,8 +18,8 @@ const [customPhotoStep] = useState({border: "0px",backgroundColor: "#007bff"});
    useEffect(() => {
     new FileUploadWithPreview("myUniqueUploadId");
     window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
-     setPhotoCount(e.detail.addedFilesCount);
-       setPhoto(e.detail.cachedFileArray);
+      setCustomOrderFileCount(e.detail.addedFilesCount);
+      setcustomPhotoUpload(e.detail.cachedFileArray);
       const pictures = {
         pic: e.detail.cachedFileArray.tokens
       };
@@ -41,9 +41,67 @@ const languagenum = () => {
   }
   return w;
 };
-////////////////////////handle submit/////////////////////////////////
-const handleSubmit = () => {
-    onClicks()
+
+   ////////////////////////handle submit/////////////////////////////////
+ const handleSubmit = () => {
+ 
+  ////////////////////////set items to send server /////////////////////////////////
+
+    const formDataorder = new FormData();
+  
+      formDataorder.append("customer_token", Cookies.get("token"));
+      formDataorder.append("order_name",Cookies.get("title"));
+      formDataorder.append("customer_description","");
+      formDataorder.append("order_type","normal");
+      formDataorder.append("translate_type",data.type);
+      formDataorder.append("page_count",0);
+      formDataorder.append("weight_added_version", 0);
+      formDataorder.append("total_price", Cookies.get("sumValue"))
+      formDataorder.append("need_certificate",0);
+      formDataorder.append("order_file_count",customOrderFileCount);
+    
+      if(customPhotoUpload!==undefined)
+      {
+        
+        customPhotoUpload.map((item,index) =>{
+      
+        formDataorder.append("order_file_"+ index ,customPhotoUpload[0]);
+       
+      })
+      }
+      formDataorder.append("order_languages",data.languages);
+      formDataorder.append("order_certificate",data.confirm);
+
+  
+   
+   
+  ////////////////////////send data to server /////////////////////////////////
+    
+    axios
+      .post(
+        "http://hezare3vom.ratechcompany.com/api/app_make_order",
+        formDataorder,
+        { headers: { "Content-Type": "multipart/form-data"} }
+      )
+      .then(function(response) {
+       console.log(response.data)
+        if (response.data.success) {
+          Cookies.set("order_code", response.data.order_code, { path: "/", expires: 7 })
+          onClicks()
+        } else {
+          ToastsStore.error(response.data.error);
+        
+        }
+      
+       
+        
+      });
+    
+
+
+   
+
+
   };
   ////////////////////////main return /////////////////////////////////
   return (

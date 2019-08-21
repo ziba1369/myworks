@@ -476,66 +476,7 @@ const Order = props => {
     return <Redirect to="/login" />;
   } else {
 
- ////////////////////////handle submit/////////////////////////////////
- const handleSubmit = () => {
- 
-  ////////////////////////set items to send server /////////////////////////////////
 
-    const formDataorder = new FormData();
-  
-      formDataorder.append("customer_token", Cookies.get("token"));
-      formDataorder.append("order_name",Cookies.get("title"));
-      formDataorder.append("customer_description","");
-      formDataorder.append("order_type","normal");
-      formDataorder.append("translate_type",customOrder.type);
-      formDataorder.append("page_count",0);
-      formDataorder.append("weight_added_version", 0);
-      formDataorder.append("total_price", Cookies.get("sumValue"))
-      formDataorder.append("need_certificate",0);
-      formDataorder.append("order_file_count",customOrderFileCount);
-    
-      if(customPhotoUpload!==undefined)
-      {
-        
-        customPhotoUpload.map((item,index) =>{
-      
-        formDataorder.append("order_file_"+ index ,customPhotoUpload[0]);
-       
-      })
-      }
-      formDataorder.append("order_languages",customOrder.languages);
-      formDataorder.append("order_certificate",customOrder.confirm);
-
-  
-   
-   
-  ////////////////////////send data to server /////////////////////////////////
-    
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/app_make_order",
-        formDataorder,
-        { headers: { "Content-Type": "multipart/form-data"} }
-      )
-      .then(function(response) {
-       console.log(response.data)
-        if (response.data.success) {
-          Cookies.set("order_code", response.data.order_code, { path: "/", expires: 7 })
-         
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      
-       
-        
-      });
-    
-
-
-   
-
-
-  };
 
    
     return (
@@ -626,7 +567,7 @@ const Order = props => {
           >
             {/* {step === 1 && <ServicesGroup onClicks={increment} count={step} />} */}
             {step === 1 && <Tabschoice onClicks={increment} count={step} data={customOrder} setdata={(customorderdata)=>setCustomorder(customorderdata)} />}
-            {step === 2 && <Photoupload onClicks={increment} count={step}  data={customOrder} photo={customPhotoUpload} setPhoto={(customPhotoUpload)=>{setcustomPhotoUpload(customPhotoUpload)}} photoCount={customOrderFileCount} setPhotoCount={(customOrderFileCount)=>{setCustomOrderFileCount(customOrderFileCount)}} />}
+            {step === 2 && <Photoupload onClicks={increment} count={step}  data={customOrder} customPhotoUpload={customPhotoUpload} setcustomPhotoUpload={(customPhotoUpload)=>{setcustomPhotoUpload(customPhotoUpload)}} customOrderFileCount={customOrderFileCount} setCustomOrderFileCount={(customOrderFileCount)=>{setCustomOrderFileCount(customOrderFileCount)}} />}
             {step === 3 && <Confirmorder onClicks={increment} count={step} />}
           </Row>
         </Container>

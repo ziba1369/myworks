@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import NavBar from "./Layout/NavBar";
 import Footer from "./Layout/Footer";
 import colseIcon from "../images/close-order.svg";
-
+import * as Cookies from "js-cookie";
 /////function aboutus
-const Basket = () => {
+const Basket = (props) => {
+
   const [basket, setBasket] = useState([
     {
       name: "شناسنامه",
@@ -48,9 +49,13 @@ const Basket = () => {
   const deleteItems=itemId=>{
     const items = basket.filter(item => item.id !== itemId);
     setBasket(items);
-    console.log(itemId)
-  }
   
+  }
+  if(Cookies.get('token')===undefined)
+  {
+    props.history.push("/login/");
+  }
+  console.log(basket)
   return (
     <React.Fragment>
       <header>

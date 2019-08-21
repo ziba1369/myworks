@@ -6,6 +6,7 @@ import axios from "axios";
 import $ from "jquery";
 import * as Cookies from "js-cookie";
 import Footer from "./Layout/Footer";
+import{get_forget_pass_code,change_forget_pass,check_forget_pass_code} from '../api/api';
 ////////////function foreget pass//////////
 const Forgetpass = props => {
     //////////////set initial variable//////////////////////
@@ -117,17 +118,9 @@ const Forgetpass = props => {
 
   // checkForgetFirstButton function after rules value changed
   const loginfirstStep = () => {
-    var forgetpass = {
-      mobile_number: mobile
-    };
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/get_forget_pass_code",
-        forgetpass,
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then(function(response) {
-        //console.log(response.data.success)
+   
+    get_forget_pass_code(mobile,(response)=>{
+   
         if (response.data.success) {
           // alert(response.data.code);
           ToastsStore.success(response.data.code);
@@ -137,10 +130,6 @@ const Forgetpass = props => {
           ToastsStore.error(response.data.error);
         }
       });
-
-    // .catch(function (error) {
-    //     ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-    // })
   };
 
   //////////////////// SECOND STEP //////////////////////
@@ -214,27 +203,40 @@ const Forgetpass = props => {
   }, [active]);
 
   const loginSecondStep = () => {
-    const checkforgetpass = {
-      mobile_number: mobile,
-      forget_pass_code: active
-    };
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/check_forget_pass_code",
-        checkforgetpass,
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then(function(response) {
-        //console.log(response.data.success)
-        if (response.data.success) {
-          //ToastsStore.success(response.data.code);
-          setStep(3);
-          //setVertification(response.data.code);
-          //props.history.push("/");
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+    console.log(mobile)
+    check_forget_pass_code(mobile,active,(response)=>{
+    
+      if (response.data.success) {
+        //ToastsStore.success(response.data.code);
+        setStep(3);
+        //setVertification(response.data.code);
+        //props.history.push("/");
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    });
+
+    // const checkforgetpass = {
+    //   mobile_number: mobile,
+    //   forget_pass_code: active
+    // };
+    // axios
+    //   .post(
+    //     "http://hezare3vom.ratechcompany.com/api/check_forget_pass_code",
+    //     checkforgetpass,
+    //     { headers: { "Content-Type": "application/json" } }
+    //   )
+    //   .then(function(response) {
+    //     //console.log(response.data.success)
+    //     if (response.data.success) {
+    //       //ToastsStore.success(response.data.code);
+    //       setStep(3);
+    //       //setVertification(response.data.code);
+    //       //props.history.push("/");
+    //     } else {
+    //       ToastsStore.error(response.data.error);
+    //     }
+    //   });
   };
 
   //////////////////// THIRD STEP //////////////////////
@@ -285,33 +287,18 @@ const Forgetpass = props => {
 
   // checkForgetThirdButton function after rules value changed
   const loginThirdStep = () => {
-    const changepass = {
-      mobile_number: mobile,
-      new_password: newpass,
-      forget_pass_code: active
-    };
-    //console.log(active)
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/change_forget_pass",
-        changepass,
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then(function(response) {
-        // console.log(response.data.success)
-        if (response.data.success) {
-          //ToastsStore.success('response.data.code');
-          setStep(4);
-          //setVertification(response.data.code);
-          //props.history.push("/");
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      })
 
-      .catch(function(error) {
-        ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-      });
+     change_forget_pass(mobile,newpass,active,(response)=>{
+      if (response.data.success) {
+      
+        setStep(4);
+       
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+
+     
   };
 
   useEffect(() => {

@@ -4,9 +4,9 @@ import {Container, Button, Col, Form} from "react-bootstrap";
 import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
 import $ from "jquery";
 import {Link,Redirect} from "react-router-dom";
-import axios from "axios";
 import * as Cookies from "js-cookie";
 import Footer from './Layout/Footer';
+import {loginAPI} from "../api/api";
 ///////////////////////////////login function///////////////////////////////
 const Login = props => {
     const [mobile, setMobile] = useState("");
@@ -70,16 +70,8 @@ const Login = props => {
     const loginbutton = () => {
         Cookies.set("mobile", mobile, {path: "/", expires: 7});
         const checkbox = document.getElementById('checkbox');
-        const login = {
-            mobile: mobile,
-            password: pass
-        };
-        axios
-            .post("http://hezare3vom.ratechcompany.com/api/login_app", login, {
-                headers: {"Content-Type": "application/json"}
-            })
-            .then(function (response) {
-                //console.log(response.data.success);
+        loginAPI(mobile, pass, (response)=>{
+        
                 if (response.data.success) {
                     if (checkbox.checked) {
                         Cookies.set("token", response.data.token, {path: "/", expires: 7});
@@ -99,11 +91,9 @@ const Login = props => {
                     ToastsStore.error(response.data.error);
                 }
             })
-            .catch(function (error) {
-                ToastsStore.error("اتصال خود به اینترنت را بررسی نمایید.");
-            });
+            
 
-    };
+        }
 
   
  if(Cookies.get('token') ==null)

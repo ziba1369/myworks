@@ -2227,10 +2227,12 @@ span.custom-file-container__custom-file__custom-file-control {
 .loginpage {
   height:calc(100vh - 252px);
   margin-top: 2rem 0 0 0;
+  height: 100%;
 }
 .registerpage {
   height: 100%;
   margin-top: 2rem;
+  min-height: 38.7vh
 }
 
 p.textlogin {
