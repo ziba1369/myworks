@@ -125,3 +125,45 @@ export const change_forget_pass=( mobile_number,new_password,forget_pass_code,ca
     });
 }
 
+
+///////////////////send order data to server////////////////////////
+export const orderAPI=(formDataorder,callBack)=>{
+    console.log(formDataorder)
+    axios.post(serverURL+"app_make_order",
+        formDataorder
+    ,{ headers: { "Content-Type": "multipart/form-data"} })
+    .then(function (response) {
+        callBack(response);
+    });
+}
+
+
+/////////////////////price servces////////////////////
+////total api
+export const priceservicesAPI=(pageLimit,offset,category_id,callBack)=>{
+    axios.post(serverURL+"get_products_list?limit=" +
+    pageLimit +
+    "&offset=" +
+    offset +
+    "&category_id=" +
+    category_id
+    ,headers)
+    .then(function (response) {
+        callBack(response);
+    }); 
+
+}
+////search api
+export const searchAPI=(offset,pageLimit,category_id,callBack)=>{
+    axios.post(serverURL+"get_products_list?limit=" +
+    pageLimit +
+    "&offset=" +
+    offset +
+    "&category_id=" +
+    category_id
+    ,headers)
+    .then(function (response) {
+        callBack(response);
+    }); 
+
+}

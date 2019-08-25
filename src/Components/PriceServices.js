@@ -9,6 +9,7 @@ import axios from "axios";
 import {ToastsContainer, ToastsStore,ToastsContainerPosition} from "react-toasts";
 import * as Cookies from "js-cookie";
 import Footer from "./Layout/Footer";
+import {priceservicesAPI} from '../api/api';
 /////////////price srvices function/////////////////
 const PriceServices = props => {
   ///////////////set initial variable/////////////////////
@@ -291,27 +292,36 @@ const searchhandler=()=>{
 }
   /////////////get products data from server/////////////////////
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_products_list?limit=" +
-          pageLimit +
-          "&offset=" +
-          offset +
-          "&category_id=" +
-          props.match.params.id,
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          setData(response.data.products);
-          setTotal(response.data.total);
+    priceservicesAPI(pageLimit,offset,props.match.params.id,(response)=>{
+      if (response.data.success) {
+        setData(response.data.products);
+        setTotal(response.data.total);
+       
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+    // axios
+    //   .get(
+    //     "http://hezare3vom.ratechcompany.com/api/front/get_products_list?limit=" +
+    //       pageLimit +
+    //       "&offset=" +
+    //       offset +
+    //       "&category_id=" +
+    //       props.match.params.id,
+    //     {
+    //       headers: { "Content-Type": "application/json" }
+    //     }
+    //   )
+    //   .then(function(response) {
+    //     if (response.data.success) {
+    //       setData(response.data.products);
+    //       setTotal(response.data.total);
          
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+    //     } else {
+    //       ToastsStore.error(response.data.error);
+    //     }
+    //   });
   }, [props.match.params.id, offset]);
 ////////////////set offset/////////////////
   useEffect(() => {

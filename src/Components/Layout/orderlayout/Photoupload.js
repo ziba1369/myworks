@@ -2,21 +2,37 @@ import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Card } from "react-bootstrap";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
-import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts";
-import axios from "axios";
+import {
+  ToastsStore,
+  ToastsContainer,
+  ToastsContainerPosition
+} from "react-toasts";
 import * as Cookies from "js-cookie";
+import { orderAPI } from "../../../api/api";
 ////////////////////photoupload function /////////////////////////////
-const Photoupload = ({ onClicks, step, onChanges,orderFileCount, setOrderFilecount,photoUpload,setPhotoUpload,languages,validation,delivery,countorder }) => {
-////////////////////////set variable/////////////////////////////////
+const Photoupload = ({
+  onClicks,
+  step,
+  onChanges,
+  orderFileCount,
+  setOrderFilecount,
+  photoUpload,
+  setPhotoUpload,
+  languages,
+  validation,
+  delivery,
+  countorder
+}) => {
+  ////////////////////////set variable/////////////////////////////////
 
-const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
-////////////////////////preview image/////////////////////////////////
+  const [photoStep] = useState({ border: "0px", backgroundColor: "#007bff" });
+  ////////////////////////preview image/////////////////////////////////
 
   const changeprev = () => {
     document.getElementById("prev").style.display = "block";
   };
   ///////////////////////////////////////////////////
-    ////////////////////////count choosed languages/////////////////////////////////
+  ////////////////////////count choosed languages/////////////////////////////////
   //eslint-disable-next-line
   const languagenum = () => {
     let w = 0;
@@ -28,7 +44,7 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
     return w;
   };
   ////////////////////////count choosed certificate/////////////////////////////////
-   //eslint-disable-next-line
+  //eslint-disable-next-line
   const acceptnum = () => {
     let w = 0;
     for (let x in validation) {
@@ -39,7 +55,7 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
     return w;
   };
   ////////////////////////count choosed certificate/////////////////////////////////
-   //eslint-disable-next-line
+  //eslint-disable-next-line
   const deliverynum = () => {
     let z;
     for (let x in delivery) {
@@ -49,8 +65,37 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
     }
     return z;
   };
-   ////////////////////////useeffectfor upload photo /////////////////////////////////
-   useEffect(() => {
+  ////////////////////////sum all vlaue of orders/////////////////////////////////
+  //eslint-disable-next-line
+  const sumValue = () => {
+    let sumd = 0;
+    let sumv = 0;
+    let sum = 0;
+    for (let x in languages) {
+      if (languages[x].checkin) {
+        sum = sum + parseInt(languages[x].price);
+      }
+    }
+    for (let x in validation) {
+      if (validation[x].checkin) {
+        sumv = sumv + parseInt(validation[x].price);
+      }
+    }
+    for (let x in delivery) {
+      if (delivery[x].checkin) {
+        sumd = sumd + parseInt(delivery[x].price);
+      }
+    }
+
+    if (countorder > 0) {
+      return (countorder + 1) * (sum + sumv + sumd);
+    } else {
+      return sum + sumv + sumd;
+    }
+  };
+
+  ////////////////////////useeffectfor upload photo /////////////////////////////////
+  useEffect(() => {
     new FileUploadWithPreview("myUniqueUploadId");
     window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
       setOrderFilecount(e.detail.addedFilesCount);
@@ -65,7 +110,7 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
       };
     });
   }, []);
-////////////////////////handle submit/////////////////////////////////
+  ////////////////////////handle submit/////////////////////////////////
   const handleSubmit = () => {
     ////////////////////////send choose languages to server /////////////////////////////////
     const orderlanguages = languages;
@@ -79,77 +124,61 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
         item.price
       );
     });
-  ////////////////////////send choose certificate to server /////////////////////////////////
-    const orderValidation =validation;
+    ////////////////////////send choose certificate to server /////////////////////////////////
+    const orderValidation = validation;
     const order_cert = orderValidation.filter(item => item.checkin === true);
     const order_certificate = order_cert.map(item => {
       return item.name + "," + item.price;
     });
-  ////////////////////////send choose deliver to server /////////////////////////////////
+    ////////////////////////send choose deliver to server /////////////////////////////////
     const translate_type = delivery;
     const deliver = translate_type.filter(item => item.checkin === true);
-    const deliverytype = deliver.map(item => {return item.type;});
+    const deliverytype = deliver.map(item => {
+      return item.type;
+    });
     const deliverypr = translate_type.filter(item => item.checkin === true);
-    const deliveryprice = deliverypr.map(item => {return item.price});
-    
-  ////////////////////////set items to send server /////////////////////////////////
+    const deliveryprice = deliverypr.map(item => {
+      return item.price;
+    });
+
+    ////////////////////////set items to send server /////////////////////////////////
 
     const formDataorder = new FormData();
-  
-      formDataorder.append("customer_token", Cookies.get("token"));
-      formDataorder.append("order_name",Cookies.get("title"));
-      formDataorder.append("customer_description","");
-      formDataorder.append("order_type","normal");
-      formDataorder.append("translate_type",deliverytype[0]);
-      formDataorder.append("page_count",0);
-      formDataorder.append("copy_count",countorder);
-      formDataorder.append("weight_added_version", 0);
-      formDataorder.append("normal_price",deliveryprice[0]);
-      formDataorder.append("fast_price", deliveryprice[0]);
-      formDataorder.append("total_price", Cookies.get("sumValue"))
-      formDataorder.append("need_certificate",0);
-      formDataorder.append("order_file_count",orderFileCount);
-      console.log(photoUpload!==undefined)
-      if(photoUpload!==undefined)
-      {
-        
-      photoUpload.map((item,index) =>{
-      
-        formDataorder.append("order_file_"+ index ,photoUpload[0]);
-       
-      })
-      }
-      formDataorder.append("order_languages",order_languages);
-      formDataorder.append("order_certificate",order_certificate);
 
-  
-   
-   
-  ////////////////////////send data to server /////////////////////////////////
-    
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/app_make_order",
-        formDataorder,
-        { headers: { "Content-Type": "multipart/form-data"} }
-      )
-      .then(function(response) {
-       console.log(response.data)
-        if (response.data.success) {
-          Cookies.set("order_code", response.data.order_code, { path: "/", expires: 7 })
-          onClicks();
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      
-       
-        
+    formDataorder.append("customer_token", Cookies.get("token"));
+    formDataorder.append("order_name", Cookies.get("title"));
+    formDataorder.append("customer_description", "");
+    formDataorder.append("order_type", "normal");
+    formDataorder.append("translate_type", deliverytype[0]);
+    formDataorder.append("page_count", 0);
+    formDataorder.append("copy_count", countorder);
+    formDataorder.append("weight_added_version", 0);
+    formDataorder.append("normal_price", deliveryprice[0]);
+    formDataorder.append("fast_price", deliveryprice[0]);
+    formDataorder.append("total_price", sumValue());
+    formDataorder.append("need_certificate", 0);
+    formDataorder.append("order_file_count", orderFileCount);
+    console.log(photoUpload !== undefined);
+    if (photoUpload !== undefined) {
+      photoUpload.map((item, index) => {
+        formDataorder.append("order_file_" + index, photoUpload[0]);
       });
-    
+    }
+    formDataorder.append("order_languages", order_languages);
+    formDataorder.append("order_certificate", order_certificate);
 
-
-   
-
+    ////////////////////////send data to server /////////////////////////////////
+    orderAPI(formDataorder, response => {
+      if (response.data.success) {
+        Cookies.set("order_code", response.data.order_code, {
+          path: "/",
+          expires: 7
+        });
+        onClicks();
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    });
   };
 
   ////////////////////////main return /////////////////////////////////
@@ -214,7 +243,6 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
                     accept="*"
                     multiple
                     aria-label=""
-                  
                   />
                   <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                   <span className="custom-file-container__custom-file__custom-file-control" />
@@ -250,7 +278,7 @@ const [photoStep] = useState({border: "0px",backgroundColor: "#007bff"});
           size="lg"
         >
           <p>مجموع هزینه ها</p>
-          <p>{Cookies.get("sumValue")}</p>
+          <p>{sumValue()}</p>
         </Button>
         <Button
           onClick={handleSubmit}
