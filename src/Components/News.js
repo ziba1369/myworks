@@ -3,9 +3,9 @@ import { Container, Image, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavBar from "./Layout/NavBar";
 import Paginatior from "react-hooks-paginator";
-import axios from "axios";
 import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
 import Footer from "./Layout/Footer";
+import {newsAPI} from '../api/api';
 /////////////////news function///////////////////////////
 const Steptranslate = () => {
 ///////////////////set initial variable////////////////////////
@@ -16,41 +16,25 @@ const Steptranslate = () => {
   const [newsdet, setNews] = useState([]);
   //////////////////get news from server from all////////////////////
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_news_list?limit=" +
-          pageLimit,
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          setNews(response.data.news);
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
-  }, []);
-  //////////////////get news from server from last news////////////////////
-  useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_news_list?limit=1",
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          setLastnews(response.data.news);
-         
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      })
+    newsAPI(pageLimit,(response)=>{
+      if (response.data.success) {
+        setNews(response.data.news);
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+    /////////////lastnews
+    newsAPI(1,(response)=>{
+      if (response.data.success) {
+        setLastnews(response.data.news);
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+ 
   
   }, []);
+ 
   ////////////////show all news/////////////////
   const show = newsdet.map((item, index) => {
     return (

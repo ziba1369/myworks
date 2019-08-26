@@ -12,12 +12,13 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 import $ from "jquery";
-import axios from "axios";
+
 import {
   ToastsContainer,
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
+import { send_messageAPI } from "../../../api/api";
 /////////////main/////////////////////
 const Contatus = props => {
   /////////////set-variable/////////////////////
@@ -115,19 +116,13 @@ const Contatus = props => {
       issue: issue,
       message: message
     };
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/front/send_message",
-        contactUs,
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          console.log(response.data.success, "send");
-        } else {
-          ToastsStore.error(response.data.errmessage);
-        }
-      });
+    send_messageAPI(contactUs, response => {
+      if (response.data.success) {
+        console.log(response.data, "send");
+      } else {
+        ToastsStore.error(response.data.errmessage);
+      }
+    });
   };
   /////////////main return/////////////////////
   return (
@@ -145,7 +140,9 @@ const Contatus = props => {
                 <Form.Group>
                   <Form.Label>نام</Form.Label>
                   <Form.Control
-                    onChange={e => {setName(e.target.value)}}
+                    onChange={e => {
+                      setName(e.target.value);
+                    }}
                     size="sm"
                     type="text"
                     value={name}
@@ -153,16 +150,20 @@ const Contatus = props => {
                   <Form.Label>شماره همراه</Form.Label>
                   <Form.Control
                     size="sm"
-                    type="number"
+                    type="tell"
                     onBlur={blurPhone}
-                    onChange={e => {setTell(e.target.value)}}
+                    onChange={e => {
+                      setTell(e.target.value);
+                    }}
                     vlaue={tel}
                     id="phone"
                     name="phone"
                   />
                   <Form.Label id="email">ایمیل آدرس</Form.Label>
                   <Form.Control
-                    onChange={e => {setEmail(e.target.value)}}
+                    onChange={e => {
+                      setEmail(e.target.value);
+                    }}
                     onBlur={blurEmail}
                     value={email}
                     size="sm"
@@ -171,7 +172,9 @@ const Contatus = props => {
                   />
                   <Form.Label>موضوع</Form.Label>
                   <Form.Control
-                    onChange={e => {setIssue(e.target.value)}}
+                    onChange={e => {
+                      setIssue(e.target.value);
+                    }}
                     size="sm"
                     value={issue}
                     type="type"
@@ -182,7 +185,13 @@ const Contatus = props => {
             <Col xl={6} md={6} sm={12} xs={12}>
               <Form>
                 <Form.Label value={message}>متن پیام</Form.Label>
-                <Form.Control onChange={e => {setMessage(e.target.value)}} as="textarea" rows="9" />
+                <Form.Control
+                  onChange={e => {
+                    setMessage(e.target.value);
+                  }}
+                  as="textarea"
+                  rows="9"
+                />
               </Form>
             </Col>
           </Row>

@@ -10,6 +10,7 @@ import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
 import $ from "jquery";
 import axios from "axios";
+import {getYear,app_edit_profileAPI} from '../../../api/api';
 /////////////////edit profile function///////////////////
 const EditProfile = props => {
   /////////////////set variable ///////////////////
@@ -81,22 +82,14 @@ const EditProfile = props => {
   });
   /////////// get years vale from server ////////////
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/get_year",
-
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          setBirthyear(response.data.year);
-          // console.log(response.data.year)
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+    getYear(response=>{
+      if (response.data.success) {
+        setBirthyear(response.data.year);
+       
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
   }, []);
 
   /////////// check edit butoon ////////////
@@ -175,48 +168,44 @@ const EditProfile = props => {
     if (imageprofile !== null) {
       formData.append("profile_image", imageprofile);
     }
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/app_edit_profile",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" }
+
+    app_edit_profileAPI(formData,(response)=>{
+      if (response.data.success) {
+        Cookies.set("name", name, { path: "/", expires: 7 });
+        Cookies.set("family", lastname, {
+          path: "/",
+          expires: 7
+        });
+        Cookies.set("national_code", certi, {
+          path: "/",
+          expires: 7
+        });
+        Cookies.set("birth_day", birthvalue, {
+          path: "/",
+          expires: 7
+        });
+        Cookies.set("birth_month", birthmonthvalue, {
+          path: "/",
+          expires: 7
+        });
+        Cookies.set("birth_year", birthyearvalue, {
+          path: "/",
+          expires: 7
+        });
+        if (response.data.customer_image !== "") {
+          Cookies.set("customer_img", response.data.customer_image, {
+            path: "/",
+            expires: 7
+          });
         }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          Cookies.set("name", name, { path: "/", expires: 7 });
-          Cookies.set("family", lastname, {
-            path: "/",
-            expires: 7
-          });
-          Cookies.set("national_code", certi, {
-            path: "/",
-            expires: 7
-          });
-          Cookies.set("birth_day", birthvalue, {
-            path: "/",
-            expires: 7
-          });
-          Cookies.set("birth_month", birthmonthvalue, {
-            path: "/",
-            expires: 7
-          });
-          Cookies.set("birth_year", birthyearvalue, {
-            path: "/",
-            expires: 7
-          });
-          if (response.data.customer_image !== "") {
-            Cookies.set("customer_img", response.data.customer_image, {
-              path: "/",
-              expires: 7
-            });
-          }
-          window.location.reload();
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+        window.location.reload();
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+
+
+
   };
 
   return (

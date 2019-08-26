@@ -4,29 +4,22 @@ import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts"
 import axios from "axios";
 import Media from "react-media";
 import * as Cookies from "js-cookie";
+import {myorderAPI} from '../../../api/api';
 //////////////////function myorder//////////////////
 const Myorder = () => {
   //////////////////set variable//////////////////
   const [order, setOrder] = useState([]);
   //////////////////get orders list from server//////////////////
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_user_orders?customer_token=" +
-          Cookies.get("token"),
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-     
-        if (response.data.success) {
-          setOrder(response.data.orders);
-         
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+    myorderAPI(Cookies.get("token"),(response)=>{
+      if (response.data.success) {
+        setOrder(response.data.orders);
+       
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+   
   }, []);
   return (
     <React.Fragment>

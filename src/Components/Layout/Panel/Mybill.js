@@ -7,31 +7,23 @@ import {
 } from "react-toasts";
 import Media from "react-media";
 import * as Cookies from "js-cookie";
-import axios from "axios";
+import {mybillAPI} from '../../../api/api';
 //////////////////myorder function//////////////////////////
 const Myorder = () => {
 //////////////////set-variable//////////////////////////
 const [order, setOrder] = useState([]);
 //////////////////get data order from server//////////////////////////
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_user_orders?customer_token=" +
-          Cookies.get("token"),
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        console.log(response.data, "www");
-        if (response.data.success) {
-          setOrder(response.data.orders);
-          console.log(response.data.orders);
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+    mybillAPI(Cookies.get("token"),(response)=>{
+      if (response.data.success) {
+        setOrder(response.data.orders);
+        console.log(response.data.orders);
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
   }, []);
+
   return (
     <React.Fragment>
       <ToastsContainer

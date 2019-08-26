@@ -6,12 +6,12 @@ import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import Media from "react-media";
 import * as Cookies from "js-cookie";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 import {
   ToastsContainer,
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
+import {get_popular_productsAPI} from '../../../api/api';
 ////////////////populerservices function/////////////////
 const Popularservices = props => {
   ////////////////custom order/////////////////
@@ -125,22 +125,15 @@ const Popularservices = props => {
   });
   ////////////////useeffect set data from server/////////////////
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_popular_products",
-        props.match.params.id,
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          setinfo([...response.data.products, ...Information]);
-          // console.log(response.data.products);
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+    get_popular_productsAPI(props.match.params.id,(response)=>{
+      if (response.data.success) {
+        setinfo([...response.data.products, ...Information]);
+        // console.log(response.data.products);
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+   
   }, []);
 
   ////////////////main return/////////////////

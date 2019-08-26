@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from "react";
 import { Col, Row} from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTwitter, faLinkedin, faInstagram, faFacebook} from "@fortawesome/free-brands-svg-icons";
 import phoneIcon from '../../images/phone-symbol-of-an-auricular-inside-a-circle.svg';
 import emailIcon from '../../images/email.svg';
 import placeholder from '../../images/placeholder.svg';
 import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
+import {newsAPI} from '../../api/api';
 ////////////////footer function/////////////////
 const Footer = () => {
     ////////////////set inintal variable/////////////////
@@ -15,25 +15,18 @@ const Footer = () => {
     const  pageLimit=3;
     //////////////////use effect to get data from srever////
     useEffect(() => {
-        axios
-            .get(
-                "http://hezare3vom.ratechcompany.com/api/front/get_news_list?limit=" + pageLimit  ,
-                {
-                    headers: {"Content-Type": "application/json"}
-                }
-            )
-            .then(function (response) {
-                if (response.data.success) {
-                    setNews(response.data.news);
-                    //console.log(response.data.news)
-                   
-
-                } else {
-                    ToastsStore.error(response.data.error);
-                }
-            })
-           
+       newsAPI(pageLimit,(response)=>{
+        if (response.data.success) {
+            setNews(response.data.news);
             
+           
+
+        } else {
+            ToastsStore.error(response.data.error);
+        }
+       })
+
+      
       },[]);
     return ( 
       

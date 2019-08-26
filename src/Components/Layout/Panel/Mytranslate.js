@@ -4,30 +4,22 @@ import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts"
 import axios from "axios";
 import Media from "react-media";
 import * as Cookies from "js-cookie";
+import {mytranslateAPI} from '../../../api/api';
 ////////////////////dunction translate list////////////////////////
 const Mytranslate = () => {
   /////////////////set initiale  variable//////////////////
   const [translate, setTranslate] = useState([]);
   /////////////////take data from server//////////////////
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_user_translations?customer_token=" +
-          Cookies.get("token") +
-          "&order_id=" +
-          Cookies.get("order_id"),
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          setTranslate(response.data.orders);
-          console.log(response.data.orders);
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+    mytranslateAPI(Cookies.get("token"), Cookies.get("order_id"),(response)=>{
+      if (response.data.success) {
+        setTranslate(response.data.orders);
+        console.log(response.data.orders);
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+  
   }, []);
   return (
     <React.Fragment>

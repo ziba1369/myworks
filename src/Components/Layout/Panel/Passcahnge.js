@@ -8,8 +8,8 @@ import {
 import * as Cookies from "js-cookie";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
 import $ from "jquery";
-import axios from "axios";
 import { withRouter } from "react-router";
+import {passchangeAPI} from '../../../api/api';
 //////////////////function changepass/////////////////////
 const Passchange = props => {
   //////////////set initial variable/////////////////////
@@ -68,14 +68,8 @@ const Passchange = props => {
       new_password:newpass,
 
     }
-    axios
-    .post(
-      "http://hezare3vom.ratechcompany.com/api/app_change_password",
-      password,
-      { headers: { "Content-Type": "application/json" } }
-    )
-    .then(function(response) {
-      // console.log(response.data.success);
+    
+    passchangeAPI(password,(response)=>{
       if (response.data.success) {
         Cookies.remove("token");
         props.history.push("/");
@@ -85,6 +79,7 @@ const Passchange = props => {
         ToastsStore.error(response.data.error);
       }
     })
+    
   
   };
   //////////////use effect to match pass border////////////////

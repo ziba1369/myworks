@@ -8,7 +8,7 @@ import Footer from "./Layout/Footer";
 import NavBar from "./Layout/NavBar";
 import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
 import * as Cookies from "js-cookie";
-import axios from "axios";
+import {getproductAPI} from '../api/api';
 //////////////order function////////////////////
 const Order = props => {
   ///////////////set initial variable///////////////////
@@ -426,65 +426,37 @@ const Order = props => {
     }
     setStep(4);
   };
-  //////////////use effect get data type////////////////////////
+  //////////////use effect get data type get id product from server////////////////////////
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id=" +
-          Cookies.get("types"),
-
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          setMadarek(response.data)
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
-
-
-
-      axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_products_details?product_id=" +
-        Cookies.get("types"),
-
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function (response) {
-        if (response.data.success) {
-         
-
-            setLang(response.data.product_languages);
-          
-            setVal(response.data.product_certificates);
+    getproductAPI(Cookies.get("types"),(response)=>{
+      if (response.data.success) {
+        setMadarek(response.data)
         
-            setDelivery([
-              {
-                type: "normal",
-                name: "عادی",
-                id: 1,
-                checkin: true,
-                price: response.data.product_normal_price
-              },
-              {
-                type: "fast",
-                name: "فوری",
-                id: 2,
-                checkin: false,
-                price: response.data.product_fast_price
-              }
-            ]);
+        setLang(response.data.product_languages);
+          
+        setVal(response.data.product_certificates);
+    
+        setDelivery([
+          {
+            type: "normal",
+            name: "عادی",
+            id: 1,
+            checkin: true,
+            price: response.data.product_normal_price
+          },
+          {
+            type: "fast",
+            name: "فوری",
+            id: 2,
+            checkin: false,
+            price: response.data.product_fast_price
           }
-         else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+        ]);
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+  
   }, [Cookies.get("types")]);
 
   

@@ -13,6 +13,7 @@ import {
   ToastsContainerPosition
 } from "react-toasts";
 import * as Cookies from "js-cookie";
+import {newsAPI} from '../../../api/api';
 ///////////////newsletter-function/////////////////////
 const Newsletter = () => {
   const [newsdet, setNews] = useState([]);

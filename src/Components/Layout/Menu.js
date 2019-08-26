@@ -8,25 +8,22 @@ import {
   ToastsContainerPosition
 } from "react-toasts";
 import * as Cookies from "js-cookie";
-import axios from "axios";
+import{menuAPI} from '../../api/api';
 ////////////////menu function/////////////////////
 const Menu = props => {
   ////////////////set initial variable/////////////////////
   const [servicemenu, setservicemenu] = useState([]);
   ////////////////get data menu from server/////////////////////
   useEffect(() => {
-    axios
-      .get("http://hezare3vom.ratechcompany.com/api/front/web_menu", {
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(function(response) {
-        if (response.data.success) {
-          setservicemenu(response.data.headers);
-         
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+    menuAPI(response=>{
+      if (response.data.success) {
+        setservicemenu(response.data.headers);
+       
+      } else {
+        ToastsStore.error(response.data.error);
+      } 
+    })
+
   }, []);
 
   return (

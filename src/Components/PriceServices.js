@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import Paginatior from "react-hooks-paginator";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import {ToastsContainer, ToastsStore,ToastsContainerPosition} from "react-toasts";
 import * as Cookies from "js-cookie";
 import Footer from "./Layout/Footer";
-import {priceservicesAPI} from '../api/api';
+import {priceservicesAPI,searchAPI} from '../api/api';
 /////////////price srvices function/////////////////
 const PriceServices = props => {
   ///////////////set initial variable/////////////////////
@@ -266,28 +265,38 @@ const PriceServices = props => {
   }, [props.match.params.id]);
 /////////////////////////search handler////////////////////
 const searchhandler=()=>{
+  
   setOffset(0);
    let value=document.getElementById("showSearch").value;
-   axios
-   .get(
-     "http://hezare3vom.ratechcompany.com/api/front/get_products_list?limit=" +
-       pageLimit +
-       "&offset=0&category_id=" +
-       props.match.params.id+"&search_query="+value,
-     {
-       headers: { "Content-Type": "application/json" }
-     }
-   )
-   .then(function(response) {
-     if (response.data.success) {
-       setData(response.data.products);
-       setTotal(response.data.total);
+   searchAPI(pageLimit,0,props.match.params.id,value,(response)=>{
+   if (response.data.success) {
+    setData(response.data.products);
+    setTotal(response.data.total);
+   
+  } else {
+    ToastsStore.error(response.data.error);
+  }
+})
+  //  axios
+  //  .get(
+  //    "http://hezare3vom.ratechcompany.com/api/front/get_products_list?limit=" +
+  //      pageLimit +
+  //      "&offset=0&category_id=" +
+  //      props.match.params.id+"&search_query="+value,
+  //    {
+  //      headers: { "Content-Type": "application/json" }
+  //    }
+  //  )
+  //  .then(function(response) {
+  //    if (response.data.success) {
+  //      setData(response.data.products);
+  //      setTotal(response.data.total);
        
        
-     } else {
-       ToastsStore.error(response.data.error);
-     }
-   });
+  //    } else {
+  //      ToastsStore.error(response.data.error);
+  //    }
+  //  });
   
 }
   /////////////get products data from server/////////////////////
@@ -301,27 +310,7 @@ const searchhandler=()=>{
         ToastsStore.error(response.data.error);
       }
     })
-    // axios
-    //   .get(
-    //     "http://hezare3vom.ratechcompany.com/api/front/get_products_list?limit=" +
-    //       pageLimit +
-    //       "&offset=" +
-    //       offset +
-    //       "&category_id=" +
-    //       props.match.params.id,
-    //     {
-    //       headers: { "Content-Type": "application/json" }
-    //     }
-    //   )
-    //   .then(function(response) {
-    //     if (response.data.success) {
-    //       setData(response.data.products);
-    //       setTotal(response.data.total);
-         
-    //     } else {
-    //       ToastsStore.error(response.data.error);
-    //     }
-    //   });
+   
   }, [props.match.params.id, offset]);
 ////////////////set offset/////////////////
   useEffect(() => {
