@@ -295,3 +295,14 @@ export const cancelitemAPI = (customer_token, order_code, callBack) => {
             callBack(response);
         })
 }
+//////custom order api///////////////////////
+// set custom order
+export const customorderAPI = (formDataorder, callBack) => {
+    console.log(formDataorder)
+    axios.post(serverURL + "app_make_order",
+        formDataorder
+        , {headers: {"Content-Type": "multipart/form-data"}})
+        .then(function (response) {
+            callBack(response);
+        });
+}

@@ -5,6 +5,7 @@ import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
 import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts";
 import axios from "axios";
 import * as Cookies from "js-cookie";
+import {customorderAPI} from '../../../api/api';
 ////////////////////photoupload function /////////////////////////////
 const Photoupload = ({ onClicks, step, onChanges,customOrderFileCount,setCustomOrderFileCount,customPhotoUpload,setcustomPhotoUpload,data,handledata }) => {
 ////////////////////////set variable/////////////////////////////////
@@ -41,25 +42,44 @@ const languagenum = () => {
   }
   return w;
 };
-
+  ////////////////////////sum all vlaue of orders/////////////////////////////////
+  //eslint-disable-next-line
+ 
    ////////////////////////handle submit/////////////////////////////////
  const handleSubmit = () => {
- 
+   ////////////////////////send choose languages to server /////////////////////////////////
+   const orderlanguages = data.languages;
+   console.log(orderlanguages)
+   const order_lang = orderlanguages.filter(item => item.status === 0);
+   const order_languages = order_lang.map(item => {
+     return (
+       item.lang.split(" به ")[0] +
+       "|" +
+       item.lang.split(" به ")[1] 
+      
+      
+     );
+   });
+   console.log(order_languages)
   ////////////////////////set items to send server /////////////////////////////////
 
     const formDataorder = new FormData();
   
-      formDataorder.append("customer_token", Cookies.get("token"));
-      formDataorder.append("order_name",Cookies.get("title"));
-      formDataorder.append("customer_description","");
-      formDataorder.append("order_type","normal");
-      formDataorder.append("translate_type",data.type);
-      formDataorder.append("page_count",0);
-      formDataorder.append("weight_added_version", 0);
-      formDataorder.append("total_price", Cookies.get("sumValue"))
-      formDataorder.append("need_certificate",0);
-      formDataorder.append("order_file_count",customOrderFileCount);
-    
+    formDataorder.append("customer_token", Cookies.get("token"));
+    formDataorder.append("order_name", data.title);
+    formDataorder.append("customer_description", data.des);
+    formDataorder.append("order_type", "custom");
+    formDataorder.append("translate_type", data.type===1?"فوری":"عادی");
+    formDataorder.append("order_languages",order_languages);
+    formDataorder.append("need_certificate", data.confirm===1?"رسمی":"غیررسمی");
+    formDataorder.append("order_certificates", " ");
+    formDataorder.append("total_price","0");
+    formDataorder.append("order_file_count", customOrderFileCount);
+    formDataorder.append("weight_added_version", "0");
+    formDataorder.append("normal_price", "0");
+    formDataorder.append("fast_price", "0");
+
+  
       if(customPhotoUpload!==undefined)
       {
         
@@ -69,39 +89,24 @@ const languagenum = () => {
        
       })
       }
-      formDataorder.append("order_languages",data.languages);
-      formDataorder.append("order_certificate",data.confirm);
+    
+     
 
   
    
    
   ////////////////////////send data to server /////////////////////////////////
+  customorderAPI(formDataorder,(response)=>{
     
-    axios
-      .post(
-        "http://hezare3vom.ratechcompany.com/api/app_make_order",
-        formDataorder,
-        { headers: { "Content-Type": "multipart/form-data"} }
-      )
-      .then(function(response) {
-       console.log(response.data)
-        if (response.data.success) {
-          Cookies.set("order_code", response.data.order_code, { path: "/", expires: 7 })
-          onClicks()
-        } else {
-          ToastsStore.error(response.data.error);
-        
-        }
-      
-       
-        
-      });
+    if (response.data.success) {
+      Cookies.set("order_code", response.data.order_code, { path: "/", expires: 7 })
+      onClicks()
+    } else {
+      ToastsStore.error(response.data.error);
     
-
-
-   
-
-
+    }
+  })
+  
   };
   ////////////////////////main return /////////////////////////////////
   return (
@@ -196,14 +201,14 @@ const languagenum = () => {
 
       <Col xl={3} lg={3} md={3} sm={12} xs={12} className="Continue-order">
         <p className="addteaxt" />
-        <Button
+        {/* <Button
           style={{ margin: "1rem 0", fontSize: ".8rem", fontFamily: "fanum" }}
           variant="primary"
           size="lg"
         >
           <p>مجموع هزینه ها</p>
           <p>{Cookies.get("sumValue")}</p>
-        </Button>
+        </Button> */}
         <Button
           onClick={handleSubmit}
           className="loginbutton"

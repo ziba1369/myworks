@@ -17,11 +17,12 @@ const Popularservices = props => {
   ////////////////custom order/////////////////
   const [Information, setinfo] = useState([
     {
-      id: 4,
+      id:4,
       img: customtrans,
       title: "ترجمه سفارشی",
       description: ["ترجمه رسمی", "مهرمترجم رسمی", "مهر دادگستری"],
-      price: "۲۵۰۰"
+      price: "۲۵۰۰",
+      slug:"customorder"
     }
   ]);
   ////////////////card services in normal resolationr/////////////////
@@ -65,7 +66,13 @@ const Popularservices = props => {
               if (Cookies.get("token")) {
                 Cookies.set("title", item.title, { expires: 7, path: "/" });
                 Cookies.set("types", item.id, { expires: 7, path: "/" });
+                if(item.id===4)
+                {
+                  props.history.push("/customorder")
+                }
+                else{
                 props.history.push("/order/" + item.slug);
+                }
               } else {
                 props.history.push("/login/");
               }
@@ -111,7 +118,13 @@ const Popularservices = props => {
               if (Cookies.get("token")) {
                 Cookies.set("title", item.title, { expires: 7, path: "/" });
                 Cookies.set("types", item.id, { expires: 7, path: "/" });
+                if(item.id===4)
+                {
+                  props.history.push(item.slug);
+                }
+                else{
                 props.history.push("/order/" + item.slug);
+                }
               } else {
                 props.history.push("/login/");
               }

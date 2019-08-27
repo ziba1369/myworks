@@ -70,8 +70,8 @@ const [newsdet, setNews] = useState([]);
         <Row className="rtl">
           <Col
             className="detailnews"
-            lg={{ span: 7, offset: 1 }}
-            xl={{ span: 7, offset: 1 }}
+            lg={{ span: 8, offset: 0 }}
+            xl={{ span: 8, offset: 0 }}
             md={{ span: 10, offset: 1 }}
             sm={{ span: 10, offset: 1 }}
             xs={{ span: 10, offset: 1 }}
