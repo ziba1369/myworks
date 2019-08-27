@@ -247,8 +247,16 @@ axios.post(serverURL+"app_edit_profile",formData,headers)
     callBack(response);
 })
 }
+//dashboard
+export const dashboardAPI=(customer_token,callBack)=>{
+    axios.get(serverURL+"front/user_dashboard?customer_token=" +customer_token,headers)
+    .then(function (response) {
+        callBack(response);
+    })
+}
+
 //////////////////////home =>layount//////////////////////////
-//popula services
+//popular services
 export const get_popular_productsAPI=(param,callBack)=>{
  axios.get(serverURL+"front/get_popular_products",param,headers)
  .then(function (response) {
@@ -258,6 +266,28 @@ export const get_popular_productsAPI=(param,callBack)=>{
 //contacus
 export const send_messageAPI=(contactUs,callBack)=>{
     axios.post(serverURL+"front/send_message",contactUs,headers)
+    .then(function (response) {
+        callBack(response);
+    })
+}
+///////////////////////meta tag/////////////////////////
+export const metatagAPI=(slug,callBack)=>{
+ axios.get(serverURL+"get_metatags",slug,headers)
+ .then(function (response) {
+    callBack(response);
+})
+}
+
+////////////////////////api basket////////////////////////
+export const basketAPI=(customer_token,callBack)=>{
+    axios.get(serverURL+"front/user_cart?customer_token="+customer_token,headers)
+    .then(function (response) {
+        callBack(response);
+    })
+}
+////post item_id
+export const cancelitemAPI=(customer_token,order_code,callBack)=>{
+    axios.post(serverURL+"user_order_cancel")
     .then(function (response) {
         callBack(response);
     })

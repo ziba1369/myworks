@@ -6,7 +6,6 @@ import {
   faAngleDoubleRight
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import {
   ToastsContainer,
   ToastsStore,
@@ -19,20 +18,14 @@ const Newsletter = () => {
   const [newsdet, setNews] = useState([]);
   Cookies.set("newsdet", newsdet, { expires: 7, path: "/" });
   useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_news_list?limit=2&offset=0",
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          setNews(response.data.news);
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+    newsAPI(2,(response)=>{
+      if (response.data.success) {
+        setNews(response.data.news);
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+  
   }, []);
 
   const show = newsdet.map((item, index) => {

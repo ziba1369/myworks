@@ -1,61 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, Col, Row, Breadcrumb } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavBar from "./Layout/NavBar";
 import Footer from "./Layout/Footer";
 import colseIcon from "../images/close-order.svg";
 import * as Cookies from "js-cookie";
-/////function aboutus
-const Basket = (props) => {
+import { basketAPI, cancelitemAPI } from "../api/api";
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
+} from "react-toasts";
+/////function basket////
+const Basket = props => {
+  const [basket, setBasket] = useState({
+    id: "",
+    link: "",
+    totalPrice: "",
+    items: []
+  });
+  useEffect(() => {
+    basketAPI(Cookies.get("token"), response => {
+      console.log(response.data);
+      if (response.data.success) {
+        setBasket({
+          id: response.data.id,
+          link: response.data.link,
+          totalPrice: response.data.totalPrice,
+          items: response.data.items
+        });
 
-  const [basket, setBasket] = useState([
-    {
-      name: "شناسنامه",
-      id: 1,
-      date: "1398/05/24",
-      price: 23000
-    },
-    {
-      name: "شناسنامه",
-      id:2,
-      date: "1398/05/24",
-      price: 23000
-    },
-    {
-      name: "شناسنامه",
-      id:3,
-      date: "1398/05/24",
-      price: 23000
-    },
-    {
-      name: "شناسنامه",
-      id:4,
-      date: "1398/05/24",
-      price: 23000
-    },
-    {
-      name: "شناسنامه",
-      id:5,
-      date: "1398/05/24",
-      price: 23000
-    },
-    {
-      name: "شناسنامه",
-      id:6,
-      date: "1398/05/24",
-      price: 23000
-    }
-  ]);
-  const deleteItems=itemId=>{
-    const items = basket.filter(item => item.id !== itemId);
-    setBasket(items);
-  
-  }
-  if(Cookies.get('token')===undefined)
-  {
+        console.log(response.data, "dash");
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    });
+  }, []);
+  const deleteItems = (itemid, itemcode) => {
+    const items = basket.items.filter(item => item.id !== itemid);
+
+    cancelitemAPI(Cookies.get("token"), itemcode, response => {
+      if (response.data.success) {
+        setBasket({ items: items });
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    });
+  };
+  if (Cookies.get("token") === undefined) {
     props.history.push("/login/");
   }
-  console.log(basket)
+  console.log(basket);
   return (
     <React.Fragment>
       <header>
@@ -82,12 +77,15 @@ const Basket = (props) => {
         <div className="row basket-text">سبد خرید</div>
         <div className="row rtl">
           <div className="row col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12">
-            {basket.map(item => {
+            {basket.items.map(item => {
               return (
-                <div className="items-basket col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 " keys={item.id}>
+                <div
+                  className="items-basket col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 "
+                  keys={item.id}
+                >
                   <p>{item.name}</p>
                   <p>
-                    کدسفارش:<span>{item.id}</span>
+                    کدسفارش:<span>{item.code}</span>
                   </p>
                   <p>
                     تاریخ سفارش:<span>{item.date}</span>
@@ -96,24 +94,30 @@ const Basket = (props) => {
                     مبلغ سفارش:
                     <span style={{ color: "#0cb69f" }}>{item.price}تومان</span>
                   </p>
-                  <p className="colseicon" >
-                    <img onClick={()=>{deleteItems(item.id)}} src={colseIcon} alt={colseIcon} />
+                  <p className="colseicon">
+                    <img
+                      onClick={() => {
+                        deleteItems(item.id, item.code);
+                      }}
+                      src={colseIcon}
+                      alt={colseIcon}
+                    />
                   </p>
                 </div>
               );
             })}
           </div>
-          <div className="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3" >
-          <div className="buttonsell">
-            <span>مجموع هزینه ها</span>
-            <span>260000 تومان</span>
-          </div> 
-          <button className="buttonpay">
-            <span>پرداخت</span>
-           
-          </button> 
-
-        </div>
+          <div className="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div className="buttonsell">
+              <span>مجموع هزینه ها</span>
+              <span>{basket.totalPrice} تومان</span>
+            </div>
+            <button className="buttonpay">
+              <Link to={basket.link}>
+                <span>پرداخت</span>
+              </Link>
+            </button>
+          </div>
         </div>
       </div>
       <Footer />

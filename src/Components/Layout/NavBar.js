@@ -75,7 +75,7 @@ const NavBar = () => {
                           eventKey="4.1"
                           className="imageprofile"
                           style={{ color: "#000" }}>
-                          <Link to="/profile/editprofile">
+                          <Link to="/profile/dashboard">
                             <Image src={profileImage} />
                             پروفایل
                           </Link>

@@ -9,7 +9,6 @@ import * as Cookies from "js-cookie";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
 import $ from "jquery";
-import axios from "axios";
 import {getYear,app_edit_profileAPI} from '../../../api/api';
 /////////////////edit profile function///////////////////
 const EditProfile = props => {

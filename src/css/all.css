@@ -2245,7 +2245,9 @@ label.form-label {
   color: #454f62;
   font-size: 0.9rem;
 }
-
+.buttonpay span {
+    color: #fff;
+}
 .form-check {
   text-align: center;
   
@@ -2560,6 +2562,7 @@ p.textpanel {
 .panel .menubar {
   background-color: #eff5ff;
   padding: 0px;
+  height:100vh
   
 }
 .panel h5 {
