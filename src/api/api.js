@@ -3,7 +3,7 @@ import axios from "axios";
 //////////////////// Global Variables //////////////////////
 const crosAnyWhere = "https://cors-anywhere.herokuapp.com/";
 const serverURL = "http://hezare3vom.ratechcompany.com/api/";
-const headers = { headers: { "Content-Type": "application/json" } };
+const headers = {headers: {"Content-Type": "application/json"}};
 /////////////////////////loginapi///////////////////////
 export const loginAPI = (mobile, password, callBack) => {
     axios
@@ -92,203 +92,206 @@ export const check_verification_code = (
 };
 /////////////////////////////////////////////forget password/////////////////////////
 /// get_forget_pass_code
-export const get_forget_pass_code=(mobile_number,callBack)=>{
-    axios.post(serverURL+"get_forget_pass_code",
-    {
-        mobile_number:mobile_number  
-    } ,headers)
-    .then(function (response) {
-        callBack(response);
-    });
+export const get_forget_pass_code = (mobile_number, callBack) => {
+    axios.post(serverURL + "get_forget_pass_code",
+        {
+            mobile_number: mobile_number
+        }, headers)
+        .then(function (response) {
+            callBack(response);
+        });
 };
 ///check_forget_pass_code
-export const check_forget_pass_code=(mobile_number,forget_pass_code,callBack)=>{
-   
-    axios.post(serverURL+"check_forget_pass_code",{
-        mobile_number:mobile_number,
-        forget_pass_code:forget_pass_code
-    },headers)
-    .then(function (response) {
-        callBack(response);
-    });
+export const check_forget_pass_code = (mobile_number, forget_pass_code, callBack) => {
+
+    axios.post(serverURL + "check_forget_pass_code", {
+        mobile_number: mobile_number,
+        forget_pass_code: forget_pass_code
+    }, headers)
+        .then(function (response) {
+            callBack(response);
+        });
 }
 ///////change_forget_pass
 
-export const change_forget_pass=( mobile_number,new_password,forget_pass_code,callBack)=>{
-    axios.post(serverURL+"change_forget_pass",{
-        mobile_number:mobile_number,
-        new_password:new_password,
-        forget_pass_code:forget_pass_code
-    },headers)
-    .then(function (response) {
-        callBack(response);
-    });
+export const change_forget_pass = (mobile_number, new_password, forget_pass_code, callBack) => {
+    axios.post(serverURL + "change_forget_pass", {
+        mobile_number: mobile_number,
+        new_password: new_password,
+        forget_pass_code: forget_pass_code
+    }, headers)
+        .then(function (response) {
+            callBack(response);
+        });
 }
 
 
 ///////////////////send order-next pai in phootouloader component data to server////////////////////////
-export const orderAPI=(formDataorder,callBack)=>{
+export const orderAPI = (formDataorder, callBack) => {
     console.log(formDataorder)
-    axios.post(serverURL+"app_make_order",
+    axios.post(serverURL + "app_make_order",
         formDataorder
-    ,{ headers: { "Content-Type": "multipart/form-data"} })
-    .then(function (response) {
-        callBack(response);
-    });
+        , {headers: {"Content-Type": "multipart/form-data"}})
+        .then(function (response) {
+            callBack(response);
+        });
 }
 
 
 /////////////////////price servces////////////////////
 ////total api
-export const priceservicesAPI=(pageLimit,offset,category_id,callBack)=>{
-    axios.get(serverURL+"front/get_products_list?limit=" +
-    pageLimit +
-    "&offset=" +
-    offset +
-    "&category_id=" +
-    category_id
-    ,headers)
-    .then(function (response) {
-        callBack(response);
-    }); 
+export const priceservicesAPI = (pageLimit, offset, category_id, callBack) => {
+    axios.get(serverURL + "front/get_products_list?limit=" +
+        pageLimit +
+        "&offset=" +
+        offset +
+        "&category_id=" +
+        category_id
+        , headers)
+        .then(function (response) {
+            callBack(response);
+        });
 
 }
 ////search api
-export const searchAPI=(pageLimit,offset,category_id,search_query,callBack)=>{
-    axios.get(serverURL+"front/get_products_list?limit=" +
-    pageLimit +
-    "&offset="+
-    offset+
-    "&category_id=" +
-    category_id+
-    "&search_query="+
-    search_query
-    ,headers)
-    .then(function (response) {
-        callBack(response);
-    }); 
+export const searchAPI = (pageLimit, offset, category_id, search_query, callBack) => {
+    axios.get(serverURL + "front/get_products_list?limit=" +
+        pageLimit +
+        "&offset=" +
+        offset +
+        "&category_id=" +
+        category_id +
+        "&search_query=" +
+        search_query
+        , headers)
+        .then(function (response) {
+            callBack(response);
+        });
 
 }
 
 ///////////////////////////order api//////////////////////////
-export const getproductAPI=(product_id,callBack)=>{
-    axios.get(serverURL+"front/get_products_details?product_id=" +product_id,
-    headers
+export const getproductAPI = (product_id, callBack) => {
+    axios.get(serverURL + "front/get_products_details?product_id=" + product_id,
+        headers
     )
-    .then(function (response) {
-        callBack(response);
-    }); 
+        .then(function (response) {
+            callBack(response);
+        });
 
 }
 //////////////////////////news api ///////////////////
-export const newsAPI=(pageLimit,callBack)=>{
-  axios.get(serverURL+"front/get_news_list?limit=" +
-  pageLimit,headers)
-  .then(function (response) {
-    callBack(response);
-})
+export const newsAPI = (pageLimit, callBack) => {
+    axios.get(serverURL + "front/get_news_list?limit=" +
+        pageLimit, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 
 ///////////////////////menu api///////////////
-export const menuAPI=(callBack)=>{
-    axios.get(serverURL+"front/web_menu",
-    headers)
-    .then(function (response) {
-        callBack(response);
-    })
+export const menuAPI = (callBack) => {
+    axios.get(serverURL + "front/web_menu",
+        headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 ///////////////////panel api////////////////
 /////////passchange api
-export const passchangeAPI=(password,callBack)=>{
-    axios.post(serverURL+"app_change_password",password,headers)
-    .then(function (response) {
-        callBack(response);
-})
+export const passchangeAPI = (password, callBack) => {
+    axios.post(serverURL + "app_change_password", password, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 ////////////mytranslate api
-export const mytranslateAPI=(customer_token,order_id,callBack)=>{
-    axios.get(serverURL+"front/get_user_translations?customer_token=" +customer_token+
-    "&order_id="+order_id,headers)
-    .then(function (response) {
-        callBack(response);
-})
+export const mytranslateAPI = (customer_token, order_id, callBack) => {
+    axios.get(serverURL + "front/get_user_translations?customer_token=" + customer_token +
+        "&order_id=" + order_id, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 //////////////myorder api
 
-export const myorderAPI=(customer_token,callBack)=>{
-    axios.get(serverURL+"front/get_user_orders?customer_token=" +
-    customer_token,headers)
-    .then(function (response) {
-        callBack(response);
-})
+export const myorderAPI = (customer_token, callBack) => {
+    axios.get(serverURL + "front/get_user_orders?customer_token=" +
+        customer_token, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 
 ///////////mybill api
-export const mybillAPI=(customer_token,callBack)=>{
-    axios.get(serverURL+"front/get_user_orders?customer_token=" +
-    customer_token,headers)
-    .then(function (response) {
-        callBack(response);
-})
+export const mybillAPI = (customer_token, callBack) => {
+    axios.get(serverURL + "front/get_user_orders?customer_token=" +
+        customer_token, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 ///////////edit profile
 ///get year
-export const editprofileAPI=(customer_token,callBack)=>{
-    axios.get(serverURL+"front/get_user_orders?customer_token=" +
-    customer_token,headers)
-    .then(function (response) {
-        callBack(response);
-})
+export const editprofileAPI = (customer_token, callBack) => {
+    axios.get(serverURL + "front/get_user_orders?customer_token=" +
+        customer_token, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 ///app_edit_profile
-export const app_edit_profileAPI=(formData,callBack)=>{
-axios.post(serverURL+"app_edit_profile",formData,headers)
-.then(function (response) {
-    callBack(response);
-})
+export const app_edit_profileAPI = (formData, callBack) => {
+    axios.post(serverURL + "app_edit_profile", formData, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 //dashboard
-export const dashboardAPI=(customer_token,callBack)=>{
-    axios.get(serverURL+"front/user_dashboard?customer_token=" +customer_token,headers)
-    .then(function (response) {
-        callBack(response);
-    })
+export const dashboardAPI = (customer_token, callBack) => {
+    axios.get(serverURL + "front/user_dashboard?customer_token=" + customer_token, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 
 //////////////////////home =>layount//////////////////////////
 //popular services
-export const get_popular_productsAPI=(param,callBack)=>{
- axios.get(serverURL+"front/get_popular_products",param,headers)
- .then(function (response) {
-    callBack(response);
-})
+export const get_popular_productsAPI = (param, callBack) => {
+    axios.get(serverURL + "front/get_popular_products", param, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 //contacus
-export const send_messageAPI=(contactUs,callBack)=>{
-    axios.post(serverURL+"front/send_message",contactUs,headers)
-    .then(function (response) {
-        callBack(response);
-    })
+export const send_messageAPI = (contactUs, callBack) => {
+    axios.post(serverURL + "front/send_message", contactUs, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 ///////////////////////meta tag/////////////////////////
-export const metatagAPI=(slug,callBack)=>{
- axios.get(serverURL+"get_metatags",slug,headers)
- .then(function (response) {
-    callBack(response);
-})
+export const metatagAPI = (slug, callBack) => {
+    axios.get(serverURL + "get_metatags", slug, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 
 ////////////////////////api basket////////////////////////
-export const basketAPI=(customer_token,callBack)=>{
-    axios.get(serverURL+"front/user_cart?customer_token="+customer_token,headers)
-    .then(function (response) {
-        callBack(response);
-    })
+export const basketAPI = (customer_token, callBack) => {
+    axios.get(serverURL + "front/user_cart?customer_token=" + customer_token, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }
 ////post item_id
-export const cancelitemAPI=(customer_token,order_code,callBack)=>{
-    axios.post(serverURL+"user_order_cancel")
-    .then(function (response) {
-        callBack(response);
-    })
+export const cancelitemAPI = (customer_token, order_code, callBack) => {
+    axios.post(serverURL + "front/user_order_cancel", {
+        customer_token: customer_token,
+        order_code: order_code
+    }, headers)
+        .then(function (response) {
+            callBack(response);
+        })
 }

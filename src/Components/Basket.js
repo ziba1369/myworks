@@ -14,7 +14,6 @@ import {
 /////function basket////
 const Basket = props => {
   const [basket, setBasket] = useState({
-    id: "",
     link: "",
     totalPrice: "",
     items: []
@@ -24,7 +23,6 @@ const Basket = props => {
       console.log(response.data);
       if (response.data.success) {
         setBasket({
-          id: response.data.id,
           link: response.data.link,
           totalPrice: response.data.totalPrice,
           items: response.data.items
@@ -36,12 +34,14 @@ const Basket = props => {
       }
     });
   }, []);
-  const deleteItems = (itemid, itemcode) => {
-    const items = basket.items.filter(item => item.id !== itemid);
 
-    cancelitemAPI(Cookies.get("token"), itemcode, response => {
+  const deleteItems = (itemCode) => {
+    cancelitemAPI(Cookies.get("token"), itemCode, response => {
       if (response.data.success) {
-        setBasket({ items: items });
+        setBasket({
+          link: response.data.link,
+          totalPrice: response.data.totalPrice,
+          items: response.data.items });
       } else {
         ToastsStore.error(response.data.error);
       }
@@ -97,10 +97,10 @@ const Basket = props => {
                   <p className="colseicon">
                     <img
                       onClick={() => {
-                        deleteItems(item.id, item.code);
+                        deleteItems(item.code);
                       }}
                       src={colseIcon}
-                      alt={colseIcon}
+                      alt=""
                     />
                   </p>
                 </div>
