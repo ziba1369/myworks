@@ -56,12 +56,12 @@ const Myorder = () => {
               </Col>
             </div>
             <div>
-              {order.map(item => {
+              {order.map((item,index) => {
                 Cookies.set("order_id", item.id, { expires: 7, path: "/" });
                 return (
                   <div className="row myorderlist">
                     <Col lg={1} xl={1} md={1}>
-                      {item.id}
+                      {index+1}
                     </Col>
                     <Col lg={2} xl={2} md={2}>
                       {item.order_name}
@@ -90,7 +90,7 @@ const Myorder = () => {
         query="(max-width:992px)"
         render={() => (
           <div className="contentpanel">
-            {order.map(item => {
+            {order.map((item,index) => {
               Cookies.set("order_id", item.id, { expires: 7, path: "/" });
               return (
                 <div className="row myorderlist">
@@ -98,7 +98,7 @@ const Myorder = () => {
                     ردیف
                   </Col>
                   <Col lg={12} xl={12} md={12}>
-                    {item.id}
+                    {index+1}
                   </Col>
                   <Col lg={12} xl={12} md={12}>
                     عنوان سفارش

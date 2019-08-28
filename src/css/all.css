@@ -1000,8 +1000,9 @@ span#basic-addon1 {
 
 .contnewsletter img {
   width: 100%;
-  height: 100%;
+  height: 200px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .extracontent.row {
@@ -2224,15 +2225,17 @@ span.custom-file-container__custom-file__custom-file-control {
 /* .loginpage, .registerpage {
     padding: 4rem 0;
 } */
+
+
 .loginpage {
-  height:calc(100vh - 252px);
+
   margin-top: 2rem 0 0 0;
   height: 100%;
 }
 .registerpage {
   height: 100%;
   margin-top: 2rem;
-  min-height: 38.7vh
+
 }
 
 p.textlogin {
@@ -2466,10 +2469,7 @@ p.activesys {
   border-color: #c1d0e8;
   font-size:.9rem;
 }
-.loginpage {
-  min-height: 37.6vh;
-  margin: 5rem 0 0 0;
-}
+
 /* .registerpage {
   min-height: 37.6vh;
   margin: 5rem 0;
@@ -2498,12 +2498,13 @@ p.activesys {
 .foter-blog {
   background-color: #eff5ff;
   padding: 2rem 2rem 0 2rem;
-  margin-top: 2rem;
-  position: relative;
+  position:relative;
   margin-bottom: 0px;
   bottom: 0;
   right: 0;
   left: 0;
+  margin-top:1rem
+
 }
 .foter-blog a {
   color: #454f63;
@@ -2567,7 +2568,9 @@ p.textpanel {
 .panel .menubar {
   background-color: #eff5ff;
   padding: 0px;
-  height:100vh
+  min-height:100vh;
+  position: relative;
+  right: 0px;
   
 }
 .panel h5 {
@@ -2712,6 +2715,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin: 0px;
   height: 100%;
 }
+.menubar .nav-item:nth-child(2) {
+  background-color: #b4e5e6;
+}
 .menubar .nav-link img,.menuprofile img {
   width: 20px;
   margin: 0px 0.5rem;
@@ -2725,7 +2731,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .myorderlist {
   background-color: #f0f0f0;
   padding: 1.2rem 0;
-  margin-top: 1rem;
+  margin:.3rem 0;
+  text-align: center;
+  direction: rtl;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  font-family: fanum;
+  font-size: 0.75rem;
+
 }
 .changepasspanel {
   padding: 3rem 0;
@@ -2746,16 +2760,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
  padding: 0px
 }
 }
-.row.myorderlist {
-  text-align: center;
-  direction: rtl;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  font-family: fanum;
-  font-size: 0.75rem;
 
-}
 .myorder {
   direction: rtl;
 }
@@ -2838,7 +2843,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding: 0 3rem;
   margin:4rem 0;
 }
-
+.lastorder {
+  font-size: .8rem;
+}
 .panel label.upladersize {
   height: 130px !important;
   /* position: absolute !important; */
@@ -3012,14 +3019,18 @@ label.upladersize {
   font-family: fanum;
   padding: 0 5rem;
 }
+
 .info-panel div {
   margin: 0 auto;
   padding: .5rem;
 }
+.info-panel div p:nth-child(1) {
+  font-size: 1.4rem;
+}
 .lastorder p {
   text-align: right;
   display: block;
-  padding: 1rem 0;
+  padding: 2rem 0 0 0;
   width: 100%;
 }
 .lastorder-box {
@@ -3033,7 +3044,7 @@ label.upladersize {
     position: relative;
     display: flex;
     border-top-right-radius: 6px;
-    padding: .5rem;
+    
 
 }
 .lasorderlist{
@@ -3054,7 +3065,8 @@ label.upladersize {
   padding: .6rem 0;
 }
 .lastorderlist {
-  display: flex;
+
+  padding: 0 1.5rem;
 }
 @media only screen  and (max-width:992px){
   .info-panel div {

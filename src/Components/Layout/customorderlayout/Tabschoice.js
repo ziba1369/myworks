@@ -295,7 +295,7 @@ const Tabschoice = ({
                         <input
                           type="radio"
                           name="certi"
-                          checked={data.confirm === 1 ? "checked" : ""}
+                          checked={data.confirm === 1 ? "checked" : "unchecked"}
                           className="nameorder"
                           value="1"
                           onChange={() => confirmChange(1)}
@@ -306,7 +306,7 @@ const Tabschoice = ({
                         <input
                           type="radio"
                           name="certi"
-                          checked={data.confirm === 0 ? "checked" : ""}
+                          checked={data.confirm === 0 ? "checked" : "unchecked"}
                           className="nameorder"
                           value="0"
                           onChange={() => confirmChange(0)}
@@ -323,7 +323,7 @@ const Tabschoice = ({
                         <input
                           type="radio"
                           name="type"
-                          checked={data.type === 0 ? "checked" : ""}
+                          checked={data.type === 0 ? "checked" : "unchecked"}
                           className="nameorder"
                           value="0"
                           onChange={() => typeTranslateChange(0)}
@@ -334,7 +334,7 @@ const Tabschoice = ({
                         <input
                           type="radio"
                           name="type"
-                          checked={data.type === 1 ? "checked" : ""}
+                          checked={data.type === 1 ? "checked" : "unchecked"}
                           className="nameorder"
                           value="1"
                           onChange={() => typeTranslateChange(1)}

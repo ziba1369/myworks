@@ -16,8 +16,8 @@ const [order, setOrder] = useState([]);
   useEffect(() => {
     mybillAPI(Cookies.get("token"),(response)=>{
       if (response.data.success) {
-        setOrder(response.data.orders);
-        console.log(response.data.orders);
+        setOrder(response.data.factors);
+        console.log(response.data.factors);
       } else {
         ToastsStore.error(response.data.error);
       }
@@ -43,43 +43,43 @@ const [order, setOrder] = useState([]);
                 ردیف
               </Col>
               <Col lg={2} xl={2} md={2}>
-                عنوان سفارش
+                کدسفارش
               </Col>
               <Col lg={3} xl={3} md={3}>
-                شماره سفارش
+               تاریخ ثبت 
               </Col>
               <Col lg={2} xl={2} md={2}>
-                تاریخ ثبت
+               وضعیت  
               </Col>
               <Col lg={2} xl={2} md={2}>
-                وضعیت
+                کد تراکنش
               </Col>
               <Col lg={2} xl={2} md={2}>
-                عملیات
+                قیمت
               </Col>
             </div>
             <div className="contentpanel">
-              {order.map(item => {
+              {order.map((item,index) => {
                 Cookies.set("order_id", item.id, { expires: 7, path: "/" });
                 return (
                   <div className="row myorderlist">
                     <Col lg={1} xl={1} md={1}>
-                      {item.id}
+                      {item.index}
                     </Col>
                     <Col lg={2} xl={2} md={2}>
-                      {item.order_name}
+                      {item.order_codes}
                     </Col>
                     <Col lg={3} xl={3} md={3}>
-                      {item.order_code}
-                    </Col>
-                    <Col lg={2} xl={2} md={2}>
-                      {item.created_at}
+                      {item.date}
                     </Col>
                     <Col lg={2} xl={2} md={2}>
                       {item.status}
                     </Col>
                     <Col lg={2} xl={2} md={2}>
-                      عملیات
+                      {item.tranaction_code}
+                    </Col>
+                    <Col lg={2} xl={2} md={2}>
+                      {item.price}
                     </Col>
                   </div>
                 );
@@ -104,34 +104,34 @@ const [order, setOrder] = useState([]);
                     {item.id}
                   </Col>
                   <Col lg={2} xl={2} md={2}>
-                    عنوان سفارش
+                    کدسفارش
                   </Col>
                   <Col lg={2} xl={2} md={2}>
-                    {item.order_name}
+                    {item.order_codes}
                   </Col>
                   <Col lg={3} xl={3} md={3}>
-                    شماره سفارش
+                  تاریخ ثبت  
                   </Col>
                   <Col lg={3} xl={3} md={3}>
-                    {item.order_code}
+                    {item.date}
                   </Col>
                   <Col lg={2} xl={2} md={2}>
-                    تاریخ ثبت
-                  </Col>
-                  <Col lg={2} xl={2} md={2}>
-                    {item.created_at}
-                  </Col>
-                  <Col lg={2} xl={2} md={2}>
-                    وضعیت
+                  وضعیت
                   </Col>
                   <Col lg={2} xl={2} md={2}>
                     {item.status}
                   </Col>
                   <Col lg={2} xl={2} md={2}>
-                    عملیات
+                    کدتراکنش
                   </Col>
                   <Col lg={2} xl={2} md={2}>
-                    عملیات
+                    {item.tranaction_code}
+                  </Col>
+                  <Col lg={2} xl={2} md={2}>
+                    قیمت
+                  </Col>
+                  <Col lg={2} xl={2} md={2}>
+                    {item.price}
                   </Col>
                 </div>
               );

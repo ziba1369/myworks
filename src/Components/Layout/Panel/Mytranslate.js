@@ -56,12 +56,12 @@ const Mytranslate = () => {
               </Col>
             </div>
 
-            {translate.map(item => {
+            {translate.map((item,index)=> {
               Cookies.set("order_id", item.id, { expires: 7, path: "/" });
               return (
                 <div className="row myorderlist">
                   <Col lg={1} xl={1} md={1}>
-                    {item.id}
+                    {index+1}
                   </Col>
                   <Col lg={2} xl={2} md={2}>
                     {item.order_name}
@@ -98,7 +98,7 @@ const Mytranslate = () => {
             </div>
 
             <div className="contentpanel">
-              {translate.map(item => {
+              {translate.map((item,index) => {
                 Cookies.set("order_id", item.id, { expires: 7, path: "/" });
                 return (
                   <div className="row myorderlist">
@@ -106,7 +106,7 @@ const Mytranslate = () => {
                       ردیف
                     </Col>
                     <Col lg={1} xl={1} md={1}>
-                      {item.id}
+                      {index+1}
                     </Col>
                     <Col lg={2} xl={2} md={2}>
                       عنوان سفارش

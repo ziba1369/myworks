@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Col, Row, Breadcrumb, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavBar from "./Layout/NavBar";
+import { metatagAPI } from "../api/api";
+import MetaTags from "react-meta-tags";
 import {
   ToastsContainer,
   ToastsStore,
@@ -9,28 +11,36 @@ import {
 } from "react-toasts";
 import axios from "axios";
 import Footer from "./Layout/Footer";
+import { get_newsAPI } from "../api/api";
 ///////////detail-news function//////////////////
 const BlogOriginal = props => {
   ///////////set initial variable//////////////////
-const [newsdet, setNews] = useState([]);
-//////////////get dtail news from server//////////////////
-  useEffect(() => {
-    axios
-      .get(
-        "http://hezare3vom.ratechcompany.com/api/front/get_news/?news_slug=" +
-          props.match.params.slug,
+  const [newsdet, setNews] = useState([]);
+  const [mettag, setMetatag] = useState({
+    title: "",
+    metatags: []
+  });
+  //////////////get dtail news from server//////////////////
 
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      )
-      .then(function(response) {
-        if (response.data.success) {
-          setNews([response.data]);
-        } else {
-          ToastsStore.error(response.data.error);
-        }
-      });
+  useEffect(() => {
+    get_newsAPI(props.match.params.slug, response => {
+      if (response.data.success) {
+        setNews([response.data]);
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    });
+    metatagAPI(props.match.params.slug, (response) => {
+      console.log(response);
+      if (response.data.success) {
+        setMetatag({
+          title: response.data.title,
+          metatags: response.data.metatags
+        });
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    });
   }, [props.match.params.slug]);
 
   return (
@@ -42,6 +52,19 @@ const [newsdet, setNews] = useState([]);
       <header>
         <NavBar />
       </header>
+      <MetaTags>
+        <title>{mettag.title}</title>
+        {mettag.metatags.map(i => {
+          if(mettag.metatags.name)
+          {return (
+              <meta name={i.name} content={i.content} /> 
+          );}
+          else if(mettag.metatags.property)
+          {return (
+              <meta property={i.property} content={i.content} />
+          );}
+        })}
+      </MetaTags>
       <Container>
         <Col
           className="service-breadcrumb"

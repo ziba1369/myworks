@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Nav, NavDropdown, Row, Dropdown, Col } from "react-bootstrap";
 import { dashboardAPI } from "../../../api/api";
 import Media from "react-media";
+import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import {
   ToastsContainer,
   ToastsStore,
   ToastsContainerPosition
 } from "react-toasts";
+import Myorder from './Myorder';
 import * as Cookies from "js-cookie";
 const NewOrder = () => {
   const [dashboarduser, setDashboard] = useState({
@@ -39,8 +41,10 @@ const NewOrder = () => {
     <React.Fragment>
       <div className="info-panel row">
         <div className="col-xl-3 col-lg-3 col-md-3  col-xs-12 countorder">
-          <p>{dashboarduser.totalOrders}</p>
-          <p>تعداد سفارشات</p>
+         
+          <p>11{dashboarduser.totalOrders}</p>
+          <p><Link to="/profile/myorders">تعداد سفارشات </Link></p>
+         
         </div>
         <div className="col-xl-3 col-lg-3 col-md-3  col-xs-12 paybox">
           <p>{dashboarduser.totalPrice}</p>
@@ -79,12 +83,12 @@ const NewOrder = () => {
                   </Col>
                 </div>
 
-                <div className="row lastorderlist">
-                  {dashboarduser.lastOrders.map(i => {
+                <div className="lastorderlist">
+                  {dashboarduser.lastOrders.map((i,index) => {
                     return (
-                      <React.Fragment>
+                      <div className="row myorderlist">
                         <Col lg={1} xl={1} md={1}>
-                          {i.id}
+                          {index+1}
                         </Col>
                         <Col lg={2} xl={2} md={2}>
                           {i.order_name}
@@ -101,7 +105,7 @@ const NewOrder = () => {
                         <Col lg={2} xl={2} md={2}>
                           6
                         </Col>
-                      </React.Fragment>
+                        </div>
                     );
                   })}
                 </div>
@@ -114,14 +118,14 @@ const NewOrder = () => {
             render={() => (
               <div className="contentpanel">
                 <div className="row myorderlist">
-                  {dashboarduser.lastOrders.map(i => {
+                  {dashboarduser.lastOrders.map((i,index) => {
                     return (
                       <React.Fragment>
                         <Col lg={12} xl={12} md={12}>
                           ردیف
                         </Col>
                         <Col lg={12} xl={12} md={12}>
-                          {i.id}
+                          {index+1}
                         </Col>
                         <Col lg={12} xl={12} md={12}>
                           عنوان سفارش
@@ -153,7 +157,7 @@ const NewOrder = () => {
                         <Col lg={12} xl={12} md={12}>
                           6
                         </Col>
-                      </React.Fragment>
+                        </React.Fragment>
                     );
                   })}
                 </div>
@@ -191,12 +195,12 @@ const NewOrder = () => {
                   </Col>
                 </div>
 
-                <div className="row lastorderlist">
-                  {dashboarduser.lastReadyTransaltion.map(i => {
+                <div className="lastorderlist">
+                  {dashboarduser.lastReadyTransaltion.map((i,index) => {
                     return (
-                      <React.Fragment>
+                      <div className="row myorderlist">
                         <Col lg={1} xl={1} md={1}>
-                          {i.id}
+                          {index+1}
                         </Col>
                         <Col lg={2} xl={2} md={2}>
                           {i.order_name}
@@ -213,7 +217,7 @@ const NewOrder = () => {
                         <Col lg={2} xl={2} md={2}>
                           6
                         </Col>
-                      </React.Fragment>
+                      </div>
                     );
                   })}
                 </div>
@@ -225,14 +229,14 @@ const NewOrder = () => {
             render={() => (
               <div className="contentpanel">
                 <div className="row myorderlist">
-                  {dashboarduser.lastReadyTransaltion.map(i => {
+                  {dashboarduser.lastReadyTransaltion.map((i,index) => {
                     return (
                       <React.Fragment>
                         <Col lg={12} xl={12} md={12}>
                           ردیف
                         </Col>
                         <Col lg={12} xl={12} md={12}>
-                          {i.id}
+                          {index+1}
                         </Col>
                         <Col lg={12} xl={12} md={12}>
                           عنوان سفارش

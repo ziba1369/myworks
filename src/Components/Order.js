@@ -8,7 +8,8 @@ import Footer from "./Layout/Footer";
 import NavBar from "./Layout/NavBar";
 import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
 import * as Cookies from "js-cookie";
-import {getproductAPI} from '../api/api';
+import {getproductAPI,metatagAPI} from '../api/api';
+import MetaTags from "react-meta-tags";
 //////////////order function////////////////////
 const Order = props => {
   ///////////////set initial variable///////////////////
@@ -33,6 +34,10 @@ const Order = props => {
   /////////////////////////photoupload///////////////////////////////
   const [orderFileCount, setOrderFilecount] = useState(0);
   const [photoUpload,setPhotoUpload]=useState();
+  const [mettag, setMetatag] = useState({
+    title: "",
+    metatags: []
+  });
   //////////////add step////////////////////
   const increment = () => {
     setStep(step + 1);
@@ -459,7 +464,20 @@ const Order = props => {
   
   }, [Cookies.get("types")]);
 
-  
+  /////////////////metatag///
+  useEffect(()=>{
+    metatagAPI(props.match.params.name, (response) => {
+      console.log(response);
+      if (response.data.success) {
+        setMetatag({
+          title: response.data.title,
+          metatags: response.data.metatags
+        });
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    });
+  },[])
   //////////check user is login////////////////
   useEffect(() => {
     if (Cookies.get("token")) {
@@ -475,6 +493,19 @@ const Order = props => {
         <header>
           <NavBar />
         </header>
+        <MetaTags>
+        <title>{mettag.title}</title>
+        {mettag.metatags.map(i => {
+          if(mettag.metatags.name)
+          {return (
+              <meta name={i.name} content={i.content} /> 
+          );}
+          else if(mettag.metatags.property)
+          {return (
+              <meta property={i.property} content={i.content} />
+          );}
+        })}
+      </MetaTags>
         <Container>
           <Row>
             <Col

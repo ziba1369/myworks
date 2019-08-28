@@ -53,10 +53,11 @@ const languagenum = () => {
    const order_lang = orderlanguages.filter(item => item.status === 0);
    const order_languages = order_lang.map(item => {
      return (
-       item.lang.split(" به ")[0] +
-       "|" +
-       item.lang.split(" به ")[1] 
-      
+        item.lang.split(" به ")[0] +
+        "|" +
+        item.lang.split(" به ")[1] +
+        "|" +
+        0
       
      );
    });

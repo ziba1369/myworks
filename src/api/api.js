@@ -225,7 +225,7 @@ export const myorderAPI = (customer_token, callBack) => {
 
 ///////////mybill api
 export const mybillAPI = (customer_token, callBack) => {
-    axios.get(serverURL + "front/get_user_orders?customer_token=" +
+    axios.get(serverURL + "front/get_user_factors?customer_token=" +
         customer_token, headers)
         .then(function (response) {
             callBack(response);
@@ -272,7 +272,7 @@ export const send_messageAPI = (contactUs, callBack) => {
 }
 ///////////////////////meta tag/////////////////////////
 export const metatagAPI = (slug, callBack) => {
-    axios.get(serverURL + "get_metatags", slug, headers)
+    axios.get(serverURL + "front/get_metatags?slug="+slug, headers)
         .then(function (response) {
             callBack(response);
         })
@@ -306,3 +306,27 @@ export const customorderAPI = (formDataorder, callBack) => {
             callBack(response);
         });
 }
+
+/////////////////blog api//////////////////////
+export const get_newsAPI = (slug, callBack) => {
+    axios.get(serverURL + "front/get_news/?news_slug=" + slug,headers)
+        .then(function (response) {
+            callBack(response);
+        });
+}
+ // axios
+    //   .get(
+    //     "http://hezare3vom.ratechcompany.com/api/front/get_news/?news_slug=" +
+    //       props.match.params.slug,
+
+    //     {
+    //       headers: { "Content-Type": "application/json" }
+    //     }
+    //   )
+    //   .then(function(response) {
+    //     if (response.data.success) {
+    //       setNews([response.data]);
+    //     } else {
+    //       ToastsStore.error(response.data.error);
+    //     }
+    //   });

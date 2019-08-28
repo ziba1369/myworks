@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Container, Image, Col, Row,Breadcrumb } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavBar from "./Layout/NavBar";
@@ -9,14 +9,51 @@ import emailIcon from "../images/email.svg";
 import clock from "../images/clock-circular-outline.svg";
 import whatsapp from "../images/whatsapp.svg";
 import telegram from "../images/telegram.svg";
+import { metatagAPI } from "../api/api";
+import MetaTags from "react-meta-tags";
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
+} from "react-toasts";
 /////////function contact us 
 const ContactUs = () => {
+  const [mettag, setMetatag] = useState({
+    title: "",
+    metatags: []
+  });
+  useEffect(() => {
+    metatagAPI("contactus", response => {
+      console.log(response.data);
+      if (response.data.success) {
+        setMetatag({
+          title: response.data.title,
+          metatags: response.data.metatags
+        });
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    });
+  },[])
     return ( 
         <React.Fragment>
       
       <header>
         <NavBar />
       </header>
+      <MetaTags>
+        <title>{mettag.title}</title>
+        {mettag.metatags.map(i => {
+          if(mettag.metatags.name)
+          {return (
+              <meta name={i.name} content={i.content} /> 
+          );}
+          else if(mettag.metatags.property)
+          {return (
+              <meta property={i.property} content={i.content} />
+          );}
+        })}
+      </MetaTags>
         <Container>
         <Row>
             <Col

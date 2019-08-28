@@ -11,6 +11,7 @@ import myorderimg from "../images/myorder.svg";
 import billimg from "../images/bill.svg";
 import inboximg from "../images/inbox.svg";
 import changepassimg from "../images/changepass.svg";
+import newtranslateimg from '../images/newtranslate.svg';
 import logout from "../images/logout.svg";
 import * as Cookies from "js-cookie";
 import { slide as Menu } from 'react-burger-menu';
@@ -70,7 +71,7 @@ const[menu,setMenu]=useState(false);
                   <React.Fragment>
                     <Col sm={2} className="menubar">
                       <Nav variant="pills" className="flex-column">
-                      <Nav.Item>
+                      <Nav.Item style={{zIndex:'999'}}>
                           <Nav.Link eventKey="dashboard">
                             <Link to="/profile/dashboard">
                             <span>
@@ -85,7 +86,7 @@ const[menu,setMenu]=useState(false);
                           <Nav.Link eventKey="neworder">
                             <Link to="/services/1">
                             <span>
-                              <Image src={myorderimg} alt="userimg" />
+                              <Image src={newtranslateimg} alt="newtranslateimg" />
                             </span>
                             ثبت ترجمه جدید
                             </Link>

@@ -1,11 +1,19 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { Image, Col, Row, Breadcrumb } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavBar from "./Layout/NavBar";
 import Footer from "./Layout/Footer";
 import Translator from '../images/Translators.jpg';
+import { metatagAPI } from "../api/api";
+import MetaTags from "react-meta-tags";
+import {
+  ToastsContainer,
+  ToastsStore,
+  ToastsContainerPosition
+} from "react-toasts";
 /////function aboutus
 const AboutUs = () => {
+  
   const [licence,setLicence]=useState([
     {
       name:"licence",
@@ -26,11 +34,41 @@ const AboutUs = () => {
     }
 
   ])
+  const [mettag, setMetatag] = useState({
+    title: "",
+    metatags: []
+  });
+  useEffect(() => {
+    metatagAPI("aboutus", response => {
+      console.log(response.data);
+      if (response.data.success) {
+        setMetatag({
+          title: response.data.title,
+          metatags: response.data.metatags
+        });
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    });
+  },[])
   return (
     <React.Fragment>
       <header>
         <NavBar />
       </header>
+      <MetaTags>
+        <title>{mettag.title}</title>
+        {mettag.metatags.map(i => {
+          if(mettag.metatags.name)
+          {return (
+              <meta name={i.name} content={i.content} /> 
+          );}
+          else if(mettag.metatags.property)
+          {return (
+              <meta property={i.property} content={i.content} />
+          );}
+        })}
+      </MetaTags>
       <div className="container padding-about">
         <Row>
           <Col
