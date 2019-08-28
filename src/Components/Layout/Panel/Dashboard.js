@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Nav, NavDropdown, Row, Dropdown, Col } from "react-bootstrap";
 import { dashboardAPI } from "../../../api/api";
 import Media from "react-media";
-import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
   ToastsContainer,
   ToastsStore,
@@ -10,7 +10,7 @@ import {
 } from "react-toasts";
 import Myorder from './Myorder';
 import * as Cookies from "js-cookie";
-const NewOrder = () => {
+const NewOrder = (props) => {
   const [dashboarduser, setDashboard] = useState({
     totalOrders: "",
     totalPrice: "",
@@ -40,17 +40,25 @@ const NewOrder = () => {
   return (
     <React.Fragment>
       <div className="info-panel row">
-        <div className="col-xl-3 col-lg-3 col-md-3  col-xs-12 countorder">
+        <div className="col-xl-3 col-lg-3 col-md-3  col-xs-12 countorder" onClick={()=>{
+          props.history.push("/profile/myorders");
+          window.location.reload();
+        }}>
          
           <p>11{dashboarduser.totalOrders}</p>
-          <p><Link to="/profile/myorders">تعداد سفارشات </Link></p>
+          <p>تعداد سفارشات</p>
          
         </div>
-        <div className="col-xl-3 col-lg-3 col-md-3  col-xs-12 paybox">
+        <div className="col-xl-3 col-lg-3 col-md-3  col-xs-12 paybox" onClick={()=>{
+          props.history.push("/basket");
+        }}>
           <p>{dashboarduser.totalPrice}</p>
           <p>سبد پرداخت</p>
         </div>
-        <div className="col-xl-3 col-lg-3 col-md-3  col-xs-12 readytrans">
+        <div className="col-xl-3 col-lg-3 col-md-3  col-xs-12 readytrans" onClick={()=>{
+          props.history.push("/profile/mytranslates");
+          window.location.reload();
+        }}>
           <p>{dashboarduser.readyOrders}</p>
           <p>ترجمه آماده</p>
         </div>
@@ -280,4 +288,4 @@ const NewOrder = () => {
     </React.Fragment>
   );
 };
-export default NewOrder;
+export default withRouter(NewOrder);
