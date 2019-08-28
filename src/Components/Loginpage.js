@@ -118,7 +118,7 @@ const Login = props => {
                         />
                         <p className="textlogin">ورود</p>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>نام کاربری</Form.Label>
+                            <Form.Label>شماره موبایل</Form.Label>
                             <Form.Control
                                 type="text"
                                 id="mobile"

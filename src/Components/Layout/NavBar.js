@@ -77,7 +77,7 @@ const NavBar = () => {
                           style={{ color: "#000" }}>
                           <Link to="/profile/dashboard">
                             <Image src={profileImage} />
-                            پروفایل
+                            داشبورد
                           </Link>
                         </NavDropdown.Item>
 
