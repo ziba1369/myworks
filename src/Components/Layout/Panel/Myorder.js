@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {Col} from "react-bootstrap";
 import {ToastsContainer,ToastsStore,ToastsContainerPosition} from "react-toasts";
@@ -5,10 +6,12 @@ import axios from "axios";
 import Media from "react-media";
 import * as Cookies from "js-cookie";
 import {myorderAPI} from '../../../api/api';
+import editicon from '../../../images/pencil-edit-button.svg';
 //////////////////function myorder//////////////////
-const Myorder = () => {
+const Myorder = ({step,setstep}) => {
   //////////////////set variable//////////////////
   const [order, setOrder] = useState([]);
+  const[change,setchange]=useState(false)
   //////////////////get orders list from server//////////////////
   useEffect(() => {
     myorderAPI(Cookies.get("token"),(response)=>{
@@ -21,8 +24,11 @@ const Myorder = () => {
     })
    
   }, []);
+ const editHandler=()=>{
+  setstep(2)
+ }
   return (
-    <React.Fragment>
+    <div>
       <ToastsContainer
         position={ToastsContainerPosition.TOP_CENTER}
         store={ToastsStore}
@@ -76,7 +82,7 @@ const Myorder = () => {
                       {item.status}
                     </Col>
                     <Col lg={2} xl={2} md={2}>
-                      عملیات
+                    <img style={{width:'10px'}} src={editicon} onClick={editHandler} alt={editicon}/>
                     </Col>
                   </div>
                 );
@@ -128,7 +134,7 @@ const Myorder = () => {
                     عملیات
                   </Col>
                   <Col lg={12} xl={12} md={12}>
-                    عملیات
+                  <img style={{width:'10px'}} src={editicon} onClick={(e)=>{alert(e)}} alt={editicon}/>
                   </Col>
                 </div>
               );
@@ -136,7 +142,8 @@ const Myorder = () => {
           </div>
         )}
       />
-    </React.Fragment>
+      </div>
+    
   );
 };
 

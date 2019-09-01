@@ -9,15 +9,16 @@ import * as Cookies from "js-cookie";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
 import $ from "jquery";
-import {getYear,app_edit_profileAPI} from '../../../api/api';
+import {getYear,app_edit_profileAPI,getprofileApI} from '../../../api/api';
+import editicon from '../../../images/pencil-edit-button.svg';
 /////////////////edit profile function///////////////////
 const EditProfile = props => {
   /////////////////set variable ///////////////////
-  const [name, setName] = useState(Cookies.get("name"));
-  const [lastname, setLastName] = useState(Cookies.get("family"));
-  const [imageprofile, setImageprofile] = useState("");
-  const [certi, setCertifi] = useState(Cookies.get("national_code"));
-  const [mobile] = useState(Cookies.get("mobile"));
+  const [name, setName] = useState();
+  const [lastname, setLastName] = useState();
+  const [imageprofile, setImageprofile] = useState();
+  const [certi, setCertifi] = useState();
+  const [mobile,setMobile] = useState();
   const [birthday] = useState([
     "01",
     "02",
@@ -154,7 +155,26 @@ const EditProfile = props => {
       };
     });
   }, []);
-  /////////// send data to server ////////////
+  //////////get_user_data///////////////////
+  useEffect(()=>{
+    getprofileApI(Cookies.get("token"),(response)=>{
+      if (response.data.success) {
+       setName(response.data.customer_name);
+       setLastName(response.data.customer_family);
+       setImageprofile(response.data.customer_img);
+       setCertifi(response.data.national_code);
+       setBirthyearvalue(response.data.birh_year);
+       setBirthmonthvalue(response.data.birth_month);
+       setBirthvalue(response.data.birth_day);
+       setMobile(response.data.mobile)
+      
+      }else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+  },[])
+
+  /////////// send data to server //////////
   const sendEditRgister = () => {
     const formData = new FormData();
     formData.append("customer_token", Cookies.get("token"));

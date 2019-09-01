@@ -13,6 +13,7 @@ import ContactUs from './Components/ContactUs';
 import AboutUs from './Components/AboutUs';
 import Basket from './Components/Basket';
 import CustomOrder from './Components/CustomOrder';
+import UnreadableCustom from './Components/Layout/Panel/unreadableCustom';
 function Routes() {
 
     const routers = [
@@ -92,7 +93,7 @@ function Routes() {
             component:CustomOrder,
             exact:true
         }
-
+      
     ];
 
     return (

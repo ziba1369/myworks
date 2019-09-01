@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Nav, NavDropdown, Row, Dropdown, Col } from "react-bootstrap";
+import { Nav, NavDropdown, Row, Dropdown, Col,Spinner } from "react-bootstrap";
 import { dashboardAPI } from "../../../api/api";
 import Media from "react-media";
 import { withRouter } from "react-router-dom";
@@ -10,6 +10,7 @@ import {
 } from "react-toasts";
 import Myorder from './Myorder';
 import * as Cookies from "js-cookie";
+import editicon from '../../../images/pencil-edit-button.svg';
 const NewOrder = (props) => {
   const [dashboarduser, setDashboard] = useState({
     totalOrders: "",
@@ -18,9 +19,10 @@ const NewOrder = (props) => {
     lastOrders: [],
     lastReadyTransaltion: []
   });
+const[spiner,setSpiner]=useState(true);
   useEffect(() => {
     dashboardAPI(Cookies.get("token"), response => {
-      console.log(response.data, "dash");
+     
       if (response.data.success) {
         setDashboard({
           totalOrders: response.data.totalOrders,
@@ -30,13 +32,14 @@ const NewOrder = (props) => {
           lastReadyTransaltion: response.data.lastReadyTransaltions
         });
 
-        console.log(response.data, "dash");
+       
       } else {
+        setSpiner(false)
         ToastsStore.error(response.data.error);
       }
     });
   }, []);
-  console.log(dashboarduser, "data");
+
   return (
     <React.Fragment>
       <div className="info-panel row">
@@ -56,7 +59,7 @@ const NewOrder = (props) => {
           <p>سبد پرداخت</p>
         </div>
         <div className="col-xl-3 col-lg-3 col-md-3  col-xs-12 readytrans" onClick={()=>{
-          props.history.push("/profile/mytranslates");
+          props.history.push("/profile/mytranslate");
           window.location.reload();
         }}>
           <p>{dashboarduser.readyOrders}</p>
@@ -92,8 +95,10 @@ const NewOrder = (props) => {
                 </div>
 
                 <div className="lastorderlist">
+                
                   {dashboarduser.lastOrders.map((i,index) => {
                     return (
+                
                       <div className="row myorderlist">
                         <Col lg={1} xl={1} md={1}>
                           {index+1}
@@ -111,9 +116,10 @@ const NewOrder = (props) => {
                           {i.status}
                         </Col>
                         <Col lg={2} xl={2} md={2}>
-                          6
+                        <img style={{width:'10px'}} src={editicon} onClick={(e)=>{alert(e)}} alt={editicon}/>
                         </Col>
                         </div>
+                    
                     );
                   })}
                 </div>
@@ -122,7 +128,7 @@ const NewOrder = (props) => {
           />
 
           <Media
-            query="(max-width:992px)"
+            query="(max-width:991px)"
             render={() => (
               <div className="contentpanel">
                 <div className="row myorderlist">
@@ -163,7 +169,7 @@ const NewOrder = (props) => {
                           عملیات
                         </Col>
                         <Col lg={12} xl={12} md={12}>
-                          6
+                        <img style={{width:'10px'}} src={editicon} onClick={(e)=>{alert(e)}} alt={editicon}/>
                         </Col>
                         </React.Fragment>
                     );
@@ -223,7 +229,7 @@ const NewOrder = (props) => {
                           {i.status}
                         </Col>
                         <Col lg={2} xl={2} md={2}>
-                          6
+                        <img style={{width:'10px'}} src={editicon} onClick={(e)=>{alert(e)}} alt={editicon}/>
                         </Col>
                       </div>
                     );
@@ -274,7 +280,7 @@ const NewOrder = (props) => {
                           عملیات
                         </Col>
                         <Col lg={12} xl={12} md={12}>
-                          6
+                        <img style={{width:'10px'}} src={editicon} onClick={(e)=>{alert(e)}} alt={editicon}/>
                         </Col>
                       </React.Fragment>
                     );

@@ -247,6 +247,12 @@ export const app_edit_profileAPI = (formData, callBack) => {
             callBack(response);
         })
 }
+export const getprofileApI=(customer_token,callBack)=>{
+    axios.get(serverURL+"front/get_user_data?customer_token="+customer_token,headers)
+    .then(function(response){
+        callBack(response)
+    })
+}
 //dashboard
 export const dashboardAPI = (customer_token, callBack) => {
     axios.get(serverURL + "front/user_dashboard?customer_token=" + customer_token, headers)
@@ -314,19 +320,26 @@ export const get_newsAPI = (slug, callBack) => {
             callBack(response);
         });
 }
- // axios
-    //   .get(
-    //     "http://hezare3vom.ratechcompany.com/api/front/get_news/?news_slug=" +
-    //       props.match.params.slug,
-
-    //     {
-    //       headers: { "Content-Type": "application/json" }
-    //     }
-    //   )
-    //   .then(function(response) {
-    //     if (response.data.success) {
-    //       setNews([response.data]);
-    //     } else {
-    //       ToastsStore.error(response.data.error);
-    //     }
-    //   });
+// edit ordef file
+export const editOrderFileAPI = (token, orderId, rejectId, editType, images, callBack) => {
+    const formData = new FormData();
+    formData.append("customer_token", token);
+    formData.append("order_id", orderId);
+    formData.append("order_reject_id", rejectId);
+    formData.append("edit_type", editType);
+    formData.append("file_count", images.length + 1);
+    var i = 0;
+    for (i = 0; i < images.length; i++) {
+        formData.append("order_file_" + (i + 1), images[i]);
+    }
+    axios.post(serverURL + "edit_order_files", formData, headers)
+        .then(function (response) {
+            callBack(response)
+        })
+};
+export const getOrderFileAPI = (token, orderId, callBack) => {
+    axios.get(serverURL + "get_order_files/?customer_token=" + token + "&order_id=" + orderId , headers)
+        .then(function (response) {
+            callBack(response)
+        })
+};
