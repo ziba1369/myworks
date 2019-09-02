@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1316d98a-d05a-42e6-8ed8-22820e469441" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CustomOrder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CustomOrder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Layout/customorderlayout/Confirmorder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/customorderlayout/Confirmorder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Layout/customorderlayout/Photoupload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/customorderlayout/Photoupload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Layout/customorderlayout/ServicesGroup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Layout/customorderlayout/Tabschoice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/customorderlayout/Tabschoice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Panel/EditeOrder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Panel/EditOrder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Panel/Myorder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Panel/Myorder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Panel/unreadableCustom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Panel/unreadableCustom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PanelCustom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PanelCustom.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -22,11 +20,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Components/Layout/customorderlayout/Tabschoice.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Layout/Panel/EditOrder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="415" column="48" selection-start-line="415" selection-start-column="48" selection-end-line="415" selection-end-column="48" />
+            <state relative-caret-position="32">
+              <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Layout/Panel/unreadableCustom.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="71" column="52" selection-start-line="71" selection-start-column="52" selection-end-line="71" selection-end-column="52" />
+              <folding>
+                <element signature="e#0#49#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Layout/home/Popularservices.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1484">
+              <caret line="180" column="26" selection-start-line="180" selection-start-column="15" selection-end-line="180" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Components/Layout/Panel/Myorder.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#49#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/PanelCustom.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="106" column="52" selection-start-line="106" selection-start-column="52" selection-end-line="109" selection-end-column="62" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -38,10 +81,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tabsdet</find>
-      <find>tabs</find>
-      <find>NavBar</find>
-      <find>Flags</find>
       <find>/order</find>
       <find>.detailnews img</find>
       <find>user</find>
@@ -68,6 +107,10 @@
       <find>onClicks</find>
       <find>customOrderFileCount</find>
       <find>data</find>
+      <find>editHandler</find>
+      <find>step</find>
+      <find>setstep</find>
+      <find>setStep</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -84,10 +127,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/App.test.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/App.css" />
-        <option value="$PROJECT_DIR$/src/Components/Layout/Slide.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/Services.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/Popularservices.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/page2.js" />
@@ -120,11 +159,9 @@
         <option value="$PROJECT_DIR$/src/Components/Loginpage.js" />
         <option value="$PROJECT_DIR$/src/Components/Register.js" />
         <option value="$PROJECT_DIR$/src/Components/PriceServices.js" />
-        <option value="$PROJECT_DIR$/src/Components/Layout/home/Popularservices.js" />
         <option value="$PROJECT_DIR$/src/Components/Order.js" />
         <option value="$PROJECT_DIR$/src/Routes.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/NavBar.js" />
-        <option value="$PROJECT_DIR$/src/Components/PanelCustom.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/Panel/EditProfile.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/orderlayout/Tabschoice.js" />
         <option value="$PROJECT_DIR$/src/css/all.css" />
@@ -135,6 +172,12 @@
         <option value="$PROJECT_DIR$/src/Components/Layout/customorderlayout/ServicesGroup.js" />
         <option value="$PROJECT_DIR$/src/Components/CustomOrder.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/customorderlayout/Tabschoice.js" />
+        <option value="$PROJECT_DIR$/src/Components/Layout/Panel/EditeOrder.js" />
+        <option value="$PROJECT_DIR$/src/Components/Layout/home/Popularservices.js" />
+        <option value="$PROJECT_DIR$/src/Components/Layout/Panel/EditOrder.js" />
+        <option value="$PROJECT_DIR$/src/Components/Layout/Panel/unreadableCustom.js" />
+        <option value="$PROJECT_DIR$/src/Components/PanelCustom.js" />
+        <option value="$PROJECT_DIR$/src/Components/Layout/Panel/Myorder.js" />
       </list>
     </option>
   </component>
@@ -187,7 +230,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
               <item name="Layout" type="462c0819:PsiDirectoryNode" />
-              <item name="customorderlayout" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hezareh3-react-js" type="b2602c69:ProjectViewProjectNode" />
@@ -195,13 +238,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
               <item name="Layout" type="462c0819:PsiDirectoryNode" />
-              <item name="orderlayout" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hezareh3-react-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hezareh3-react-js" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="Panel" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -262,18 +299,18 @@
       <workItem from="1564211884090" duration="1034000" />
       <workItem from="1564226283472" duration="6957000" />
       <workItem from="1564290233645" duration="1715000" />
-      <workItem from="1567399629540" duration="11756000" />
+      <workItem from="1567399629540" duration="20835000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80911000" />
+    <option name="totallyTimeSpent" value="89990000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -288,7 +325,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="TypeScript" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -310,9 +347,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Components/Layout/ContatctUs.js" />
-    <entry file="file://$PROJECT_DIR$/src/Components/Layout/Flags.js" />
-    <entry file="file://$PROJECT_DIR$/src/Components/Layout/Introduce.js" />
     <entry file="file://$PROJECT_DIR$/src/Components/Layout/page2.js" />
     <entry file="file://$PROJECT_DIR$/src/Components/Layout/Popularservices.js" />
     <entry file="file://$PROJECT_DIR$/src/Components/Layout/Services.js" />
@@ -403,16 +437,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/News.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="123" column="36" lean-forward="true" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Register.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -437,13 +461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Layout/home/Popularservices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="83" column="43" selection-start-line="83" selection-start-column="24" selection-end-line="83" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Layout/Menu.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="950">
@@ -455,16 +472,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1360">
           <caret line="97" column="45" selection-start-line="97" selection-start-column="45" selection-end-line="97" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/PanelCustom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="51" column="83" selection-start-line="51" selection-start-column="83" selection-end-line="51" selection-end-column="83" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -495,13 +502,6 @@
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5015">
-          <caret line="295" column="34" selection-start-line="295" selection-start-column="34" selection-end-line="295" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -556,30 +556,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Layout/customorderlayout/Photoupload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="83" selection-start-line="4" selection-start-column="83" selection-end-line="4" selection-end-column="83" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Layout/customorderlayout/ServicesGroup.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3028">
           <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Layout/customorderlayout/Confirmorder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -607,10 +587,91 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Layout/customorderlayout/Confirmorder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="27" selection-end-line="23" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Layout/customorderlayout/Photoupload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="83" selection-start-line="4" selection-start-column="83" selection-end-line="4" selection-end-column="83" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Layout/customorderlayout/Tabschoice.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="415" column="48" selection-start-line="415" selection-start-column="48" selection-end-line="415" selection-end-column="48" />
+        <state relative-caret-position="7072">
+          <caret line="416" column="52" lean-forward="true" selection-start-line="416" selection-start-column="52" selection-end-line="416" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/News.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="123" column="14" selection-start-line="123" selection-start-column="14" selection-end-line="123" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="339" column="13" selection-start-line="339" selection-start-column="13" selection-end-line="339" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Layout/Panel/EditOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/PanelCustom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="106" column="52" selection-start-line="106" selection-start-column="52" selection-end-line="109" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Layout/Panel/unreadableCustom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="71" column="52" selection-start-line="71" selection-start-column="52" selection-end-line="71" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Layout/home/Popularservices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1484">
+          <caret line="180" column="26" selection-start-line="180" selection-start-column="15" selection-end-line="180" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Layout/Panel/Myorder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>
