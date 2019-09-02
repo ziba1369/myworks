@@ -9,7 +9,7 @@ import axios from "axios";
 import * as Cookies from "js-cookie";
 import Media from "react-media";
 ////////////////////////tabchoice function /////////////////////////////////
-const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,validation,setVal,delivery,setDelivery,countorder,setcountorder }) => {
+const Tabschoice = (props) => {
   /////////////////////set variable ///////////////////////
  
   const [styleone, setStyleone] = useState({
@@ -18,18 +18,18 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
     color: "#e1e1e1",
     border: "0px"
   });
-  ////////////////////////set data to languages /////////////////////////////////
-  const lnaguage = languages.map((item, index) => {
+  ////////////////////////set data to props.languages /////////////////////////////////
+  const lnaguage = props.languages.map((item, index) => {
     const langhandle = () => {
-      var lng = [...languages];
+      var lng = [...props.languages];
       lng[index].checkin = !lng[index].checkin;
-      setLang(lng);
+      props.setLang(lng);
     };
 
     return (
       <Row>
        <div className="col-8 text-services">{item.name}</div>
-        <Col xl={4} lg={4} md={4} sm={4} xs={4}>
+        <Col xl={4} lg={4} md={5} sm={5} xs={5} >
           <div className="stylenumprice">
             {item.price} <span className="styletoman"> تومان</span>
             
@@ -48,8 +48,8 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
     );
   });
   ////////////////////////set data to certificate/////////////////////////////////
-  const valid = validation.map((item, index) => {
-    var val = [...validation];
+  const valid = props.validation.map((item, index) => {
+    var val = [...props.validation];
     if (val[index].needed === 1) {
       val[index].checkin = true;
     }
@@ -57,7 +57,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
       if (val[index].needed === 0) {
         val[index].checkin = !val[index].checkin;
 
-        setVal(val);
+        props.setVal(val);
       }
     };
     return (
@@ -83,13 +83,13 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
     );
   });
   ////////////////////////set data to delivery/////////////////////////////////
-  const typedelivery = delivery.map((item, index) => {
+  const typedelivery = props.delivery.map((item, index) => {
     const deliveryhandle = () => {
       console.log(index);
-      var del = [...delivery];
+      var del = [...props.delivery];
       del[0].checkin = !del[0].checkin;
       del[1].checkin = !del[1].checkin;
-      setDelivery(del);
+      props.setDelivery(del);
     };
     return (
       <Row key={item.id}>
@@ -116,22 +116,22 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
     let blang = false;
     let bval = false;
     let bdel = false;
-    for (let x in languages) {
-      if (languages[x].checkin) {
+    for (let x in props.languages) {
+      if (props.languages[x].checkin) {
         blang = true;
         break;
       }
     }
 
-    for (let x in validation) {
-      if (validation[x].checkin) {
+    for (let x in props.validation) {
+      if (props.validation[x].checkin) {
         bval = true;
 
         break;
       }
     }
-    for (let x in delivery) {
-      if (delivery[x].checkin) {
+    for (let x in props.delivery) {
+      if (props.delivery[x].checkin) {
         bdel = true;
 
         break;
@@ -139,7 +139,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
     }
     if (blang && bval && bdel) {
  
-      onClicks();
+      props.onClicks();
     } else if (blang === false) {
       ToastsStore.warning("لطفا یک زبان برای ترجمه انتخاب کنید");
     } else if (bval === false) {
@@ -153,22 +153,22 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
     let blang = false;
     let bval = false;
     let bdel = false;
-    for (let x in languages) {
-      if (languages[x].checkin) {
+    for (let x in props.languages) {
+      if (props.languages[x].checkin) {
         blang = true;
 
         break;
       }
     }
-    for (let x in validation) {
-      if (validation[x].checkin) {
+    for (let x in props.validation) {
+      if (props.validation[x].checkin) {
         bval = true;
 
         break;
       }
     }
-    for (let x in delivery) {
-      if (delivery[x].checkin) {
+    for (let x in props.delivery) {
+      if (props.delivery[x].checkin) {
         bdel = true;
 
         break;
@@ -204,80 +204,20 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
       });
     }
   };
-  ////////////////////////count choosed languages/////////////////////////////////
-  //eslint-disable-next-line
-  const languagenum = () => {
-    let w = 0;
-    for (let x in languages) {
-      if (languages[x].checkin) {
-        w++;
-      }
-    }
-    return w;
-  };
-  ////////////////////////count choosed certificate/////////////////////////////////
-   //eslint-disable-next-line
-  const acceptnum = () => {
-    let w = 0;
-    for (let x in validation) {
-      if (validation[x].checkin) {
-        w++;
-      }
-    }
-    return w;
-  };
-  ////////////////////////count choosed certificate/////////////////////////////////
-   //eslint-disable-next-line
-  const deliverynum = () => {
-    let z;
-    for (let x in delivery) {
-      if (delivery[x].checkin) {
-        z = delivery[x].name;
-      }
-    }
-    return z;
-  };
+ 
 
   ////////////////////////check change login button/////////////////////////////////
   
   useEffect(() => {
     changeButton();
-  }, [languages]);
+  }, [props.languages]);
   useEffect(() => {
     changeButton();
-  }, [validation]);
+  }, [props.validation]);
   useEffect(() => {
     changeButton();
-  }, [delivery]);
-  ////////////////////////sum all vlaue of orders/////////////////////////////////
- //eslint-disable-next-line
-  const sumValue = () => {
-    let sumd = 0;
-    let sumv = 0;
-    let sum = 0;
-    for (let x in languages) {
-      if (languages[x].checkin) {
-        sum = sum + parseInt(languages[x].price);
-      }
-    }
-    for (let x in validation) {
-      if (validation[x].checkin) {
-        sumv = sumv + parseInt(validation[x].price);
-      }
-    }
-    for (let x in delivery) {
-      if (delivery[x].checkin) {
-        sumd = sumd + parseInt(delivery[x].price);
-      }
-    }
-
-    if (countorder > 0) {
-      return (countorder + 1) * (sum + sumv + sumd);
-    } else {
-      return sum + sumv + sumd;
-    }
-  };
-
+  }, [props.delivery]);
+ 
   ////////////////////////set data in cookie/////////////////////////////////
 
   return (
@@ -290,18 +230,18 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
             <Card.Text>
               زبان ترجمه
               <span>
-                {languagenum()}
+                {props.languagenum()}
                 مورد
               </span>
             </Card.Text>
             <Card.Text>
-              مهرو تاییدات<span>{acceptnum()} مورد</span>
+              مهرو تاییدات<span>{props.acceptnum()} مورد</span>
             </Card.Text>
             <Card.Text>
-              نسخه اضافه<span>{countorder} مورد</span>
+              نسخه اضافه<span>{props.countorder} مورد</span>
             </Card.Text>
             <Card.Text>
-              نوع تحویل<span>{deliverynum()}</span>
+              نوع تحویل<span>{props.deliverynum()}</span>
             </Card.Text>
           </Card.Body>
         </Card>
@@ -384,21 +324,21 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
                     <div className="incre col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12">
                       <Button
                         className="increase"
-                        onClick={() => setcountorder(prevCount => prevCount + 1)}
+                        onClick={() => props.setcountorder(prevCount => prevCount + 1)}
                       >
                         +
                       </Button>
                     </div>
                     <div className="text col-xl-8 col-lg-8 col-md-8 col-sm-12  col-xs-12">
-                      {countorder}
+                      {props.countorder}
                     </div>
                     <div className="dec col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12">
                       <Button
                         className="decrease col-x1-2 col-lg-2 col-md-2 col-sm-12  col-xs-12"
                         onClick={() => {
-                          if (countorder <= 0) setcountorder(0);
+                          if (props.countorder <= 0) props.setcountorder(0);
                           else {
-                            setcountorder(prevCount => prevCount - 1);
+                            props.setcountorder(prevCount => prevCount - 1);
                           }
                         }}
                       >
@@ -459,21 +399,21 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
                         <div className="incre col-2">
                           <Button
                             className="increase"
-                            onClick={() => setcountorder(prevCount => prevCount + 1)}
+                            onClick={() => props.setcountorder(prevCount => prevCount + 1)}
                           >
                             +
                           </Button>
                         </div>
                         <div className="text col-8">
-                          {countorder}
+                          {props.countorder}
                         </div>
                         <div className="dec col-2">
                           <Button
                             className="decrease col-2"
                             onClick={() => {
-                              if (countorder <= 0) setcountorder(0);
+                              if (props.countorder <= 0) props.setcountorder(0);
                               else {
-                                setcountorder(prevCount => prevCount - 1);
+                                props.setcountorder(prevCount => prevCount - 1);
                               }
                             }}
                           >
@@ -510,7 +450,7 @@ const Tabschoice = ({ optiontype, onClicks, step, onChanges,languages,setLang,va
           size="lg"
         >
           <p>مجموع هزینه ها</p>
-          <p>{sumValue()} تومان</p>
+          <p>{props.sumValue()} تومان</p>
         </Button>
         <Button style={styleone} id="add1" onClick={handleSubmit} type="submit">
           ادامه سفارش

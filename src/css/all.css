@@ -2021,6 +2021,9 @@ form.servicesgroup {
 .increase {
   background-color: #1976d2 !important;
   border: 0px !important;
+  margin:0 auto;
+  display:table !important;
+  position: relative;
 }
 
 .increase:focus {
@@ -2052,6 +2055,17 @@ div#left-tabs-example-tabpane-third {
   .counter .text {
     padding: 0px !important
   }
+  .text-services {
+    text-align: right;
+    flex: 0 0 55.666667% !important;
+    max-width: 55.666667% !important;
+}
+.decrease{
+  margin: 0 -1rem 0 0;
+}
+.increase {
+  margin: 0 -1rem 0 0rem;
+}
 }
 .tabsorder .nav-item a {
   color: #454f63 !important;
@@ -2179,7 +2193,9 @@ input[type="checkbox"]:checked:after {
 }
 
 .custom-file-container {
-  width: 100%;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 1rem !important;
 }
 
 #prev {

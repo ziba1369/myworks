@@ -4,12 +4,12 @@ import {Col, Button, Image} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import * as Cookies from "js-cookie";
 //////////////////////function confirmorder////////////////////////////////
-const Confirmorder = ({onClicks, step, onChanges}) => {
+const Confirmorder = (props) => {
 //////////////////////set varible for code//////////////////////////////// 
    
 //////////////////////handlecilck to next step////////////////////////////////
     const handleSubmit = () => {
-        onClicks();
+        props.onClicks();
     };
 //////////////////////main return////////////////////////////////
     return (
@@ -22,8 +22,8 @@ const Confirmorder = ({onClicks, step, onChanges}) => {
                 <p style={{fontSize: '.6rem', color: '#707069'}}>جهت پیگیری روند سفارش به بخش سفارش ها مراجعه کنید</p>
 
             </div>
-            <Button style={{width: '14rem',color:'#fff'}} id="add1" onClick={handleSubmit} >
-                <Link style={{width: '14rem',color:'#fff'}} to="/profile/second">
+            <Button style={{width: '14rem',color:'#fff'}} id="add1"  >
+                <Link style={{width: '14rem',color:'#fff'}} to="/profile/myorders">
                 سفارشات
                 </Link>
             </Button>

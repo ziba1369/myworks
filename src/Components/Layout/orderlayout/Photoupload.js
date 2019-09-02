@@ -10,19 +10,7 @@ import {
 import * as Cookies from "js-cookie";
 import { orderAPI } from "../../../api/api";
 ////////////////////photoupload function /////////////////////////////
-const Photoupload = ({
-  onClicks,
-  step,
-  onChanges,
-  orderFileCount,
-  setOrderFilecount,
-  photoUpload,
-  setPhotoUpload,
-  languages,
-  validation,
-  delivery,
-  countorder
-}) => {
+const Photoupload = (props) => {
   ////////////////////////set variable/////////////////////////////////
 
   const [photoStep] = useState({ border: "0px", backgroundColor: "#007bff" });
@@ -32,74 +20,13 @@ const Photoupload = ({
     document.getElementById("prev").style.display = "block";
   };
   ///////////////////////////////////////////////////
-  ////////////////////////count choosed languages/////////////////////////////////
-  //eslint-disable-next-line
-  const languagenum = () => {
-    let w = 0;
-    for (let x in languages) {
-      if (languages[x].checkin) {
-        w++;
-      }
-    }
-    return w;
-  };
-  ////////////////////////count choosed certificate/////////////////////////////////
-  //eslint-disable-next-line
-  const acceptnum = () => {
-    let w = 0;
-    for (let x in validation) {
-      if (validation[x].checkin) {
-        w++;
-      }
-    }
-    return w;
-  };
-  ////////////////////////count choosed certificate/////////////////////////////////
-  //eslint-disable-next-line
-  const deliverynum = () => {
-    let z;
-    for (let x in delivery) {
-      if (delivery[x].checkin) {
-        z = delivery[x].name;
-      }
-    }
-    return z;
-  };
-  ////////////////////////sum all vlaue of orders/////////////////////////////////
-  //eslint-disable-next-line
-  const sumValue = () => {
-    let sumd = 0;
-    let sumv = 0;
-    let sum = 0;
-    for (let x in languages) {
-      if (languages[x].checkin) {
-        sum = sum + parseInt(languages[x].price);
-      }
-    }
-    for (let x in validation) {
-      if (validation[x].checkin) {
-        sumv = sumv + parseInt(validation[x].price);
-      }
-    }
-    for (let x in delivery) {
-      if (delivery[x].checkin) {
-        sumd = sumd + parseInt(delivery[x].price);
-      }
-    }
-
-    if (countorder > 0) {
-      return (countorder + 1) * (sum + sumv + sumd);
-    } else {
-      return sum + sumv + sumd;
-    }
-  };
 
   ////////////////////////useeffectfor upload photo /////////////////////////////////
   useEffect(() => {
     new FileUploadWithPreview("myUniqueUploadId");
     window.addEventListener("fileUploadWithPreview:imagesAdded", function(e) {
-      setOrderFilecount(e.detail.addedFilesCount);
-      setPhotoUpload(e.detail.cachedFileArray);
+      props.setOrderFilecount(e.detail.addedFilesCount);
+      props.setPhotoUpload(e.detail.cachedFileArray);
       const pictures = {
         pic: e.detail.cachedFileArray.tokens
       };
@@ -113,7 +40,7 @@ const Photoupload = ({
   ////////////////////////handle submit/////////////////////////////////
   const handleSubmit = () => {
     ////////////////////////send choose languages to server /////////////////////////////////
-    const orderlanguages = languages;
+    const orderlanguages = props.languages;
     const order_lang = orderlanguages.filter(item => item.checkin === true);
     const order_languages = order_lang.map(item => {
       return (
@@ -125,13 +52,13 @@ const Photoupload = ({
       );
     });
     ////////////////////////send choose certificate to server /////////////////////////////////
-    const orderValidation = validation;
+    const orderValidation =props.validation;
     const order_cert = orderValidation.filter(item => item.checkin === true);
     const order_certificate = order_cert.map(item => {
       return item.name + "," + item.price;
     });
     ////////////////////////send choose deliver to server /////////////////////////////////
-    const translate_type = delivery;
+    const translate_type = props.delivery;
     const deliver = translate_type.filter(item => item.checkin === true);
     const deliverytype = deliver.map(item => {
       return item.type;
@@ -151,17 +78,17 @@ const Photoupload = ({
     formDataorder.append("order_type", "normal");
     formDataorder.append("translate_type", deliverytype[0]);
     formDataorder.append("page_count", 0);
-    formDataorder.append("copy_count", countorder);
+    formDataorder.append("copy_count", props.countorder);
     formDataorder.append("weight_added_version", 0);
     formDataorder.append("normal_price", deliveryprice[0]);
     formDataorder.append("fast_price", deliveryprice[0]);
-    formDataorder.append("total_price", sumValue());
+    formDataorder.append("total_price", props.sumValue());
     formDataorder.append("need_certificate", 0);
-    formDataorder.append("order_file_count", orderFileCount);
-    console.log(photoUpload !== undefined);
-    if (photoUpload !== undefined) {
-      photoUpload.map((item, index) => {
-        formDataorder.append("order_file_" + index, photoUpload[0]);
+    formDataorder.append("order_file_count", props.orderFileCount);
+    console.log(props.photoUpload !== undefined);
+    if (props.photoUpload !== undefined) {
+      props.photoUpload.map((item, index) => {
+        formDataorder.append("order_file_" + index, props.photoUpload[0]);
       });
     }
     formDataorder.append("order_languages", order_languages);
@@ -174,7 +101,7 @@ const Photoupload = ({
           path: "/",
           expires: 7
         });
-        onClicks();
+        props.onClicks();
       } else {
         ToastsStore.error(response.data.error);
       }
@@ -194,16 +121,16 @@ const Photoupload = ({
           <Card.Body>
             <Card.Title> {Cookies.get("title")}</Card.Title>
             <Card.Text>
-              زبان ترجمه<span>{languagenum()} مورد</span>
+              زبان ترجمه<span>{props.languagenum()} مورد</span>
             </Card.Text>
             <Card.Text>
-              مهرو تاییدات<span>{acceptnum()} مورد</span>
+              مهرو تاییدات<span>{props.acceptnum()} مورد</span>
             </Card.Text>
             <Card.Text>
-              نسخه اضافه<span>{countorder} مورد</span>
+              نسخه اضافه<span>{props.countorder} مورد</span>
             </Card.Text>
             <Card.Text>
-              نوع تحویل<span>{deliverynum()}</span>
+              نوع تحویل<span>{props.deliverynum()}</span>
             </Card.Text>
           </Card.Body>
         </Card>
@@ -278,7 +205,7 @@ const Photoupload = ({
           size="lg"
         >
           <p>مجموع هزینه ها</p>
-          <p>{sumValue()}</p>
+          <p>{props.sumValue()}</p>
         </Button>
         <Button
           onClick={handleSubmit}

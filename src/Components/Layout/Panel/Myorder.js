@@ -16,6 +16,7 @@ const Myorder = ({step,setstep}) => {
   useEffect(() => {
     myorderAPI(Cookies.get("token"),(response)=>{
       if (response.data.success) {
+        console.log(response.data)
         setOrder(response.data.orders);
        
       } else {

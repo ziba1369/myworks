@@ -137,7 +137,7 @@ const Panelcustom = props => {
                       </Nav.Item>
                       <Nav.Item>
                         <Nav.Link eventKey="editprofile">
-                          <Link to="/profile/mybills">
+                          <Link to="/profile/editprofile">
                             <span>
                               <Image src={userimg} alt="userimg" />
                             </span>
@@ -174,9 +174,7 @@ const Panelcustom = props => {
                       <Tab.Pane eventKey="dashboard">
                         <Dashboard />
                       </Tab.Pane>
-                      <Tab.Pane eventKey="editprofile">
-                        <EditProfile />
-                      </Tab.Pane>
+                      
 
                       <Tab.Pane eventKey="myorders">
                         {step===1&&<Myorder setstep={(x)=>setstep(x)}/>}
@@ -188,6 +186,9 @@ const Panelcustom = props => {
                       </Tab.Pane>
                       <Tab.Pane eventKey="mytranslate">
                         <Mytranslate />
+                      </Tab.Pane>
+                      <Tab.Pane eventKey="editprofile">
+                        <EditProfile />
                       </Tab.Pane>
                       <Tab.Pane eventKey="changepass">
                         <Passchange />
@@ -295,14 +296,15 @@ const Panelcustom = props => {
                   ></div>
                   {props.match.params.page === "dashboard" ? (
                     <Dashboard />
-                  ) : props.match.params.page === "editprofile" ? (
-                    <EditProfile />
+                 
                   ) : props.match.params.page === "myorders" ? (
                     <Myorder />
                   ) : props.match.params.page === "mybill" ? (
                     <Mybill />
                   ) : props.match.params.page === "mytranslate" ? (
                     <Mytranslate />
+                    ) : props.match.params.page === "editprofile" ? (
+                      <EditProfile />
                   ) : props.match.params.page === "changepass" ? (
                     <Passchange />
                   ) : (
