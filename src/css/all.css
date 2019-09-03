@@ -3405,6 +3405,11 @@ span.input-title {
 	cursor: default;
 	z-index: 1900;
 }
+.modal-body {
+  text-align: center;
+}
+
+
 /* customorder */
 /* basket */
 /* aboutus */

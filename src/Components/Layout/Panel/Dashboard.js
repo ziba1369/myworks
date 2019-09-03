@@ -77,21 +77,19 @@ const[spiner,setSpiner]=useState(true);
                   <Col lg={1} xl={1} md={1}>
                     ردیف
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={3} xl={3} md={3}>
                     عنوان سفارش
                   </Col>
                   <Col lg={3} xl={3} md={3}>
                     شماره سفارش
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={3} xl={3} md={3}>
                     تاریخ ثبت
                   </Col>
                   <Col lg={2} xl={2} md={2}>
                     وضعیت
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
-                    عملیات
-                  </Col>
+                 
                 </div>
 
                 <div className="lastorderlist">
@@ -103,21 +101,19 @@ const[spiner,setSpiner]=useState(true);
                         <Col lg={1} xl={1} md={1}>
                           {index+1}
                         </Col>
-                        <Col lg={2} xl={2} md={2}>
+                        <Col lg={3} xl={3} md={3}>
                           {i.order_name}
                         </Col>
                         <Col lg={3} xl={3} md={3}>
                           {i.order_code}
                         </Col>
-                        <Col lg={2} xl={2} md={2}>
+                        <Col lg={3} xl={3} md={3}>
                           {i.created_at}
                         </Col>
                         <Col lg={2} xl={2} md={2}>
                           {i.status}
                         </Col>
-                        <Col lg={2} xl={2} md={2}>
-                        <img style={{width:'10px'}} src={editicon} onClick={(e)=>{alert(e)}} alt={editicon}/>
-                        </Col>
+                      
                         </div>
                     
                     );
@@ -165,12 +161,8 @@ const[spiner,setSpiner]=useState(true);
                         <Col lg={12} xl={12} md={12}>
                           {i.status}
                         </Col>
-                        <Col lg={12} xl={12} md={12}>
-                          عملیات
-                        </Col>
-                        <Col lg={12} xl={12} md={12}>
-                        <img style={{width:'10px'}} src={editicon} onClick={(e)=>{alert(e)}} alt={editicon}/>
-                        </Col>
+                       
+                       
                         </React.Fragment>
                     );
                   })}
@@ -192,21 +184,19 @@ const[spiner,setSpiner]=useState(true);
                   <Col lg={1} xl={1} md={1}>
                     ردیف
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={3} xl={3} md={3}>
                     عنوان سفارش
                   </Col>
                   <Col lg={3} xl={3} md={3}>
                     شماره سفارش
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
+                  <Col lg={3} xl={3} md={3}>
                     تاریخ ثبت
                   </Col>
                   <Col lg={2} xl={2} md={2}>
                     وضعیت
                   </Col>
-                  <Col lg={2} xl={2} md={2}>
-                    عملیات
-                  </Col>
+                  
                 </div>
 
                 <div className="lastorderlist">
@@ -216,21 +206,19 @@ const[spiner,setSpiner]=useState(true);
                         <Col lg={1} xl={1} md={1}>
                           {index+1}
                         </Col>
-                        <Col lg={2} xl={2} md={2}>
+                        <Col lg={3} xl={3} md={3}>
                           {i.order_name}
                         </Col>
                         <Col lg={3} xl={3} md={3}>
                           {i.order_code}
                         </Col>
-                        <Col lg={2} xl={2} md={2}>
+                        <Col lg={3} xl={3} md={3}>
                           {i.created_at}
                         </Col>
-                        <Col lg={2} xl={2} md={2}>
+                        <Col lg={3} xl={2} md={2}>
                           {i.status}
                         </Col>
-                        <Col lg={2} xl={2} md={2}>
-                        <img style={{width:'10px'}} src={editicon} onClick={(e)=>{alert(e)}} alt={editicon}/>
-                        </Col>
+                        
                       </div>
                     );
                   })}
@@ -276,12 +264,7 @@ const[spiner,setSpiner]=useState(true);
                         <Col lg={12} xl={12} md={12}>
                           {i.status}
                         </Col>
-                        <Col lg={12} xl={12} md={12}>
-                          عملیات
-                        </Col>
-                        <Col lg={12} xl={12} md={12}>
-                        <img style={{width:'10px'}} src={editicon} onClick={(e)=>{alert(e)}} alt={editicon}/>
-                        </Col>
+                       
                       </React.Fragment>
                     );
                   })}

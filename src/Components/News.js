@@ -125,7 +125,7 @@ const Steptranslate = () => {
         <div className="rtl centerapge">
           <Paginatior
             totalRecords={newsdet.length}
-            pageLimit={1}
+            pageLimit={7}
             pageNeighbours={1}
             setOffset={setOffset}
             currentPage={currentPage}
