@@ -2164,8 +2164,12 @@ input[type="checkbox"]:checked:after {
 .uploadphoto {
   padding: 2rem 2rem 2rem;
   height: 100%;
+  width:100%;
 }
-
+.upload-preview {
+  width: 130px;
+  height: 130px !important;
+}
 .uploadphoto .custom-file-container__image-preview {
   overflow: auto !important;
   background: none !important;
@@ -2175,6 +2179,7 @@ input[type="checkbox"]:checked:after {
 .upload-text {
   text-align: center;
   font-size: 0.75rem;
+  margin: 0 auto
 }
 
 .uploadphotobox {
@@ -2193,8 +2198,8 @@ input[type="checkbox"]:checked:after {
 }
 
 .custom-file-container {
-  width: 130px;
-  height: 130px;
+  width: 100%;
+
   margin-bottom: 1rem !important;
 }
 
@@ -2881,10 +2886,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   border-radius: 1rem;
   
 }
-/* .panel .custom-file-container__image-preview {
-  height: 130px !important;
-  width: 130px !important;
-} */
+
 .profpic{
   margin:0 auto;
   display: table;
@@ -3405,11 +3407,33 @@ span.input-title {
 	cursor: default;
 	z-index: 1900;
 }
-.modal-body {
-  text-align: center;
+.edit-file-images {
+  width: 20%;
+  margin: .5rem;
 }
-
-
+.edit-file-images img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+}
+button.re-upload {
+  background-color: #f7faff;
+  border: 0px;
+  border-radius: 1rem;
+  padding: 0.9rem;
+}
+button.btn-second-edit-file {
+  display: table;
+  margin: 0 auto;
+  background-color: #f7faff !important;
+  border: 0px;
+  width: 200px;
+  border-radius: 1rem;
+  padding: .5rem 1rem;
+  margin-top: 1rem;
+}
 /* customorder */
 /* basket */
 /* aboutus */

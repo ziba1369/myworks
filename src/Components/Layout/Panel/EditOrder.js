@@ -120,7 +120,7 @@ export default function EditOrder(props) {
                     <p className="title-custom">دلیل عدم تایید</p>
                     <p className="title-cutomdet">{props.orderIssue}</p>
                 </div>
-                <div className="uploadphoto" style={{margin: '0 auto'}}>
+                <div className="uploadphoto" >
                     <Row>فایلهای پیوست</Row>
                     <Row>
                         <div className="upload-text">
@@ -144,8 +144,8 @@ export default function EditOrder(props) {
                             return (
                                 <div key={index} className="edit-file-images">
                                     <img src={item.img} alt=""/>
-                                    <span style={style}>{item.status}</span>
-                                    <button onClick={() => {
+                                    <p style={style}>{item.status}</p>
+                                    <button className="re-upload" onClick={() => {
                                         setSelectedId(item.id);
                                         inputOpenFileRef.current.click()
                                     }}>آپلود مجدد
