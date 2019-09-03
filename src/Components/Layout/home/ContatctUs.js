@@ -118,7 +118,9 @@ const Contatus = props => {
     };
     send_messageAPI(contactUs, response => {
       if (response.data.success) {
-        console.log(response.data, "send");
+        ToastsStore.success(
+          "پیام شما باموفقیت ارسال گردید"
+        );
       } else {
         ToastsStore.error(response.data.errmessage);
       }

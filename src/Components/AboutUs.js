@@ -83,7 +83,7 @@ const AboutUs = () => {
               <Breadcrumb.Item>
                 <Link to="/">صفحه اصلی</Link>
               </Breadcrumb.Item>
-              <Breadcrumb.Item>درباره ما</Breadcrumb.Item>
+              <Breadcrumb.Item active href={null}>درباره ما</Breadcrumb.Item>
             </Breadcrumb>
           </Col>
         </Row>

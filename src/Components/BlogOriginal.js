@@ -11,11 +11,12 @@ import {
 } from "react-toasts";
 import axios from "axios";
 import Footer from "./Layout/Footer";
-import { get_newsAPI } from "../api/api";
+import { newsAPI,get_newsAPI } from "../api/api";
 ///////////detail-news function//////////////////
 const BlogOriginal = props => {
   ///////////set initial variable//////////////////
   const [newsdet, setNews] = useState([]);
+  const[news,setNewss]=useState([]);
   const [mettag, setMetatag] = useState({
     title: "",
     metatags: []
@@ -23,6 +24,16 @@ const BlogOriginal = props => {
   //////////////get dtail news from server//////////////////
 
   useEffect(() => {
+    newsAPI(4,(response)=>{
+      if (response.data.success) {
+        setNewss(response.data.news);
+        
+      } else {
+        ToastsStore.error(response.data.error);
+      }
+    })
+  
+ 
     get_newsAPI(props.match.params.slug, response => {
       if (response.data.success) {
         setNews([response.data]);
@@ -127,11 +138,11 @@ const BlogOriginal = props => {
           >
             <div className="rlnews">
               <h5 className="head-rtnews">اخبارهای مرتبط</h5>
-              {newsdet.map(i => {
+              {news.map(i => {
                 return (
                   <Row key={i.id}>
                     <Col lg={7} xl={7} md={12} sm={12} xs={12}>
-                      {i.title}
+                    <Link to={"/blog/" + i.slug}> {i.title}</Link>
                     </Col>
                     <Col lg={5} xl={5} md={12} sm={12} xs={12}>
                       <Image src={i.img} alt={i.title} />

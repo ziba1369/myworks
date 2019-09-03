@@ -18,7 +18,7 @@ const Footer = () => {
        newsAPI(pageLimit,(response)=>{
         if (response.data.success) {
             setNews(response.data.news);
-            
+            console.log(response.data.news,"footer")
            
 
         } else {
@@ -38,16 +38,17 @@ const Footer = () => {
            
            <Col  xl={2} lg={2}  md={2}   sm={12}  xs={12}>
              <p><Link to="/">صفحه اصلی</Link></p>
-             <p><Link to="/">خدمات ترجمه</Link></p>
+             <p><Link to="/services/all">خدمات ترجمه</Link></p>
              <p><Link to="/">قیمت ترجمه</Link></p>
-             <p><Link to="/">درباره ما</Link></p>
+             <p><Link to="/contactus">تماس باما</Link></p>
+             <p><Link to="/aboutus">درباره ما</Link></p>
            </Col>
            <Col  xl={4} lg={4}  md={4}   sm={12}  xs={12}>
             <h5>آخرین خبر</h5>
              {newsdet.map(item=>{
               
                  return(
-                     <p>{item.title}</p>
+                     <p> <Link to={"/blog/" + item.slug}>{item.title}</Link></p>
                  )
              }
                  )}
