@@ -5,263 +5,838 @@ import {Link} from "react-router-dom";
 import Paginatior from "react-hooks-paginator";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {ToastsContainer, ToastsStore, ToastsContainerPosition} from "react-toasts";
+import {ToastsStore} from "react-toasts";
 import * as Cookies from "js-cookie";
 import Footer from "./Layout/Footer";
-import {priceservicesAPI, searchAPI} from '../api/api';
-/////////////price srvices function/////////////////
+import {getHomeServicesAPI, metatagAPI, priceservicesAPI, searchAPI} from '../api/api';
+import MetaTags from "react-meta-tags";
+import officeDoc from "../images/sherkati-g.svg";
+import workDoc from "../images/shoghli.svg";
+import financeDoc from "../images/mali-g.svg";
+import educarionDoc from "../images/tahsili-g.svg";
+import cardDoc from "../images/passport.46186dcf.svg";
+
+
 const PriceServices = props => {
-    ///////////////set initial variable/////////////////////
+
+    const [metaTag, setMetaTag] = useState({
+        title: "",
+        metaTags: []
+    });
     const pageLimit = 15;
     const [offset, setOffset] = useState(0);
     const [total, setTotal] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [data, setData] = useState([]);
-    const [styleone, setStyleone] = useState({
-        color: "#454f63 ",
-        backgroundColor: "#aad0f4",
-        borderColor: "#aad0f4"
-    });
-    ////////////initial for buttons//////////////
-    const [styletwo, setStyletwo] = useState({
-        color: "#454f63",
-        backgroundColor: "#5766b5",
-        borderColor: "#5766b5"
-    });
-    const [stylethree, setStylethree] = useState({
-        color: "#454f63",
-        backgroundColor: "#ffdfe6",
-        borderColor: "#ffdfe6"
-    });
-    const [stylefour, setStylefour] = useState({
-        color: "#454f63",
-        backgroundColor: "#c5edd7",
-        borderColor: "#c5edd7"
-    });
-    const [stylefive, setStylefive] = useState({
-        color: "#454f63",
-        backgroundColor: "#dac2d4",
-        borderColor: "#dac2d4"
-    });
-    const [stylesix, setStylesix] = useState({
-        color: "#454f63",
-        backgroundColor: "#ffe7bd",
-        borderColor: "#ffe7bd"
-    });
-////////////////change color selected button///////////////
+    const [servicesButtons, setServicesButtons] = useState([]);
+
 
     useEffect(() => {
+        setOffset(0);
         switch (props.match.params.id) {
             case "all":
-                setStyleone({
-                    backgroundColor: "#3798f5",
-                    boxShadow: " 0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    border: "0px"
-                });
-                setStyletwo({
-                    color: "#454f63",
-                    backgroundColor: "#ebeeff",
-                    borderColor: "#5766b5"
-                });
-                setStylethree({
-                    color: "#454f63",
-                    backgroundColor: "#ffdfe6",
-                    borderColor: "#ffdfe6"
-                });
-                setStylefour({
-                    color: "#454f63",
-                    backgroundColor: "#c5edd7",
-                    borderColor: "#c5edd7"
-                });
-                setStylefive({
-                    color: "#454f63",
-                    backgroundColor: "#dac2d4",
-                    borderColor: "#dac2d4"
-                });
-                setStylesix({
-                    color: "#454f63",
-                    backgroundColor: "#ffe7bd",
-                    borderColor: "#ffe7bd"
-                });
-
+                setServicesButtons([
+                    {
+                        id: 1,
+                        title: "همه موارد",
+                        style: {
+                            backgroundColor: "#3798f5",
+                            boxShadow: " 0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            border: "0px"
+                        },
+                        url: "/services/all/allServices"
+                    },
+                    {
+                        id: 2,
+                        title: "مدارک شناسایی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ebeeff",
+                            borderColor: "#5766b5"
+                        },
+                        url: "/services/1/slug"
+                    },
+                    {
+                        id: 3,
+                        title: "مدارک تحصیلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffdfe6",
+                            borderColor: "#ffdfe6"
+                        },
+                        url: "/services/3/slug"
+                    },
+                    {
+                        id: 4,
+                        title: "مدارک مالی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#c5edd7",
+                            borderColor: "#c5edd7"
+                        },
+                        url: "/services/4/slug"
+                    },
+                    {
+                        id: 5,
+                        title: "مدارک شغلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#dac2d4",
+                            borderColor: "#dac2d4"
+                        },
+                        url: "/services/2/slug"
+                    },
+                    {
+                        id: 6,
+                        title: "مدارک شرکتی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffe7bd",
+                            borderColor: "#ffe7bd"
+                        },
+                        url: "/services/5/slug"
+                    }
+                ]);
                 break;
             case "1":
-                setStyleone({
-                    color: "#454f63 ",
-                    backgroundColor: "#aad0f4",
-                    borderColor: "#aad0f4"
-                });
-                setStyletwo({
-                    backgroundColor: "#5766b5",
-                    boxShadow: "  0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    border: "0px"
-                });
-                setStylethree({
-                    color: "#454f63",
-                    backgroundColor: "#ffdfe6",
-                    borderColor: "#ffdfe6"
-                });
-                setStylefour({
-                    color: "#454f63",
-                    backgroundColor: "#c5edd7",
-                    borderColor: "#c5edd7"
-                });
-                setStylefive({
-                    color: "#454f63",
-                    backgroundColor: "#dac2d4",
-                    borderColor: "#dac2d4"
-                });
-                setStylesix({
-                    color: "#454f63",
-                    backgroundColor: "#ffe7bd",
-                    borderColor: "#ffe7bd"
-                });
+                setServicesButtons([
+                    {
+                        id: 1,
+                        title: "همه موارد",
+                        style: {
+                            color: "#454f63 ",
+                            backgroundColor: "#aad0f4",
+                            borderColor: "#aad0f4"
+                        },
+                        url: "/services/all/allServices"
+                    },
+                    {
+                        id: 2,
+                        title: "مدارک شناسایی",
+                        style: {
+                            backgroundColor: "#5766b5",
+                            boxShadow: "  0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            border: "0px"
+                        },
+                        url: "/services/1/slug"
+                    },
+                    {
+                        id: 3,
+                        title: "مدارک تحصیلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffdfe6",
+                            borderColor: "#ffdfe6"
+                        },
+                        url: "/services/3/slug"
+                    },
+                    {
+                        id: 4,
+                        title: "مدارک مالی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#c5edd7",
+                            borderColor: "#c5edd7"
+                        },
+                        url: "/services/4/slug"
+                    },
+                    {
+                        id: 5,
+                        title: "مدارک شغلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#dac2d4",
+                            borderColor: "#dac2d4"
+                        },
+                        url: "/services/2/slug"
+                    },
+                    {
+                        id: 6,
+                        title: "مدارک شرکتی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffe7bd",
+                            borderColor: "#ffe7bd"
+                        },
+                        url: "/services/5/slug"
+                    }
+                ]);
                 break;
             case "3":
-                setStyleone({
-                    color: "#454f63 ",
-                    backgroundColor: "#aad0f4",
-                    borderColor: "#aad0f4"
-                });
-                setStyletwo({
-                    color: "#454f63",
-                    backgroundColor: "#ebeeff",
-                    borderColor: "#5766b5"
-                });
-                setStylethree({
-                    backgroundColor: "#ef9a9a",
-                    boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    border: "0px"
-                });
-                setStylefour({
-                    color: "#454f63",
-                    backgroundColor: "#c5edd7",
-                    borderColor: "#c5edd7"
-                });
-                setStylefive({
-                    color: "#454f63",
-                    backgroundColor: "#dac2d4",
-                    borderColor: "#dac2d4"
-                });
-                setStylesix({
-                    color: "#454f63",
-                    backgroundColor: "#ffe7bd",
-                    borderColor: "#ffe7bd"
-                });
+                setServicesButtons([
+                    {
+                        id: 1,
+                        title: "همه موارد",
+                        style: {
+                            color: "#454f63 ",
+                            backgroundColor: "#aad0f4",
+                            borderColor: "#aad0f4"
+                        },
+                        url: "/services/all/allServices"
+                    },
+                    {
+                        id: 2,
+                        title: "مدارک شناسایی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ebeeff",
+                            borderColor: "#5766b5"
+                        },
+                        url: "/services/1/slug"
+                    },
+                    {
+                        id: 3,
+                        title: "مدارک تحصیلی",
+                        style: {
+                            backgroundColor: "#ef9a9a",
+                            boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            border: "0px"
+                        },
+                        url: "/services/3/slug"
+                    },
+                    {
+                        id: 4,
+                        title: "مدارک مالی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#c5edd7",
+                            borderColor: "#c5edd7"
+                        },
+                        url: "/services/4/slug"
+                    },
+                    {
+                        id: 5,
+                        title: "مدارک شغلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#dac2d4",
+                            borderColor: "#dac2d4"
+                        },
+                        url: "/services/2/slug"
+                    },
+                    {
+                        id: 6,
+                        title: "مدارک شرکتی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffe7bd",
+                            borderColor: "#ffe7bd"
+                        },
+                        url: "/services/5/slug"
+                    }
+                ]);
                 break;
-
             case "4":
-                setStyleone({
-                    color: "#454f63 ",
-                    backgroundColor: "#aad0f4",
-                    borderColor: "#aad0f4"
-                });
-                setStyletwo({
-                    color: "#454f63",
-                    backgroundColor: "#ebeeff",
-                    borderColor: "#5766b5"
-                });
-                setStylethree({
-                    color: "#454f63",
-                    backgroundColor: "#ffdfe6",
-                    borderColor: "#ffdfe6"
-                });
-                setStylefour({
-                    backgroundColor: "#0cb69f",
-                    boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    border: "0px"
-                });
-                setStylefive({
-                    color: "#454f63",
-                    backgroundColor: "#dac2d4",
-                    borderColor: "#dac2d4"
-                });
-                setStylesix({
-                    color: "#454f63",
-                    backgroundColor: "#ffe7bd",
-                    borderColor: "#ffe7bd"
-                });
+                setServicesButtons([
+                    {
+                        id: 1,
+                        title: "همه موارد",
+                        style: {
+                            color: "#454f63 ",
+                            backgroundColor: "#aad0f4",
+                            borderColor: "#aad0f4"
+                        },
+                        url: "/services/all/allServices"
+                    },
+                    {
+                        id: 2,
+                        title: "مدارک شناسایی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ebeeff",
+                            borderColor: "#5766b5"
+                        },
+                        url: "/services/1/slug"
+                    },
+                    {
+                        id: 3,
+                        title: "مدارک تحصیلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffdfe6",
+                            borderColor: "#ffdfe6"
+                        },
+                        url: "/services/3/slug"
+                    },
+                    {
+                        id: 4,
+                        title: "مدارک مالی",
+                        style: {
+                            backgroundColor: "#0cb69f",
+                            boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            border: "0px"
+                        },
+                        url: "/services/4/slug"
+                    },
+                    {
+                        id: 5,
+                        title: "مدارک شغلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#dac2d4",
+                            borderColor: "#dac2d4"
+                        },
+                        url: "/services/2/slug"
+                    },
+                    {
+                        id: 6,
+                        title: "مدارک شرکتی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffe7bd",
+                            borderColor: "#ffe7bd"
+                        },
+                        url: "/services/5/slug"
+                    }
+                ]);
                 break;
             case "2":
-                setStyleone({
-                    color: "#454f63 ",
-                    backgroundColor: "#aad0f4",
-                    borderColor: "#aad0f4"
-                });
-                setStyletwo({
-                    color: "#454f63",
-                    backgroundColor: "#ebeeff",
-                    borderColor: "#5766b5"
-                });
-                setStylethree({
-                    color: "#454f63",
-                    backgroundColor: "#ffdfe6",
-                    borderColor: "#ffdfe6"
-                });
-                setStylefour({
-                    color: "#454f63",
-                    backgroundColor: "#c5edd7",
-                    borderColor: "#c5edd7"
-                });
-                setStylefive({
-                    backgroundColor: "#c463ac",
-                    boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    border: "0px"
-                });
-                setStylesix({
-                    color: "#454f63",
-                    backgroundColor: "#ffe7bd",
-                    borderColor: "#ffe7bd"
-                });
+                setServicesButtons([
+                    {
+                        id: 1,
+                        title: "همه موارد",
+                        style: {
+                            color: "#454f63 ",
+                            backgroundColor: "#aad0f4",
+                            borderColor: "#aad0f4"
+                        },
+                        url: "/services/all/allServices"
+                    },
+                    {
+                        id: 2,
+                        title: "مدارک شناسایی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ebeeff",
+                            borderColor: "#5766b5"
+                        },
+                        url: "/services/1/slug"
+                    },
+                    {
+                        id: 3,
+                        title: "مدارک تحصیلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffdfe6",
+                            borderColor: "#ffdfe6"
+                        },
+                        url: "/services/3/slug"
+                    },
+                    {
+                        id: 4,
+                        title: "مدارک مالی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#c5edd7",
+                            borderColor: "#c5edd7"
+                        },
+                        url: "/services/4/slug"
+                    },
+                    {
+                        id: 5,
+                        title: "مدارک شغلی",
+                        style: {
+                            backgroundColor: "#c463ac",
+                            boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            border: "0px"
+                        },
+                        url: "/services/2/slug"
+                    },
+                    {
+                        id: 6,
+                        title: "مدارک شرکتی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffe7bd",
+                            borderColor: "#ffe7bd"
+                        },
+                        url: "/services/5/slug"
+                    }
+                ]);
                 break;
             case "5":
-                setStyleone({
-                    color: "#454f63 ",
-                    backgroundColor: "#aad0f4",
-                    borderColor: "#aad0f4"
-                });
-                setStyletwo({
-                    color: "#454f63",
-                    backgroundColor: "#ebeeff",
-                    borderColor: "#5766b5"
-                });
-                setStylethree({
-                    color: "#454f63",
-                    backgroundColor: "#ffdfe6",
-                    borderColor: "#ffdfe6"
-                });
-                setStylefour({
-                    color: "#454f63",
-                    backgroundColor: "#c5edd7",
-                    borderColor: "#c5edd7"
-                });
-                setStylefive({
-                    color: "#454f63",
-                    backgroundColor: "#dac2d4",
-                    borderColor: "#dac2d4"
-                });
-                setStylesix({
-                    color: "#454f63",
-                    backgroundColor: "#ffe7bd",
-                    borderColor: "#ffe7bd"
-                });
-                setStylesix({
-                    backgroundColor: "#f4c36d",
-                    boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
-                    border: "0px"
-                });
+                setServicesButtons([
+                    {
+                        id: 1,
+                        title: "همه موارد",
+                        style: {
+                            color: "#454f63 ",
+                            backgroundColor: "#aad0f4",
+                            borderColor: "#aad0f4"
+                        },
+                        url: "/services/all/allServices"
+                    },
+                    {
+                        id: 2,
+                        title: "مدارک شناسایی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ebeeff",
+                            borderColor: "#5766b5"
+                        },
+                        url: "/services/1/slug"
+                    },
+                    {
+                        id: 3,
+                        title: "مدارک تحصیلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#ffdfe6",
+                            borderColor: "#ffdfe6"
+                        },
+                        url: "/services/3/slug"
+                    },
+                    {
+                        id: 4,
+                        title: "مدارک مالی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#c5edd7",
+                            borderColor: "#c5edd7"
+                        },
+                        url: "/services/4/slug"
+                    },
+                    {
+                        id: 5,
+                        title: "مدارک شغلی",
+                        style: {
+                            color: "#454f63",
+                            backgroundColor: "#dac2d4",
+                            borderColor: "#dac2d4"
+                        },
+                        url: "/services/2/slug"
+                    },
+                    {
+                        id: 6,
+                        title: "مدارک شرکتی",
+                        style: {
+                            backgroundColor: "#f4c36d",
+                            boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                            border: "0px"
+                        },
+                        url: "/services/5/slug"
+                    }
+                ]);
                 break;
             default:
                 break;
         }
+        metatagAPI(props.match.params.slug, response => {
+            if (response.data.success) {
+                setMetaTag({
+                    title: response.data.title,
+                    metaTags: response.data.metatags
+                });
+            }
+        });
+        getHomeServicesAPI((response)=>{
+            if (response.data.success){
+                switch (props.match.params.id) {
+                    case "all":
+                        setServicesButtons([
+                            {
+                                id: 1,
+                                title: "همه موارد",
+                                style: {
+                                    backgroundColor: "#3798f5",
+                                    boxShadow: " 0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    border: "0px"
+                                },
+                                url: "/services/all/allServices"
+                            },
+                            {
+                                id: 2,
+                                title: "مدارک شناسایی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ebeeff",
+                                    borderColor: "#5766b5"
+                                },
+                                url: "/services/1/" + response.data["1"]
+                            },
+                            {
+                                id: 3,
+                                title: "مدارک تحصیلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffdfe6",
+                                    borderColor: "#ffdfe6"
+                                },
+                                url: "/services/3/" + response.data["3"]
+                            },
+                            {
+                                id: 4,
+                                title: "مدارک مالی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#c5edd7",
+                                    borderColor: "#c5edd7"
+                                },
+                                url: "/services/4/" + response.data["4"]
+                            },
+                            {
+                                id: 5,
+                                title: "مدارک شغلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#dac2d4",
+                                    borderColor: "#dac2d4"
+                                },
+                                url: "/services/2/" + response.data["2"]
+                            },
+                            {
+                                id: 6,
+                                title: "مدارک شرکتی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffe7bd",
+                                    borderColor: "#ffe7bd"
+                                },
+                                url: "/services/5/" + response.data["5"]
+                            }
+                        ]);
+                        break;
+                    case "1":
+                        setServicesButtons([
+                            {
+                                id: 1,
+                                title: "همه موارد",
+                                style: {
+                                    color: "#454f63 ",
+                                    backgroundColor: "#aad0f4",
+                                    borderColor: "#aad0f4"
+                                },
+                                url: "/services/all/allServices"
+                            },
+                            {
+                                id: 2,
+                                title: "مدارک شناسایی",
+                                style: {
+                                    backgroundColor: "#5766b5",
+                                    boxShadow: "  0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    border: "0px"
+                                },
+                                url: "/services/1/" + response.data["1"]
+                            },
+                            {
+                                id: 3,
+                                title: "مدارک تحصیلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffdfe6",
+                                    borderColor: "#ffdfe6"
+                                },
+                                url: "/services/3/" + response.data["3"]
+                            },
+                            {
+                                id: 4,
+                                title: "مدارک مالی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#c5edd7",
+                                    borderColor: "#c5edd7"
+                                },
+                                url: "/services/4/" + response.data["4"]
+                            },
+                            {
+                                id: 5,
+                                title: "مدارک شغلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#dac2d4",
+                                    borderColor: "#dac2d4"
+                                },
+                                url: "/services/2/" + response.data["2"]
+                            },
+                            {
+                                id: 6,
+                                title: "مدارک شرکتی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffe7bd",
+                                    borderColor: "#ffe7bd"
+                                },
+                                url: "/services/5/" + response.data["5"]
+                            }
+                        ]);
+                        break;
+                    case "3":
+                        setServicesButtons([
+                            {
+                                id: 1,
+                                title: "همه موارد",
+                                style: {
+                                    color: "#454f63 ",
+                                    backgroundColor: "#aad0f4",
+                                    borderColor: "#aad0f4"
+                                },
+                                url: "/services/all/allServices"
+                            },
+                            {
+                                id: 2,
+                                title: "مدارک شناسایی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ebeeff",
+                                    borderColor: "#5766b5"
+                                },
+                                url: "/services/1/" + response.data["1"]
+                            },
+                            {
+                                id: 3,
+                                title: "مدارک تحصیلی",
+                                style: {
+                                    backgroundColor: "#ef9a9a",
+                                    boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    border: "0px"
+                                },
+                                url: "/services/3/" + response.data["3"]
+                            },
+                            {
+                                id: 4,
+                                title: "مدارک مالی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#c5edd7",
+                                    borderColor: "#c5edd7"
+                                },
+                                url: "/services/4/" + response.data["4"]
+                            },
+                            {
+                                id: 5,
+                                title: "مدارک شغلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#dac2d4",
+                                    borderColor: "#dac2d4"
+                                },
+                                url: "/services/2/" + response.data["2"]
+                            },
+                            {
+                                id: 6,
+                                title: "مدارک شرکتی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffe7bd",
+                                    borderColor: "#ffe7bd"
+                                },
+                                url: "/services/5/" + response.data["5"]
+                            }
+                        ]);
+                        break;
+                    case "4":
+                        setServicesButtons([
+                            {
+                                id: 1,
+                                title: "همه موارد",
+                                style: {
+                                    color: "#454f63 ",
+                                    backgroundColor: "#aad0f4",
+                                    borderColor: "#aad0f4"
+                                },
+                                url: "/services/all/allServices"
+                            },
+                            {
+                                id: 2,
+                                title: "مدارک شناسایی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ebeeff",
+                                    borderColor: "#5766b5"
+                                },
+                                url: "/services/1/" + response.data["1"]
+                            },
+                            {
+                                id: 3,
+                                title: "مدارک تحصیلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffdfe6",
+                                    borderColor: "#ffdfe6"
+                                },
+                                url: "/services/3/" + response.data["3"]
+                            },
+                            {
+                                id: 4,
+                                title: "مدارک مالی",
+                                style: {
+                                    backgroundColor: "#0cb69f",
+                                    boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    border: "0px"
+                                },
+                                url: "/services/4/" + response.data["4"]
+                            },
+                            {
+                                id: 5,
+                                title: "مدارک شغلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#dac2d4",
+                                    borderColor: "#dac2d4"
+                                },
+                                url: "/services/2/" + response.data["2"]
+                            },
+                            {
+                                id: 6,
+                                title: "مدارک شرکتی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffe7bd",
+                                    borderColor: "#ffe7bd"
+                                },
+                                url: "/services/5/" + response.data["5"]
+                            }
+                        ]);
+                        break;
+                    case "2":
+                        setServicesButtons([
+                            {
+                                id: 1,
+                                title: "همه موارد",
+                                style: {
+                                    color: "#454f63 ",
+                                    backgroundColor: "#aad0f4",
+                                    borderColor: "#aad0f4"
+                                },
+                                url: "/services/all/allServices"
+                            },
+                            {
+                                id: 2,
+                                title: "مدارک شناسایی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ebeeff",
+                                    borderColor: "#5766b5"
+                                },
+                                url: "/services/1/" + response.data["1"]
+                            },
+                            {
+                                id: 3,
+                                title: "مدارک تحصیلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffdfe6",
+                                    borderColor: "#ffdfe6"
+                                },
+                                url: "/services/3/" + response.data["3"]
+                            },
+                            {
+                                id: 4,
+                                title: "مدارک مالی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#c5edd7",
+                                    borderColor: "#c5edd7"
+                                },
+                                url: "/services/4/" + response.data["4"]
+                            },
+                            {
+                                id: 5,
+                                title: "مدارک شغلی",
+                                style: {
+                                    backgroundColor: "#c463ac",
+                                    boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    border: "0px"
+                                },
+                                url: "/services/2/" + response.data["2"]
+                            },
+                            {
+                                id: 6,
+                                title: "مدارک شرکتی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffe7bd",
+                                    borderColor: "#ffe7bd"
+                                },
+                                url: "/services/5/" + response.data["5"]
+                            }
+                        ]);
+                        break;
+                    case "5":
+                        setServicesButtons([
+                            {
+                                id: 1,
+                                title: "همه موارد",
+                                style: {
+                                    color: "#454f63 ",
+                                    backgroundColor: "#aad0f4",
+                                    borderColor: "#aad0f4"
+                                },
+                                url: "/services/all/allServices"
+                            },
+                            {
+                                id: 2,
+                                title: "مدارک شناسایی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ebeeff",
+                                    borderColor: "#5766b5"
+                                },
+                                url: "/services/1/" + response.data["1"]
+                            },
+                            {
+                                id: 3,
+                                title: "مدارک تحصیلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#ffdfe6",
+                                    borderColor: "#ffdfe6"
+                                },
+                                url: "/services/3/" + response.data["3"]
+                            },
+                            {
+                                id: 4,
+                                title: "مدارک مالی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#c5edd7",
+                                    borderColor: "#c5edd7"
+                                },
+                                url: "/services/4/" + response.data["4"]
+                            },
+                            {
+                                id: 5,
+                                title: "مدارک شغلی",
+                                style: {
+                                    color: "#454f63",
+                                    backgroundColor: "#dac2d4",
+                                    borderColor: "#dac2d4"
+                                },
+                                url: "/services/2/" + response.data["2"]
+                            },
+                            {
+                                id: 6,
+                                title: "مدارک شرکتی",
+                                style: {
+                                    backgroundColor: "#f4c36d",
+                                    boxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    webkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    MozwebkitboxShadow: "0px 0px 15px -6px rgba(0,0,0,0.75)",
+                                    border: "0px"
+                                },
+                                url: "/services/5/" + response.data["5"]
+                            }
+                        ]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }, [props.match.params.id]);
 /////////////////////////search handler////////////////////
     const searchhandler = () => {
@@ -291,16 +866,26 @@ const PriceServices = props => {
         })
 
     }, [props.match.params.id, offset]);
-////////////////set offset/////////////////
-    useEffect(() => {
-        setOffset(0);
-    }, [props.match.params.id]);
 
     return (
         <React.Fragment>
             <header>
                 <NavBar/>
             </header>
+            <MetaTags>
+                <title>{metaTag.title}</title>
+                {metaTag.metaTags.map(i => {
+                    if (i.name) {
+                        return (
+                            <meta name={i.name} content={i.content}/>
+                        );
+                    } else if (i.property) {
+                        return (
+                            <meta property={i.property} content={i.content}/>
+                        );
+                    }
+                })}
+            </MetaTags>
             <Container fluid className="contentpadding">
                 <Row>
                     <Col
@@ -359,49 +944,15 @@ const PriceServices = props => {
                         <Card className="gservices" style={{textAlign: "center"}}>
                             <Card.Body>
                                 <Card.Title className="sbox-title">گروه بندی خدمات</Card.Title>
-
-                                <Button
-                                    block
-                                    style={styleone}
-                                    onClick={e => props.history.push("/services/all/allServices")}
-                                >
-                                    همه موارد
-                                </Button>
-                                <Button
-                                    onClick={e => props.history.push("/services/1")}
-                                    style={styletwo}
-                                    block
-                                >
-                                    مدارک شناسایی
-                                </Button>
-                                <Button
-                                    style={stylethree}
-                                    onClick={e => props.history.push("/services/3")}
-                                    block
-                                >
-                                    مدارک تحصیلی
-                                </Button>
-                                <Button
-                                    style={stylefour}
-                                    onClick={e => props.history.push("/services/4")}
-                                    block
-                                >
-                                    مدارک مالی
-                                </Button>
-                                <Button
-                                    style={stylefive}
-                                    onClick={e => props.history.push("/services/2")}
-                                    block
-                                >
-                                    مدارک شغلی
-                                </Button>
-                                <Button
-                                    style={stylesix}
-                                    onClick={e => props.history.push("/services/5")}
-                                    block
-                                >
-                                    مدارک شرکتی
-                                </Button>
+                                {servicesButtons.map((item)=>(
+                                    <Button
+                                        block
+                                        style={item.style}
+                                        onClick={e => props.history.push(item.url)}
+                                    >
+                                        {item.title}
+                                    </Button>
+                                ))}
                             </Card.Body>
                         </Card>
                     </Col>

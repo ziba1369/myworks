@@ -129,7 +129,6 @@ const Popularservices = props => {
         get_popular_productsAPI(props.match.params.id, (response) => {
             if (response.data.success) {
                 setinfo([...response.data.products, ...Information]);
-                // console.log(response.data.products);
             } else {
                 ToastsStore.error(response.data.error);
             }

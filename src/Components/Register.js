@@ -109,7 +109,6 @@ const Register = props => {
   // checkRegisterFirstButton function after rules value changed
   const loginfirstStep = () => {
     get_verification_code(mobile,(response)=>{
-        // console.log(response.data.success);
         if (response.data.success) {
           ToastsStore.success(response.data.code);
           Cookies.set("mobile", mobile, { path: "/", expires: 7 });
@@ -139,7 +138,6 @@ const Register = props => {
     if (second === 0) {
       setSecond(60);
       get_verification_code(mobile,(response)=>{
-          //console.log(response.data.success);
           if (response.data.success) {
             // Cookies.set("token", response.data.token, {
             //   path: "/",
@@ -182,9 +180,7 @@ const Register = props => {
   const loginSecondStep = () => {
    
     check_verification_code(mobile,active,(response)=>{
-        // console.log(response.data);
         if (response.data.success) {
-          //console.log(response.data)
           setStep(3);
           // Cookies.set("mobile",mobile, {path: "/",expires: 7});
         } else {
@@ -306,7 +302,6 @@ const Register = props => {
     }
   };
   const checkRegisterThirdEnter = () => {
-    // console.log(pass.length);
     if (
       name.length > 0 &&
       lastname.length > 0 &&
@@ -362,7 +357,6 @@ const Register = props => {
        getYear((response)=>{
         if (response.data.success) {
           setBirthyear(response.data.year);
-          // console.log(response.data.year)
         } else {
           ToastsStore.error(response.data.error);
         }

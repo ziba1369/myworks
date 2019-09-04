@@ -38,7 +38,7 @@ const Footer = () => {
            
            <Col  xl={2} lg={2}  md={2}   sm={12}  xs={12}>
              <p><Link to="/">صفحه اصلی</Link></p>
-             <p><Link to="/services/all">خدمات ترجمه</Link></p>
+             <p><Link to="/services/all/allServices">خدمات ترجمه</Link></p>
              <p><Link to="/">قیمت ترجمه</Link></p>
              <p><Link to="/contactus">تماس باما</Link></p>
              <p><Link to="/aboutus">درباره ما</Link></p>

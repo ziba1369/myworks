@@ -19,7 +19,6 @@ function Myorder () {
         myorderAPI(Cookies.get("token"), (response) => {
             if (response.data.success) {
                 setOrder(response.data.orders);
-                console.log(response.data);
             } else {
                 ToastsStore.error(response.data.error);
             }
@@ -27,7 +26,6 @@ function Myorder () {
     }, []);
 
     const handleEdit = (item) =>{
-        console.log(item);
         if (item.rejects[0].title === "خوانا نبودن"){
             setSubComponentProps({
                 orderName: item.order_name,

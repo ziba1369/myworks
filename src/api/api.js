@@ -128,7 +128,6 @@ export const change_forget_pass = (mobile_number, new_password, forget_pass_code
 
 ///////////////////send order-next pai in phootouloader component data to server////////////////////////
 export const orderAPI = (formDataorder, callBack) => {
-    console.log(formDataorder)
     axios.post(serverURL + "app_make_order",
         formDataorder
         , {headers: {"Content-Type": "multipart/form-data"}})
@@ -263,6 +262,14 @@ export const dashboardAPI = (customer_token, callBack) => {
 
 //////////////////////home =>layount//////////////////////////
 //popular services
+export const getHomeServicesAPI = (callBack) => {
+    axios.get(serverURL + "front/get_home_services", headers)
+        .then(function (response) {
+            callBack(response);
+        })
+}
+
+//popular services
 export const get_popular_productsAPI = (param, callBack) => {
     axios.get(serverURL + "front/get_popular_products", param, headers)
         .then(function (response) {
@@ -304,7 +311,6 @@ export const cancelitemAPI = (customer_token, order_code, callBack) => {
 //////custom order api///////////////////////
 // set custom order
 export const customorderAPI = (formDataorder, callBack) => {
-    console.log(formDataorder)
     axios.post(serverURL + "app_make_order",
         formDataorder
         , {headers: {"Content-Type": "multipart/form-data"}})

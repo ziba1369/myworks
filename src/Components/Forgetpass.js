@@ -203,7 +203,6 @@ const Forgetpass = props => {
   }, [active]);
 
   const loginSecondStep = () => {
-    console.log(mobile)
     check_forget_pass_code(mobile,active,(response)=>{
     
       if (response.data.success) {
@@ -215,28 +214,6 @@ const Forgetpass = props => {
         ToastsStore.error(response.data.error);
       }
     });
-
-    // const checkforgetpass = {
-    //   mobile_number: mobile,
-    //   forget_pass_code: active
-    // };
-    // axios
-    //   .post(
-    //     "http://hezare3vom.ratechcompany.com/api/check_forget_pass_code",
-    //     checkforgetpass,
-    //     { headers: { "Content-Type": "application/json" } }
-    //   )
-    //   .then(function(response) {
-    //     //console.log(response.data.success)
-    //     if (response.data.success) {
-    //       //ToastsStore.success(response.data.code);
-    //       setStep(3);
-    //       //setVertification(response.data.code);
-    //       //props.history.push("/");
-    //     } else {
-    //       ToastsStore.error(response.data.error);
-    //     }
-    //   });
   };
 
   //////////////////// THIRD STEP //////////////////////

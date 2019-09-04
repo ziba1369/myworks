@@ -222,7 +222,6 @@ const Order = props => {
     //////////////use effect get data type get id product from server////////////////////////
     useEffect(() => {
         getproductAPI(Cookies.get("types"), (response) => {
-            console.log(response.data)
             if (response.data.success) {
 
                 setOrderData({
@@ -285,7 +284,6 @@ const Order = props => {
     };
 
     const handleSubmit = () => {
-        console.log("bla bla bla")
         ////////////////////////send choose languages to server /////////////////////////////////
         const orderlanguages = orderData.languages;
         const order_lang = orderlanguages.filter(item => item.checkin === true);
@@ -332,7 +330,6 @@ const Order = props => {
         formDataorder.append("total_price", sumValue());
         formDataorder.append("need_certificate", 0);
         formDataorder.append("order_file_count", orderFileCount);
-        console.log(photoUpload !== undefined);
         if (photoUpload !== undefined) {
             photoUpload.map((item, index) => {
                 formDataorder.append("order_file_" + (index + 1), photoUpload[0]);
@@ -432,7 +429,7 @@ const Order = props => {
                                     <Link to="/">صفحه اصلی</Link>
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item>
-                                    <Link to="/services/all">خدمات ترجمه</Link>
+                                    <Link to="/services/all/allServices">خدمات ترجمه</Link>
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item active href={null}>
                                     {Cookies.get("title")}

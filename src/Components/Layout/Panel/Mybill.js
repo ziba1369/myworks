@@ -18,7 +18,6 @@ const [order, setOrder] = useState([]);
     mybillAPI(Cookies.get("token"),(response)=>{
       if (response.data.success) {
         setOrder(response.data.factors);
-        console.log(response.data.factors);
       } else {
         ToastsStore.error(response.data.error);
       }
