@@ -145,7 +145,6 @@ const EditProfile = props => {
     //////////get_user_data///////////////////
     useEffect(() => {
         getprofileApI(Cookies.get("token"), (response) => {
-            console.log(response.data)
             if (response.data.success) {
                 setName(response.data.customer_name);
                 setLastName(response.data.customer_family);
@@ -163,7 +162,6 @@ const EditProfile = props => {
 
     /////////// send data to server //////////
     const sendEditRgister = () => {
-        console.log(birthvalue, birthmonthvalue, birthyearvalue)
         const formData = new FormData();
         formData.append("customer_token", Cookies.get("token"));
         formData.append("name", name);
@@ -182,7 +180,7 @@ const EditProfile = props => {
                     Cookies.set("customer_img", response.data.customer_image, {path: "/", expires: 7});
                 }
                 ToastsStore.success("تغییر اطلاعات کاربری با موفقیت انجام گردید");
-                setTimeout(function() {window.location.reload()}, 1000);
+                setTimeout(function() {window.location.reload(true)}, 1000);
             } else {
                 ToastsStore.error(response.data.error);
             }
