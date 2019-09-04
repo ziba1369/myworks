@@ -187,7 +187,7 @@ const EditProfile = props => {
 
     app_edit_profileAPI(formData,(response)=>{
       if (response.data.success) {
-        ToastsStore.success("تغییر نام کاربری با موفقیت انجام گردید");
+        ToastsStore.success("تغییر اطلاعات کاربری با موفقیت انجام گردید");
        
         setTimeout(window.location.reload(), 2000);
        

@@ -25,13 +25,30 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import Media from "react-media";
 import Logotranslate from "../images/Ghazaeie-logo-LimooGraphic.png";
 import dashboard from "../images/dashboard.svg";
-
+import {getprofileApI} from '../api/api';
+import {
+    ToastsContainer,
+    ToastsStore,
+    ToastsContainerPosition
+  } from "react-toasts";
 /////////////main/////////////
 const Panelcustom = props => {
     const [menu, setMenu] = useState(false);
-
+    const[name,setName]=useState('');
+    const[lastName,setLastName]=useState('')
     /////////////logout/////////////
-
+    getprofileApI(Cookies.get("token"),(response)=>{
+        if (response.data.success) {
+          console.log(response.data)
+         setName(response.data.customer_name);
+         setLastName(response.data.customer_family);
+         
+        
+        }else {
+          ToastsStore.error(response.data.error);
+        }
+      })
+    
     const handlelogout = () => {
         Cookies.remove("token");
         Cookies.remove("name");
@@ -58,7 +75,7 @@ const Panelcustom = props => {
                         </div>
                     </div>
                     <div className="userpanel">
-                        {Cookies.get("name") + " " + Cookies.get("family")}
+                        {name + " " + lastName}
                     </div>
                 </div>
             </div>
