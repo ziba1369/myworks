@@ -25,7 +25,7 @@ const Mytranslate = () => {
     mytranslateAPI(Cookies.get("token"), Cookies.get("order_id"), response => {
       if (response.data.success) {
         setTranslate(response.data.orders);
-        console.log(response.data.orders);
+       
       } else {
         ToastsStore.error(response.data.error);
       }
@@ -107,8 +107,8 @@ const Mytranslate = () => {
                       <Modal.Body>{item.translations.map(i=>{
                         return(
                           <div className="row download">
-                          <p className="col-6">{i.file_name}</p>
-                          <p className="col-6"><a href={i.file_link}>دانلود</a></p>
+                          <div className="col-6">{i.file_name}</div>
+                          <div className="col-6"><a href={i.file_link}>دانلود</a></div>
                           </div>
                           
                         )
@@ -192,9 +192,8 @@ const Mytranslate = () => {
                       <Modal.Body>{item.translations.map(i=>{
                         return(
                           <React.Fragment>
-                          <p>{i.file_name}</p>
-                          <a href={i.file_link}>دانلود</a>
-                          <p></p>
+                           <div className="col-6">{i.file_name}</div>
+                          <div className="col-6"><a href={i.file_link}>دانلود</a></div>
                           </React.Fragment>
                         )
                       })}</Modal.Body>

@@ -367,6 +367,7 @@ a.dropdown-item {
   .slideone {
   height: 50vh;
   }
+
 }
 
 .centerlogo {
@@ -2077,7 +2078,17 @@ div#left-tabs-example-tabpane-third {
   border-bottom: 2px solid #e1e1e1;
   padding: 0.13rem;
 }
+
 @media screen and (max-width:992px){
+  .Continue-order #add1 {
+    margin: 1rem 0;
+}
+.accordion .card-body  {
+ text-align:center
+}
+.accordion textarea {
+  border: 1px solid #000;
+}
   .counter .text {
     padding: 0px !important
   }
@@ -2444,6 +2455,7 @@ p.activesys {
 }
 
 @media only screen and (min-width: 992) {
+
   .detailnews {
     margin-right: 0 !important;
     margin-left: 8.3333% !important;
@@ -2465,6 +2477,13 @@ p.activesys {
 }
 .card-body {
   font-size: 0.8rem;
+}
+.accordion .form-check {
+    margin: -0.3rem 7rem 0 0;
+}
+.input-cusomeorder {
+
+  text-align: left;
 }
 }
 /* @media only screen and (max-width: 1024px),(min-height:1000px) {
@@ -3470,6 +3489,20 @@ button.btn-second-edit-file {
   border-radius: 1rem;
   padding: .5rem 1rem;
   margin-top: 1rem;
+  cursor: pointer;
+}
+.download {
+  border-radius: 1rem;
+}
+.download p.col-6 {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.download .col-6 {
+  text-align: center;
+  margin: .5rem 0;
 }
 /* customorder */
 /* basket */

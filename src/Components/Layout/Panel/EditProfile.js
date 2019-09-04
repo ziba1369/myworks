@@ -155,7 +155,7 @@ const EditProfile = props => {
   useEffect(()=>{
     getprofileApI(Cookies.get("token"),(response)=>{
       if (response.data.success) {
-        console.log(response.data)
+        console.log(response.data.success)
        setName(response.data.customer_name);
        setLastName(response.data.customer_family);
        setImageprofile(response.data.customer_img);
@@ -188,7 +188,7 @@ const EditProfile = props => {
     app_edit_profileAPI(formData,(response)=>{
       if (response.data.success) {
         ToastsStore.success("تغییر اطلاعات کاربری با موفقیت انجام گردید");
-       
+       HTMLFormControlsCollection.log(response.data.success,'send')
         setTimeout(window.location.reload(), 2000);
        
         

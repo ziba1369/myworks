@@ -33,7 +33,7 @@ function TabsChoice(props) {
         return (
             <Row>
                 <div className="col-8 text-services">{item.lang}</div>
-                <Col xl={4} lg={4} md={4} sm={4} xs={4}>
+                <Col xl={4} lg={4} md={4} sm={4} xs={4} className="input-cusomeorder">
                     <div className="stylenumprice">
                         <Form.Check
                             value={item.lang}

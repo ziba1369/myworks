@@ -39,7 +39,7 @@ const Panelcustom = props => {
     /////////////logout/////////////
     getprofileApI(Cookies.get("token"),(response)=>{
         if (response.data.success) {
-          console.log(response.data)
+       
          setName(response.data.customer_name);
          setLastName(response.data.customer_family);
          
