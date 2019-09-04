@@ -855,6 +855,10 @@ span#basic-addon1 {
   height: 73px;
 }
 
+.carousel-indicators {
+  display: none !important;
+}
+
 .servicetran {
   border: 1px solid #ebeeff;
   border-top-left-radius: 17px;
