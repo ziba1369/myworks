@@ -463,6 +463,10 @@ section {
   margin: -25vh 13vh 0vh 0;
   position: absolute;
 }
+span.widthprice {
+  width: 56px;
+  text-align: left;
+}
 
 .price button {
   margin: 1.5vh;
@@ -645,12 +649,16 @@ span#basic-addon1 {
 .contentnews {
   font-size: .8rem;
 }
-
+a#newtrans {
+  background-color: #b4e5e6;
+}
 .card-title a {
   color: #000;
   font-size: 1.1rem;
 }
-
+.download{
+  background-color: #e1e1e1;
+}
 @media only screen and (max-width: 767px) {
   /* .popularservices{
       margin:1rem;
@@ -1822,7 +1830,13 @@ p.content {
   background-color: #fafafa;
   font-size: 0.9rem;
 }
-
+.titlecustomorder {
+  width: 50%;
+  text-align: right;
+  height: 39px;
+  overflow: hidden;
+  white-space: nowrap;
+}
 .card-text span {
   position: absolute;
   left: 1rem;
@@ -2005,6 +2019,13 @@ form.servicesgroup {
   align-items: center;
   margin: 2rem 1rem;
 }
+button.increase.btn.btn-primary:focus {
+  box-shadow: unset !important;
+}
+button.decrease.btn.btn-primary:focus {
+  box-shadow: unset !important;
+}
+
 
 .incre {
   background-color: #1976d2;
@@ -2700,6 +2721,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
+  top:0px;
 }
  
 /* General sidebar styles */
@@ -2728,6 +2750,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+  top:0px;
 }
 /* myorder/panelcustom */
 .myorder {
@@ -2788,7 +2811,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
   border: 1px solid #123456;
 } */
 .row.myorderlist{
- padding: 0px
+ padding: 0px;
+ margin:1.5rem;
+
 }
 }
 
@@ -2838,17 +2863,18 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .chanepassprof {
   width: 100% !important;
 }
-/* div#showimage {
-  display: table;
-  margin: 0 auto;
-  position: relative;
-  left: 3rem;
-  top:5%;
-} */
+
+
 .profpic .custom-file-container__image-preview{
   margin-top: 3rem;
   margin-bottom: 0px;
 }
+#showimage{
+  width:120px !important;
+  height:120px !important
+}
+
+
 .profilelink {
   display: none;
 }
@@ -3036,7 +3062,7 @@ border-radius: 1rem;
     width: 100% !important;
 }
 .upload-preview{
-  width: 18vh !important;
+  width: 130px !important;
 
 }
 }
@@ -3063,7 +3089,7 @@ label.uploadremove {
   bottom: 40px !important;
   z-index: -1 !important;
   background-color: #fff !important;
-  height: 18vh !important;
+  height: 130px !important;
   overflow: hidden !important;
   border-radius: 56% !important;
   box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
@@ -3078,9 +3104,9 @@ label.upladersize {
 .dropdown-item span[role="button"] {
   display: inline-block;
 }
-/* .panel .custom-file-container__image-preview {
-  width: 115px;
-} */
+ .panel .custom-file-container__image-preview {
+  width: 130px;
+}
 /* dashboard */
 .countorder {
   background-color: #dac2d4;
@@ -3102,6 +3128,7 @@ label.upladersize {
 .info-panel div {
   margin: 0 auto;
   padding: .5rem;
+  cursor: pointer;
 }
 .info-panel div p:nth-child(1) {
   font-size: 1.4rem;

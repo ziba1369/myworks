@@ -52,7 +52,7 @@ const EditProfile = props => {
     "30",
     "31"
   ]);
-  const [birthvalue, setBirthvalue] = useState(Cookies.get("birth_day"));
+  const [birthvalue, setBirthvalue] = useState('');
   const [birthmonth] = useState([
     "01",
     "02",
@@ -67,13 +67,9 @@ const EditProfile = props => {
     "11",
     "12"
   ]);
-  const [birthmonthvalue, setBirthmonthvalue] = useState(
-    Cookies.get("birth_month")
-  );
+  const [birthmonthvalue, setBirthmonthvalue] = useState('');
   const [birthyear, setBirthyear] = useState([]);
-  const [birthyearvalue, setBirthyearvalue] = useState(
-    Cookies.get("birth_year")
-  );
+  const [birthyearvalue, setBirthyearvalue] = useState('');
   const [Edit, setEdit] = useState({
     backgroundColor: "#e1e1e1",
     border: "0px",
@@ -159,11 +155,12 @@ const EditProfile = props => {
   useEffect(()=>{
     getprofileApI(Cookies.get("token"),(response)=>{
       if (response.data.success) {
+        console.log(response.data)
        setName(response.data.customer_name);
        setLastName(response.data.customer_family);
        setImageprofile(response.data.customer_img);
        setCertifi(response.data.national_code);
-       setBirthyearvalue(response.data.birh_year);
+       setBirthyearvalue(response.data.birth_year);
        setBirthmonthvalue(response.data.birth_month);
        setBirthvalue(response.data.birth_day);
        setMobile(response.data.mobile)
@@ -190,34 +187,11 @@ const EditProfile = props => {
 
     app_edit_profileAPI(formData,(response)=>{
       if (response.data.success) {
-        Cookies.set("name", name, { path: "/", expires: 7 });
-        Cookies.set("family", lastname, {
-          path: "/",
-          expires: 7
-        });
-        Cookies.set("national_code", certi, {
-          path: "/",
-          expires: 7
-        });
-        Cookies.set("birth_day", birthvalue, {
-          path: "/",
-          expires: 7
-        });
-        Cookies.set("birth_month", birthmonthvalue, {
-          path: "/",
-          expires: 7
-        });
-        Cookies.set("birth_year", birthyearvalue, {
-          path: "/",
-          expires: 7
-        });
-        if (response.data.customer_image !== "") {
-          Cookies.set("customer_img", response.data.customer_image, {
-            path: "/",
-            expires: 7
-          });
-        }
-        window.location.reload();
+        ToastsStore.success("تغییر نام کاربری با موفقیت انجام گردید");
+       
+        setTimeout(window.location.reload(), 2000);
+       
+        
       } else {
         ToastsStore.error(response.data.error);
       }

@@ -72,7 +72,11 @@ const Passchange = props => {
     passchangeAPI(password,(response)=>{
       if (response.data.success) {
         Cookies.remove("token");
-        props.history.push("/");
+        ToastsStore.success("تغییر رمز با موفقیت انجام گردید");
+        setTimeout(function(){
+          props.history.push("/") // you can pass true to reload function to ignore the client cache and reload from the server
+      },2000); 
+        
        
        
       } else {

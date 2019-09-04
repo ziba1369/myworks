@@ -137,7 +137,7 @@ function TabsChoice(props) {
               </span>
                         </Card.Text>
                         <Card.Text>
-                            عنوان سفارش<span>{props.data.title}</span>
+                            عنوان سفارش<span className="titlecustomorder">{props.data.title}</span>
                         </Card.Text>
                         <Card.Text>
                             تاییدات<span>{props.data.confirm === 1 ? "رسمی" : "غیررسمی"}</span>

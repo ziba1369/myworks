@@ -92,7 +92,7 @@ function TabsChoice(props) {
                 <div className="col-8 text-services">{item.name}</div>
                 <Col xl={4} lg={4} md={5} sm={5} xs={5}>
                     <div className="stylenumprice">
-                        {item.price} <span className="styletoman"> تومان</span>
+                        <span className="widthprice">{item.price}</span> <span className="styletoman"> تومان</span>
                         <Form.Check
                             onChange={langhandle}
                             value={item.value}
@@ -124,7 +124,7 @@ function TabsChoice(props) {
                 <div className="col-8 text-services">{item.name}</div>
                 <Col xl={4} lg={4} md={4} sm={4} xs={4}>
                     <p className="stylenumprice">
-                        {item.price} <span className="styletoman"> تومان</span>
+                        <span className="widthprice">{item.price} </span><span className="styletoman"> تومان</span>
                         <span>
               <Form.Check
                   className="checkbox-container checkmark"

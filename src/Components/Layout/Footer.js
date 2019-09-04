@@ -18,7 +18,7 @@ const Footer = () => {
        newsAPI(pageLimit,(response)=>{
         if (response.data.success) {
             setNews(response.data.news);
-            console.log(response.data.news,"footer")
+           
            
 
         } else {

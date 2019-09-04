@@ -106,11 +106,11 @@ const Mytranslate = () => {
                       </Modal.Header>
                       <Modal.Body>{item.translations.map(i=>{
                         return(
-                          <React.Fragment>
-                          <p>{i.file_name}</p>
-                          <a href={i.file_link}>دانلود</a>
-                          <p></p>
-                          </React.Fragment>
+                          <div className="row download">
+                          <p className="col-6">{i.file_name}</p>
+                          <p className="col-6"><a href={i.file_link}>دانلود</a></p>
+                          </div>
+                          
                         )
                       })}</Modal.Body>
                     </Modal>

@@ -88,7 +88,7 @@ const Panelcustom = props => {
                                             </Nav.Item>
                                             <Nav.Item>
                                                 <Nav.Link eventKey="neworder">
-                                                    <Link to="/services/1">
+                                                    <Link to="/services/all/allServices">
                                                         <span>
                                                           <Image
                                                               src={newtranslateimg}
@@ -132,7 +132,7 @@ const Panelcustom = props => {
                                             </Nav.Item>
                                             <Nav.Item>
                                                 <Nav.Link eventKey="editprofile">
-                                                    <Link to="/profile/mybills">
+                                                    <Link to="/profile/editprofile">
                                                         <span>
                                                           <Image src={userimg} alt="userimg"/>
                                                         </span>
@@ -194,6 +194,10 @@ const Panelcustom = props => {
                     <Media
                         query="(max-width:991px)"
                         render={() => (
+                            <React.Fragment>
+                            <div className="profileopen"
+                                        onClick={() => setMenu(true)}
+                                    ></div>
                             <div id="outer-container">
                                 <Menu
                                     right
@@ -220,15 +224,15 @@ const Panelcustom = props => {
                                         to="/profile/dashboard"
                                         onClick={() => setMenu(false)}
                                     >
-                                        داشبورد <Image src={userimg} alt="userimg"/>
+                                        داشبورد <Image src={dashboard} alt="userimg"/>
                                     </Link>
                                     <Link
                                         id="newtrans"
                                         className="menu-item"
-                                        to={"/services/1"}
+                                        to={"/services/all/allServices"}
                                         onClick={() => setMenu(false)}
                                     >
-                                        ثبت ترجمه جدید <Image src={userimg} alt="userimg"/>
+                                        ثبت ترجمه جدید <Image src={newtranslateimg} alt="userimg"/>
                                     </Link>
 
                                     <Link
@@ -281,10 +285,7 @@ const Panelcustom = props => {
                                     </Link>
                                 </Menu>
                                 <main id="page-wrap">
-                                    <div
-                                        className="profileopen"
-                                        onClick={() => setMenu(true)}
-                                    ></div>
+                                    
                                     {props.match.params.page === "dashboard" ? (
                                         <Dashboard/>
                                     ) : props.match.params.page === "editprofile" ? (
@@ -302,6 +303,7 @@ const Panelcustom = props => {
                                     )}
                                 </main>
                             </div>
+                            </React.Fragment>
                         )}
                     />
                 </React.Fragment>

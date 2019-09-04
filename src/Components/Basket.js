@@ -20,8 +20,9 @@ const Basket = props => {
   });
   useEffect(() => {
     basketAPI(Cookies.get("token"), response => {
-      console.log(response.data);
+     
       if (response.data.success) {
+        console.log(response.data,'basket');
         setBasket({
           link: response.data.link,
           totalPrice: response.data.totalPrice,
