@@ -210,14 +210,11 @@ const Order = props => {
     /////////////////metatag///
     useEffect(() => {
         metatagAPI(props.match.params.name, (response) => {
-            console.log(response);
             if (response.data.success) {
                 setMetatag({
                     title: response.data.title,
                     metatags: response.data.metatags
                 });
-            } else {
-                ToastsStore.error(response.data.error);
             }
         });
     }, []);

@@ -24,14 +24,11 @@ const Home = () => {
   });
   useEffect(() => {
     metatagAPI("home", response => {
-      
       if (response.data.success) {
         setMetatag({
           title: response.data.title,
           metatags: response.data.metatags
         });
-      } else {
-        ToastsStore.error(response.data.error);
       }
     });
   }, []);

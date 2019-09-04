@@ -24,17 +24,14 @@ const ContactUs = () => {
   });
   useEffect(() => {
     metatagAPI("contactus", response => {
-      console.log(response.data);
       if (response.data.success) {
         setMetatag({
           title: response.data.title,
           metatags: response.data.metatags
         });
-      } else {
-        ToastsStore.error(response.data.error);
       }
     });
-  },[])
+  },[]);
     return ( 
         <React.Fragment>
       
