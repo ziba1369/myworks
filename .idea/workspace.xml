@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1316d98a-d05a-42e6-8ed8-22820e469441" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/css/all.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/all.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PriceServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PriceServices.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -17,10 +19,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/css/all.css">
+        <entry file="file://$PROJECT_DIR$/src/Components/Layout/Menu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="858" column="26" selection-start-line="858" selection-start-column="26" selection-end-line="858" selection-end-column="26" />
+            <state relative-caret-position="695">
+              <caret line="51" selection-start-line="51" selection-end-line="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/PriceServices.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="365" column="95" selection-start-line="365" selection-start-column="95" selection-end-line="365" selection-end-column="95" />
             </state>
           </provider>
         </entry>
@@ -87,7 +98,6 @@
         <option value="$PROJECT_DIR$/src/Components/Layout/home/ContatctUs.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/home/ButtonPrice.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/Login.js" />
-        <option value="$PROJECT_DIR$/src/Components/Layout/Menu.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/home/NavBar.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/router.js" />
@@ -96,8 +106,6 @@
         <option value="$PROJECT_DIR$/src/Components/News.js" />
         <option value="$PROJECT_DIR$/src/Components/Loginpage.js" />
         <option value="$PROJECT_DIR$/src/Components/Register.js" />
-        <option value="$PROJECT_DIR$/src/Components/PriceServices.js" />
-        <option value="$PROJECT_DIR$/src/Routes.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/NavBar.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout/Panel/EditProfile.js" />
         <option value="$PROJECT_DIR$/src/api/api.js" />
@@ -126,6 +134,9 @@
         <option value="$PROJECT_DIR$/src/Components/ContactUs.js" />
         <option value="$PROJECT_DIR$/src/Components/Home.js" />
         <option value="$PROJECT_DIR$/src/css/all.css" />
+        <option value="$PROJECT_DIR$/src/Routes.js" />
+        <option value="$PROJECT_DIR$/src/Components/PriceServices.js" />
+        <option value="$PROJECT_DIR$/src/Components/Layout/Menu.js" />
       </list>
     </option>
   </component>
@@ -271,12 +282,12 @@
       <workItem from="1564226283472" duration="6957000" />
       <workItem from="1564290233645" duration="1715000" />
       <workItem from="1567399629540" duration="20835000" />
-      <workItem from="1567571577599" duration="1161000" />
+      <workItem from="1567571577599" duration="1787000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101464000" />
+    <option name="totallyTimeSpent" value="102090000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -433,13 +444,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Layout/Menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="950">
-          <caret line="191" selection-start-line="191" selection-end-line="191" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Layout/NavBar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1360">
@@ -470,29 +474,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/PriceServices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5151">
-          <caret line="313" column="12" selection-start-line="313" selection-start-column="12" selection-end-line="313" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Basket.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-36">
-          <caret line="88" column="22" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -650,10 +637,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="97" column="12" lean-forward="true" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/css/all.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="858" column="26" selection-start-line="858" selection-start-column="26" selection-end-line="858" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/PriceServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="365" column="95" selection-start-line="365" selection-start-column="95" selection-end-line="365" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Layout/Menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="695">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>

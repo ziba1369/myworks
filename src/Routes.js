@@ -13,7 +13,7 @@ import ContactUs from './Components/ContactUs';
 import AboutUs from './Components/AboutUs';
 import Basket from './Components/Basket';
 import CustomOrder from './Components/CustomOrder';
-import AddFileToOrder from './Components/Layout/Panel/AddFileToOrder';
+
 function Routes() {
 
     const routers = [
@@ -25,8 +25,7 @@ function Routes() {
 
         },
         {
-            path: '/services/:id',
-            // path: '/services',
+            path: '/services/:id/:slug',
             component: PriceServices,
             exact: true,
 
