@@ -350,7 +350,7 @@ function Order(props) {
                     >
                         <h5>فرآیند ثبت ترجمه سفارشی</h5>
                     </Col>
-                    <Row className="orderbuttons rtl">
+                    <Row className="orderbuttons rtl justify-content-center">
 
 
                         <Col
@@ -381,14 +381,6 @@ function Order(props) {
                                 تایید سفارش
                             </Button>
                             <span style={stepStyles.lineThird}/>
-                        </Col>
-                        <Col
-                            id="pay"
-                            className="col-xl-3 col-lg-3 col-md-3 col-xs-3 selectcer last"
-                        >
-                            <Button size="lg" style={stepStyles.buttonFourth}>
-                                پرداخت
-                            </Button>
                         </Col>
                     </Row>
 

@@ -12,6 +12,10 @@ import $ from "jquery";
 import {getYear, app_edit_profileAPI, getprofileApI} from '../../../api/api';
 
 const EditProfile = props => {
+
+    // refs
+    let inputOpenFileRef = React.createRef();
+
     /////////////////set variable ///////////////////
     const [name, setName] = useState();
     const [lastName, setLastName] = useState();
@@ -75,6 +79,8 @@ const EditProfile = props => {
         width: "11vw",
         borderRadius: ".25rem"
     });
+    const [loading, setLoading] = useState(false);
+
     /////////// get years vale from server ////////////
     useEffect(() => {
         getYear(response => {
@@ -110,16 +116,18 @@ const EditProfile = props => {
 
     /////////// set keypress for image ////////////
     useEffect(() => {
-        document
-            .querySelector("#certi")
-            .addEventListener("keypress", function (evt) {
-                if (
-                    (evt.which !== 8 && evt.which !== 0 && evt.which < 48) ||
-                    evt.which > 57
-                ) {
-                    evt.preventDefault();
-                }
-            });
+        if( $('#certi').length ){
+            document
+                .querySelector("#certi")
+                .addEventListener("keypress", function (evt) {
+                    if (
+                        (evt.which !== 8 && evt.which !== 0 && evt.which < 48) ||
+                        evt.which > 57
+                    ) {
+                        evt.preventDefault();
+                    }
+                });
+        }
     }, [certi]);
 
     /////////// useeffect for changing active or diactive butoon ////////////
@@ -127,20 +135,51 @@ const EditProfile = props => {
         checkEditButton();
     }, [name, lastName, certi, mobile, birthvalue, birthmonthvalue, birthyearvalue]);
 
-    /////////// preview detail ////////////
-    const changeprev = () => {
-        document.getElementById("prev").style.display = "block";
-    };
 
     /////////// useeffect for upload photo ////////////
     useEffect(() => {
-        new FileUploadWithPreview("myUniqueUploadId");
-        window.addEventListener("fileUploadWithPreview:imagesAdded", function (e) {
-            const pictures = {
-                pic: e.detail.cachedFileArray.tokens
+        if( $('#canvas').length ) {
+            const canvas = document.getElementById('canvas');
+            const img = new Image();
+            img.src = imageProfile;
+            img.onload = () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const context = canvas.getContext('2d');
+                context.drawImage(img, 0, 0);
             };
-        });
-    }, []);
+        }
+    }, [imageProfile]);
+
+
+    // this method lunch when user open image file
+    const handleOpenFile = event => {
+        var fileName = event.target.files[0].name;
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        if (extFile === "jpg" || extFile === "jpeg" || extFile === "png") {
+            var file = event.target.files[0];
+            var fr = new FileReader();
+            fr.onload = () => {
+                const canvas = document.getElementById('canvas');
+                const img = new Image();
+                img.src = fr.result;
+                img.onload = () => {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const context = canvas.getContext('2d');
+                    context.drawImage(img, 0, 0);
+                    canvas.toBlob(function (blob) {
+                        setImageProfile(blob);
+                    }, 'image/jpeg', 1)
+                };
+
+            };   // onload fires after reading is complete
+            fr.readAsDataURL(file);
+
+        }
+    };
+
 
     //////////get_user_data///////////////////
     useEffect(() => {
@@ -162,6 +201,7 @@ const EditProfile = props => {
 
     /////////// send data to server //////////
     const sendEditRgister = () => {
+        setLoading(true);
         const formData = new FormData();
         formData.append("customer_token", Cookies.get("token"));
         formData.append("name", name);
@@ -176,12 +216,19 @@ const EditProfile = props => {
 
         app_edit_profileAPI(formData, (response) => {
             if (response.data.success) {
-                if (response.data.customer_image.length !== 0){
-                    Cookies.set("customer_img", response.data.customer_image, {path: "/", expires: 7});
+                setLoading(false);
+                if (response.data.customer_image.length !== 0) {
+                    Cookies.set("customer_img", (response.data.customer_image + '?random_number=' + new Date().getTime()), {
+                        path: "/",
+                        expires: 7
+                    });
                 }
                 ToastsStore.success("تغییر اطلاعات کاربری با موفقیت انجام گردید");
-                setTimeout(function() {window.location.reload(true)}, 1000);
+                setTimeout(function () {
+                    window.location.reload(true)
+                }, 1000);
             } else {
+                setLoading(false);
                 ToastsStore.error(response.data.error);
             }
         })
@@ -190,196 +237,177 @@ const EditProfile = props => {
     };
 
     return (
-        <div className="container rtl" style={{maxWidth: "65vw"}}>
-            <ToastsContainer
-                position={ToastsContainerPosition.TOP_CENTER}
-                store={ToastsStore}
-            />
-            <Row>
-                <div className="profpic">
+        <React.Fragment>
+            {loading ?
+                <div className="container rtl" style={{maxWidth: "65vw"}}>
+                    <Row>
+                        <h5>در حال بارگذاری</h5>
+                    </Row>
+                </div>
+                :
+                <div className="container rtl" style={{maxWidth: "65vw"}}>
+                    <ToastsContainer
+                        position={ToastsContainerPosition.TOP_CENTER}
+                        store={ToastsStore}
+                    />
+                    <Row>
+                        <div className="profpic">
+                            <input id="image" ref={inputOpenFileRef} onChange={handleOpenFile}
+                                   accept="image/x-png,image/jpeg" type="file" style={{display: "none"}}/>
+                            <canvas id="canvas" className="edit-profile-image" width="80px" height="80px" onClick={() => {inputOpenFileRef.current.click()}}/>
 
-                    <div
-                        className="custom-file-container"
-                        data-upload-id="myUniqueUploadId"
-                    >
-                        <label className="uploadremove">
-                            Upload File{" "}
-                            <a
-                                href="javascript:void(0)"
-                                class="custom-file-container__image-clear"
-                                title="Clear Image"
-                            >
-                                &times;
-                            </a>
-                        </label>
-                        <label className="custom-file-container__custom-file  upladersize">
-                            <input
-                                type="file"
-                                className="custom-file-container__custom-file__custom-file-input"
-                                accept="*"
-                                aria-label="Choose File"
-                                onChange={e => {
-                                    setImageProfile(e.target.files[0])
-                                }}
-                            />
-                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760"/>
-                            <span className="custom-file-container__custom-file__custom-file-control"/>
-                        </label>
+                        </div>
+                    </Row>
+                    <Row>
+                        <h5>مشخصات شخصی</h5>
+                    </Row>
+
+                    <Row>
+                        <Col xl={6} lg={6} md={6} xs={12}>
+                            <Form.Group>
+                                <Form.Label>نام </Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    onChange={e => {
+                                        setName(e.target.value)
+                                    }}
+                                    value={name}
+                                    required
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col xl={6} lg={6} md={6} xs={12}>
+                            <Form.Group>
+                                <Form.Label>نام خانوادگی</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    onChange={e => {
+                                        setLastName(e.target.value)
+                                    }}
+                                    value={lastName}
+                                    required
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xl={6} lg={6} md={6} xs={12}>
+                            <Form.Group>
+                                <Form.Label>کدملی</Form.Label>
+                                <Form.Control
+                                    type="tel"
+                                    placeholder=""
+                                    onChange={e => {
+                                        setCertifi(e.target.value)
+                                    }}
+                                    value={certi}
+                                    id="certi"
+                                    required
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col xl={6} lg={6} md={6} xs={12}>
+                            <Form.Label>تاریخ تولد</Form.Label>
+                            <div className="row date">
+                                <Col xl={4} lg={4} md={4} sm={12} xs={12}>
+                                    <Form.Control
+                                        id="day"
+                                        as="select"
+                                        type="select"
+                                        onChange={e => {
+                                            setBirthvalue(e.target.value)
+                                        }}
+                                        value={birthvalue}
+                                        name="slelect"
+                                        required
+                                        className="day"
+                                    >
+                                        <option selected disabled>
+                                            روز
+                                        </option>
+
+                                        {birthday.map(num => (
+                                            <option value={num}>{num}</option>
+                                        ))}
+                                    </Form.Control>
+                                </Col>
+
+                                <Col xl={4} lg={4} md={4} sm={12} xs={12}>
+                                    <Form.Control
+                                        id="groups"
+                                        as="select"
+                                        type="select"
+                                        onChange={e => {
+                                            setBirthmonthvalue(e.target.value)
+                                        }}
+                                        value={birthmonthvalue}
+                                        name="slelect"
+                                        required
+                                        className="month"
+                                    >
+                                        <option selected disabled>
+                                            ماه
+                                        </option>
+                                        {birthmonth.map(num => (
+                                            <option value={num}>{num}</option>
+                                        ))}
+                                    </Form.Control>
+                                </Col>
+                                <Col xl={4} lg={4} md={4} sm={12} xs={12}>
+                                    <Form.Control
+                                        id="groups"
+                                        as="select"
+                                        type="select"
+                                        onChange={e => {
+                                            setBirthyearvalue(e.target.value);
+                                        }}
+                                        value={birthyearvalue}
+                                        name="slelect"
+                                        required
+                                    >
+                                        <option selected disabled>
+                                            سال
+                                        </option>
+                                        {birthyear.map(num => (
+                                            <option value={num}>{num}</option>
+                                        ))}
+                                    </Form.Control>
+                                </Col>
+                            </div>
+                        </Col>
+
+                        <Col xl={6} lg={6} md={6} xs={12}>
+                            <Form.Group>
+                                <Form.Label>شماره همراه </Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder={Cookies.get("mobile")}
+                                    disabled
+                                />
+                            </Form.Group>
+                        </Col>
+
                         <div
-                            id="showimage"
-                            className="custom-file-container__image-preview upload-preview"
-                        />
-                    </div>
+                            className="ltr col-xl-12 col-lg-12 col-md-12 col-12"
+                            style={{textAlign: "left", padding: "2rem 1rem"}}
+                        >
+                            <Button
+                                variant="primary"
+                                size="lg"
+                                id="rfbutton"
+                                style={Edit}
+                                onClick={sendEditRgister}
+                                className="loginbutton editprofile"
+                            >
+                                ثبت
+                            </Button>
+                        </div>
+                    </Row>
                 </div>
-            </Row>
-            <Row>
-                <h5>مشخصات شخصی</h5>
-            </Row>
-
-            <Row>
-                <Col xl={6} lg={6} md={6} xs={12}>
-                    <Form.Group>
-                        <Form.Label>نام </Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder=""
-                            onChange={e => {
-                                setName(e.target.value)
-                            }}
-                            value={name}
-                            required
-                        />
-                    </Form.Group>
-                </Col>
-                <Col xl={6} lg={6} md={6} xs={12}>
-                    <Form.Group>
-                        <Form.Label>نام خانوادگی</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder=""
-                            onChange={e => {
-                                setLastName(e.target.value)
-                            }}
-                            value={lastName}
-                            required
-                        />
-                    </Form.Group>
-                </Col>
-            </Row>
-            <Row>
-                <Col xl={6} lg={6} md={6} xs={12}>
-                    <Form.Group>
-                        <Form.Label>کدملی</Form.Label>
-                        <Form.Control
-                            type="tel"
-                            placeholder=""
-                            onChange={e => {
-                                setCertifi(e.target.value)
-                            }}
-                            value={certi}
-                            id="certi"
-                            required
-                        />
-                    </Form.Group>
-                </Col>
-                <Col xl={6} lg={6} md={6} xs={12}>
-                    <Form.Label>تاریخ تولد</Form.Label>
-                    <div className="row date">
-                        <Col xl={4} lg={4} md={4} sm={12} xs={12}>
-                            <Form.Control
-                                id="day"
-                                as="select"
-                                type="select"
-                                onChange={e => {
-                                    setBirthvalue(e.target.value)
-                                }}
-                                value={birthvalue}
-                                name="slelect"
-                                required
-                                className="day"
-                            >
-                                <option selected disabled>
-                                    روز
-                                </option>
-
-                                {birthday.map(num => (
-                                    <option value={num}>{num}</option>
-                                ))}
-                            </Form.Control>
-                        </Col>
-
-                        <Col xl={4} lg={4} md={4} sm={12} xs={12}>
-                            <Form.Control
-                                id="groups"
-                                as="select"
-                                type="select"
-                                onChange={e => {
-                                    setBirthmonthvalue(e.target.value)
-                                }}
-                                value={birthmonthvalue}
-                                name="slelect"
-                                required
-                                className="month"
-                            >
-                                <option selected disabled>
-                                    ماه
-                                </option>
-                                {birthmonth.map(num => (
-                                    <option value={num}>{num}</option>
-                                ))}
-                            </Form.Control>
-                        </Col>
-                        <Col xl={4} lg={4} md={4} sm={12} xs={12}>
-                            <Form.Control
-                                id="groups"
-                                as="select"
-                                type="select"
-                                onChange={e => {
-                                    setBirthyearvalue(e.target.value);
-                                }}
-                                value={birthyearvalue}
-                                name="slelect"
-                                required
-                            >
-                                <option selected disabled>
-                                    سال
-                                </option>
-                                {birthyear.map(num => (
-                                    <option value={num}>{num}</option>
-                                ))}
-                            </Form.Control>
-                        </Col>
-                    </div>
-                </Col>
-
-                <Col xl={6} lg={6} md={6} xs={12}>
-                    <Form.Group>
-                        <Form.Label>شماره همراه </Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder={Cookies.get("mobile")}
-                            disabled
-                        />
-                    </Form.Group>
-                </Col>
-
-                <div
-                    className="ltr col-xl-12 col-lg-12 col-md-12 col-12"
-                    style={{textAlign: "left", padding: "2rem 1rem"}}
-                >
-                    <Button
-                        variant="primary"
-                        size="lg"
-                        id="rfbutton"
-                        style={Edit}
-                        onClick={sendEditRgister}
-                        className="loginbutton editprofile"
-                    >
-                        ثبت
-                    </Button>
-                </div>
-            </Row>
-        </div>
+            }
+        </React.Fragment>
     );
 };
 

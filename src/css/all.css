@@ -178,7 +178,8 @@ a:hover {
 
 .imageprofile img {
     margin-left: 0.5rem;
-    width: 12px;
+    margin-right: -7px;
+    width: 16px;
 }
 
 .imagelogout img {
@@ -348,19 +349,22 @@ a.dropdown-item {
 }
 
 .smenu p a.dropdown-item {
-    border: 0px;
+    border: 90px;
 }
 
 .slideone {
     background: url("../images/Group1866.svg") no-repeat center center;
     background-size: cover;
-    height: 90vh;
+    height: 70vh;
     background-position: bottom;
 }
 
-@media screen and (max-width: 992px) and (min-width: 768px) {
+@media screen and (max-width: 991px) and (min-width: 768px) {
     .slideone {
         height: 50vh;
+    }
+    .contnewsletterlast img {
+        height: 156px !important;
     }
 
 }
@@ -1030,7 +1034,7 @@ a#newtrans {
 
 .contnewsletterlast img {
     width: 100%;
-    height: 200px;
+    height: 300px;
     border-radius: 10px;
     object-fit: cover;
 }
@@ -2539,6 +2543,9 @@ p.activesys {
 }
 
 @media only screen and (max-width: 768px) {
+    .related-news {
+        padding: 0 !important;
+    }
     .rlnews {
 
         margin-top: 2rem;
@@ -2773,6 +2780,11 @@ p.textpanel {
     -moz-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
     box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.32);
     border-radius: 0px;
+}
+
+.panel .nav-pills .nav-link.active a,
+.panel .nav-pills .show > .nav-link a {
+    color: #000;
 }
 
 .logoutpanel {
@@ -3094,6 +3106,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
     margin: 0 auto;
     display: table;
 }
+
+.edit-profile-image {
+    border: 2px solid #e1e1e1;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    display: block;
+    margin: 10px auto;
+}
+
 
 @media only screen and (min-width: 992px) {
     p.distance {

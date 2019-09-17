@@ -206,19 +206,6 @@ const Order = props => {
         }
     }, [step]);
 
-
-    /////////////////metatag///
-    useEffect(() => {
-        metatagAPI(props.match.params.name, (response) => {
-            if (response.data.success) {
-                setMetatag({
-                    title: response.data.title,
-                    metatags: response.data.metatags
-                });
-            }
-        });
-    }, []);
-
     //////////////use effect get data type get id product from server////////////////////////
     useEffect(() => {
         getproductAPI(Cookies.get("types"), (response) => {
@@ -252,8 +239,16 @@ const Order = props => {
                 ToastsStore.error(response.data.error);
             }
         })
-
-    }, [Cookies.get("types")]);
+        metatagAPI(props.match.params.name, (response) => {
+            if (response.data.success) {
+                setMetatag({
+                    title: response.data.title,
+                    metatags: response.data.metatags
+                });
+            }
+        });
+        setStep(1);
+    }, [props.match.params.name]);
 
     ////////////////////////sum all vlaue of orders/////////////////////////////////
     const sumValue = () => {
@@ -468,7 +463,7 @@ const Order = props => {
                     >
                         <h5>فرآیند ثبت سفارش ترجمه</h5>
                     </Col>
-                    <Row className="orderbuttons rtl">
+                    <Row className="orderbuttons rtl justify-content-center">
                         <Col
                             id="kindtrans"
                             className="col-xl-3 col-lg-3 col-md-3 col-xs-3 selectcer">
@@ -497,14 +492,7 @@ const Order = props => {
                             </Button>
                             <span style={stepStyles.lineThird}/>
                         </Col>
-                        <Col
-                            id="pay"
-                            className="col-xl-3 col-lg-3 col-md-3 col-xs-3 selectcer last"
-                        >
-                            <Button size="lg" style={stepStyles.buttonFourth} onClick={handlerPay}>
-                                پرداخت
-                            </Button>
-                        </Col>
+
                     </Row>
 
                     <Row

@@ -133,7 +133,7 @@ const Panelcustom = props => {
                                                         <span>
                                                           <Image src={billimg} alt="billImage"/>
                                                         </span>
-                                                        فاکتورهای من
+                                                        تراکنش های من
                                                     </Link>
                                                 </Nav.Link>
                                             </Nav.Item>
@@ -266,7 +266,7 @@ const Panelcustom = props => {
                                         to="/profile/mybill"
                                         onClick={() => setMenu(false)}
                                     >
-                                        فاکتورهای من <Image src={billimg} alt="billimg"/>
+                                        تراکنش های من <Image src={billimg} alt="billimg"/>
                                     </Link>
                                     <Link
                                         id="mytrans"

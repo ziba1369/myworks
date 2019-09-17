@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import Menu from "./Menu";
 import * as Cookies from "js-cookie";
 import logoutImage from "../../images/logout.svg";
-import profileImage from "../../images/profileee.svg";
+import profileImage from "../../images/dashboard.svg";
 ///////////////navbar function///////////////
 const NavBar = () => {
   ////////////////set initial  variable/////////////////////
