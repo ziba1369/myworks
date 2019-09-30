@@ -280,7 +280,7 @@ function TabsChoice(props) {
                                             eventKey="fifth"
                                         >
                                             <p>
-                                                <span className="input-title">عادی</span>{" "}
+                                                <span className="input-title">عادی (۵ روز کاری)</span>{" "}
                                                 <input
                                                     type="radio"
                                                     name="type"
@@ -291,7 +291,7 @@ function TabsChoice(props) {
                                                 />
                                             </p>
                                             <p>
-                                                <span className="input-title">فوری</span>{" "}
+                                                <span className="input-title">فوری (۲ روز کاری)</span>{" "}
                                                 <input
                                                     type="radio"
                                                     name="type"
@@ -393,7 +393,7 @@ function TabsChoice(props) {
                                     <Accordion.Collapse eventKey="4">
                                         <Card.Body>
                                             <p>
-                                                <span className="input-title">عادی</span>{" "}
+                                                <span className="input-title">عادی (۵ روز کاری)</span>{" "}
                                                 <input
                                                     type="radio"
                                                     name="type"
@@ -404,7 +404,7 @@ function TabsChoice(props) {
                                                 />
                                             </p>
                                             <p>
-                                                <span className="input-title">فوری</span>{" "}
+                                                <span className="input-title">فوری (۲ روز کاری)</span>{" "}
                                                 <input
                                                     type="radio"
                                                     name="type"

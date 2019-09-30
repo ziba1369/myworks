@@ -20,7 +20,7 @@ const Slide = () => {
                         <img src={Logotranslate} alt={"Logotranslate"} />
                     </p>
                     <p className="office">دفتر ترجمه رسمی ۴۴۹ تهران</p>
-                    <p className="owner">مترجم مسئول: موسوی</p>
+                    <p className="owner">مترجم مسئول: محمد قوچی</p>
                 </div>
                 <div className="groupflags col-xl-6 col-md-6 col-sm-12 col-xs-12">
                     <div className="container countries">
