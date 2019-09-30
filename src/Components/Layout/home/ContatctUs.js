@@ -18,10 +18,21 @@ import {
     ToastsStore,
     ToastsContainerPosition
 } from "react-toasts";
-import {send_messageAPI} from "../../../api/api";
+import {contactUsInfoAPI, send_messageAPI} from "../../../api/api";
 /////////////main/////////////////////
 const Contatus = props => {
     /////////////set-variable/////////////////////
+    const [contactData, setContactData] = useState({
+        address: "",
+        email: "",
+        phone: [],
+        social: {
+            instagram: "", 
+            facebook: "", 
+            linkedin: "", 
+            twitter: ""
+        }
+    });
     const [name, setName] = useState("");
     const [tel, setTell] = useState("");
     const [email, setEmail] = useState("");
@@ -30,6 +41,19 @@ const Contatus = props => {
     const [loginButton, setLoginButtonStyle] = useState({
         backgroundColor: "#e1e1e1"
     });
+    
+    useEffect(() => {
+        contactUsInfoAPI(response=>{
+            if (response.data.success) {
+                setContactData({
+                    address: response.data.address.split("&")[0],
+                    email: response.data.email,
+                    phone: response.data.phone,
+                    social: response.data.social
+                });
+            }
+        })
+    }, []);
 
     /////////////active login button/////////////////////
     const checkLoginButton = () => {
@@ -205,44 +229,41 @@ const Contatus = props => {
                         <p>
                             <img src={phoneIcon} alt={"phoneIcon"}/>
                         </p>
-                        <p>
-                            <span>021-44442131</span>
-                        </p>
-                        <p>
-                            <span>021-44442131</span>
-                        </p>
+                        {contactData.phone.map((phoneNumber, index)=>(
+                            <p key={index}>
+                                <span>{phoneNumber}</span>
+                            </p>
+                        ))}
                     </Col>
-
                     <Col xl={12} md={12} sm={12} xs={12}>
                         <p>
                             <img src={emailIcon} alt={"emailIcon"}/>
                         </p>
                         <p className="mail">
-                            <span>info@Hezare3.com</span>
+                            <span>{contactData.email}</span>
                         </p>
                     </Col>
-
                     <Col xl={12} md={12} sm={12} xs={12}>
                         <p>
                             <img src={placeholder} alt={"placehilder"}/>
                         </p>
                         <p className="address">
-                            <span>میدان پونک-ساختمان پنجم-طبقه 6ام</span>
+                            <span>{contactData.address}</span>
                         </p>
                     </Col>
                     <div className="fontawe col-xl-12 col-md-12 col-sm-12 col-xs-12">
-                        <Link to="/" className="instagram">
+                        <a href={contactData.social.instagram} className="instagram">
                             <FontAwesomeIcon icon={faInstagram}/>
-                        </Link>
-                        <Link to="/" className="linkdin">
+                        </a>
+                        <a href={contactData.social.linkedin} className="linkdin">
                             <FontAwesomeIcon icon={faLinkedin}/>
-                        </Link>
-                        <Link to="/" className="twitter">
+                        </a>
+                        <a href={contactData.social.twitter} className="twitter">
                             <FontAwesomeIcon icon={faTwitter}/>
-                        </Link>
-                        <Link to="/" className="facebook">
+                        </a>
+                        <a href={contactData.social.facebook} className="facebook">
                             <FontAwesomeIcon icon={faFacebook}/>
-                        </Link>
+                        </a>
                     </div>
                 </Col>
             </Row>

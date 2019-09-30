@@ -349,3 +349,17 @@ export const getOrderFileAPI = (token, orderId, callBack) => {
             callBack(response)
         })
 };
+
+export const contactUsInfoAPI = (callBack) => {
+    axios.get(serverURL + "front/contact_us_info", headers)
+        .then(function (response) {
+            callBack(response)
+        })
+};
+
+export const aboutUsAPI = (callBack) => {
+    axios.get(serverURL + "front/about_us", headers)
+        .then(function (response) {
+            callBack(response)
+        })
+};

@@ -3589,12 +3589,12 @@ iframe {
 
 .coworker .text-coworker {
     font-size: .8rem;
-    text-align: center;
+    text-align: right;
     direction: rtl;
     line-height: 1.8rem;
     list-style-type: circle;
     font-family: fanum;
-    padding: .3rem 0;
+    padding: .3rem;
 }
 
 ul.ul-coworker {

@@ -3,8 +3,7 @@ import {Image, Col, Row, Breadcrumb} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import NavBar from "./Layout/NavBar";
 import Footer from "./Layout/Footer";
-import Translator from '../images/Translators.jpg';
-import {metatagAPI} from "../api/api";
+import {aboutUsAPI, metatagAPI} from "../api/api";
 import MetaTags from "react-meta-tags";
 import {
     ToastsContainer,
@@ -35,20 +34,15 @@ const AboutUs = () => {
             }
         });
 
-        setData({
-            text: "ئیبم ناسیبکهخاس بخهسا بگسخهب شخبت سخه کسهبا خستب گحخب یبال گسحخبت بال کخثها منسی بگسخیبت کسخها بکهخا کسیخهل گسحخیل سلحخت",
-            images:[Translator,Translator,Translator,Translator],
-            team: ["منسی بگسخیبت کسخها بکهخا کسیخهل گسحخیل سلحخت","منسی بگسخیبت کسخها بکهخا کسیخهل گسحخیل سلحخت","منسی بگسخیبت کسخها بکهخا کسیخهل گسحخیل سلحخت"]
+        aboutUsAPI(response => {
+            if (response.data.success) {
+                setData({
+                    text: response.data.text,
+                    images: response.data.images,
+                    team: response.data.team,
+                });
+            }
         });
-        // aboutUsAPI(response => {
-        //     if (response.data.success) {
-        //         setData({
-        //             text: "ئیبم ناسیبکهخاس بخهسا بگسخهب شخبت سخه کسهبا خستب گحخب یبال گسحخبت بال کخثها منسی بگسخیبت کسخها بکهخا کسیخهل گسحخیل سلحخت",
-        //             images:[Translator,Translator,Translator,Translator],
-        //             team: ["منسی بگسخیبت کسخها بکهخا کسیخهل گسحخیل سلحخت","منسی بگسخیبت کسخها بکهخا کسیخهل گسحخیل سلحخت","منسی بگسخیبت کسخها بکهخا کسیخهل گسحخیل سلحخت"]
-        //         });
-        //     }
-        // });
 
     }, []);
     return (

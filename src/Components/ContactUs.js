@@ -9,18 +9,30 @@ import emailIcon from "../images/email.svg";
 import clock from "../images/clock-circular-outline.svg";
 import whatsapp from "../images/whatsapp.svg";
 import telegram from "../images/telegram.svg";
-import {metatagAPI} from "../api/api";
+import {contactUsInfoAPI, metatagAPI} from "../api/api";
 import MetaTags from "react-meta-tags";
 import {
     ToastsContainer,
     ToastsStore,
     ToastsContainerPosition
 } from "react-toasts";
-/////////function contact us 
+/////////function contact us
 const ContactUs = () => {
     const [mettag, setMetatag] = useState({
         title: "",
         metatags: []
+    });
+    const [contactData, setContactData] = useState({
+        address: "",
+        email: "",
+        map: "",
+        phone: [],
+        social: {
+            instagram: "",
+            facebook: "",
+            linkedin: "",
+            twitter: ""
+        }
     });
     useEffect(() => {
         metatagAPI("contactus", response => {
@@ -31,6 +43,17 @@ const ContactUs = () => {
                 });
             }
         });
+        contactUsInfoAPI(response=>{
+            if (response.data.success) {
+                setContactData({
+                    address: response.data.address.replaceAll("&", "\n"),
+                    email: response.data.email,
+                    map: response.data.map,
+                    phone: response.data.phone,
+                    social: response.data.social
+                });
+            }
+        })
     }, []);
     return (
         <React.Fragment>
@@ -126,7 +149,7 @@ const ContactUs = () => {
                                                                                                         alt={"whatsapp"}/>
                                         </div>
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-xs-8 col-8"><p
-                                            className="nameapp">Whatsapp</p><p className="phone">091200000000</p></div>
+                                            className="nameapp">Whatsapp</p><p className="phone">09388959590</p></div>
                                     </div>
                                 </div>
                                 <div className="box col-5">
@@ -135,7 +158,7 @@ const ContactUs = () => {
                                                                                                         alt={"whatsapp"}/>
                                         </div>
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-xs-8 col-8"><p
-                                            className="nameapp">Whatsapp</p><p className="phone">091200000000</p></div>
+                                            className="nameapp">Whatsapp</p><p className="phone">09054844828</p></div>
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +170,7 @@ const ContactUs = () => {
                                                                                                         alt={"telegram"}/>
                                         </div>
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-xs-8 col-8"><p
-                                            className="nameapp1">Telegram</p><p className="phone">091200000000</p></div>
+                                            className="nameapp1">Telegram</p><p className="phone">09388959590</p></div>
                                     </div>
                                 </div>
                                 <div className="box col-5">
@@ -156,7 +179,7 @@ const ContactUs = () => {
                                                                                                         alt={"telegram"}/>
                                         </div>
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-xs-8 col-8"><p
-                                            className="nameapp1">Telegram</p><p className="phone">091200000000</p></div>
+                                            className="nameapp1">Telegram</p><p className="phone">09054844828</p></div>
                                     </div>
                                 </div>
                             </div>
