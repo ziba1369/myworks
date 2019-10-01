@@ -3478,7 +3478,14 @@ span.tell-translate {
 
 .address-translate img {
     width: 25px;
-    margin: 0 0 0 1rem;
+    margin: 0 0 80px 1rem;
+    float: right;
+    display: block;
+}
+
+.work-time {
+    float: right;
+    margin-right: -42px;
 }
 
 .work-time img {

@@ -23,7 +23,7 @@ const ContactUs = () => {
         metatags: []
     });
     const [contactData, setContactData] = useState({
-        address: "",
+        address: [],
         email: "",
         map: "",
         phone: [],
@@ -45,8 +45,9 @@ const ContactUs = () => {
         });
         contactUsInfoAPI(response=>{
             if (response.data.success) {
+                console.log(response.data);
                 setContactData({
-                    address: response.data.address.replaceAll("&", "\n"),
+                    address: response.data.address.split("&"),
                     email: response.data.email,
                     map: response.data.map,
                     phone: response.data.phone,
@@ -102,8 +103,10 @@ const ContactUs = () => {
                     <Col xl={6} lg={6} md={12} xs={12}>
                         <div className="address-translate">
                             <p>
-                                <span>میدان پونک -ساختمان 130-طبقه 5ام-واحد320</span><img src={placeholder}
-                                                                                          alt={"placehilder"}/>
+                                <img src={placeholder} alt={"placehilder"}/>
+                                {contactData.address.map((address, index)=>(
+                                    <span key={index}>{address}<br/></span>
+                                ))}
                             </p>
                         </div>
                         <div className="phone-translate">
@@ -112,15 +115,15 @@ const ContactUs = () => {
                                     <img src={phoneIcon} alt={"phoneIcon"}/>
                                 </p>
                                 <p style={{width: "85%", display: "inline-block"}}>
-                                    <span className="tell-translate">021-44442131</span>
-                                    <span className="tell-translate">021-44442131</span>
-                                    <span className="tell-translate">021-44442131</span>
+                                    {contactData.phone.map((phoneNumber, index)=>(
+                                        <span key={index} className="tell-translate">{phoneNumber}</span>
+                                    ))}
                                 </p>
                             </p>
                         </div>
                         <div className="address-translate mail-translate">
                             <p>
-                                <span style={{fontFamily: "Arial"}}>info@hezareh3.com</span><img src={emailIcon}
+                                <span style={{fontFamily: "Arial"}}>{contactData.email}</span><img src={emailIcon}
                                                                                                  alt={"emailIcon"}/>
                             </p>
                         </div>
@@ -188,7 +191,7 @@ const ContactUs = () => {
 
                     </Col>
                     <Col xl={6} lg={6} md={12} xs={12}>
-                        <iframe src="https://www.google.com/maps/d/embed?mid=1tnAtQ73e9tguz-ooEP-ULT8WZwfRytnv"
+                        <iframe src={contactData.map}
                                 width="640" height="480"></iframe>
                     </Col>
                 </div>
