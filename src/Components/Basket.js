@@ -12,7 +12,6 @@ import {ToastsStore} from "react-toasts";
 const Basket = props => {
 
     const [basket, setBasket] = useState({
-        link: "",
         totalPrice: "",
         items: []
     });
@@ -22,7 +21,6 @@ const Basket = props => {
 
             if (response.data.success) {
                 setBasket({
-                    link: response.data.link,
                     totalPrice: response.data.totalPrice,
                     items: response.data.items
                 });
@@ -38,7 +36,6 @@ const Basket = props => {
             console.log(response);
             if (response.data.success) {
                 setBasket({
-                    link: response.data.link,
                     totalPrice: response.data.totalPrice,
                     items: response.data.items
                 });
@@ -112,7 +109,7 @@ const Basket = props => {
                             <span>{basket.totalPrice} تومان</span>
                         </div>
                         <button className="buttonpay">
-                            <Link to={basket.link}>
+                            <Link to={"/api/app_pay_order?customer_token=" + Cookies.get("token")}>
                                 <span>پرداخت</span>
                             </Link>
                         </button>

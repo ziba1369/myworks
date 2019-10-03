@@ -13,6 +13,7 @@ import ContactUs from './Components/ContactUs';
 import AboutUs from './Components/AboutUs';
 import Basket from './Components/Basket';
 import CustomOrder from './Components/CustomOrder';
+import PaymentCallback from "./Components/PaymentCallback";
 
 function Routes() {
 
@@ -86,10 +87,15 @@ function Routes() {
             path:'/basket',
             component:Basket,
             exact:true
-        }
-        ,{
+        },
+        {
             path:'/customorder',
             component:CustomOrder,
+            exact:true
+        },
+        {
+            path:'/callback',
+            component:PaymentCallback,
             exact:true
         }
       
@@ -98,7 +104,7 @@ function Routes() {
     return (
         <BrowserRouter>
             <React.Fragment>
-              
+
                 {routers.map((route, index) => <Route key={index} {...route}/>)}
 
             </React.Fragment>
