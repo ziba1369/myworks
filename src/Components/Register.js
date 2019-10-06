@@ -111,7 +111,6 @@ const Register = props => {
     get_verification_code(mobile,(response)=>{
         if (response.data.success) {
           ToastsStore.success(response.data.code);
-          Cookies.set("mobile", mobile, { path: "/", expires: 7 });
           setStep(2);
         } else {
           ToastsStore.error(response.data.error);
@@ -139,13 +138,7 @@ const Register = props => {
       setSecond(60);
       get_verification_code(mobile,(response)=>{
           if (response.data.success) {
-            // Cookies.set("token", response.data.token, {
-            //   path: "/",
-            //   expires: 7
-            // });
-            
-            ToastsStore.success(response.data.code);
-            setVerification(response.data.code);
+
           } else {
             ToastsStore.error(response.data.error);
           }
@@ -182,7 +175,6 @@ const Register = props => {
     check_verification_code(mobile,active,(response)=>{
         if (response.data.success) {
           setStep(3);
-          // Cookies.set("mobile",mobile, {path: "/",expires: 7});
         } else {
           ToastsStore.error("کدفعالسازی اشتباه است");
         }

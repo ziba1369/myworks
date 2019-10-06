@@ -109,9 +109,9 @@ const Basket = props => {
                             <span>{basket.totalPrice} تومان</span>
                         </div>
                         <button className="buttonpay">
-                            <Link to={"/api/app_pay_order?customer_token=" + Cookies.get("token")}>
+                            <a href={"/api/app_pay_order?customer_token=" + Cookies.get("token")}>
                                 <span>پرداخت</span>
-                            </Link>
+                            </a>
                         </button>
                     </div>
                 </div>

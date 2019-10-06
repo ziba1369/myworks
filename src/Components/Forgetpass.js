@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "./Layout/NavBar";
 import {Container, Button, Col, Form } from "react-bootstrap";
 import {ToastsStore,ToastsContainer,ToastsContainerPosition} from "react-toasts";
-import axios from "axios";
 import $ from "jquery";
-import * as Cookies from "js-cookie";
 import Footer from "./Layout/Footer";
 import{get_forget_pass_code,change_forget_pass,check_forget_pass_code} from '../api/api';
 ////////////function foreget pass//////////
@@ -120,11 +118,8 @@ const Forgetpass = props => {
   const loginfirstStep = () => {
    
     get_forget_pass_code(mobile,(response)=>{
-   
         if (response.data.success) {
-          // alert(response.data.code);
-          ToastsStore.success(response.data.code);
-          setVertification(response.data.code);
+
           setStep(2);
         } else {
           ToastsStore.error(response.data.error);
@@ -206,10 +201,7 @@ const Forgetpass = props => {
     check_forget_pass_code(mobile,active,(response)=>{
     
       if (response.data.success) {
-        //ToastsStore.success(response.data.code);
         setStep(3);
-        //setVertification(response.data.code);
-        //props.history.push("/");
       } else {
         ToastsStore.error(response.data.error);
       }
