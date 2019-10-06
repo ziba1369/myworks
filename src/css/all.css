@@ -359,6 +359,10 @@ a.dropdown-item {
     background-position: bottom;
 }
 
+.newsletter {
+    margin-top: -143px;
+}
+
 @media screen and (max-width: 991px) and (min-width: 768px) {
     .slideone {
         height: 50vh;
@@ -918,6 +922,11 @@ a#newtrans {
     min-height: 130px;
 }
 
+.descript p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .descriptiontrans p {
     font-size: 0.75rem;
     font-family: fanum;
@@ -992,6 +1001,10 @@ a#newtrans {
     padding: .5rem;
 }
 
+.relatedsite:hover {
+    box-shadow: 0px 4px 3px 2px rgba(0,0,0,0.1);
+}
+
 .centertext {
     text-align: center;
     padding: 1rem 0;
@@ -1013,6 +1026,7 @@ a#newtrans {
     text-align: left;
     color: #8d8d8d;
     font-size: .9rem;
+    font-family: fanum;
 }
 
 /* .newletter h5 {
@@ -1024,6 +1038,7 @@ a#newtrans {
     border-radius: 10px;
     margin: 2rem 0;
     padding: 1rem 0rem;
+    background: #ffffff;
 }
 
 .contnewsletterlast {
@@ -2308,13 +2323,14 @@ input[type="checkbox"]:checked:after {
 }
 
 .uploadphotobox:before {
-    content: "آپلود عکس" !important;
+    content: "آپلود عکس و پاسپورت" !important;
     opacity: 1 !important;
     color: #1976d2 !important;
     font-size: 0.9rem !important;
     position: absolute;
     top: 35%;
-    left: 14%;
+    left: 5%;
+    text-align: center;
 }
 
 span.custom-file-container__custom-file__custom-file-control {
@@ -2349,15 +2365,13 @@ span.custom-file-container__custom-file__custom-file-control {
 
 
 .loginpage {
-
-    margin-top: 2rem 0 0 0;
+    margin-top: 2rem;
     height: 100%;
 }
 
 .registerpage {
     height: 100%;
-    margin-top: 2rem;
-
+    margin: 17vh 0;
 }
 
 p.textlogin {
@@ -2648,7 +2662,7 @@ p.activesys {
 }
 
 .foter-blog img {
-    width: 37px;
+    width: 25px;
 }
 
 .foter-blog h5 {
@@ -3528,6 +3542,10 @@ iframe {
     font-size: 1.2rem;
     text-align: center;
     margin-bottom: .3rem;
+}
+
+.phone {
+    color: #212529 !important;
 }
 
 .nameapp1 {

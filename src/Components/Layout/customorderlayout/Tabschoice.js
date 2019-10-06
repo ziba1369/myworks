@@ -224,13 +224,24 @@ function TabsChoice(props) {
                                             eventKey="second"
                                         >
                                             <p>
-                                                <input
-                                                    type="text"
-                                                    value={props.data.title}
+                                                <Form.Control
+                                                    id="groups"
+                                                    as="select"
+                                                    type="select"
                                                     onChange={e => {
                                                         setChangetitle(e);
                                                     }}
-                                                />
+                                                    value={props.data.title}
+                                                    name="slelect"
+                                                    required
+                                                >
+                                                    <option selected disabled>یک گزینه را انتخاب کنید</option>
+                                                    <option value="نامه">نامه</option>
+                                                    <option value="مقاله">مقاله</option>
+                                                    <option value="متن حقوقی">متن حقوقی</option>
+                                                    <option value="متن عمومی">متن عمومی</option>
+                                                    <option value="غیره">غیره</option>
+                                                </Form.Control>
                                             </p>
                                         </Tab.Pane>
                                         <Tab.Pane
@@ -326,13 +337,24 @@ function TabsChoice(props) {
                                     <Accordion.Collapse eventKey="1">
                                         <Card.Body>
                                             <p>
-                                                <input
-                                                    type="text"
-                                                    value={props.data.title}
+                                                <Form.Control
+                                                    id="groups"
+                                                    as="select"
+                                                    type="select"
                                                     onChange={e => {
                                                         setChangetitle(e);
                                                     }}
-                                                />
+                                                    value={props.data.title}
+                                                    name="slelect"
+                                                    required
+                                                >
+                                                    <option selected disabled>یک گزینه را انتخاب کنید</option>
+                                                    <option value="نامه">نامه</option>
+                                                    <option value="مقاله">مقاله</option>
+                                                    <option value="متن حقوقی">متن حقوقی</option>
+                                                    <option value="متن عمومی">متن عمومی</option>
+                                                    <option value="غیره">غیره</option>
+                                                </Form.Control>
                                             </p>
                                         </Card.Body>
                                     </Accordion.Collapse>

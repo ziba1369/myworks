@@ -43,7 +43,7 @@ const ContactUs = () => {
                 });
             }
         });
-        contactUsInfoAPI(response=>{
+        contactUsInfoAPI(response => {
             if (response.data.success) {
                 console.log(response.data);
                 setContactData({
@@ -104,7 +104,7 @@ const ContactUs = () => {
                         <div className="address-translate">
                             <p>
                                 <img src={placeholder} alt={"placehilder"}/>
-                                {contactData.address.map((address, index)=>(
+                                {contactData.address.map((address, index) => (
                                     <span key={index}>{address}<br/></span>
                                 ))}
                             </p>
@@ -115,7 +115,7 @@ const ContactUs = () => {
                                     <img src={phoneIcon} alt={"phoneIcon"}/>
                                 </p>
                                 <p style={{width: "85%", display: "inline-block"}}>
-                                    {contactData.phone.map((phoneNumber, index)=>(
+                                    {contactData.phone.map((phoneNumber, index) => (
                                         <span key={index} className="tell-translate">{phoneNumber}</span>
                                     ))}
                                 </p>
@@ -124,7 +124,7 @@ const ContactUs = () => {
                         <div className="address-translate mail-translate">
                             <p>
                                 <span style={{fontFamily: "Arial"}}>{contactData.email}</span><img src={emailIcon}
-                                                                                                 alt={"emailIcon"}/>
+                                                                                                   alt={"emailIcon"}/>
                             </p>
                         </div>
                         <div className="work-time">
@@ -147,22 +147,30 @@ const ContactUs = () => {
                                 فروش</Row>
                             <div className="row">
                                 <div className="box col-5">
-                                    <div className="row rtl boxcontent">
-                                        <div className="col-xl-4 col-lg-4 col-md-4 col-xs-4 col-4"><img src={whatsapp}
-                                                                                                        alt={"whatsapp"}/>
+                                    <a href="https://api.whatsapp.com/send?phone=09388959590">
+                                        <div className="row rtl boxcontent">
+                                            <div className="col-xl-4 col-lg-4 col-md-4 col-xs-4 col-4"><img
+                                                src={whatsapp}
+                                                alt={"whatsapp"}/>
+                                            </div>
+                                            <div className="col-xl-8 col-lg-8 col-md-8 col-xs-8 col-8"><p
+                                                className="nameapp">Whatsapp</p><p className="phone">09388959590</p>
+                                            </div>
                                         </div>
-                                        <div className="col-xl-8 col-lg-8 col-md-8 col-xs-8 col-8"><p
-                                            className="nameapp">Whatsapp</p><p className="phone">09388959590</p></div>
-                                    </div>
+                                    </a>
                                 </div>
                                 <div className="box col-5">
-                                    <div className="row rtl boxcontent">
-                                        <div className="col-xl-4 col-lg-4 col-md-4 col-xs-4 col-4"><img src={whatsapp}
-                                                                                                        alt={"whatsapp"}/>
+                                    <a href="https://api.whatsapp.com/send?phone=09054844828">
+                                        <div className="row rtl boxcontent">
+                                            <div className="col-xl-4 col-lg-4 col-md-4 col-xs-4 col-4"><img
+                                                src={whatsapp}
+                                                alt={"whatsapp"}/>
+                                            </div>
+                                            <div className="col-xl-8 col-lg-8 col-md-8 col-xs-8 col-8"><p
+                                                className="nameapp">Whatsapp</p><p className="phone">09054844828</p>
+                                            </div>
                                         </div>
-                                        <div className="col-xl-8 col-lg-8 col-md-8 col-xs-8 col-8"><p
-                                            className="nameapp">Whatsapp</p><p className="phone">09054844828</p></div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
 
