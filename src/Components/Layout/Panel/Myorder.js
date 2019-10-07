@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from "react";
 import {Col} from "react-bootstrap";
 import {ToastsContainer, ToastsStore, ToastsContainerPosition} from "react-toasts";
-import axios from "axios";
 import Media from "react-media";
 import * as Cookies from "js-cookie";
-import {myorderAPI} from '../../../api/api';
-import editicon from '../../../images/pencil-edit-button.svg';
+import {cancelitemAPI, myorderAPI} from '../../../api/api';
+import editIcon from '../../../images/pencil-edit-button.svg';
+import deleteIcon from '../../../images/rubbish-bin.svg';
 import EditOrder from "./EditOrder";
 import AddFileToOrder from "./AddFileToOrder";
+import AddFile from "./AddFiles";
 function Myorder () {
 
     const [step, setStep] = useState(1);
@@ -26,28 +27,50 @@ function Myorder () {
     }, []);
 
     const handleEdit = (item) =>{
-        if (item.rejects[0].title === "خوانا نبودن"){
+        if (item.status === "جدید" || item.status === "ارسال مجدد" ){
             setSubComponentProps({
                 orderName: item.order_name,
                 orderDate: item.created_at,
                 orderCode: item.order_code,
-                orderIssue: item.rejects[0].title,
                 orderID: item.id,
-                rejectedId: item.rejects[0].order_reject_id
             });
-            setStep(3);
+            setStep(4);
         } else {
-            setSubComponentProps({
-                orderName: item.order_name,
-                orderDate: item.created_at,
-                orderCode: item.order_code,
-                orderIssue: item.rejects[0].title,
-                orderDesc: item.rejects[0].description,
-                orderID: item.id,
-                rejectedId: item.rejects[0].order_reject_id
-            });
-            setStep(2);
+            if (item.rejects[0].title === "خوانا نبودن"){
+                setSubComponentProps({
+                    orderName: item.order_name,
+                    orderDate: item.created_at,
+                    orderCode: item.order_code,
+                    orderIssue: item.rejects[0].title,
+                    orderID: item.id,
+                    rejectedId: item.rejects[0].order_reject_id
+                });
+                setStep(3);
+            } else {
+                setSubComponentProps({
+                    orderName: item.order_name,
+                    orderDate: item.created_at,
+                    orderCode: item.order_code,
+                    orderIssue: item.rejects[0].title,
+                    orderDesc: item.rejects[0].description,
+                    orderID: item.id,
+                    rejectedId: item.rejects[0].order_reject_id
+                });
+                setStep(2);
+            }
         }
+
+    };
+
+    const handleCancel = (orderCode) => {
+        cancelitemAPI(Cookies.get("token"), orderCode, response => {
+            if (response.data.success) {
+                window.location.reload();
+                ToastsStore.error("سفارش شما با موفقیت لغو شد");
+            } else {
+                ToastsStore.error(response.data.error);
+            }
+        });
     };
 
     const Content = () => {
@@ -107,9 +130,14 @@ function Myorder () {
                                                         {item.status}
                                                     </Col>
                                                     <Col lg={2} xl={2} md={2}>
-                                                        {item.status === "عدم تایید" ?
-                                                            <img style={{width: '10px'}} src={editicon} onClick={() => handleEdit(item)}
-                                                                 alt={editicon}/>
+                                                        {item.status === "جدید" || item.status === "ارسال مجدد" || item.status === "عدم تایید" ?
+                                                            <img style={{width: '13px', margin: "5px"}} src={editIcon} onClick={() => handleEdit(item)}
+                                                                 alt=""/>
+                                                            : null}
+                                                        {(item.status === "جدید" || item.status === "عدم تایید" ||
+                                                            item.status === "ارسال مجدد" || item.status === "منتظر پرداخت" || item.status === "تایید شده")?
+                                                            <img style={{width: '13px', margin: "5px"}} src={deleteIcon} onClick={() => handleCancel(item.order_code)}
+                                                                 alt=""/>
                                                             : null}
                                                     </Col>
                                                 </div>
@@ -161,9 +189,15 @@ function Myorder () {
                                                     عملیات
                                                 </Col>
                                                 <Col lg={12} xl={12} md={12}>
-                                                    {item.status === "عدم تایید" ?
-                                                        <img style={{width: '10px'}} src={editicon} onClick={() => handleEdit(item)} alt={editicon}/>
-                                                    : null}
+                                                    {item.status === "جدید" || item.status === "ارسال مجدد" || item.status === "عدم تایید" ?
+                                                        <img style={{width: '13px', margin: "5px"}} src={editIcon} onClick={() => handleEdit(item)}
+                                                             alt=""/>
+                                                        : null}
+                                                    {(item.status === "جدید" || item.status === "عدم تایید" ||
+                                                        item.status === "ارسال مجدد" || item.status === "منتظر پرداخت" || item.status === "تایید شده")?
+                                                        <img style={{width: '13px', margin: "5px"}} src={deleteIcon} onClick={() => handleCancel(item.order_code)}
+                                                             alt=""/>
+                                                        : null}
                                                 </Col>
                                             </div>
                                         );
@@ -180,6 +214,10 @@ function Myorder () {
             case 3:
                 return (
                     <EditOrder {...subComponentProps}/>
+                );
+            case 4:
+                return (
+                  <AddFile {...subComponentProps}/>
                 );
         }
     };

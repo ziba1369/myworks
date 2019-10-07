@@ -343,6 +343,22 @@ export const editOrderFileAPI = (token, orderId, rejectId, editType, images, cal
             callBack(response)
         })
 };
+
+export const addOrderFileAPI = (token, orderId, images, callBack) => {
+    const formData = new FormData();
+    formData.append("customer_token", token);
+    formData.append("order_id", orderId);
+    formData.append("file_count", images.length + 1);
+    var i = 0;
+    for (i = 0; i < images.length; i++) {
+        formData.append("order_file_" + (i + 1), images[i]);
+    }
+    axios.post(serverURL + "add_order_files", formData, headers)
+        .then(function (response) {
+            callBack(response)
+        })
+};
+
 export const getOrderFileAPI = (token, orderId, callBack) => {
     axios.get(serverURL + "get_order_files/?customer_token=" + token + "&order_id=" + orderId , headers)
         .then(function (response) {

@@ -2,11 +2,11 @@ import React, {useState, useEffect} from "react";
 import {Row} from "react-bootstrap";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "file-upload-with-preview/dist/file-upload-with-preview.min.css";
-import {editOrderFileAPI} from "../../../api/api";
 import * as Cookies from "js-cookie";
 import {ToastsStore} from "react-toasts";
+import {addOrderFileAPI} from "../../../api/api";
 
-function AddFileToOrder(props) {
+function AddFile(props) {
     const [orderFileCount, setOrderFilecount] = useState(0);
     const [photoUpload, setPhotoUpload] = useState();
 
@@ -30,10 +30,8 @@ function AddFileToOrder(props) {
     }, []);
 
     const handleAddFile = () => {
-        editOrderFileAPI(Cookies.get('token'),
+        addOrderFileAPI(Cookies.get('token'),
             props.orderID,
-            props.rejectedId,
-            "2",
             photoUpload,
             (response) => {
                 if (response.data.success) {
@@ -49,21 +47,17 @@ function AddFileToOrder(props) {
         <React.Fragment>
             <div className="row editorder">اصلاح سفارش</div>
             <div className="row" style={{margin: '0 3rem'}}>
-                <div className="col-xl-3 col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                <div className="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12">
                     <p className="title-custom">نام سفارش</p>
                     <p className="title-cutomdet">{props.orderName}</p>
                 </div>
-                <div className="col-xl-3 col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                <div className="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12">
                     <p className="title-custom">تاریخ سفارش</p>
                     <p className="title-cutomdet">{props.orderDate}</p>
                 </div>
-                <div className="col-xl-3 col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                <div className="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12">
                     <p className="title-custom">کد سفارش</p>
                     <p className="title-cutomdet">{props.orderCode}</p>
-                </div>
-                <div className="col-xl-3 col-lg-3 col-md-3 col-xs-12 col-sm-12">
-                    <p className="title-custom">دلیل عدم تایید</p>
-                    <p className="title-cutomdet">{props.orderIssue}</p>
                 </div>
                 <div className="uploadphoto" style={{margin: '0 auto'}}>
                     <Row>فایلهای پیوست</Row>
@@ -106,8 +100,7 @@ function AddFileToOrder(props) {
                         </div>
                     </Row>
                     <Row>
-                        <utton className="btn-second-edit-file" onClick={handleAddFile}>ارسال
-                        </utton>
+                        <button className="btn-second-edit-file" onClick={handleAddFile}>ارسال</button>
                     </Row>
                 </div>
             </div>
@@ -115,4 +108,4 @@ function AddFileToOrder(props) {
     )
 }
 
-export default AddFileToOrder;
+export default AddFile;
